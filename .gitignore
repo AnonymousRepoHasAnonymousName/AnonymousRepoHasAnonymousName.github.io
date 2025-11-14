@@ -1,6 +1,7 @@
 # Python virtual environment
 documentation/venv/
 venv/
+**/venv/
 
 # Build artifacts (we copy the output to root, so ignore the build directory)
 documentation/_build/
@@ -15,4 +16,7 @@ documentation/_build/
 __pycache__/
 *.py[cod]
 *$py.class
+
+# Note: We DO want to commit the built HTML files in the root directory
+# for GitHub Pages, so we don't ignore them here
 

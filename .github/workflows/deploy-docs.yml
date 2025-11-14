@@ -1,0 +1,62 @@
+name: Deploy Documentation
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'documentation/**'
+      - 'VERSION'
+      - '.github/workflows/deploy-docs.yml'
+  workflow_dispatch:  # Allows manual triggering
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Needed to commit back to the repository
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        cd documentation
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Build documentation
+      run: |
+        cd documentation
+        rm -rf _build
+        make current-docs
+    
+    - name: Deploy to root directory
+      run: |
+        # Remove old built files (but keep documentation source)
+        rm -rf _images _sources _sphinx_design_static _static source *.html *.js objects.inv 2>/dev/null || true
+        # Copy new build to root
+        cp -r documentation/_build/current/* .
+        # Ensure .nojekyll exists
+        touch .nojekyll
+    
+    - name: Commit and push changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add _images _sources _sphinx_design_static _static source *.html *.js objects.inv .nojekyll 2>/dev/null || true
+        if ! git diff --staged --quiet; then
+          git commit -m "Auto-update documentation [skip ci]"
+          git push
+        else
+          echo "No changes to commit"
+        fi
+
