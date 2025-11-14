@@ -9,6 +9,7 @@ sphinx_design
 sphinxemoji
 sphinx-tabs # backwards compatibility for building docs on v1.0.0
 sphinx-multiversion==0.2.4
+sphinx-autobuild  # for live preview with auto-reload
 
 # basic python
 numpy

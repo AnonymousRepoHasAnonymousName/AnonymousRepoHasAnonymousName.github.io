@@ -1,6 +1,15 @@
 # Documentation Website
 
-Page: 
+Page: https://anonymousrepohasanonymousname.github.io/
+
+Local live:
+```shell
+# Terminal 1: Start live preview
+cd documentation
+source venv/bin/activate
+make livehtml
+```
+----
 
 This repository contains the documentation website for the project, built with Sphinx and deployed to GitHub Pages.
 

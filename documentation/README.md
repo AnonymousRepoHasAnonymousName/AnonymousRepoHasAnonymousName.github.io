@@ -4,6 +4,27 @@ We use [Sphinx](https://www.sphinx-doc.org/en/master/) with the [Book Theme](htt
 
 > **Note:** To avoid dependency conflicts, we strongly recommend using a Python virtual environment to isolate the required dependencies from your system's global Python environment.
 
+## Live Preview (Recommended for Writing)
+
+To preview your documentation with automatic rebuild and browser refresh:
+
+```bash
+# 1. Navigate to the docs directory and activate virtual environment
+cd documentation
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# 2. Start the live preview server
+make livehtml
+```
+
+This will:
+- Start a local server at `http://localhost:8000`
+- Automatically rebuild when you save changes to RST/MD files
+- Auto-refresh your browser to show the latest changes
+- Keep running until you press `Ctrl+C`
+
+**Perfect for writing and editing!** Just keep this running while you work.
+
 ## Current-Version Documentation
 
 This section describes how to build the documentation for the current version of the project.

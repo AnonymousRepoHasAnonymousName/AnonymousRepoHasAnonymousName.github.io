@@ -16,3 +16,7 @@ multi-docs:
 .PHONY: current-docs
 current-docs:
 	@$(SPHINXBUILD) "$(SOURCEDIR)" "$(BUILDDIR)/current" $(SPHINXOPTS)
+
+.PHONY: livehtml
+livehtml:
+	@sphinx-autobuild "$(SOURCEDIR)" "$(BUILDDIR)/current" $(SPHINXOPTS) --host 0.0.0.0 --port 8000 --open-browser
