@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Welcome to URBAN-SIM! &#8212; URBAN-SIM Documentation</title>
+    <title>Welcome to UrbanVerse! &#8212; URBAN-SIM Documentation</title>
   
   
   
@@ -33,7 +33,7 @@
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="/Users/miu/GoldsGym/AnonymousRepoHasAnonymousName.github.io/documentation/venv/lib/python3.14/site-packages/sphinxcontrib/icon/node_modules/@fortawesome/fontawesome-free/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/sphinxcontrib/icon/node_modules/@fortawesome/fontawesome-free/css/all.min.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/custom.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.4cbf315f70debaebd550c87a6162cf0f.min.css" />
@@ -47,7 +47,7 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/sphinx_highlight.js"></script>
-    <script src="/Users/miu/GoldsGym/AnonymousRepoHasAnonymousName.github.io/documentation/venv/lib/python3.14/site-packages/sphinxcontrib/icon/node_modules/@fortawesome/fontawesome-free/js/all.min.js"></script>
+    <script src="/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/sphinxcontrib/icon/node_modules/@fortawesome/fontawesome-free/js/all.min.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
@@ -205,7 +205,7 @@
 </form></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started with URBAN-SIM</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Installation</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="source/setup/installation/index.html">Local Installation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="source/setup/installation/binaries_installation.html">Binary installation (recommended)</a></li>
@@ -213,9 +213,18 @@
 <li class="toctree-l2"><a class="reference internal" href="source/setup/installation/verifying_installation.html">Verifying the installation</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="source/setup/quickstart.html">Quickstart Guide</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">RL Training with URBAN-SIM</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Quickstart Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="source/setup/quickstart/index.html">Getting Started with UrbanVerse</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="source/setup/quickstart/urbanverse_100k.html">Use UrbanVerse-100K with APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/setup/quickstart/urbanverse_gen.html">Real-to-Sim Scene Generation with UrbanVerse-Gen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/setup/quickstart/urbanverse_scenes.html">Use Built-in UrbanVerse Scenes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/setup/quickstart/craftbench.html">Use CraftBench Scenes</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">RL Training with UrbanVerse</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="source/overview/simulation.html">Simulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source/overview/environments.html">Environments</a></li>
@@ -447,7 +456,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Welcome to URBAN-SIM!</h1>
+    <h1>Welcome to UrbanVerse!</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -457,9 +466,16 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Welcome to URBAN-SIM!</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Welcome to UrbanVerse!</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#urbanverse">UrbanVerse</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-components">Core Components</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#built-in-urban-simulation-environments">Built-in Urban Simulation Environments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#open-source-release">Open-Source Release</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation-platform">Simulation Platform</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extensibility">Extensibility</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#license">License</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgement">Acknowledgement</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-contents">Table of Contents</a><ul class="visible nav section-nav flex-column">
 </ul>
 </li>
@@ -475,62 +491,116 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="welcome-to-urban-sim">
-<h1>Welcome to URBAN-SIM!<a class="headerlink" href="#welcome-to-urban-sim" title="Permalink to this heading">#</a></h1>
+  <section id="welcome-to-urbanverse">
+<h1>Welcome to UrbanVerse!<a class="headerlink" href="#welcome-to-urbanverse" title="Permalink to this heading">#</a></h1>
 <figure class="align-default">
-<a class="reference internal image-reference" href="_images/teaser_v7.png"><img alt="Async Simulation in URBAN-SIM" src="_images/teaser_v7.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="_images/teaser_v7.png"><img alt="UrbanVerse Overview" src="_images/teaser_v7.png" style="width: 100%;" /></a>
 </figure>
-<p><strong>URBAN-SIMeee</strong> is a unified framework for robot learning in urban scenarios,
-including point navigation, obstacle avoidance, pedestrian interaction, etc.
-It is designed to support a wide range of learning paradigms such as reinforcement learning, imitation learning.
-Built on top of <a class="reference external" href="https://docs.isaacsim.omniverse.nvidia.com/latest/index.html">NVIDIA Isaac Sim</a> and <a class="reference external" href="https://isaac-sim.github.io/IsaacLab/main/index.html">NVIDIA Isaac Lab</a>, URBAN-SIM enables high-fidelity photo-realistic rendering,
-efficient, asynchronous simulation in large-scale, dynamic environments.</p>
-<p>URBAN-SIM provides a variety of environments featuring diverse robots and scenario generation pipelines. We are
-actively expanding the set of supported scenarios to accommodate broader use cases and research needs.</p>
-<p>Based on Omniverse, PhysX, OpenUSD provided by NVIDIA Isaac ecosystem,
-the platform is also designed so that you can add your own robots!</p>
+</section>
+<section id="urbanverse">
+<h1>UrbanVerse<a class="headerlink" href="#urbanverse" title="Permalink to this heading">#</a></h1>
+<p><strong>UrbanVerse</strong> is a unified real-to-sim system built on the Urban-Sim platform with Nvidia IsaacLab as the simulation engine for robot learning in urban environments.
+It converts casually captured, uncalibrated city-tour videos into fully interactive simulation scenes, enabling users to build realistic, layout-accurate environments and train their own robots at scale.</p>
+<section id="core-components">
+<h2>Core Components<a class="headerlink" href="#core-components" title="Permalink to this heading">#</a></h2>
+<p>UrbanVerse is powered by two main modules:</p>
+<ol class="arabic simple">
+<li><p><strong>UrbanVerse-100K</strong> — a large-scale dataset of (a) Object Collection: 102,530 urban 3D assets across 667 categories, each annotated with 33 semantic, physical, and affordance attributes in true metric scale; (b) Ground Texture Collection: 288 4K photorealistic PBR materials (98 road, 190 sidewalk) for ground plane texturing; (c) Sky Collection: 306 4K HDRI sky maps for realistic global illumination and immersive 360° backgrounds.</p></li>
+<li><p><strong>UrbanVerse-Gen</strong> — an automatic pipeline that extracts scene layouts from video and instantiates metric-scale simulations using retrieved assets.</p></li>
+</ol>
+</section>
+<section id="built-in-urban-simulation-environments">
+<h2>Built-in Urban Simulation Environments<a class="headerlink" href="#built-in-urban-simulation-environments" title="Permalink to this heading">#</a></h2>
+<p>We provide ready-to-use (pre-built) urban simulation environments for training and evaluation, each packaged as a standalone <cite>.usd</cite> file that can be directly loaded into the IsaacLab platform:</p>
+<ol class="arabic simple">
+<li><p><strong>UrbanVerse-160</strong> — a collection of 160 pre-built environments reconstructed from city-tour videos across 7 continents, 24 countries, and 27 cities, available for training and validation.</p></li>
+<li><p><strong>CraftBench</strong> — a suite of 10 high-fidelity urban scenes created by professional 3D artists, reserved exclusively for test-time evaluation.</p></li>
+</ol>
+</section>
+<section id="open-source-release">
+<h2>Open-Source Release<a class="headerlink" href="#open-source-release" title="Permalink to this heading">#</a></h2>
+<p>We fully open-source the following resources of UrbanVerse to the community:</p>
+<ol class="arabic simple">
+<li><p>All assets in UrbanVerse-100K.</p></li>
+<li><p>The complete UrbanVerse-Gen pipeline for layout extraction, asset retrieval, and scene instantiation.</p></li>
+<li><p>Code for urban-navigation tasks (point navigation, obstacle avoidance, pedestrian interaction, etc.) for both training and evaluation.</p></li>
+<li><p>Tools for automatically annotating new 3D objects with semantic, physical, and affordance attributes using GPT-4.1.</p></li>
+<li><p>Multiple robot embodiments, including COCO wheeled delivery robots and robots natively supported by Urban-Sim (e.g., Unitree Go2 quadrupeds, Unitree G1 humanoids).</p></li>
+</ol>
+</section>
+<section id="simulation-platform">
+<h2>Simulation Platform<a class="headerlink" href="#simulation-platform" title="Permalink to this heading">#</a></h2>
+<p>Built on top of <em>NVIDIA Isaac Sim</em> and <em>NVIDIA Isaac Lab</em>, UrbanVerse provides high-fidelity photorealistic rendering and efficient, asynchronous simulation in large-scale, dynamic environments.
+It supports a wide range of learning paradigms, including reinforcement learning and imitation learning, and offers diverse environments, robots, and scenario-generation pipelines.</p>
+</section>
+<section id="extensibility">
+<h2>Extensibility<a class="headerlink" href="#extensibility" title="Permalink to this heading">#</a></h2>
+<p>UrbanVerse is fully extensible. With UrbanVerse-Gen, you can build custom environments directly from casually captured videos. Using our automatic annotation tools, you can also annotate and integrate new assets, and add your own robots with ease.</p>
 <figure class="align-default">
 <a class="reference internal image-reference" href="_images/teaser.gif"><img alt="Example robots" src="_images/teaser.gif" style="width: 100%;" /></a>
 </figure>
 </section>
+</section>
 <section id="license">
 <h1>License<a class="headerlink" href="#license" title="Permalink to this heading">#</a></h1>
-<p>The URBAN-SIM framework is open-sourced under the Apache 2.0 license.
-Please refer to <a class="reference internal" href="source/refs/license.html#license"><span class="std std-ref">License</span></a> for more details.</p>
-</section>
-<section id="acknowledgement">
-<h1>Acknowledgement<a class="headerlink" href="#acknowledgement" title="Permalink to this heading">#</a></h1>
-<p>If you find URBAN-SIM helpful for your research, please cite the following BibTeX entry:</p>
-<div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@inproceedings</span><span class="p">{</span><span class="nl">wu2025towards</span><span class="p">,</span>
-<span class="w">   </span><span class="na">title</span><span class="p">=</span><span class="s">{Towards autonomous micromobility through scalable urban simulation}</span><span class="p">,</span>
-<span class="w">   </span><span class="na">author</span><span class="p">=</span><span class="s">{Wu, Wayne and He, Honglin and Zhang, Chaoyuan and He, Jack and Zhao, Seth Z and Gong, Ran and Li, Quanyi and Zhou, Bolei}</span><span class="p">,</span>
-<span class="w">   </span><span class="na">booktitle</span><span class="p">=</span><span class="s">{Proceedings of the Computer Vision and Pattern Recognition Conference}</span><span class="p">,</span>
-<span class="w">   </span><span class="na">pages</span><span class="p">=</span><span class="s">{27553--27563}</span><span class="p">,</span>
-<span class="w">   </span><span class="na">year</span><span class="p">=</span><span class="s">{2025}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
+<p>This work, UrbanVerse, is released under the Creative Commons Attribution 4.0 International (CC BY 4.0) License, which permits sharing and adaptation with appropriate credit.</p>
 </section>
 <section id="table-of-contents">
 <h1>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this heading">#</a></h1>
 <div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started with URBAN-SIM</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Installation</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="source/setup/installation/index.html">Local Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="source/setup/installation/binaries_installation.html">Binary installation (recommended)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/setup/installation/asset_caching.html">Asset caching</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/setup/installation/verifying_installation.html">Verifying the installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/setup/installation/binaries_installation.html">Binary installation (recommended)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="source/setup/installation/binaries_installation.html#installing-isaac-sim">Installing Isaac Sim</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source/setup/installation/binaries_installation.html#installing-urban-sim">Installing URBAN-SIM</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="source/setup/quickstart.html">Quickstart Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="source/setup/quickstart.html#launch-training">Launch Training</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/setup/quickstart.html#configurations">Configurations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/setup/installation/asset_caching.html">Asset caching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/setup/installation/verifying_installation.html">Verifying the installation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">RL Training with URBAN-SIM</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Quickstart Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="source/setup/quickstart/index.html">Getting Started with UrbanVerse</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="source/setup/quickstart/urbanverse_100k.html">Use UrbanVerse-100K with APIs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="source/setup/quickstart/urbanverse_100k.html#quick-exploration-of-667-categories">Quick Exploration of 667 Categories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source/setup/quickstart/urbanverse_100k.html#loading-categories">Loading Categories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source/setup/quickstart/urbanverse_100k.html#loading-uids">Loading UIDs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source/setup/quickstart/urbanverse_100k.html#loading-annotations">Loading Annotations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source/setup/quickstart/urbanverse_100k.html#filtering-by-attributes">Filtering by Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source/setup/quickstart/urbanverse_100k.html#downloading-assets">Downloading Assets</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="source/setup/quickstart/urbanverse_gen.html">Real-to-Sim Scene Generation with UrbanVerse-Gen</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="source/setup/quickstart/urbanverse_gen.html#prepare-your-video">Prepare Your Video</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source/setup/quickstart/urbanverse_gen.html#extracting-semantic-scene-layout-from-videos">Extracting Semantic Scene Layout from Videos</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source/setup/quickstart/urbanverse_gen.html#retrieving-3d-assets-and-materialsfrom-urbanverse-100k">Retrieving 3D Assets and Materialsfrom UrbanVerse-100K</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source/setup/quickstart/urbanverse_gen.html#creating-and-instantiating-simulation-scenes">Creating and Instantiating Simulation Scenes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source/setup/quickstart/urbanverse_gen.html#exporting-simulation-scenes">Exporting Simulation Scenes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="source/setup/quickstart/urbanverse_scenes.html">Use Built-in UrbanVerse Scenes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="source/setup/quickstart/urbanverse_scenes.html#loading-urbanverse-160-scenes">Loading UrbanVerse-160 Scenes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source/setup/quickstart/urbanverse_scenes.html#filtering-scenes-by-statistics">Filtering Scenes by Statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source/setup/quickstart/urbanverse_scenes.html#downloading-urbanverse-160-scenes">Downloading UrbanVerse-160 Scenes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="source/setup/quickstart/craftbench.html">Use CraftBench Scenes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="source/setup/quickstart/craftbench.html#loading-urbanverse-160-scenes">Loading UrbanVerse-160 Scenes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source/setup/quickstart/craftbench.html#filtering-scenes-by-types">Filtering Scenes by Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source/setup/quickstart/craftbench.html#downloading-craftbench-scenes">Downloading CraftBench Scenes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">RL Training with UrbanVerse</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="source/overview/simulation.html">Simulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source/overview/environments.html">Environments</a></li>
@@ -630,9 +700,16 @@ Please refer to <a class="reference internal" href="source/refs/license.html#lic
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Welcome to URBAN-SIM!</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Welcome to UrbanVerse!</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#urbanverse">UrbanVerse</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-components">Core Components</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#built-in-urban-simulation-environments">Built-in Urban Simulation Environments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#open-source-release">Open-Source Release</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation-platform">Simulation Platform</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extensibility">Extensibility</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#license">License</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgement">Acknowledgement</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-contents">Table of Contents</a><ul class="visible nav section-nav flex-column">
 </ul>
 </li>

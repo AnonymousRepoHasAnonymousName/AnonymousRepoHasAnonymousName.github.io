@@ -1,4 +1,4 @@
-.. _urbansim-installation-root:
+.. _urbanverse-installation-root:
 
 Local Installation
 ==================
