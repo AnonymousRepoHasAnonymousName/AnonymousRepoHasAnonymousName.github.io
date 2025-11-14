@@ -1,0 +1,18 @@
+# Python virtual environment
+documentation/venv/
+venv/
+
+# Build artifacts (we copy the output to root, so ignore the build directory)
+documentation/_build/
+
+# OS files
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
