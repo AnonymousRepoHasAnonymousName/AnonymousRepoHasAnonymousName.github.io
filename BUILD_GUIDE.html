@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Known Issues and Limitations &#8212; URBAN-SIM Documentation</title>
+    <title>Documentation Build Guide &#8212; URBAN-SIM Documentation</title>
   
   
   
@@ -52,7 +52,7 @@
     <script src="_static/copybutton.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script src="_static/design-tabs.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'faq';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'BUILD_GUIDE';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -323,7 +323,7 @@
       
       
       
-      <li><a href="https://github.com/metadriverse/urban-sim/edit/main/faq.md" target="_blank"
+      <li><a href="https://github.com/metadriverse/urban-sim/edit/main/BUILD_GUIDE.md" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -340,7 +340,7 @@
       
       
       
-      <li><a href="https://github.com/metadriverse/urban-sim/issues/new?title=Issue%20on%20page%20%2Ffaq.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/metadriverse/urban-sim/issues/new?title=Issue%20on%20page%20%2FBUILD_GUIDE.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -370,7 +370,7 @@
       
       
       
-      <li><a href="_sources/faq.md" target="_blank"
+      <li><a href="_sources/BUILD_GUIDE.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -446,7 +446,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Known Issues and Limitations</h1>
+    <h1>Documentation Build Guide</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -456,11 +456,18 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-not-found-error">Module Not Found Error</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#known-issue-with-zsh">Known Issue with <code class="docutils literal notranslate"><span class="pre">zsh</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cuda-glibcxx-incompatibility">CUDA &amp; GLIBCXX Incompatibility</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a100-gpu-compatibility">A100 GPU Compatibility</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asset-availability">Asset Availability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-ways-to-update-documentation">Two Ways to Update Documentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-1-automatic-recommended">Method 1: Automatic (Recommended) 🚀</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-2-manual-build">Method 2: Manual Build 🔧</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-gets-built">What Gets Built?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-script-fails">Build script fails</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#github-actions-not-running">GitHub Actions not running</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#website-not-updating">Website not updating</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -472,53 +479,91 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="known-issues-and-limitations">
-<h1>Known Issues and Limitations<a class="headerlink" href="#known-issues-and-limitations" title="Permalink to this heading">#</a></h1>
-<p>This section outlines known issues and current limitations in URBAN-SIM, including hardware requirements, missing dependencies, upcoming asset releases, etc.</p>
-<section id="module-not-found-error">
-<h2>Module Not Found Error<a class="headerlink" href="#module-not-found-error" title="Permalink to this heading">#</a></h2>
-<p>If you meet the error <code class="docutils literal notranslate"><span class="pre">ModuleNotFoundError:</span> <span class="pre">No</span> <span class="pre">module</span> <span class="pre">named</span> <span class="pre">'xxx'</span></code>, ensure that the conda environment is activated and use:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>_isaac_sim/setup_conda_env.sh
+  <section id="documentation-build-guide">
+<h1>Documentation Build Guide<a class="headerlink" href="#documentation-build-guide" title="Permalink to this heading">#</a></h1>
+<p>This guide explains how to update the documentation website.</p>
+<section id="two-ways-to-update-documentation">
+<h2>Two Ways to Update Documentation<a class="headerlink" href="#two-ways-to-update-documentation" title="Permalink to this heading">#</a></h2>
+<section id="method-1-automatic-recommended">
+<h3>Method 1: Automatic (Recommended) 🚀<a class="headerlink" href="#method-1-automatic-recommended" title="Permalink to this heading">#</a></h3>
+<p><strong>One-time setup:</strong></p>
+<ol class="arabic simple">
+<li><p>Make sure GitHub Actions is enabled in your repository settings</p></li>
+<li><p>The workflow will automatically run when you push changes to the <code class="docutils literal notranslate"><span class="pre">documentation/</span></code> folder</p></li>
+</ol>
+<p><strong>To update documentation:</strong></p>
+<ol class="arabic">
+<li><p>Edit files in the <code class="docutils literal notranslate"><span class="pre">documentation/</span></code> folder (<code class="docutils literal notranslate"><span class="pre">.md</span></code>, <code class="docutils literal notranslate"><span class="pre">.rst</span></code>, etc.)</p></li>
+<li><p>Commit and push your changes:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>documentation/
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Update documentation: [describe your changes]&quot;</span>
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main
 </pre></div>
 </div>
-</section>
-<section id="known-issue-with-zsh">
-<h2>Known Issue with <code class="docutils literal notranslate"><span class="pre">zsh</span></code><a class="headerlink" href="#known-issue-with-zsh" title="Permalink to this heading">#</a></h2>
-<p>IsaacSim has limited compatibility with <code class="docutils literal notranslate"><span class="pre">zsh</span></code>. If you encounter unexpected behavior (e.g., UI not showing, runtime errors) when running with <code class="docutils literal notranslate"><span class="pre">zsh</span></code>, please switch to <code class="docutils literal notranslate"><span class="pre">bash</span></code> before launching Isaac Sim.</p>
-</section>
-<section id="cuda-glibcxx-incompatibility">
-<h2>CUDA &amp; GLIBCXX Incompatibility<a class="headerlink" href="#cuda-glibcxx-incompatibility" title="Permalink to this heading">#</a></h2>
-<p>URBAN-SIM relies on many libraries and systems like NVIDIA Isaac Sim, which requires support of <code class="docutils literal notranslate"><span class="pre">libstdc++</span></code> for successful runtime.<br />
-On some systems, especially with custom Anaconda installations, the following error may occur:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ImportError: ... libstdc++.so.6: version `GLIBCXX_3.4.32&#39; not found
-</pre></div>
-</div>
-<p><strong>Solution</strong>: Ensure your environment uses a system-level <code class="docutils literal notranslate"><span class="pre">libstdc++.so.6</span></code> with <code class="docutils literal notranslate"><span class="pre">GLIBCXX_3.4.32+</span></code>.<br />
-You can verify this with:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>strings<span class="w"> </span><span class="k">$(</span>g++<span class="w"> </span>-print-file-name<span class="o">=</span>libstdc++.so.6<span class="k">)</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>GLIBCXX
-</pre></div>
-</div>
-<p>If you can find <code class="docutils literal notranslate"><span class="pre">GLIBCXX_3.4.32</span></code> or higher in the output, your system is compatible.<br />
-If you are using a custom Anaconda installation, you may need to install the system-level <code class="docutils literal notranslate"><span class="pre">libstdc++</span></code> package or replace the <code class="docutils literal notranslate"><span class="pre">libstdc++.so.6</span></code> link in Anaconda with the system version.</p>
-</section>
-<section id="a100-gpu-compatibility">
-<h2>A100 GPU Compatibility<a class="headerlink" href="#a100-gpu-compatibility" title="Permalink to this heading">#</a></h2>
-<p>Isaac Sim currently does <strong>not support running on NVIDIA A100 GPUs</strong> due to limitations in the OptiX and PhysX backends.<br />
-Attempting to launch on an A100 may result in failure to create Vulkan/OpenGL contexts or invalid CUDA device errors.</p>
-<p>We recommend using RTX 30xx / 40xx / 50xx consumer cards or supported workstation GPUs.</p>
-</section>
-<section id="asset-availability">
-<h2>Asset Availability<a class="headerlink" href="#asset-availability" title="Permalink to this heading">#</a></h2>
-<p>Some assets in URBAN-SIM scenarios are under construction or being curated for release.<br />
-More specifically:</p>
+</li>
+<li><p>The GitHub Actions workflow will automatically:</p>
 <ul class="simple">
-<li><p><strong>Static objects</strong>: Static objects are currently partial; a full set with more than 15,000 well-annotated assets will be released progressively.</p></li>
-<li><p><strong>Pedestrians</strong>: We use pedestrian assets from the <a class="reference external" href="https://synbody.github.io/">Synbody</a> project.<br />
-To reduce space and streamline runtime loading, only a <strong>subset of Synbody</strong> models is currently included in URBAN-SIM.<br />
-We will release code to process and convert Synbody assets into <code class="docutils literal notranslate"><span class="pre">.usd</span></code> format in the future.<br />
-For now, you can manually convert Synbody assets using the Isaac Sim GUI.</p></li>
+<li><p>Build the documentation</p></li>
+<li><p>Deploy it to the root directory</p></li>
+<li><p>Commit and push the built files</p></li>
 </ul>
-<p>Please stay tuned via our repo or project page for updates.</p>
+</li>
+<li><p>Your website will be updated within a few minutes!</p></li>
+</ol>
+<p><strong>Note:</strong> The workflow only runs when files in <code class="docutils literal notranslate"><span class="pre">documentation/</span></code> change, so it won’t create infinite loops.</p>
+</section>
+<section id="method-2-manual-build">
+<h3>Method 2: Manual Build 🔧<a class="headerlink" href="#method-2-manual-build" title="Permalink to this heading">#</a></h3>
+<p>If you prefer to build locally or the automatic workflow isn’t working:</p>
+<ol class="arabic">
+<li><p>Run the build script:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./build_docs.sh
+</pre></div>
+</div>
+</li>
+<li><p>Review and commit the changes:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>.
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Update documentation&quot;</span>
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+</section>
+<section id="what-gets-built">
+<h2>What Gets Built?<a class="headerlink" href="#what-gets-built" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Source files: <code class="docutils literal notranslate"><span class="pre">documentation/</span></code> folder (Markdown, RST, images, etc.)</p></li>
+<li><p>Built files: Root directory (HTML, CSS, JS - these are what GitHub Pages serves)</p></li>
+</ul>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading">#</a></h2>
+<section id="build-script-fails">
+<h3>Build script fails<a class="headerlink" href="#build-script-fails" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Make sure Python 3.8+ is installed</p></li>
+<li><p>Check that you’re in the repository root directory</p></li>
+<li><p>Try: <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">documentation</span> <span class="pre">&amp;&amp;</span> <span class="pre">python3</span> <span class="pre">-m</span> <span class="pre">venv</span> <span class="pre">venv</span> <span class="pre">&amp;&amp;</span> <span class="pre">source</span> <span class="pre">venv/bin/activate</span> <span class="pre">&amp;&amp;</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-r</span> <span class="pre">requirements.txt</span></code></p></li>
+</ul>
+</section>
+<section id="github-actions-not-running">
+<h3>GitHub Actions not running<a class="headerlink" href="#github-actions-not-running" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Check the “Actions” tab in your GitHub repository</p></li>
+<li><p>Make sure GitHub Actions is enabled in repository settings</p></li>
+<li><p>Verify the workflow file exists at <code class="docutils literal notranslate"><span class="pre">.github/workflows/deploy-docs.yml</span></code></p></li>
+</ul>
+</section>
+<section id="website-not-updating">
+<h3>Website not updating<a class="headerlink" href="#website-not-updating" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Wait a few minutes for GitHub Pages to rebuild</p></li>
+<li><p>Check the GitHub Actions logs for errors</p></li>
+<li><p>Verify GitHub Pages is enabled and set to serve from the root directory</p></li>
+</ul>
+</section>
 </section>
 </section>
 
@@ -550,11 +595,18 @@ For now, you can manually convert Synbody assets using the Isaac Sim GUI.</p></l
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-not-found-error">Module Not Found Error</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#known-issue-with-zsh">Known Issue with <code class="docutils literal notranslate"><span class="pre">zsh</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cuda-glibcxx-incompatibility">CUDA &amp; GLIBCXX Incompatibility</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a100-gpu-compatibility">A100 GPU Compatibility</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asset-availability">Asset Availability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-ways-to-update-documentation">Two Ways to Update Documentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-1-automatic-recommended">Method 1: Automatic (Recommended) 🚀</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-2-manual-build">Method 2: Manual Build 🔧</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-gets-built">What Gets Built?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-script-fails">Build script fails</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#github-actions-not-running">GitHub Actions not running</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#website-not-updating">Website not updating</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
