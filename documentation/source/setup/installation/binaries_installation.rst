@@ -1,4 +1,4 @@
-.. _urbansim-binaries-installation:
+.. _urbanverse-binaries-installation:
 
 Installation using Binaries
 =====================================

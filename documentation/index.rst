@@ -1,21 +1,57 @@
-Welcome to URBAN-SIM!
+Welcome to UrbanVerse!
 =====================
 
 .. figure:: assets/teaser_v7.png
    :width: 100%
-   :alt: Async Simulation in URBAN-SIM
+   :alt: UrbanVerse Overview
 
-**URBAN-SIMeee** is a unified framework for robot learning in urban scenarios, 
-including point navigation, obstacle avoidance, pedestrian interaction, etc. 
-It is designed to support a wide range of learning paradigms such as reinforcement learning, imitation learning. 
-Built on top of `NVIDIA Isaac Sim`_ and `NVIDIA Isaac Lab`_, URBAN-SIM enables high-fidelity photo-realistic rendering,
-efficient, asynchronous simulation in large-scale, dynamic environments.
+UrbanVerse
+==========
 
-URBAN-SIM provides a variety of environments featuring diverse robots and scenario generation pipelines. We are 
-actively expanding the set of supported scenarios to accommodate broader use cases and research needs.
+**UrbanVerse** is a unified real-to-sim system built on the Urban-Sim platform with Nvidia IsaacLab as the simulation engine for robot learning in urban environments.  
+It converts casually captured, uncalibrated city-tour videos into fully interactive simulation scenes, enabling users to build realistic, layout-accurate environments and train their own robots at scale.
 
-Based on Omniverse, PhysX, OpenUSD provided by NVIDIA Isaac ecosystem, 
-the platform is also designed so that you can add your own robots!
+Core Components
+---------------
+
+UrbanVerse is powered by two main modules:
+
+1. **UrbanVerse-100K** — a large-scale dataset of (a) Object Collection: 102,530 urban 3D assets across 667 categories, each annotated with 33 semantic, physical, and affordance attributes in true metric scale; (b) Ground Texture Collection: 288 4K photorealistic PBR materials (98 road, 190 sidewalk) for ground plane texturing; (c) Sky Collection: 306 4K HDRI sky maps for realistic global illumination and immersive 360° backgrounds.
+
+2. **UrbanVerse-Gen** — an automatic pipeline that extracts scene layouts from video and instantiates metric-scale simulations using retrieved assets.
+
+Built-in Urban Simulation Environments
+--------------------------------------
+
+We provide ready-to-use (pre-built) urban simulation environments for training and evaluation, each packaged as a standalone `.usd` file that can be directly loaded into the IsaacLab platform:
+
+1. **UrbanVerse-160** — a collection of 160 pre-built environments reconstructed from city-tour videos across 7 continents, 24 countries, and 27 cities, available for training and validation.
+
+2. **CraftBench** — a suite of 10 high-fidelity urban scenes created by professional 3D artists, reserved exclusively for test-time evaluation.
+
+
+Open-Source Release
+-------------------
+
+We fully open-source the following resources of UrbanVerse to the community:
+
+1. All assets in UrbanVerse-100K.
+2. The complete UrbanVerse-Gen pipeline for layout extraction, asset retrieval, and scene instantiation.
+3. Code for urban-navigation tasks (point navigation, obstacle avoidance, pedestrian interaction, etc.) for both training and evaluation.
+4. Tools for automatically annotating new 3D objects with semantic, physical, and affordance attributes using GPT-4.1.
+5. Multiple robot embodiments, including COCO wheeled delivery robots and robots natively supported by Urban-Sim (e.g., Unitree Go2 quadrupeds, Unitree G1 humanoids).
+
+
+Simulation Platform
+-------------------
+
+Built on top of *NVIDIA Isaac Sim* and *NVIDIA Isaac Lab*, UrbanVerse provides high-fidelity photorealistic rendering and efficient, asynchronous simulation in large-scale, dynamic environments.  
+It supports a wide range of learning paradigms, including reinforcement learning and imitation learning, and offers diverse environments, robots, and scenario-generation pipelines.
+
+Extensibility
+-------------
+UrbanVerse is fully extensible. With UrbanVerse-Gen, you can build custom environments directly from casually captured videos. Using our automatic annotation tools, you can also annotate and integrate new assets, and add your own robots with ease.
+
 
 .. figure:: assets/teaser.gif
    :width: 100%
@@ -24,37 +60,27 @@ the platform is also designed so that you can add your own robots!
 
 License
 =======
+This work, UrbanVerse, is released under the Creative Commons Attribution 4.0 International (CC BY 4.0) License, which permits sharing and adaptation with appropriate credit.
 
-The URBAN-SIM framework is open-sourced under the Apache 2.0 license.
-Please refer to :ref:`license` for more details.
-
-Acknowledgement
-===============
-If you find URBAN-SIM helpful for your research, please cite the following BibTeX entry:
-
-.. code:: bibtex
-
-   @inproceedings{wu2025towards,
-      title={Towards autonomous micromobility through scalable urban simulation},
-      author={Wu, Wayne and He, Honglin and Zhang, Chaoyuan and He, Jack and Zhao, Seth Z and Gong, Ran and Li, Quanyi and Zhou, Bolei},
-      booktitle={Proceedings of the Computer Vision and Pattern Recognition Conference},
-      pages={27553--27563},
-      year={2025}
-   }
 
 Table of Contents
 =================
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Getting Started with URBAN-SIM
+   :maxdepth: 3
+   :caption: Installation
 
    source/setup/installation/index
-   source/setup/quickstart
 
 .. toctree::
    :maxdepth: 3
-   :caption: RL Training with URBAN-SIM
+   :caption: Quickstart Guide
+
+   source/setup/quickstart/index
+
+.. toctree::
+   :maxdepth: 3
+   :caption: RL Training with UrbanVerse
    :titlesonly:
    
    source/overview/simulation
@@ -77,5 +103,3 @@ Table of Contents
    source/refs/license
    source/refs/3license
 
-.. _NVIDIA Isaac Sim: https://docs.isaacsim.omniverse.nvidia.com/latest/index.html
-.. _NVIDIA Isaac Lab: https://isaac-sim.github.io/IsaacLab/main/index.html
