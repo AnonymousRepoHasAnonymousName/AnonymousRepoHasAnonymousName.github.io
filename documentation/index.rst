@@ -1,7 +1,7 @@
 Welcome to URBAN-SIM!
 =====================
 
-.. figure:: assets/URBANSIM.png
+.. figure:: assets/teaser_v7.png
    :width: 100%
    :alt: Async Simulation in URBAN-SIM
 
