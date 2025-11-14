@@ -456,6 +456,7 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#live-preview-while-writing">Live Preview While Writing ✨</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-ways-to-update-documentation">Two Ways to Update Documentation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-1-automatic-recommended">Method 1: Automatic (Recommended) 🚀</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-2-manual-build">Method 2: Manual Build 🔧</a></li>
@@ -482,6 +483,22 @@
   <section id="documentation-build-guide">
 <h1>Documentation Build Guide<a class="headerlink" href="#documentation-build-guide" title="Permalink to this heading">#</a></h1>
 <p>This guide explains how to update the documentation website.</p>
+<section id="live-preview-while-writing">
+<h2>Live Preview While Writing ✨<a class="headerlink" href="#live-preview-while-writing" title="Permalink to this heading">#</a></h2>
+<p><strong>The easiest way to preview your changes while writing:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>documentation
+<span class="nb">source</span><span class="w"> </span>venv/bin/activate
+make<span class="w"> </span>livehtml
+</pre></div>
+</div>
+<p>This starts a local server at <code class="docutils literal notranslate"><span class="pre">http://localhost:8000</span></code> that:</p>
+<ul class="simple">
+<li><p>✅ Automatically rebuilds when you save RST/MD files</p></li>
+<li><p>✅ Auto-refreshes your browser</p></li>
+<li><p>✅ Shows your changes instantly</p></li>
+</ul>
+<p>Keep this running while you write - no need to manually rebuild!</p>
+</section>
 <section id="two-ways-to-update-documentation">
 <h2>Two Ways to Update Documentation<a class="headerlink" href="#two-ways-to-update-documentation" title="Permalink to this heading">#</a></h2>
 <section id="method-1-automatic-recommended">
@@ -595,6 +612,7 @@ git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#live-preview-while-writing">Live Preview While Writing ✨</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-ways-to-update-documentation">Two Ways to Update Documentation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-1-automatic-recommended">Method 1: Automatic (Recommended) 🚀</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-2-manual-build">Method 2: Manual Build 🔧</a></li>

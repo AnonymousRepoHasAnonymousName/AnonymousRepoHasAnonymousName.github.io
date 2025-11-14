@@ -2,6 +2,23 @@
 
 This guide explains how to update the documentation website.
 
+## Live Preview While Writing ✨
+
+**The easiest way to preview your changes while writing:**
+
+```bash
+cd documentation
+source venv/bin/activate
+make livehtml
+```
+
+This starts a local server at `http://localhost:8000` that:
+- ✅ Automatically rebuilds when you save RST/MD files
+- ✅ Auto-refreshes your browser
+- ✅ Shows your changes instantly
+
+Keep this running while you write - no need to manually rebuild!
+
 ## Two Ways to Update Documentation
 
 ### Method 1: Automatic (Recommended) 🚀

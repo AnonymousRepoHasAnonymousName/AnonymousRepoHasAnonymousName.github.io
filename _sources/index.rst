@@ -1,11 +1,11 @@
 Welcome to URBAN-SIM!
 =====================
 
-.. figure:: assets/URBANSIM.png
+.. figure:: assets/teaser_v7.png
    :width: 100%
    :alt: Async Simulation in URBAN-SIM
 
-**URBAN-SIM** is a unified framework for robot learning in urban scenarios, 
+**URBAN-SIMeee** is a unified framework for robot learning in urban scenarios, 
 including point navigation, obstacle avoidance, pedestrian interaction, etc. 
 It is designed to support a wide range of learning paradigms such as reinforcement learning, imitation learning. 
 Built on top of `NVIDIA Isaac Sim`_ and `NVIDIA Isaac Lab`_, URBAN-SIM enables high-fidelity photo-realistic rendering,
