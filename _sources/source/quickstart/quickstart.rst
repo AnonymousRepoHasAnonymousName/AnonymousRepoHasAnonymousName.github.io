@@ -4,10 +4,10 @@ Quickstart Guide
 =======================
 
 
-This guide includes running RL, finding environments, creating new projects, and some basic usage of URBAN-SIM.
+This guide includes running RL, finding environments, creating new projects, and some basic usage of UrbanVerse.
 
-To get started, we will first install URBAN-SIM following the previsou section.
-After that, we can launch a training script to train a reinforcement learning agent in a URBAN-SIM environment.
+To get started, we will first install UrbanVerse following the previsou section.
+After that, we can launch a training script to train a reinforcement learning agent in a UrbanVerse environment.
 
 Explore UrbanVerse-100K API
 ----------------------------
@@ -24,7 +24,7 @@ With UrbanVerse-Gen, you can build custom environments directly from casually ca
 Launch Training
 -------------------
 
-The various envs of URBAN-SIM are accessed through their corresponding ``train.py`` scripts located in the ``urbansim/learning/RL`` directory.
+The various envs of UrbanVerse are accessed through their corresponding ``train.py`` scripts located in the ``urbansim/learning/RL`` directory.
 Invoking these scripts will require a **Task Configuration** to the gymnasium API. For example,
 
 .. code-block:: bash
@@ -63,7 +63,7 @@ This is the configuration file that defines the training parameters, such as the
 Configurations
 ---------------
 
-Regardless of what you are going to be doing with URBAN-SIM, you will need to deal with **Configurations**. Configurations
+Regardless of what you are going to be doing with UrbanVerse, you will need to deal with **Configurations**. Configurations
 can all be identified by the inclusion of the ``@configclass`` decorator above their class definition and the lack of an ``__init__`` function. For example,
 
 .. code-block:: python

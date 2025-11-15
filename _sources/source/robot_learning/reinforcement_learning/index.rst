@@ -1,7 +1,7 @@
 Reinforcement Learning
 ===================================
 
-URBAN-SIM provides a modular and extensible framework for reinforcement learning (RL) in complex urban environments.  
+UrbanVerse provides a modular and extensible framework for reinforcement learning (RL) in complex urban environments.  
 It is built on top of Isaac Lab's `ManagerBasedRLEnv` architecture and supports multi-environment parallel simulation, curriculum learning, and rich observations/actions.
 
 This section introduces the major configurable components of the RL environment pipeline.
@@ -26,7 +26,7 @@ Component Overview
   See: :doc:`scene`
 
 - **Actions**  
-  URBAN-SIM supports multiple action interfaces, including velocity commands for wheeled and legged robots.  
+  UrbanVerse supports multiple action interfaces, including velocity commands for wheeled and legged robots.  
   See: :doc:`action`
 
 - **Observations**  

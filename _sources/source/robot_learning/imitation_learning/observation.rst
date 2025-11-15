@@ -1,7 +1,7 @@
 Observation Space
 =================
 
-URBAN-SIM supports configurable multimodal observation spaces tailored to different robot embodiments and tasks.  
+UrbanVerse supports configurable multimodal observation spaces tailored to different robot embodiments and tasks.  
 Each environment binds an observation configuration class that defines the set of sensors, modalities, and preprocessing methods available to the policy.
 
 The observation space is defined in the scenecfg file, for example, ``urbansim/primitives/navigation/random_env_cfg.py``.
@@ -9,7 +9,7 @@ The observation space is defined in the scenecfg file, for example, ``urbansim/p
 Sensor-based Observations
 ----------------------------
 
-URBAN-SIM supports a modular sensor system, where observations from various physical or virtual sensors  
+UrbanVerse supports a modular sensor system, where observations from various physical or virtual sensors  
 (e.g., cameras, raycasters, contact sensors) can be processed and passed to RL policies.  
 These sensors are defined under the robot's scene configuration and referenced by observation terms.
 

@@ -1,7 +1,7 @@
 Action Space
 =================
 
-URBAN-SIM supports multiple types of action spaces depending on the robot embodiment.  
+UrbanVerse supports multiple types of action spaces depending on the robot embodiment.  
 Each robot defines its own control interface by providing a corresponding action configuration class.  
 This configuration determines the **action dimension**, **control type**, and **scaling behavior** used during RL training.
 

@@ -3,14 +3,14 @@
 License
 ========
 
-URBAN-SIM
+UrbanVerse
 ----------
 
-URBAN-SIM is released under the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_.
+UrbanVerse is released under the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_.
 
 .. code-block:: text
 
-   Copyright (c) 2025-2030, The URBAN-SIM Project Developers.
+   Copyright (c) 2025-2030, The UrbanVerse Project Developers.
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.

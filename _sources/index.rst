@@ -8,7 +8,7 @@ Welcome to UrbanVerse!
 UrbanVerse
 ==========
 
-**UrbanVerse** is a unified real-to-sim system built on the Urban-Sim platform with Nvidia IsaacLab as the simulation engine for robot learning in urban environments.  
+**UrbanVerse** is a unified real-to-sim system built on the UrbanVerse platform with Nvidia IsaacLab as the simulation engine for robot learning in urban environments.  
 It converts casually captured, uncalibrated city-tour videos into fully interactive simulation scenes, enabling users to build realistic, layout-accurate environments and train their own robots at scale.
 
 Core Components
@@ -39,7 +39,7 @@ We fully open-source the following resources of UrbanVerse to the community:
 2. The complete UrbanVerse-Gen pipeline for layout extraction, asset retrieval, and scene instantiation.
 3. Code for urban-navigation tasks (point navigation, obstacle avoidance, pedestrian interaction, etc.) for both training and evaluation.
 4. Tools for automatically annotating new 3D objects with semantic, physical, and affordance attributes using GPT-4.1.
-5. Multiple robot embodiments, including COCO wheeled delivery robots and robots natively supported by Urban-Sim (e.g., Unitree Go2 quadrupeds, Unitree G1 humanoids).
+5. Multiple robot embodiments, including COCO wheeled delivery robots and robots natively supported by UrbanVerse (e.g., Unitree Go2 quadrupeds, Unitree G1 humanoids).
 
 
 Simulation Platform

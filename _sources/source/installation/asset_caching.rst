@@ -1,7 +1,7 @@
 Asset Caching
 =============
 
-Assets used in URBAN-SIM should be downloaded from HuggingFace.
+Assets used in UrbanVerse should be downloaded from HuggingFace.
 We provide utility scripts to help automate this process.
 
 .. code:: bash

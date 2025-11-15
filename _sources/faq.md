@@ -1,6 +1,6 @@
 # Known Issues and Limitations
 
-This section outlines known issues and current limitations in URBAN-SIM, including hardware requirements, missing dependencies, upcoming asset releases, etc.
+This section outlines known issues and current limitations in UrbanVerse, including hardware requirements, missing dependencies, upcoming asset releases, etc.
 
 ## Module Not Found Error
 
@@ -16,7 +16,7 @@ IsaacSim has limited compatibility with `zsh`. If you encounter unexpected behav
 
 ## CUDA & GLIBCXX Incompatibility
 
-URBAN-SIM relies on many libraries and systems like NVIDIA Isaac Sim, which requires support of `libstdc++` for successful runtime.  
+UrbanVerse relies on many libraries and systems like NVIDIA Isaac Sim, which requires support of `libstdc++` for successful runtime.  
 On some systems, especially with custom Anaconda installations, the following error may occur:
 
 ```bash
@@ -42,12 +42,12 @@ We recommend using RTX 30xx / 40xx / 50xx consumer cards or supported workstatio
 
 ## Asset Availability
 
-Some assets in URBAN-SIM scenarios are under construction or being curated for release.  
+Some assets in UrbanVerse scenarios are under construction or being curated for release.  
 More specifically:
 
 - **Static objects**: Static objects are currently partial; a full set with more than 15,000 well-annotated assets will be released progressively.
 - **Pedestrians**: We use pedestrian assets from the [Synbody](https://synbody.github.io/) project.  
-  To reduce space and streamline runtime loading, only a **subset of Synbody** models is currently included in URBAN-SIM.  
+  To reduce space and streamline runtime loading, only a **subset of Synbody** models is currently included in UrbanVerse.  
   We will release code to process and convert Synbody assets into `.usd` format in the future.  
   For now, you can manually convert Synbody assets using the Isaac Sim GUI.
 

@@ -1,7 +1,7 @@
 
-# Scenario Generation in URBAN-SIM
+# Scenario Generation in UrbanVerse
 
-We provide two distinct pipelines for scenario generation in URBAN-SIM, each with different strengths suited for various training and evaluation goals.
+We provide two distinct pipelines for scenario generation in UrbanVerse, each with different strengths suited for various training and evaluation goals.
 
 ---
 

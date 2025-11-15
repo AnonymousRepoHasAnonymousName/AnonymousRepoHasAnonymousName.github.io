@@ -1,24 +1,45 @@
 .. _urbanverse-binaries-installation:
 
-Installation using Binaries
-=====================================
+Installation via Pre-Built Binaries
+===================================
 
-URBAN-SIM requires Isaac Sim. This tutorial installs Isaac Sim first from binaries, then URBAN-SIM from source code.
+UrbanVerse runs on top of the NVIDIA Isaac Sim simulation engine.  
+This guide first installs Isaac Sim from its binary distribution, then sets up the UrbanVerse source code.
+
+.. image:: https://img.shields.io/badge/IsaacSim-4.5.0-silver.svg
+   :target: .
+   :alt: Isaac Sim 4.5.0
+
+.. image:: https://img.shields.io/badge/IsaacLab-2.0.1-silver.svg
+   :target: .
+   :alt: Isaac Lab 2.0.1
+
+.. image:: https://img.shields.io/badge/python-3.10-blue.svg
+   :target: .
+   :alt: Python 3.10
+
+.. image:: https://img.shields.io/badge/platform-linux--64-orange.svg
+   :target: .
+   :alt: Linux (64-bit)
+
+.. note::
+
+   We recommend running UrbanVerse on systems with **at least 32 GB RAM** and **16 GB GPU VRAM**.  
+   Workflows involving high-fidelity rendering of complex 3D assets may require even more GPU memory.  
+   For detailed and up-to-date hardware requirements, refer to the  
+   Isaac Sim system requirements.
+
 
 Installing Isaac Sim
 --------------------
 
-Downloading pre-built binaries
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Obtaining the Isaac Sim Binary Package
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Please follow the Isaac Sim
-`documentation <https://docs.isaacsim.omniverse.nvidia.com/latest/installation/install_workstation.html>`__
-to install the latest Isaac Sim release.
+Please refer to the official Isaac Sim documentation to download the most recent binary release.  
+Starting from Isaac Sim 4.5, pre-built binaries are distributed directly as a `.zip` archive from NVIDIA’s website.
 
-From Isaac Sim 4.5 release, Isaac Sim binaries can be `downloaded <https://docs.isaacsim.omniverse.nvidia.com/latest/installation/download.html#download-isaac-sim-short>`_ directly as a zip file.
-
-To check the minimum system requirements, refer to the documentation
-`here <https://docs.isaacsim.omniverse.nvidia.com/latest/installation/requirements.html>`__.
+Before installation, ensure that your system meets the minimum hardware and software requirements listed in the official documentation.
 
 .. tab-set::
    :sync-group: os
@@ -28,20 +49,23 @@ To check the minimum system requirements, refer to the documentation
 
       .. note::
 
-         We have tested Isaac Lab with Isaac Sim 4.5 release on Ubuntu
-         22.04 LTS with NVIDIA driver 535.230 on NVIDIA 4080 Super, 4090 and L40S.
+         We have validated Isaac Lab and UrbanVerse using Isaac Sim 4.5.0 on Ubuntu 22.04 LTS and 24.04 LTS  
+         with NVIDIA driver 535.230 on RTX 4080, RTX 4080 Super, RTX 4090, RTX 5090, RTX 6000, RTX 6000 Pro, and L40S GPUs.
 
-         From Isaac Sim 4.5 release, Isaac Sim binaries can be downloaded directly as a zip file.
-         The below steps assume the Isaac Sim folder was unzipped to the ``${HOME}/isaacsim`` directory.
+         Isaac Sim 4.5.0 and later can be installed by simply extracting the `.zip` archive.  
+         The following instructions assume the folder was unpacked to ``${HOME}/isaacsim``.
 
-      On Linux systems, Isaac Sim directory will be named ``${HOME}/isaacsim``.
+      On Linux systems, the installation directory is typically located at ``${HOME}/isaacsim``.
 
-Verifying the Isaac Sim installation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. note::
 
-To avoid the overhead of finding and locating the Isaac Sim installation
-directory every time, we recommend exporting the following environment
-variables to your terminal for the remaining of the installation instructions:
+   For consistency, run all commands in a **bash** terminal.  
+   If your shell defaults to **zsh**, switch temporarily by running ``bash`` before proceeding.
+
+Verifying Your Isaac Sim Setup
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To simplify the upcoming steps, we recommend exporting two environment variables that point to the Isaac Sim installation:
 
 .. tab-set::
    :sync-group: os
@@ -51,17 +75,15 @@ variables to your terminal for the remaining of the installation instructions:
 
       .. code:: bash
 
-         # Isaac Sim root directory
+         # Path to the Isaac Sim installation
          export ISAACSIM_PATH="${HOME}/isaacsim"
-         # Isaac Sim python executable
+
+         # Isaac Sim Python helper launcher
          export ISAACSIM_PYTHON_EXE="${ISAACSIM_PATH}/python.sh"
 
+You can consult the Isaac Sim documentation for more details about standard install paths.
 
-For more information on common paths, please check the Isaac Sim
-`documentation <https://docs.isaacsim.omniverse.nvidia.com/latest/installation/install_faq.html#common-path-locations>`__.
-
-
--  Check that the simulator runs as expected:
+-  **Test launching the simulator GUI:**
 
    .. tab-set::
       :sync-group: os
@@ -71,10 +93,9 @@ For more information on common paths, please check the Isaac Sim
 
          .. code:: bash
 
-            # note: you can pass the argument "--help" to see all arguments possible.
             ${ISAACSIM_PATH}/isaac-sim.sh
 
--  Check that the simulator runs from a standalone python script:
+-  **Test launching Isaac Sim through Python:**
 
    .. tab-set::
       :sync-group: os
@@ -84,29 +105,27 @@ For more information on common paths, please check the Isaac Sim
 
          .. code:: bash
 
-            # checks that python path is set correctly
-            ${ISAACSIM_PYTHON_EXE} -c "print('Isaac Sim configuration is now complete.')"
-            # checks that Isaac Sim can be launched from python
+            # Confirm python path is configured correctly
+            ${ISAACSIM_PYTHON_EXE} -c "print('Isaac Sim environment detected.')"
+
+            # Confirm Isaac Sim can be launched from python
             ${ISAACSIM_PYTHON_EXE} ${ISAACSIM_PATH}/standalone_examples/api/isaacsim.core.api/add_cubes.py
 
-If the simulator does not run or crashes while following the above
-instructions, it means that something is incorrectly configured. To
-debug and troubleshoot, please check Isaac Sim
-`documentation <https://docs.omniverse.nvidia.com/dev-guide/latest/linux-troubleshooting.html>`__
-and the
-`forums <https://docs.isaacsim.omniverse.nvidia.com/latest/isaac_sim_forums.html>`__.
+If you encounter crashes or import errors, verify that Isaac Sim is installed correctly and consult the FAQs and troubleshooting pages in the Isaac Sim documentation and user forums.
 
-.. note:: 
-    If you meet  the error ``ModuleNotFoundError: No module named 'xxx'``, ensure that the conda environment is activated and use
-    ``source _isaac_sim/setup_conda_env.sh`` to set up the conda environment.
+.. note::
 
-Installing URBAN-SIM
---------------------
+   If you encounter ``ModuleNotFoundError: No module named 'xxx'``, ensure your conda environment is activated and run:
 
-Cloning URBAN-SIM
-~~~~~~~~~~~~~~~~~
+   ``source _isaac_sim/setup_conda_env.sh``
 
-Clone the URBAN-SIM repository into your workspace:
+Installing UrbanVerse
+---------------------
+
+Cloning the UrbanVerse Repository
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Clone the UrbanVerse codebase into your working directory:
 
 .. tab-set::
 
@@ -114,11 +133,11 @@ Clone the URBAN-SIM repository into your workspace:
 
       .. code:: bash
 
-         git clone -b main --depth 1 https://github.com/metadriverse/urban-sim.git
+         git clone -b main --depth 1 "<URL OMITTED FOR DOUBLE-BLIND REVIEW>"
 
 .. note::
-   We provide a helper executable `urbansim.sh` that provides
-   utilities to manage extensions:
+
+   The ``urbanverse.sh`` helper script simplifies common setup tasks such as installing extensions, creating conda environments, and generating VSCode settings.
 
    .. tab-set::
       :sync-group: os
@@ -128,23 +147,23 @@ Clone the URBAN-SIM repository into your workspace:
 
          .. code:: text
 
-            ./urbansim.sh --help
+            ./urbanverse.sh --help
 
-            usage: urbansim.sh [-h] [-i] [-v] [-c] [-a] -- Utility to manage URBAN-SIM.
+            usage: urbanverse.sh [-h] [-i] [-v] [-c] [-a]
+                Utility to manage UrbanVerse.
 
             optional arguments:
-                -h, --help           Display the help content.
-                -i, --install        Install the extensions inside URBAN-SIM and learning frameworks as extra dependencies.
-                -v, --vscode         Generate the VSCode settings file from template.
-                -c, --conda [NAME]   Create the conda environment for URBAN-SIM. Default name is 'urbansim'.
-                -a, --advanced       Run the advanced command.
+                -h, --help           Show this help message.
+                -i, --install        Install UrbanVerse extensions and dependencies.
+                -v, --vscode         Generate VSCode settings.
+                -c, --conda [NAME]   Create a conda environment (default: "urbanverse").
+                -a, --advanced       Install advanced components.
 
-Creating the Isaac Sim Symbolic Link
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Linking Isaac Sim into UrbanVerse
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Set up a symbolic link between the installed Isaac Sim root folder
-and ``_isaac_sim`` in the Isaac Lab directory. This makes it convenient
-to index the python modules and look for extensions shipped with Isaac Sim.
+UrbanVerse expects a symbolic link to the Isaac Sim installation under the ``_isaac_sim`` directory.  
+This gives UrbanVerse direct access to Isaac Sim’s modules and extensions.
 
 .. tab-set::
    :sync-group: os
@@ -154,14 +173,12 @@ to index the python modules and look for extensions shipped with Isaac Sim.
 
       .. code:: bash
 
-         # enter the cloned repository
-         cd urban-sim
-         # create a symbolic link
+         cd UrbanVerse
          ln -s ${HOME}/isaacsim ./_isaac_sim
-         # You can also use the absolute path instead of ${HOME}/isaacsim
+         # Alternatively, use an absolute path to the Isaac Sim installation.
 
-Setting up the conda environment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Creating the Conda Environment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. tab-set::
    :sync-group: os
@@ -171,20 +188,19 @@ Setting up the conda environment
 
       .. code:: bash
 
-         bash urbansim.sh -c [env_name]  # The default name is "urbansim"
+         bash urbanverse.sh -c [env_name]   # Default environment name: "urbanverse"
 
-Once created, be sure to activate the environment before proceeding!
+Activate the environment before continuing:
 
 .. code:: bash
 
-   conda activate urbansim  # or "conda activate my_env"
+   conda activate urbanverse
 
-Once you are in the virtual environment, you can use the default python executable in your environment
-by running ``python`` or ``python3``.
+Once activated, the standard python executable in this environment (``python`` or ``python3``) will be used for UrbanVerse.
 
-
-Installation
-~~~~~~~~~~~~
+Installing UrbanVerse
+~~~~~~~~~~~~~~~~~~~~~
+We provide an automatic installation script ``urbanverse.sh`` that simplifies the installation process:
 
 .. tab-set::
    :sync-group: os
@@ -194,10 +210,22 @@ Installation
 
       .. code:: bash
 
-         ./urbansim.sh --install # or "./urbansim.sh -i"
-         ./urbansim.sh --advanced # or "./urbansim.sh -a"
+         ./urbanverse.sh --install
+         ./urbanverse.sh --advanced    # Optional: install advanced features
 
 .. note::
 
-   By default, the above will install all the learning frameworks. More specifically, `--install` will install the basic pipeline for random scenario generation,
-   `--advanced` will install the full pipeline for scenario generation, including the learning frameworks and additional dependencies such as ORCA for pedestrian moving.
+   **Basic installation** (``--install``) includes:
+
+   - Core UrbanVerse dependencies
+   - UrbanVerse-100K APIs
+   - Core 3rd-party modules and their model weights (e.g., MASt3R, CLIP, SAM-2, DINOv2, Mask2Former, Faiss)
+   - The full UrbanVerse-Gen real-to-sim pipeline (3D semantic layout parsing and extraction → asset retrieval → USD scene generation)  
+   - Robot learning modules for training and evaluating agents in UrbanVerse environments  
+
+   **Advanced installation** (``--advanced``) additionally includes:
+
+   - Dynamic agents (pedestrians, riders and vehicles) populated using ORCA algorithm
+   - UrbanVerse’s automatic asset annotation toolkit (semantic / physical / affordance attributes via GPT-4.1)  
+   - VR interaction tools for exploring UrbanVerse environments
+

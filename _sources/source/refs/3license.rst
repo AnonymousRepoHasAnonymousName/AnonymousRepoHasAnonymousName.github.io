@@ -1,7 +1,7 @@
 Third-Party License Notice
 ===========================
 
-URBAN-SIM makes use of several third-party libraries, assets, and pretrained models, each governed by their own respective licenses.  
+UrbanVerse makes use of several third-party libraries, assets, and pretrained models, each governed by their own respective licenses.  
 To ensure clarity and proper attribution, all third-party license texts and usage notes have been included in the ``licenses/`` directory at the root of this repository.
 
 Please refer to the files in ``licenses/`` for details on:

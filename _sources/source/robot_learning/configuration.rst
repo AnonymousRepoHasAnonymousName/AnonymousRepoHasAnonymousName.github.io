@@ -1,7 +1,7 @@
 Environment Configurations
 ====================================
 
-The `EnvCfg` class defines the configuration schema for URBAN-SIM training environments.  
+The `EnvCfg` class defines the configuration schema for UrbanVerse training environments.  
 It inherits from `ManagerBasedRLEnvCfg` in Isaac Lab and encapsulates settings for the simulation scene, observation/action space, rewards, curriculum, and termination logic.
 
 .. code-block:: python
@@ -9,7 +9,7 @@ It inherits from `ManagerBasedRLEnvCfg` in Isaac Lab and encapsulates settings f
    @configclass
    class EnvCfg(ManagerBasedRLEnvCfg):
        """
-       Environment configuration schema for URBAN-SIM.
+       Environment configuration schema for UrbanVerse.
        Inherits from ManagerBasedRLEnvCfg.
        """
 
@@ -81,7 +81,7 @@ All these components are dynamically loaded based on the environment configurati
 Robot Configuration
 ====================
 
-URBAN-SIM supports multiple robot embodiments, each with its own physical parameters, control interface, and integration strategy.
+UrbanVerse supports multiple robot embodiments, each with its own physical parameters, control interface, and integration strategy.
 
 The robot selection is determined via the ``robot_name`` field in the environment configuration, and dynamically loads the corresponding config modules.
 

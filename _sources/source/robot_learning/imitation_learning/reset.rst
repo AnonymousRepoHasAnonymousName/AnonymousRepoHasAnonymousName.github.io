@@ -1,7 +1,7 @@
 Termination Conditions
 ==============================
 
-URBAN-SIM uses a set of modular termination conditions to determine when an episode should end.  
+UrbanVerse uses a set of modular termination conditions to determine when an episode should end.  
 Each condition is implemented as a `DoneTerm`, and bound via a `TerminationsCfg` config class.
 
 Taking **COCO** (a wheeled robot) as an example:

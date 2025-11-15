@@ -1,7 +1,7 @@
 Scene Configuration
 =====================
 
-URBAN-SIM supports multiple pipelines for generating simulation scenes with varying complexity, spatial structure, and randomness.  
+UrbanVerse supports multiple pipelines for generating simulation scenes with varying complexity, spatial structure, and randomness.  
 Each environment binds a scene configuration (`SceneCfg`) that determines what types of scenes are loaded, how they are arranged, and how they are reused across multiple environments.
 
 Scene Binding
@@ -21,7 +21,7 @@ The scene class determines the number of environments, their spatial arrangement
 Scenario Generation Pipelines
 ------------------------------
 
-URBAN-SIM includes two main pipelines for generating scenes:
+UrbanVerse includes two main pipelines for generating scenes:
 
 1. **Random Object Placement**  
    Fast and lightweight. Places obstacles, buildings, and pedestrians randomly within a defined area.  
@@ -93,7 +93,7 @@ You can also inject dynamic agents (e.g., pedestrians, moving vehicles) through 
 Spatial Arrangement
 --------------------
 
-URBAN-SIM supports both:
+UrbanVerse supports both:
 
 - **Synchronous scenes**: All environments share the same map and layout (ideal for evaluation)
 - **Asynchronous scenes**: Each environment is different (ideal for generalization training)
