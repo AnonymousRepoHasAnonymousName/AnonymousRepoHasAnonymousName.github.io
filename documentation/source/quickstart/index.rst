@@ -1,4 +1,4 @@
-.. _urbanverse-installation-root:
+.. _urbanverse-quickstart-root:
 
 .. note::
 

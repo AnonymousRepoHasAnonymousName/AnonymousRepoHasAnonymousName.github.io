@@ -70,7 +70,10 @@ Table of Contents
    :maxdepth: 2
    :caption: Installation
 
-   source/installation/index
+   source/installation/binaries_installation
+   source/installation/asset_caching
+   source/installation/scene_caching
+   source/installation/verifying_installation
 
 .. toctree::
    :maxdepth: 2
