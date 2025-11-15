@@ -484,10 +484,13 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-exploration-of-667-categories">Quick Exploration of 667 Categories</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-dataset-overview-sunburst-plot">Interactive Dataset Overview (Sunburst Plot)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-exploration-of-categories-and-components">Quick Exploration of Categories and Components</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-categories">Loading Categories</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-uids">Loading UIDs</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-annotations">Loading Annotations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#per-object-annotation-example-in-urbanverse-100k">Per-object Annotation Example in UrbanVerse-100K</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#full-list-of-annotation-fields">Full List of Annotation Fields</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-by-attributes">Filtering by Attributes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downloading-assets">Downloading Assets</a></li>
 </ul>
@@ -502,31 +505,616 @@
                 <article class="bd-article">
                   
   <section id="use-urbanverse-100k-with-apis">
-<span id="urbanverse-urbanverse100k-api"></span><h1>Use UrbanVerse-100K with APIs<a class="headerlink" href="#use-urbanverse-100k-with-apis" title="Permalink to this heading">#</a></h1>
-<p>aaa</p>
-<section id="quick-exploration-of-667-categories">
-<h2>Quick Exploration of 667 Categories<a class="headerlink" href="#quick-exploration-of-667-categories" title="Permalink to this heading">#</a></h2>
-<p>aaa</p>
+<span id="urbanverse-quickstart-urbanverse100k"></span><h1>Use UrbanVerse-100K with APIs<a class="headerlink" href="#use-urbanverse-100k-with-apis" title="Permalink to this heading">#</a></h1>
+<p>UrbanVerse-100K is a standalone, Python-friendly dataset of <strong>102,530 metric-scale urban 3D assets</strong>,
+organized into <strong>8 top-level</strong>, <strong>59 mid-level</strong>, and <strong>667 leaf-level categories</strong>.
+In addition, it provides <strong>288 ground materials</strong> and <strong>306 HDRI sky maps</strong> for realistic simulation.</p>
+<p>Each 3D object asset is annotated with <strong>33+ semantic, physical, and affordance attributes</strong>
+(e.g., mass, friction, traversability, material composition, affordances such as <code class="docutils literal notranslate"><span class="pre">drivable</span></code> or <code class="docutils literal notranslate"><span class="pre">openable</span></code>).</p>
+<p>This section shows how to:</p>
+<ul class="simple">
+<li><p>explore the dataset structure and category statistics,</p></li>
+<li><p>load categories, UIDs, and annotations,</p></li>
+<li><p>filter objects by attributes,</p></li>
+<li><p>download object meshes, ground materials, and sky maps.</p></li>
+</ul>
+<p>Install the UrbanVerse-100K API as:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>urbanverse-100k
+</pre></div>
+</div>
+<p>and import it in Python as:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse_100k</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uvk</span>
+</pre></div>
+</div>
+<section id="interactive-dataset-overview-sunburst-plot">
+<h2>Interactive Dataset Overview (Sunburst Plot)<a class="headerlink" href="#interactive-dataset-overview-sunburst-plot" title="Permalink to this heading">#</a></h2>
+<p>UrbanVerse-100K ships with an interactive <strong>sunburst visualization</strong> summarizing the distribution of assets
+across the category hierarchy (<code class="docutils literal notranslate"><span class="pre">l1</span></code>, <code class="docutils literal notranslate"><span class="pre">l2</span></code>, <code class="docutils literal notranslate"><span class="pre">l3</span></code>), ground materials, and sky maps.
+The HTML file is bundled inside the package at:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">assets/urbanverse_distribution.html</span></code></p></li>
+</ul>
+<p>You can open it from a Jupyter notebook:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">IFrame</span>
+
+<span class="n">html_path</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">get_distribution_html</span><span class="p">()</span>  <span class="c1"># returns the absolute path to the HTML file</span>
+<span class="n">IFrame</span><span class="p">(</span><span class="n">src</span><span class="o">=</span><span class="n">html_path</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">900</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Or open it in your default browser:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">webbrowser</span>
+
+<span class="n">html_path</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">get_distribution_html</span><span class="p">()</span>
+<span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;file://</span><span class="si">{</span><span class="n">html_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This is a convenient way to visually inspect the category hierarchy
+before using the Python API.</p>
+</section>
+<section id="quick-exploration-of-categories-and-components">
+<h2>Quick Exploration of Categories and Components<a class="headerlink" href="#quick-exploration-of-categories-and-components" title="Permalink to this heading">#</a></h2>
+<p>At a high level, UrbanVerse-100K is organized as follows:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<colgroup>
+<col style="width: 22.0%" />
+<col style="width: 45.0%" />
+<col style="width: 18.0%" />
+<col style="width: 15.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Component</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Quantity</p></th>
+<th class="head"><p>Format</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>3D Object Assets</p></td>
+<td><p>Metric-scale 3D object models spanning hundreds of urban categories.</p></td>
+<td><p>102,530</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.glb</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Object Thumbnails</p></td>
+<td><p>Canonical-view thumbnail for each 3D object asset.</p></td>
+<td><p>102,530</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.png</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Multi-View Object Renders</p></td>
+<td><p>Four standardized renders per asset at 0°, 90°, 180°, 270°.</p></td>
+<td><p>4 × 102,530</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.png</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Ground Materials (PBR)</p></td>
+<td><p>4K photorealistic PBR ground materials for <strong>road</strong>, <strong>sidewalk</strong>, and terrain.</p></td>
+<td><p>288</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.mdl</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Ground Material Thumbnails</p></td>
+<td><p>Preview thumbnail for each ground material.</p></td>
+<td><p>288</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.png</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>HDRI Sky Maps</p></td>
+<td><p>High-resolution 4K HDRI domes for realistic, full-environment lighting.</p></td>
+<td><p>306</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.hdr</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>HDRI Thumbnails</p></td>
+<td><p>Thumbnail previews for each HDRI sky map.</p></td>
+<td><p>306</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.png</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Per-Object Annotations</p></td>
+<td><p>One annotation file per asset, each containing semantic, physical, and affordance attributes.</p></td>
+<td><p>102,530</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.json</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Master Annotation File</p></td>
+<td><p>Global index describing dataset statistics and the <code class="docutils literal notranslate"><span class="pre">l1/l2/l3</span></code> hierarchy.</p></td>
+<td><p>1</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">urbanverse_annotation.json</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>You can query the global statistics and hierarchy as:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">about</span><span class="p">,</span> <span class="n">stats</span><span class="p">,</span> <span class="n">hierarchy</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_dataset_metadata</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">about</span><span class="p">[</span><span class="s2">&quot;version&quot;</span><span class="p">])</span>          <span class="c1"># e.g., &quot;1.0&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stats</span><span class="p">[</span><span class="s2">&quot;number_of_assets&quot;</span><span class="p">])</span> <span class="c1"># e.g., 102,530</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stats</span><span class="p">[</span><span class="s2">&quot;number_of_classes_l1&quot;</span><span class="p">],</span> <span class="n">stats</span><span class="p">[</span><span class="s2">&quot;number_of_classes_l2&quot;</span><span class="p">],</span> <span class="n">stats</span><span class="p">[</span><span class="s2">&quot;number_of_classes_l3&quot;</span><span class="p">])</span>
+
+<span class="c1"># First few hierarchical entries (l1, l2, l3)</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">hierarchy</span><span class="p">[:</span><span class="mi">5</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;l1&quot;</span><span class="p">],</span> <span class="s2">&quot;&gt;&quot;</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;l2&quot;</span><span class="p">],</span> <span class="s2">&quot;&gt;&quot;</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;l3&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
 </section>
 <section id="loading-categories">
 <h2>Loading Categories<a class="headerlink" href="#loading-categories" title="Permalink to this heading">#</a></h2>
-<p>aaa</p>
+<p>UrbanVerse-100K uses a three-level semantic hierarchy:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">l1</span></code>: top-level (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;building&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;road&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;street</span> <span class="pre">user&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;urban</span> <span class="pre">object&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;amenity&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;nature&quot;</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">l2</span></code>: mid-level (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;commercial</span> <span class="pre">building&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;transportation</span> <span class="pre">amenity&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;vegetation&quot;</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">l3</span></code>: leaf-level, fine-grained categories
+(e.g., <code class="docutils literal notranslate"><span class="pre">&quot;traffic</span> <span class="pre">light&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;trash</span> <span class="pre">bin&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;apartment</span> <span class="pre">building&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;electric</span> <span class="pre">car&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;delivery</span> <span class="pre">robot&quot;</span></code>)</p></li>
+</ul>
+<p>API:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uvk</span><span class="o">.</span><span class="n">load_categories</span><span class="p">(</span>
+    <span class="n">level</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;leaf&quot;</span><span class="p">,</span>  <span class="c1"># &quot;top&quot;, &quot;mid&quot;, or &quot;leaf&quot;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+
+<span class="n">uvk</span><span class="o">.</span><span class="n">load_category_stats</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Examples:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse_100k</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uvk</span>
+
+<span class="c1"># All leaf-level categories (667 in v1.0)</span>
+<span class="n">leaf_categories</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_categories</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="s2">&quot;leaf&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Leaf categories:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">leaf_categories</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">leaf_categories</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+
+<span class="c1"># Coarser mid-level and top-level groups</span>
+<span class="n">mid_categories</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_categories</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="s2">&quot;mid&quot;</span><span class="p">)</span>
+<span class="n">top_categories</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_categories</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="s2">&quot;top&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Top-level categories:&quot;</span><span class="p">,</span> <span class="n">top_categories</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To inspect counts per category:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">stats</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_category_stats</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">stats</span><span class="p">[:</span><span class="mi">5</span><span class="p">]:</span>
+    <span class="c1"># Example: &quot;street user &gt; robot &gt; delivery robot  :  42&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;l1&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1"> &gt; </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;l2&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1"> &gt; </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;l3&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1"> : </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
 </section>
 <section id="loading-uids">
 <h2>Loading UIDs<a class="headerlink" href="#loading-uids" title="Permalink to this heading">#</a></h2>
-<p>aaa</p>
+<p>Each asset in UrbanVerse-100K is identified by a unique <strong>UID</strong>.
+We distinguish between:</p>
+<ul class="simple">
+<li><p><strong>object UIDs</strong> for 3D assets (e.g., an <code class="docutils literal notranslate"><span class="pre">&quot;electric</span> <span class="pre">car&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;traffic</span> <span class="pre">light&quot;</span></code>),</p></li>
+<li><p><strong>ground material IDs</strong> (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;Asphalt016&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;PavingStones040&quot;</span></code>),</p></li>
+<li><p><strong>sky map IDs</strong> (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;urban_street_01&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;autumn_field_puresky&quot;</span></code>).</p></li>
+</ul>
+<p>APIs:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uvk</span><span class="o">.</span><span class="n">load_object_uids</span><span class="p">(</span>
+    <span class="n">top_category</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>   <span class="c1"># maps to l1, e.g., &quot;street user&quot;</span>
+    <span class="n">mid_category</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>   <span class="c1"># maps to l2, e.g., &quot;robot&quot;</span>
+    <span class="n">leaf_category</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># maps to l3, e.g., &quot;delivery robot&quot;</span>
+    <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+
+<span class="n">uvk</span><span class="o">.</span><span class="n">load_ground_ids</span><span class="p">(</span>
+    <span class="n">subset</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># &quot;road&quot;, &quot;sidewalk&quot;, or None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+
+<span class="n">uvk</span><span class="o">.</span><span class="n">load_sky_ids</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Examples:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse_100k</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uvk</span>
+
+<span class="c1"># 1) All object UIDs in the dataset</span>
+<span class="n">all_object_uids</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_object_uids</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total objects:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_object_uids</span><span class="p">))</span>
+
+<span class="c1"># 2) Only &quot;street user&quot; assets (top category)</span>
+<span class="n">street_user_uids</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_object_uids</span><span class="p">(</span><span class="n">top_category</span><span class="o">=</span><span class="s2">&quot;street user&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Street users:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">street_user_uids</span><span class="p">))</span>
+
+<span class="c1"># 3) Only &quot;traffic light&quot; assets (leaf category), capped at 20</span>
+<span class="n">tl_uids</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_object_uids</span><span class="p">(</span><span class="n">leaf_category</span><span class="o">=</span><span class="s2">&quot;traffic light&quot;</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Traffic lights (sample):&quot;</span><span class="p">,</span> <span class="n">tl_uids</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
+
+<span class="c1"># 4) Ground material IDs (all, road-only, sidewalk-only)</span>
+<span class="n">all_ground_ids</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_ground_ids</span><span class="p">()</span>
+<span class="n">road_ground_ids</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_ground_ids</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="s2">&quot;road&quot;</span><span class="p">)</span>
+<span class="n">sidewalk_ground_ids</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_ground_ids</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="s2">&quot;sidewalk&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ground materials:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_ground_ids</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Road materials (e.g., &#39;Asphalt016&#39;, &#39;Road004&#39;):&quot;</span><span class="p">,</span> <span class="n">road_ground_ids</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sidewalk materials (e.g., &#39;PavingStones040&#39;, &#39;wet_arc_cobble&#39;):&quot;</span><span class="p">,</span> <span class="n">sidewalk_ground_ids</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
+
+<span class="c1"># 5) HDRI sky map IDs</span>
+<span class="n">sky_ids</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_sky_ids</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sky maps:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sky_ids</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Examples:&quot;</span><span class="p">,</span> <span class="n">sky_ids</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>  <span class="c1"># e.g., &quot;urban_street_01&quot;, &quot;stuttgart_suburbs&quot;, &quot;venice_sunset&quot;</span>
+</pre></div>
+</div>
 </section>
 <section id="loading-annotations">
 <h2>Loading Annotations<a class="headerlink" href="#loading-annotations" title="Permalink to this heading">#</a></h2>
-<p>aaa</p>
+<p>Object annotations expose the full set of <strong>semantic, physical, and affordance attributes</strong> per asset.</p>
+<p>API:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uvk</span><span class="o">.</span><span class="n">load_object_annotations</span><span class="p">(</span>
+    <span class="n">uids</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>If <code class="docutils literal notranslate"><span class="pre">uids</span></code> is provided, only those objects are returned.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">uids=None</span></code>, annotations for <strong>all</strong> objects are returned (and cached locally after first download).</p></li>
+</ul>
+<p>Example: inspect a subset of <code class="docutils literal notranslate"><span class="pre">&quot;electric</span> <span class="pre">car&quot;</span></code> assets:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse_100k</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uvk</span>
+
+<span class="c1"># Sample a few &quot;electric car&quot; assets</span>
+<span class="n">car_uids</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_object_uids</span><span class="p">(</span><span class="n">leaf_category</span><span class="o">=</span><span class="s2">&quot;electric car&quot;</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">annotations</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_object_annotations</span><span class="p">(</span><span class="n">car_uids</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Loaded annotations for:&quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">annotations</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+
+<span class="n">uid</span> <span class="o">=</span> <span class="n">car_uids</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">ann</span> <span class="o">=</span> <span class="n">annotations</span><span class="p">[</span><span class="n">uid</span><span class="p">]</span>
+
+<span class="c1"># Print a few key attributes</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;UID:&quot;</span><span class="p">,</span> <span class="n">ann</span><span class="p">[</span><span class="s2">&quot;uid&quot;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CLASS_NAME:&quot;</span><span class="p">,</span> <span class="n">ann</span><span class="p">[</span><span class="s2">&quot;CLASS_NAME&quot;</span><span class="p">])</span>               <span class="c1"># e.g., &quot;electric car&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;mass (kg):&quot;</span><span class="p">,</span> <span class="n">ann</span><span class="p">[</span><span class="s2">&quot;mass&quot;</span><span class="p">])</span>                     <span class="c1"># e.g., 3000</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;friction:&quot;</span><span class="p">,</span> <span class="n">ann</span><span class="p">[</span><span class="s2">&quot;friction_coefficient&quot;</span><span class="p">])</span>      <span class="c1"># e.g., 0.9</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;traversability:&quot;</span><span class="p">,</span> <span class="n">ann</span><span class="p">[</span><span class="s2">&quot;traversability&quot;</span><span class="p">])</span>      <span class="c1"># e.g., &quot;obstacle&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;affordances:&quot;</span><span class="p">,</span> <span class="n">ann</span><span class="p">[</span><span class="s2">&quot;affordances&quot;</span><span class="p">])</span>            <span class="c1"># e.g., [&quot;drivable&quot;, &quot;openable&quot;, ...]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;materials:&quot;</span><span class="p">,</span> <span class="n">ann</span><span class="p">[</span><span class="s2">&quot;materials&quot;</span><span class="p">])</span>                <span class="c1"># e.g., [&quot;steel&quot;, &quot;glass&quot;, &quot;rubber&quot;, ...]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;license:&quot;</span><span class="p">,</span> <span class="n">ann</span><span class="p">[</span><span class="s2">&quot;license_info&quot;</span><span class="p">][</span><span class="s2">&quot;license&quot;</span><span class="p">])</span>    <span class="c1"># e.g., &quot;by&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="per-object-annotation-example-in-urbanverse-100k">
+<h2>Per-object Annotation Example in UrbanVerse-100K<a class="headerlink" href="#per-object-annotation-example-in-urbanverse-100k" title="Permalink to this heading">#</a></h2>
+<p>Each object in UrbanVerse-100K is described by <strong>33+ semantic, physical, material, affordance, and metadata attributes</strong>.
+To help users understand the full structure, we provide a real annotation example below.</p>
+<p>The following JSON block is an actual per-object annotation from UrbanVerse-100K
+(for UID <code class="docutils literal notranslate"><span class="pre">5a87daef2ee3489dba8b173290029513</span></code> — an <em>electric car</em>, a Tesla Cybertruck):</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;description_long&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;This electric car features a sharply angular, geometric design with ...&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A matte dark gray, angular electric pickup with ...&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;description_view_0&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Front view shows a wide, flat hood ...&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;description_view_1&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Left side view highlights ...&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;description_view_2&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Rear view displays ...&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;description_view_3&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Right side view mirrors ...&quot;</span><span class="p">,</span>
+
+<span class="w">  </span><span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;electric car&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;height&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.9</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;max_dimension&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">5.7</span><span class="p">,</span>
+
+<span class="w">  </span><span class="nt">&quot;materials&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;steel&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;glass&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;rubber&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;plastic&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;air&quot;</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;materials_composition&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.7</span><span class="p">,</span><span class="w"> </span><span class="mf">0.15</span><span class="p">,</span><span class="w"> </span><span class="mf">0.08</span><span class="p">,</span><span class="w"> </span><span class="mf">0.05</span><span class="p">,</span><span class="w"> </span><span class="mf">0.02</span><span class="p">],</span>
+
+<span class="w">  </span><span class="nt">&quot;mass&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3000</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;receptacle&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;frontView&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;quality&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;movable&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;required_force&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">6000</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;walkable&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;enterable&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+
+<span class="w">  </span><span class="nt">&quot;affordances&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;drivable&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;openable&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;closable&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;pressable&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;toggleable&quot;</span>
+<span class="w">  </span><span class="p">],</span>
+
+<span class="w">  </span><span class="nt">&quot;support_surface&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;interactive_parts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;door&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;wheel&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;window&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;headlight&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;taillight&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;trunk&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;charging port&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;mirror&quot;</span>
+<span class="w">  </span><span class="p">],</span>
+
+<span class="w">  </span><span class="nt">&quot;traversability&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;obstacle&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;traversable_by&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+
+<span class="w">  </span><span class="nt">&quot;colors&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;dark gray&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;black&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;orange&quot;</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;colors_composition&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.85</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.03</span><span class="p">,</span><span class="w"> </span><span class="mf">0.02</span><span class="p">],</span>
+
+<span class="w">  </span><span class="nt">&quot;surface_hardness&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;hard&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;surface_roughness&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.18</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;surface_finish&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;matte&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;reflectivity&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.18</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;index_of_refraction&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.52</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;youngs_modulus&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">200000</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;friction_coefficient&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.9</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;bounciness&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.05</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;recommended_clearance&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.5</span><span class="p">,</span>
+
+<span class="w">  </span><span class="nt">&quot;asset_composition_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;single&quot;</span><span class="p">,</span>
+
+<span class="w">  </span><span class="nt">&quot;attribute_car_manufacturer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Tesla&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;attribute_car_model&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Cybertruck&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;attribute_charging_port_location&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;left rear quarter panel&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;attribute_license_plate_design&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;attribute_badging_or_emblem&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+
+<span class="w">  </span><span class="nt">&quot;uid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5a87daef2ee3489dba8b173290029513&quot;</span><span class="p">,</span>
+
+<span class="w">  </span><span class="nt">&quot;near_synsets&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;electric.n.01&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5254</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pickup.n.01&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5421</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;technical.n.01&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5443</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;car_window.n.01&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5600</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;bumper_car.n.01&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5702</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;car.n.01&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">-1000.0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;car.n.02&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">-1000.0</span>
+<span class="w">  </span><span class="p">},</span>
+
+<span class="w">  </span><span class="nt">&quot;synset&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pickup.n.01&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;wn_version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;oewn:2022&quot;</span><span class="p">,</span>
+
+<span class="w">  </span><span class="nt">&quot;annotation_info&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;vision_llm&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gpt-4.1-2025-04-14&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;text_llm&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gpt-4.1-2025-04-14&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+
+<span class="w">  </span><span class="nt">&quot;license_info&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;license&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;by&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;uri&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;AnonymousForDoubleBlindReview&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;creator_username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;AnonymousForDoubleBlindReview&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;creator_display_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;AnonymousForDoubleBlindReview&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;creator_profile_url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;AnonymousForDoubleBlindReview&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+
+<span class="w">  </span><span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5a87daef2ee3489dba8b173290029513.glb&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;CLASS_NAME&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;electric car&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;foldername&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+
+<span class="w">  </span><span class="nt">&quot;hshift&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">-90.0</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;length&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">6.12585</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;width&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">2.41919</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;is_building&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="full-list-of-annotation-fields">
+<h2>Full List of Annotation Fields<a class="headerlink" href="#full-list-of-annotation-fields" title="Permalink to this heading">#</a></h2>
+<p>Below is a structured overview of all annotation fields found in UrbanVerse-100K, grouped by functionality.</p>
+<p><strong>1. Descriptions (LLM-generated)</strong>
+- <code class="docutils literal notranslate"><span class="pre">description_long</span></code>
+- <code class="docutils literal notranslate"><span class="pre">description</span></code>
+- <code class="docutils literal notranslate"><span class="pre">description_view_0</span></code> … <code class="docutils literal notranslate"><span class="pre">description_view_3</span></code></p>
+<p><strong>2. Semantic Category</strong>
+- <code class="docutils literal notranslate"><span class="pre">category</span></code> (same as <code class="docutils literal notranslate"><span class="pre">CLASS_NAME</span></code>)
+- <code class="docutils literal notranslate"><span class="pre">synset</span></code> (WordNet synset)
+- <code class="docutils literal notranslate"><span class="pre">near_synsets</span></code> (top-scoring related synsets)
+- <code class="docutils literal notranslate"><span class="pre">wn_version</span></code></p>
+<p><strong>3. Geometry &amp; Dimensions</strong>
+- <code class="docutils literal notranslate"><span class="pre">height</span></code>
+- <code class="docutils literal notranslate"><span class="pre">length</span></code>
+- <code class="docutils literal notranslate"><span class="pre">width</span></code>
+- <code class="docutils literal notranslate"><span class="pre">max_dimension</span></code>
+- <code class="docutils literal notranslate"><span class="pre">scale</span></code>
+- <code class="docutils literal notranslate"><span class="pre">z_axis_scale</span></code>
+- <code class="docutils literal notranslate"><span class="pre">pose_z_rot_angle</span></code>
+- <code class="docutils literal notranslate"><span class="pre">hshift</span></code></p>
+<p><strong>4. Materials</strong>
+- <code class="docutils literal notranslate"><span class="pre">materials</span></code> (e.g., steel, glass)
+- <code class="docutils literal notranslate"><span class="pre">materials_composition</span></code> (fractions)
+- <code class="docutils literal notranslate"><span class="pre">colors</span></code> (semantic)
+- <code class="docutils literal notranslate"><span class="pre">colors_composition</span></code></p>
+<p><strong>5. Physical Properties</strong>
+- <code class="docutils literal notranslate"><span class="pre">mass</span></code>
+- <code class="docutils literal notranslate"><span class="pre">friction_coefficient</span></code>
+- <code class="docutils literal notranslate"><span class="pre">bounciness</span></code>
+- <code class="docutils literal notranslate"><span class="pre">surface_roughness</span></code>
+- <code class="docutils literal notranslate"><span class="pre">surface_hardness</span></code>
+- <code class="docutils literal notranslate"><span class="pre">surface_finish</span></code>
+- <code class="docutils literal notranslate"><span class="pre">reflectivity</span></code>
+- <code class="docutils literal notranslate"><span class="pre">index_of_refraction</span></code>
+- <code class="docutils literal notranslate"><span class="pre">youngs_modulus</span></code>
+- <code class="docutils literal notranslate"><span class="pre">max_dimension</span></code></p>
+<p><strong>6. Affordances &amp; Interactions</strong>
+- <code class="docutils literal notranslate"><span class="pre">movable</span></code>
+- <code class="docutils literal notranslate"><span class="pre">interactive_parts</span></code> (doors, wheels, trunk, …)
+- <code class="docutils literal notranslate"><span class="pre">affordances</span></code> (drivable, openable, pressable, …)
+- <code class="docutils literal notranslate"><span class="pre">enterable</span></code>
+- <code class="docutils literal notranslate"><span class="pre">walkable</span></code>
+- <code class="docutils literal notranslate"><span class="pre">support_surface</span></code></p>
+<p><strong>7. Traversability</strong>
+- <code class="docutils literal notranslate"><span class="pre">traversability</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">obstacle</span></code>)
+- <code class="docutils literal notranslate"><span class="pre">traversable_by</span></code> (list of agent types)</p>
+<p><strong>8. Object Metadata</strong>
+- <code class="docutils literal notranslate"><span class="pre">uid</span></code>
+- <code class="docutils literal notranslate"><span class="pre">filename</span></code>
+- <code class="docutils literal notranslate"><span class="pre">foldername</span></code> (if grouped)
+- <code class="docutils literal notranslate"><span class="pre">quality</span></code> (asset quality score)
+- <code class="docutils literal notranslate"><span class="pre">asset_composition_type</span></code></p>
+<p><strong>9. Additional Object-Specific Attributes</strong>
+(e.g., for <code class="docutils literal notranslate"><span class="pre">electric</span> <span class="pre">car''</span> <span class="pre">category)</span>
+<span class="pre">-</span> <span class="pre">``attribute_car_manufacturer</span></code>
+- <code class="docutils literal notranslate"><span class="pre">attribute_car_model</span></code>
+- <code class="docutils literal notranslate"><span class="pre">attribute_charging_port_location</span></code>
+- <code class="docutils literal notranslate"><span class="pre">attribute_license_plate_design</span></code>
+- <code class="docutils literal notranslate"><span class="pre">attribute_badging_or_emblem</span></code></p>
+<p><strong>10. Annotation Metadata</strong>
+- <code class="docutils literal notranslate"><span class="pre">annotation_info</span></code> (LLM models used)</p>
+<p><strong>11. Licensing Information</strong>
+- <code class="docutils literal notranslate"><span class="pre">license_info</span></code></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">license</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">by</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">creator_username</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">creator_display_name</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">creator_profile_url</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">uri</span></code></p></li>
+</ul>
+</div></blockquote>
 </section>
 <section id="filtering-by-attributes">
 <h2>Filtering by Attributes<a class="headerlink" href="#filtering-by-attributes" title="Permalink to this heading">#</a></h2>
-<p>aaa</p>
+<p>With annotations loaded, you can filter assets using standard Python/NumPy/Pandas tooling.
+Below are some example filters based on real attribute patterns in UrbanVerse-100K.</p>
+<p>First, if you prefer ultra-high quality assets, you can filter objects using the UrbanVerse-100K <strong>quality score</strong> (0–10).
+We provide an example below.</p>
+<p>Example: <strong>high-quality buildings</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">annotations</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_object_annotations</span><span class="p">()</span>
+
+<span class="n">high_quality_buildings</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">uid</span>
+    <span class="k">for</span> <span class="n">uid</span><span class="p">,</span> <span class="n">ann</span> <span class="ow">in</span> <span class="n">annotations</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">ann</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;CLASS_NAME&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;building&quot;</span>
+    <span class="ow">and</span> <span class="n">ann</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;quality&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">8</span>
+<span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;High-quality buildings (quality ≥ 8):&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">high_quality_buildings</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">high_quality_buildings</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Second, you can also filter objects based on their semantic category and physical attributes, as you would like for your own use cases. We provide some examples below.</p>
+<p>Example: <strong>light, movable street furniture</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">annotations</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_object_annotations</span><span class="p">()</span>
+
+<span class="n">movable_light_uids</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">uid</span>
+    <span class="k">for</span> <span class="n">uid</span><span class="p">,</span> <span class="n">ann</span> <span class="ow">in</span> <span class="n">annotations</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">ann</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;l2&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;facilities amenity&quot;</span>
+    <span class="ow">and</span> <span class="n">ann</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mass&quot;</span><span class="p">,</span> <span class="mf">1e9</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">50.0</span>
+    <span class="ow">and</span> <span class="n">ann</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;movable&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">True</span>
+<span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Movable light facilities (e.g., benches, picnic tables):&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">movable_light_uids</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">movable_light_uids</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Example: <strong>static obstacles</strong> suitable as clutter:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">static_obstacles</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">uid</span>
+    <span class="k">for</span> <span class="n">uid</span><span class="p">,</span> <span class="n">ann</span> <span class="ow">in</span> <span class="n">annotations</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">ann</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;traversability&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;obstacle&quot;</span>
+    <span class="ow">and</span> <span class="n">ann</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;movable&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">False</span>
+<span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Static obstacles (e.g., walls, bollards, stone blocks):&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">static_obstacles</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Example: <strong>drivable vehicles</strong> with realistic mass:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">vehicles</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">uid</span>
+    <span class="k">for</span> <span class="n">uid</span><span class="p">,</span> <span class="n">ann</span> <span class="ow">in</span> <span class="n">annotations</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">ann</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;l1&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;street user&quot;</span>
+    <span class="ow">and</span> <span class="n">ann</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;CLASS_NAME&quot;</span><span class="p">)</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">&quot;electric car&quot;</span><span class="p">,</span> <span class="s2">&quot;car&quot;</span><span class="p">,</span> <span class="s2">&quot;bus&quot;</span><span class="p">,</span> <span class="s2">&quot;truck&quot;</span><span class="p">}</span>
+    <span class="ow">and</span> <span class="s2">&quot;drivable&quot;</span> <span class="ow">in</span> <span class="n">ann</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;affordances&quot;</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="ow">and</span> <span class="mf">500.0</span> <span class="o">&lt;</span> <span class="n">ann</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mass&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">5000.0</span>
+<span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Drivable vehicles:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">vehicles</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">vehicles</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>You can define your own filters using any combination of semantic labels and physical attributes,
+for example:</p>
+<ul class="simple">
+<li><p>choose only low-friction surfaces (e.g., <code class="docutils literal notranslate"><span class="pre">surface_roughness</span> <span class="pre">&lt;</span> <span class="pre">0.2</span></code>),</p></li>
+<li><p>filter for objects at human scale (e.g., <code class="docutils literal notranslate"><span class="pre">1.0</span> <span class="pre">&lt;=</span> <span class="pre">height</span> <span class="pre">&lt;=</span> <span class="pre">2.5</span></code>),</p></li>
+<li><p>focus on objects with specific affordances (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;sit-able&quot;</span></code> furniture, <code class="docutils literal notranslate"><span class="pre">&quot;pressable&quot;</span></code> buttons),</p></li>
+<li><p>or restrict to licensed subsets (e.g., only assets with <code class="docutils literal notranslate"><span class="pre">license_info[&quot;license&quot;]</span> <span class="pre">==</span> <span class="pre">&quot;by&quot;</span></code>).</p></li>
+</ul>
 </section>
 <section id="downloading-assets">
 <h2>Downloading Assets<a class="headerlink" href="#downloading-assets" title="Permalink to this heading">#</a></h2>
-<p>aaa</p>
+<p>UrbanVerse-100K assets are stored on Hugging Face and fetched lazily.
+The API downloads them to your local cache (typically under <code class="docutils literal notranslate"><span class="pre">$URBANVERSE_ASSET_ROOT</span></code>)
+and returns the corresponding file paths.</p>
+<p>APIs:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uvk</span><span class="o">.</span><span class="n">load_objects</span><span class="p">(</span>
+    <span class="n">uids</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">download_processes</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">include_thumbnails</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">include_renders</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]</span>
+
+<span class="n">uvk</span><span class="o">.</span><span class="n">load_ground_materials</span><span class="p">(</span>
+    <span class="n">ids</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">download_processes</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">include_thumbnails</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]</span>
+
+<span class="n">uvk</span><span class="o">.</span><span class="n">load_sky_maps</span><span class="p">(</span>
+    <span class="n">ids</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">download_processes</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">include_thumbnails</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>For objects, the returned dictionary is structured as:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;&lt;uid&gt;&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;glb&quot;</span><span class="p">:</span> <span class="s2">&quot;/path/to/assets_glb/&lt;uid&gt;.glb&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;thumbnail&quot;</span><span class="p">:</span> <span class="s2">&quot;/path/to/assets_thumbnails/&lt;uid&gt;.png&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;renders&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;0&quot;</span><span class="p">:</span>   <span class="s2">&quot;/path/to/assets_renders/&lt;uid&gt;_view_000.png&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;90&quot;</span><span class="p">:</span>  <span class="s2">&quot;/path/to/assets_renders/&lt;uid&gt;_view_090.png&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;180&quot;</span><span class="p">:</span> <span class="s2">&quot;/path/to/assets_renders/&lt;uid&gt;_view_180.png&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;270&quot;</span><span class="p">:</span> <span class="s2">&quot;/path/to/assets_renders/&lt;uid&gt;_view_270.png&quot;</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>For ground materials:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;&lt;ground_id&gt;&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;mdl&quot;</span><span class="p">:</span> <span class="s2">&quot;/path/to/ground_materials_mdl/&lt;subset&gt;/&lt;ground_id&gt;.mdl&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;thumbnail&quot;</span><span class="p">:</span> <span class="s2">&quot;/path/to/ground_materials_thumbnails/&lt;subset&gt;/&lt;ground_id&gt;.png&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">&lt;subset&gt;</span></code> is typically <code class="docutils literal notranslate"><span class="pre">&quot;road&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;sidewalk&quot;</span></code>
+(e.g., <code class="docutils literal notranslate"><span class="pre">&quot;Asphalt016&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;Road004&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;PavingStones040&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;wet_arc_cobble&quot;</span></code>).</p>
+<p>For sky maps:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;&lt;sky_id&gt;&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;hdr&quot;</span><span class="p">:</span> <span class="s2">&quot;/path/to/sky_maps_hdr/&lt;sky_id&gt;.hdr&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;thumbnail&quot;</span><span class="p">:</span> <span class="s2">&quot;/path/to/sky_maps_thumbnails/&lt;sky_id&gt;.png&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>with IDs such as <code class="docutils literal notranslate"><span class="pre">&quot;urban_street_01&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;stuttgart_suburbs&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;venice_sunset&quot;</span></code>,
+<code class="docutils literal notranslate"><span class="pre">&quot;autumn_field_puresky&quot;</span></code>, or <code class="docutils literal notranslate"><span class="pre">&quot;the_sky_is_on_fire&quot;</span></code>.</p>
+<p>Example: download and inspect a small random subset of objects:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">multiprocessing</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse_100k</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uvk</span>
+
+<span class="c1"># Sample 50 random objects</span>
+<span class="n">all_uids</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_object_uids</span><span class="p">()</span>
+<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">sample_uids</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">all_uids</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+
+<span class="n">processes</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">()</span>
+
+<span class="n">object_paths</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_objects</span><span class="p">(</span>
+    <span class="n">uids</span><span class="o">=</span><span class="n">sample_uids</span><span class="p">,</span>
+    <span class="n">download_processes</span><span class="o">=</span><span class="n">processes</span><span class="p">,</span>
+    <span class="n">include_thumbnails</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">include_renders</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">uid</span> <span class="o">=</span> <span class="n">sample_uids</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Paths for&quot;</span><span class="p">,</span> <span class="n">uid</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">object_paths</span><span class="p">[</span><span class="n">uid</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Example: download all road ground materials and a few sky maps:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">road_ids</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_ground_ids</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="s2">&quot;road&quot;</span><span class="p">)</span>
+<span class="n">sky_ids</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_sky_ids</span><span class="p">()[:</span><span class="mi">10</span><span class="p">]</span>
+
+<span class="n">ground_paths</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_ground_materials</span><span class="p">(</span><span class="n">road_ids</span><span class="p">)</span>
+<span class="n">sky_paths</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_sky_maps</span><span class="p">(</span><span class="n">sky_ids</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;One road material:&quot;</span><span class="p">,</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">ground_paths</span><span class="o">.</span><span class="n">values</span><span class="p">())))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;One sky map:&quot;</span><span class="p">,</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">sky_paths</span><span class="o">.</span><span class="n">values</span><span class="p">())))</span>
+</pre></div>
+</div>
+<p>Once meshes, materials, and sky domes are cached locally, subsequent calls reuse the local files,
+making development, visualization, and real-to-sim scene generation with UrbanVerse-Gen much faster.</p>
 </section>
 </section>
 
@@ -576,10 +1164,13 @@
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-exploration-of-667-categories">Quick Exploration of 667 Categories</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-dataset-overview-sunburst-plot">Interactive Dataset Overview (Sunburst Plot)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-exploration-of-categories-and-components">Quick Exploration of Categories and Components</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-categories">Loading Categories</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-uids">Loading UIDs</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-annotations">Loading Annotations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#per-object-annotation-example-in-urbanverse-100k">Per-object Annotation Example in UrbanVerse-100K</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#full-list-of-annotation-fields">Full List of Annotation Fields</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-by-attributes">Filtering by Attributes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downloading-assets">Downloading Assets</a></li>
 </ul>

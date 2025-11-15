@@ -70,6 +70,48 @@ UrbanVerse-100K includes the following assets:
 
 Each asset is keyed by a unique UID, which appears consistently across all files and metadata.
 
+Asset License Distribution
+--------------------------
+
+Below, we provide the license distribution of the UrbanVerse-100K dataset. In summary, most of the assets are released under **CC BY** license, which allows non-commercial and commercial use with attribution.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 50 20
+
+   * - License Type
+     - Description
+     - Count
+
+   * - **CC BY**
+     - Redistribution allowed with attribution; commercial use permitted.
+     - 84,538
+
+   * - **CC BY-NC-SA**
+     - Non-commercial use only; derivatives must be shared alike.
+     - 9,757
+
+   * - **CC BY-NC**
+     - Non-commercial use only; sharing allowed with attribution.
+     - 5,824
+
+   * - **CC BY-SA**
+     - Attribution required; derivatives must be shared alike.
+     - 1,365
+
+   * - **CC0**
+     - Public domain; no attribution or restrictions.
+     - 960
+
+   * - **Ground Materials (PBR)**
+     - All 4K MDL ground materials are released under **CC BY**.
+     - 288
+
+   * - **HDRI Sky Maps**
+     - All HDRI sky domes are released under **CC BY**.
+     - 306
+
+
 Downloading UrbanVerse-100K from Hugging Face
 ---------------------------------------------
 
