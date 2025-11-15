@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Asset Caching &#8212; UrbanVerse Documentation</title>
+    <title>UrbanVerse-100K Asset Caching &#8212; UrbanVerse Documentation</title>
   
   
   
@@ -55,7 +55,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'source/installation/asset_caching';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Installation Verification" href="verifying_installation.html" />
+    <link rel="next" title="UrbanVerse Scene Caching" href="scene_caching.html" />
     <link rel="prev" title="Installation via Pre-Built Binaries" href="binaries_installation.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -206,9 +206,10 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Installation</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="binaries_installation.html">Binary installation (recommended)</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Asset caching</a></li>
-<li class="toctree-l1"><a class="reference internal" href="verifying_installation.html">Verifying the installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="binaries_installation.html">Installation via Pre-Built Binaries</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">UrbanVerse-100K Asset Caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scene_caching.html">UrbanVerse Scene Caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="verifying_installation.html">Installation Verification</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Quickstart Guide</span></p>
 <ul class="nav bd-sidenav">
@@ -460,7 +461,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -471,11 +474,28 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Asset Caching</h1>
+    <h1>UrbanVerse-100K Asset Caching</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-structure">Dataset Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downloading-urbanverse-100k-from-hugging-face">Downloading UrbanVerse-100K from Hugging Face</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-1-using-the-hugging-face-cli-recommended">Method 1: Using the Hugging Face CLI (Recommended)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-2-using-git-lfs">Method 2: Using Git LFS</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verifying-your-local-cache">Verifying Your Local Cache</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linking-urbanverse-100k-with-urbanverse">Linking UrbanVerse-100K with UrbanVerse</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-asset-caching-in-urbanverse-gen">Using Asset Caching in UrbanVerse-Gen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -485,18 +505,201 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="asset-caching">
-<h1>Asset Caching<a class="headerlink" href="#asset-caching" title="Permalink to this heading">#</a></h1>
-<p>Assets used in UrbanVerse should be downloaded from HuggingFace.
-We provide utility scripts to help automate this process.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>scripts/tools/collectors/collect_asset.py
+  <section id="urbanverse-100k-asset-caching">
+<span id="urbanverse-installation-assets"></span><h1>UrbanVerse-100K Asset Caching<a class="headerlink" href="#urbanverse-100k-asset-caching" title="Permalink to this heading">#</a></h1>
+<p>UrbanVerse-100K is our curated collection of high-quality urban 3D assets and textures, each annotated with semantic, physical, and affordance attributes in true metric scale.
+To use the full UrbanVerse-100K database with UrbanVerse-Gen or for your own custom pipelines, you must first download the dataset from our Hugging Face 🤗 repository.</p>
+<p>This page describes how to download, verify, and cache UrbanVerse-100K locally.</p>
+<section id="dataset-structure">
+<h2>Dataset Structure<a class="headerlink" href="#dataset-structure" title="Permalink to this heading">#</a></h2>
+<p>UrbanVerse-100K includes the following assets:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<colgroup>
+<col style="width: 22.0%" />
+<col style="width: 45.0%" />
+<col style="width: 18.0%" />
+<col style="width: 15.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Component</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Quantity</p></th>
+<th class="head"><p>Format</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>3D Object Assets</p></td>
+<td><p>Metric-scale 3D object models spanning 667 urban categories.</p></td>
+<td><p>102,530</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.glb</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Object Thumbnails</p></td>
+<td><p>Canonical-view thumbnail for each 3D object asset.</p></td>
+<td><p>102,530</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.png</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Multi-View Object Renders</p></td>
+<td><p>Four standardized renders per asset at 0°, 90°, 180°, 270°.</p></td>
+<td><p>410,120 (4 × 102,530)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.png</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Ground Materials (PBR)</p></td>
+<td><p>4K photorealistic PBR ground materials (road, sidewalk, terrain).</p></td>
+<td><p>288</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.mdl</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Ground Material Thumbnails</p></td>
+<td><p>Preview thumbnail for each ground material.</p></td>
+<td><p>288</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.png</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>HDRI Sky Maps</p></td>
+<td><p>High-resolution 4K HDRI domes for realistic, full-environment lighting.</p></td>
+<td><p>306</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.hdr</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>HDRI Thumbnails</p></td>
+<td><p>Thumbnail previews for each HDRI sky map.</p></td>
+<td><p>306</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.png</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Per-Object Annotations</p></td>
+<td><p>One annotation file per asset, each containing 33 semantic, physical, and affordance attributes.</p></td>
+<td><p>102,530</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.json</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Master Annotation File</p></td>
+<td><p>Global index linking all assets, UIDs, categories, and metadata.</p></td>
+<td><p>1</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">urbanverse_annotation.json</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Each asset is keyed by a unique UID, which appears consistently across all files and metadata.</p>
+</section>
+<section id="downloading-urbanverse-100k-from-hugging-face">
+<h2>Downloading UrbanVerse-100K from Hugging Face<a class="headerlink" href="#downloading-urbanverse-100k-from-hugging-face" title="Permalink to this heading">#</a></h2>
+<p>We host UrbanVerse-100K on Hugging Face for fast, reliable downloads and resumable large-file transfers.
+You can download the dataset using either the <strong>Hugging Face CLI</strong> or <strong>Git LFS</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All download URLs in this documentation are anonymized with <code class="docutils literal notranslate"><span class="pre">&lt;URL</span> <span class="pre">OMITTED</span> <span class="pre">FOR</span> <span class="pre">DOUBLE-BLIND</span> <span class="pre">REVIEW&gt;</span></code> placeholderfor double-blind review.</p>
+</div>
+<section id="method-1-using-the-hugging-face-cli-recommended">
+<h3>Method 1: Using the Hugging Face CLI (Recommended)<a class="headerlink" href="#method-1-using-the-hugging-face-cli-recommended" title="Permalink to this heading">#</a></h3>
+<ol class="arabic">
+<li><p>Install the Hugging Face client:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-U<span class="w"> </span>huggingface_hub
 </pre></div>
 </div>
-<p>Note that for the first run, assets ending in <cite>.gltf</cite> or <cite>.glb</cite> need to be converted to <a href="#id1"><span class="problematic" id="id2">`</span></a>.usd <a href="#id3"><span class="problematic" id="id4">`</span></a>format for use in Isaac Sim.</p>
-<p>We provide a script to automate this conversion:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>scripts/tools/converters/convert_asset.py
+</li>
+<li><p>Log in (optional for public models, required for private access):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>huggingface-cli<span class="w"> </span>login
 </pre></div>
 </div>
+</li>
+<li><p>Download the entire UrbanVerse-100K repository:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>huggingface-cli<span class="w"> </span>repo<span class="w"> </span>download<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span><span class="s2">&quot;&lt;URL OMITTED FOR DOUBLE-BLIND REVIEW&gt;&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>--local-dir<span class="w"> </span>./UrbanVerse-100K<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>--local-dir-use-symlinks<span class="w"> </span>False
+</pre></div>
+</div>
+</li>
+</ol>
+<p>This will download all assets, textures, and annotation files into the <code class="docutils literal notranslate"><span class="pre">./UrbanVerse-100K</span></code> directory.</p>
+</section>
+<section id="method-2-using-git-lfs">
+<h3>Method 2: Using Git LFS<a class="headerlink" href="#method-2-using-git-lfs" title="Permalink to this heading">#</a></h3>
+<p>For users who prefer dataset version control with Git:</p>
+<ol class="arabic">
+<li><p>Install Git LFS:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>git-lfs
+git<span class="w"> </span>lfs<span class="w"> </span>install
+</pre></div>
+</div>
+</li>
+<li><p>Clone the dataset repository:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span><span class="s2">&quot;&lt;URL OMITTED FOR DOUBLE-BLIND REVIEW&gt;&quot;</span><span class="w"> </span>UrbanVerse-100K
+</pre></div>
+</div>
+</li>
+</ol>
+<p>Git LFS will automatically fetch the necessary large binary files.</p>
+</section>
+</section>
+<section id="verifying-your-local-cache">
+<h2>Verifying Your Local Cache<a class="headerlink" href="#verifying-your-local-cache" title="Permalink to this heading">#</a></h2>
+<p>After downloading, ensure the following files exist:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>UrbanVerse-100K/
+├── assets_glb/                     # 3D object assets (.glb)
+├── assets_thumbnails/              # Thumbnails (1 per asset)
+├── assets_renders/                 # Multi-view renders (0°, 90°, 180°, 270°)
+├── assets_annotations/             # Per-object attribute JSON files
+├── ground_materials_mdl/           # PBR ground materials (.mdl)
+│   ├── road/
+│   └── sidewalk/
+├── ground_materials_thumbnails/    # Thumbnails for each PBR ground material
+│   ├── road/
+│   └── sidewalk/
+├── sky_maps_hdr/                   # HDRI sky maps (.hdr)
+├── sky_maps_thumbnails/            # Thumbnails for each HDRI sky map
+├── urbanverse_annotation.json      # Master annotation file
+└── README.md
+</pre></div>
+</div>
+<p>If the annotation file is missing, the download may be incomplete.</p>
+</section>
+<section id="linking-urbanverse-100k-with-urbanverse">
+<h2>Linking UrbanVerse-100K with UrbanVerse<a class="headerlink" href="#linking-urbanverse-100k-with-urbanverse" title="Permalink to this heading">#</a></h2>
+<p>Once the dataset is downloaded, set the cache path in your environment:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">URBANVERSE_ASSET_ROOT</span><span class="o">=</span><span class="s2">&quot;/path/to/UrbanVerse-100K&quot;</span>
+</pre></div>
+</div>
+<p>UrbanVerse-Gen and UrbanVerse training pipelines will automatically detect
+the dataset and load assets, textures, and metadata from this directory.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you place the dataset elsewhere, simply update <code class="docutils literal notranslate"><span class="pre">URBANVERSE_ASSET_ROOT</span></code> accordingly.</p>
+</div>
+</section>
+<section id="using-asset-caching-in-urbanverse-gen">
+<h2>Using Asset Caching in UrbanVerse-Gen<a class="headerlink" href="#using-asset-caching-in-urbanverse-gen" title="Permalink to this heading">#</a></h2>
+<p>UrbanVerse-Gen relies on the cached UrbanVerse-100K dataset to retrieve and assemble the correct 3D assets for each object detected in a scene. Retrieval is performed using:</p>
+<ul class="simple">
+<li><p>the asset’s GLB file, thumbnail, and multi-view renders (for matching and verification)</p></li>
+<li><p>the unique asset UID</p></li>
+<li><p>category and subcategory information</p></li>
+<li><p>semantic, physical, and affordance attribute filters</p></li>
+</ul>
+<p>When the UrbanVerse-100K cache is properly configured, UrbanVerse-Gen will:</p>
+<ol class="arabic simple">
+<li><p><strong>Retrieve candidate assets</strong> from the cached directory based on category tags and attribute constraints.</p></li>
+<li><p><strong>Parse per-object annotations</strong> in the extracted semantic scene layout and bind the best-matching cached assets to each object instance.</p></li>
+<li><p><strong>Assemble the final simulation scene</strong> by placing assets at metric-accurate coordinates, applying physical parameters from annotations, and exporting the complete scene as a USD environment.</p></li>
+</ol>
+<p>With the asset cache in place, this entire process is automatic and requires no manual handling of files.</p>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading">#</a></h2>
+<p><strong>Incomplete download</strong></p>
+<p>If some files appear missing, re-run the download with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>huggingface-cli<span class="w"> </span>repo<span class="w"> </span>download<span class="w"> </span><span class="s2">&quot;&lt;URL OMITTED FOR DOUBLE-BLIND REVIEW&gt;&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--local-dir<span class="w"> </span>./UrbanVerse-100K<span class="w"> </span>--resume-download
+</pre></div>
+</div>
+<p><strong>Git LFS not pulling large files</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>lfs<span class="w"> </span>pull
+</pre></div>
+</div>
+<p><strong>UrbanVerse cannot find the asset cache</strong></p>
+<p>Verify that:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="nv">$URBANVERSE_ASSET_ROOT</span>
+</pre></div>
+</div>
+<p>points to your dataset root folder.</p>
+</section>
 </section>
 
 
@@ -520,11 +723,11 @@ We provide utility scripts to help automate this process.</p>
       </div>
     </a>
     <a class="right-next"
-       href="verifying_installation.html"
+       href="scene_caching.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Installation Verification</p>
+        <p class="prev-next-title">UrbanVerse Scene Caching</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -534,6 +737,31 @@ We provide utility scripts to help automate this process.</p>
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-structure">Dataset Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downloading-urbanverse-100k-from-hugging-face">Downloading UrbanVerse-100K from Hugging Face</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-1-using-the-hugging-face-cli-recommended">Method 1: Using the Hugging Face CLI (Recommended)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-2-using-git-lfs">Method 2: Using Git LFS</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verifying-your-local-cache">Verifying Your Local Cache</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linking-urbanverse-100k-with-urbanverse">Linking UrbanVerse-100K with UrbanVerse</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-asset-caching-in-urbanverse-gen">Using Asset Caching in UrbanVerse-Gen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

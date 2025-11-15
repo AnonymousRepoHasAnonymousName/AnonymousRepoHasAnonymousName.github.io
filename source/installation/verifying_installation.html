@@ -56,7 +56,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Introduction to Quickstart Guide" href="../quickstart/intro_quickstart.html" />
-    <link rel="prev" title="Asset Caching" href="asset_caching.html" />
+    <link rel="prev" title="UrbanVerse Scene Caching" href="scene_caching.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="1.0.0" />
@@ -206,9 +206,10 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Installation</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="binaries_installation.html">Binary installation (recommended)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="asset_caching.html">Asset caching</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Verifying the installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="binaries_installation.html">Installation via Pre-Built Binaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asset_caching.html">UrbanVerse-100K Asset Caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scene_caching.html">UrbanVerse Scene Caching</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Installation Verification</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Quickstart Guide</span></p>
 <ul class="nav bd-sidenav">
@@ -460,7 +461,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -476,6 +479,18 @@
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verifying-scene-generation-minimal-test">Verifying Scene Generation (Minimal Test)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verifying-multi-scene-loading-urbanverse-160">Verifying Multi-Scene Loading (UrbanVerse-160)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verifying-robot-initialization">Verifying Robot Initialization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-a-successful-verification-looks-like">What a Successful Verification Looks Like</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -486,25 +501,102 @@
                 <article class="bd-article">
                   
   <section id="installation-verification">
-<h1>Installation Verification<a class="headerlink" href="#installation-verification" title="Permalink to this heading">#</a></h1>
-<p>After installing UrbanVerse and caching assets, it is important to verify that the installation was successful and that all components are functioning correctly.
-Try to use the code to run a simple simulation and check if the environment loads correctly.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>urbansim/envs/separate_envs/random_env.py<span class="w"> </span>--enable_cameras<span class="w"> </span>--num_envs<span class="w"> </span><span class="si">${</span><span class="nv">NUM_ENV</span><span class="si">}</span><span class="w"> </span>--scenario_type<span class="w"> </span><span class="si">${</span><span class="nv">TYPE</span><span class="si">}</span><span class="w"> </span>--use_async
-
--<span class="w"> </span><span class="sb">`</span>--enable_cameras<span class="sb">`</span>:<span class="w"> </span>Enables<span class="w"> </span>vision-based<span class="w"> </span>observation<span class="w"> </span>space.
--<span class="w"> </span><span class="sb">`</span>NUM_ENV<span class="sb">`</span>:<span class="w"> </span>Number<span class="w"> </span>of<span class="w"> </span>parallel<span class="w"> </span>environments<span class="w"> </span>to<span class="w"> </span>simulate<span class="w"> </span><span class="o">(</span>e.g.,<span class="w"> </span><span class="m">256</span><span class="o">)</span>.
--<span class="w"> </span><span class="sb">`</span>TYPE<span class="sb">`</span>:<span class="w"> </span><span class="sb">`</span><span class="o">{</span>clean,<span class="w"> </span>static,<span class="w"> </span>dynamic<span class="o">}</span><span class="sb">`</span>
-<span class="w">  </span>-<span class="w"> </span><span class="sb">`</span>clean<span class="sb">`</span>:<span class="w"> </span>No<span class="w"> </span>obstacles<span class="w"> </span>or<span class="w"> </span>pedestrians
-<span class="w">  </span>-<span class="w"> </span><span class="sb">`</span>static<span class="sb">`</span>:<span class="w"> </span>Includes<span class="w"> </span>static<span class="w"> </span>obstacles
-<span class="w">  </span>-<span class="w"> </span><span class="sb">`</span>dynamic<span class="sb">`</span>:<span class="w"> </span>Includes<span class="w"> </span>static<span class="w"> </span>obstacles<span class="w"> </span>and<span class="w"> </span>moving<span class="w"> </span>pedestrians
--<span class="w"> </span><span class="sb">`</span>--use_async<span class="sb">`</span>:<span class="w"> </span>Launches<span class="w"> </span>environments<span class="w"> </span><span class="k">in</span><span class="w"> </span>asynchronous<span class="w"> </span>stepping<span class="w"> </span>mode,<span class="w"> </span>enabling<span class="w"> </span>diverse<span class="w"> </span>simulation<span class="w"> </span>timings<span class="w"> </span>across<span class="w"> </span>parallel<span class="w"> </span>agents.
+<span id="urbanverse-installation-verifying"></span><h1>Installation Verification<a class="headerlink" href="#installation-verification" title="Permalink to this heading">#</a></h1>
+<p>After installing UrbanVerse, caching UrbanVerse-100K, and configuring your scene directories, you should verify that the installation works end-to-end.
+This includes:</p>
+<ul class="simple">
+<li><p>confirming that UrbanVerse-Gen can load assets and build scenes</p></li>
+<li><p>checking that Isaac Sim / Isaac Lab integrates correctly</p></li>
+<li><p>validating that scenes and robots can be spawned without errors</p></li>
+</ul>
+<p>The following steps walk you through a minimal and a full verification procedure.</p>
+<section id="verifying-scene-generation-minimal-test">
+<h2>Verifying Scene Generation (Minimal Test)<a class="headerlink" href="#verifying-scene-generation-minimal-test" title="Permalink to this heading">#</a></h2>
+<p>First, generate a simple test scene from a small layout file included in the UrbanVerse repository:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>urbanverse.gen.spawn<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>--layout<span class="w"> </span>tests/sample_layout.json<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>--asset-root<span class="w"> </span><span class="nv">$URBANVERSE_ASSET_ROOT</span><span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>--output<span class="w"> </span>./test_scene.usd
 </pre></div>
 </div>
-<p>If the simulation runs without errors and the environment loads correctly, your installation is successful. If you encounter any issues, please refer to the troubleshooting section in the UrbanVerse documentation or seek help from the community forums.
-The target environment should look like these:</p>
+<p>Where:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--layout</span></code> is a minimal layout containing a few objects</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--asset-root</span></code> points to your UrbanVerse-100K directory</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--output</span></code> defines where the generated USD should be saved</p></li>
+</ul>
+<p>If this command completes without errors, you can load the resulting USD scene in Isaac Sim:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="si">${</span><span class="nv">ISAACSIM_PATH</span><span class="si">}</span>/isaac-sim.sh<span class="w"> </span>./test_scene.usd
+</pre></div>
+</div>
+<p>A correct installation will display several objects in the expected arrangement, with proper textures, materials, and metric scaling.</p>
+</section>
+<section id="verifying-multi-scene-loading-urbanverse-160">
+<h2>Verifying Multi-Scene Loading (UrbanVerse-160)<a class="headerlink" href="#verifying-multi-scene-loading-urbanverse-160" title="Permalink to this heading">#</a></h2>
+<p>Next, verify that UrbanVerse can load one of the cached real-to-sim environments.
+We recommend using a fixed example scene included in UrbanVerse-160:</p>
+<ul class="simple">
+<li><p><strong>Scene ID:</strong> <code class="docutils literal notranslate"><span class="pre">CapeTown_0001</span></code></p></li>
+<li><p><strong>Robot:</strong> <code class="docutils literal notranslate"><span class="pre">coco_wheeled</span></code> (default wheeled delivery robot)</p></li>
+</ul>
+<p>Load the USD environment directly in Isaac Sim:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="si">${</span><span class="nv">ISAACSIM_PATH</span><span class="si">}</span>/isaac-sim.sh<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span><span class="nv">$URBANVERSE_SCENE_ROOT</span>/scenes_usd/CapeTown_0001/scene.usd
+</pre></div>
+</div>
+<p>This should open a fully reconstructed real-world scene from Cape Town, including:</p>
+<ul class="simple">
+<li><p>calibrated ground plane</p></li>
+<li><p>3D assets from UrbanVerse-100K</p></li>
+<li><p>metric-scale object placements</p></li>
+<li><p>HDRI sky lighting and materials</p></li>
+</ul>
+</section>
+<section id="verifying-robot-initialization">
+<h2>Verifying Robot Initialization<a class="headerlink" href="#verifying-robot-initialization" title="Permalink to this heading">#</a></h2>
+<p>To verify that robots load correctly in UrbanVerse, run the <code class="docutils literal notranslate"><span class="pre">coco_wheeled</span></code> robot inside the same scene:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>urbanverse.control.run<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>--scene<span class="w"> </span><span class="nv">$URBANVERSE_SCENE_ROOT</span>/scenes_usd/CapeTown_0001/scene.usd<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>--robot<span class="w"> </span>coco_wheeled
+</pre></div>
+</div>
+<p>A successful configuration will:</p>
+<ul class="simple">
+<li><p>spawn the <strong>COCO wheeled delivery robot</strong> at the scene’s default spawn location</p></li>
+<li><p>initialize its sensors and actuators</p></li>
+<li><p>render the scene with all assets and materials resolved</p></li>
+<li><p>begin executing a simple idle policy or default navigation behavior (depending on your config)</p></li>
+</ul>
+<p>If everything loads without warnings about unresolved prims, missing materials, or module errors, your installation is verified.</p>
+</section>
+<section id="what-a-successful-verification-looks-like">
+<h2>What a Successful Verification Looks Like<a class="headerlink" href="#what-a-successful-verification-looks-like" title="Permalink to this heading">#</a></h2>
+<p>A correctly functioning installation should display a scene similar to the example below.</p>
 <figure class="align-center" style="width: 100%">
-<img alt="Simulator with staic and dynamic objects." src="../assets/async_dynamic.gif" />
+<img alt="Example UrbanVerse scene with static and dynamic objects." src="../../_images/capetown_succ.gif" />
 </figure>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading">#</a></h2>
+<p>If you encounter issues:</p>
+<ul>
+<li><p>Confirm environment variables are set correctly:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="nv">$URBANVERSE_ASSET_ROOT</span>
+<span class="nb">echo</span><span class="w"> </span><span class="nv">$URBANVERSE_SCENE_ROOT</span>
+</pre></div>
+</div>
+</li>
+<li><p>Make sure Isaac Sim runs independently without errors</p></li>
+<li><p>Ensure UrbanVerse-100K and UrbanVerse-160 downloads are complete</p></li>
+<li><p>Fix module errors by re-running:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>_isaac_sim/setup_conda_env.sh
+</pre></div>
+</div>
+</li>
+<li><p>Check GPU driver, CUDA, and system requirements listed in the installation guide</p></li>
+</ul>
+<p>For unresolved issues, consult the troubleshooting section of the UrbanVerse documentation or open a discussion with the community.</p>
+</section>
 </section>
 
 
@@ -519,12 +611,12 @@ The target environment should look like these:</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="asset_caching.html"
+       href="scene_caching.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Asset Caching</p>
+        <p class="prev-next-title">UrbanVerse Scene Caching</p>
       </div>
     </a>
     <a class="right-next"
@@ -542,6 +634,26 @@ The target environment should look like these:</p>
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verifying-scene-generation-minimal-test">Verifying Scene Generation (Minimal Test)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verifying-multi-scene-loading-urbanverse-160">Verifying Multi-Scene Loading (UrbanVerse-160)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verifying-robot-initialization">Verifying Robot Initialization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-a-successful-verification-looks-like">What a Successful Verification Looks Like</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

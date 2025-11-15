@@ -1,4 +1,4 @@
-.. _urbanverse-binaries-installation:
+.. _urbanverse-installation-binaries:
 
 Installation via Pre-Built Binaries
 ===================================
