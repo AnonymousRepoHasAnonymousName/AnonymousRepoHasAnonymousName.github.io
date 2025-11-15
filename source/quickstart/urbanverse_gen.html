@@ -484,11 +484,30 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-your-video">Prepare Your Video</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extracting-semantic-scene-layout-from-videos">Extracting Semantic Scene Layout from Videos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#retrieving-3d-assets-and-materialsfrom-urbanverse-100k">Retrieving 3D Assets and Materialsfrom UrbanVerse-100K</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-and-instantiating-simulation-scenes">Creating and Instantiating Simulation Scenes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exporting-simulation-scenes">Exporting Simulation Scenes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-your-video">Prepare Your Video</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#api">API</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-pipeline-step-1">Examples (pipeline step 1)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extracting-semantic-scene-layout-from-videos">Extracting Semantic Scene Layout from Videos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">API</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-pipeline-step-2">Example (pipeline step 2)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output-structure">Output Structure</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#retrieving-3d-assets-and-materials-from-urbanverse-100k">Retrieving 3D Assets and Materials from UrbanVerse-100K</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">API</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-pipeline-step-3">Example (pipeline step 3)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output">Output</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-and-instantiating-simulation-scenes">Creating and Instantiating Simulation Scenes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">API</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-pipeline-step-4">Example (pipeline step 4)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Output Structure</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-end-to-end-example-pipeline">Summary: End-to-End Example Pipeline</a></li>
 </ul>
             </nav>
         </div>
@@ -501,27 +520,275 @@
                 <article class="bd-article">
                   
   <section id="real-to-sim-scene-generation-with-urbanverse-gen">
-<span id="urbanverse-urbanverse-gen"></span><h1>Real-to-Sim Scene Generation with UrbanVerse-Gen<a class="headerlink" href="#real-to-sim-scene-generation-with-urbanverse-gen" title="Permalink to this heading">#</a></h1>
-<p>aaa</p>
+<span id="urbanverse-quickstart-urbanversegen"></span><h1>Real-to-Sim Scene Generation with UrbanVerse-Gen<a class="headerlink" href="#real-to-sim-scene-generation-with-urbanverse-gen" title="Permalink to this heading">#</a></h1>
+<p>UrbanVerse-Gen is an automatic <strong>real-to-simulation</strong> pipeline that converts raw,
+uncalibrated RGB city-tour videos into <strong>fully interactive, metric-scale 3D simulation
+environments</strong> in USD format.</p>
+<p>UrbanVerse-Gen operates in three main stages:</p>
+<ol class="arabic simple">
+<li><p><strong>Scene Distillation</strong> – Extract object semantics, metric 3D layout, ground geometry,
+and sky appearance.</p></li>
+<li><p><strong>Materialization</strong> – Match each real-world instance to multiple digital-cousin
+assets from UrbanVerse-100K.</p></li>
+<li><p><strong>Scene Generation</strong> – Assemble physically plausible USD scenes using Isaac Sim.</p></li>
+</ol>
+<p>Everything is exposed through:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
+</pre></div>
+</div>
 <section id="prepare-your-video">
 <h2>Prepare Your Video<a class="headerlink" href="#prepare-your-video" title="Permalink to this heading">#</a></h2>
-<p>aaa</p>
+<p>UrbanVerse-Gen accepts three types of video inputs:</p>
+<ol class="arabic simple">
+<li><p><strong>YouTube URL:</strong>
+UrbanVerse automatically downloads the segment you specify using <code class="docutils literal notranslate"><span class="pre">yt-dlp</span></code>.</p></li>
+<li><p><strong>Local RGB video file:</strong>
+Any phone-recorded or camera-recorded city-tour video is allowed.</p></li>
+<li><p><strong>A folder or list of pre-extracted image frames:</strong></p></li>
+</ol>
+<p>All inputs are normalized to:</p>
+<p><code class="docutils literal notranslate"><span class="pre">output_dir/images/</span></code></p>
+<p>where UrbanVerse stores sequential PNG frames.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Timestamps (``start_time`` and ``end_time``) are required</strong> for video inputs
+(YouTube or local).
+MASt3R reconstructs global 3D geometry; long clips cause <strong>GPU OOM</strong>.</p>
+<p>Recommended clip durations:</p>
+<ul class="simple">
+<li><p><strong>Walk videos:</strong> ≤ <strong>2 minutes</strong></p></li>
+<li><p><strong>Drive videos:</strong> ≤ <strong>1 minute</strong></p></li>
+</ul>
+<p>Trim longer videos or specify a smaller interval.</p>
+</div>
+<section id="api">
+<h3>API<a class="headerlink" href="#api" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uv</span><span class="o">.</span><span class="n">gen</span><span class="o">.</span><span class="n">prepare_input_video</span><span class="p">(</span>
+    <span class="n">input_source</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">start_time</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">end_time</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">min_side</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">540</span><span class="p">,</span>
+    <span class="n">frames_per_clip</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+</pre></div>
+</div>
+</section>
+<section id="examples-pipeline-step-1">
+<h3>Examples (pipeline step 1)<a class="headerlink" href="#examples-pipeline-step-1" title="Permalink to this heading">#</a></h3>
+<p><strong>1) From YouTube URL</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uv</span><span class="o">.</span><span class="n">gen</span><span class="o">.</span><span class="n">prepare_input_video</span><span class="p">(</span>
+    <span class="n">input_source</span><span class="o">=</span><span class="s2">&quot;https://www.AnonymousYouTubeVideo/PlaceHolder/ForDoubleBlindReview&quot;</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;outputs/tokyo&quot;</span><span class="p">,</span>
+    <span class="n">start_time</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span>
+    <span class="n">end_time</span><span class="o">=</span><span class="mi">120</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>2) From local video file</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uv</span><span class="o">.</span><span class="n">gen</span><span class="o">.</span><span class="n">prepare_input_video</span><span class="p">(</span>
+    <span class="n">input_source</span><span class="o">=</span><span class="s2">&quot;/data/videos/tokyo_walk.mp4&quot;</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;outputs/tokyo&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>3) From existing image frames</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uv</span><span class="o">.</span><span class="n">gen</span><span class="o">.</span><span class="n">prepare_input_video</span><span class="p">(</span>
+    <span class="n">input_source</span><span class="o">=</span><span class="p">[</span>
+        <span class="s2">&quot;my_frames/000001.png&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;my_frames/000002.png&quot;</span><span class="p">,</span>
+        <span class="o">...</span>
+    <span class="p">],</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;outputs/tokyo&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>The function returns the normalized image directory:</p>
+<p><code class="docutils literal notranslate"><span class="pre">outputs/tokyo/images/</span></code></p>
+</section>
 </section>
 <section id="extracting-semantic-scene-layout-from-videos">
 <h2>Extracting Semantic Scene Layout from Videos<a class="headerlink" href="#extracting-semantic-scene-layout-from-videos" title="Permalink to this heading">#</a></h2>
-<p>aaa</p>
+<p>UrbanVerse-Gen performs <strong>open-vocabulary scene distillation</strong> using:</p>
+<ul class="simple">
+<li><p>GPT-4.1 for category enumeration</p></li>
+<li><p>MASt3R for metric depth + SE(3) camera poses</p></li>
+<li><p>YOLO-World + SAM2 for 2D instance segmentation</p></li>
+<li><p>Mask2Former for road/sidewalk segmentation</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>UrbanVerse-Gen <strong>requires</strong> an OpenAI GPT-4.1 key:</p>
+<p><code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">OPENAI_API_KEY=&quot;your_openai_key&quot;</span></code></p>
+</div>
+<section id="id1">
+<h3>API<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uv</span><span class="o">.</span><span class="n">gen</span><span class="o">.</span><span class="n">scene_distillation</span><span class="p">(</span>
+    <span class="n">image_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">use_openai_gpt</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+</pre></div>
+</div>
 </section>
-<section id="retrieving-3d-assets-and-materialsfrom-urbanverse-100k">
-<h2>Retrieving 3D Assets and Materialsfrom UrbanVerse-100K<a class="headerlink" href="#retrieving-3d-assets-and-materialsfrom-urbanverse-100k" title="Permalink to this heading">#</a></h2>
-<p>aaa</p>
+<section id="example-pipeline-step-2">
+<h3>Example (pipeline step 2)<a class="headerlink" href="#example-pipeline-step-2" title="Permalink to this heading">#</a></h3>
+<p>Continuing from step 1:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">distilled_path</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">gen</span><span class="o">.</span><span class="n">scene_distillation</span><span class="p">(</span>
+    <span class="n">image_dir</span><span class="o">=</span><span class="s2">&quot;outputs/tokyo/images&quot;</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;outputs/tokyo&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Distilled scene graph at:&quot;</span><span class="p">,</span> <span class="n">distilled_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="output-structure">
+<h3>Output Structure<a class="headerlink" href="#output-structure" title="Permalink to this heading">#</a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>outputs/tokyo/
+├── conf/                          # depth confidence maps (.npy)
+├── depth/                         # metric depth maps (.npy)
+├── poses/                         # camera SE(3) poses (.npy)
+├── segmentations_2d/              # YOLO-World + SAM2 + Mask2Former masks (.jpg)
+├── camera.yaml                    # estimated intrinsics
+├── config_params.json             # pipeline config file
+├── scene_pcd.glb                  # reconstructed 3D point cloud
+└── distilled_scene_graph.pkl.gz   # unified distilled 3D scene graph
+</pre></div>
+</div>
+</section>
+</section>
+<section id="retrieving-3d-assets-and-materials-from-urbanverse-100k">
+<h2>Retrieving 3D Assets and Materials from UrbanVerse-100K<a class="headerlink" href="#retrieving-3d-assets-and-materials-from-urbanverse-100k" title="Permalink to this heading">#</a></h2>
+<p>UrbanVerse-Gen enriches the scene graph by attaching <code class="docutils literal notranslate"><span class="pre">k_cousins</span></code> matched assets to:</p>
+<ul class="simple">
+<li><p>object nodes</p></li>
+<li><p>road nodes</p></li>
+<li><p>sidewalk nodes</p></li>
+<li><p>sky node</p></li>
+</ul>
+<p>Using:</p>
+<ul class="simple">
+<li><p><strong>CLIP semantic similarity</strong></p></li>
+<li><p><strong>Geometry filtering (minimal BBD)</strong></p></li>
+<li><p><strong>DINOv2 appearance similarity</strong></p></li>
+<li><p><strong>PBR material matching (pixel MSE)</strong></p></li>
+<li><p><strong>HDRI sky matching (HSV histograms)</strong></p></li>
+</ul>
+<section id="id2">
+<h3>API<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uv</span><span class="o">.</span><span class="n">gen</span><span class="o">.</span><span class="n">materialization</span><span class="p">(</span>
+    <span class="n">distilled_graph_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">k_cousins</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+</pre></div>
+</div>
+</section>
+<section id="example-pipeline-step-3">
+<h3>Example (pipeline step 3)<a class="headerlink" href="#example-pipeline-step-3" title="Permalink to this heading">#</a></h3>
+<p>Continuing from step 2:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">materialized_path</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">gen</span><span class="o">.</span><span class="n">materialization</span><span class="p">(</span>
+    <span class="n">distilled_graph_dir</span><span class="o">=</span><span class="s2">&quot;outputs/tokyo&quot;</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;outputs/tokyo&quot;</span><span class="p">,</span>
+    <span class="n">k_cousins</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Materialized graph saved to:&quot;</span><span class="p">,</span> <span class="n">materialized_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="output">
+<h3>Output<a class="headerlink" href="#output" title="Permalink to this heading">#</a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>outputs/tokyo/materialized_scene_with_cousins.pkl.gz
+</pre></div>
+</div>
+<p>This file contains the distilled scene graph plus matched digital-cousin assets.</p>
+</section>
 </section>
 <section id="creating-and-instantiating-simulation-scenes">
 <h2>Creating and Instantiating Simulation Scenes<a class="headerlink" href="#creating-and-instantiating-simulation-scenes" title="Permalink to this heading">#</a></h2>
-<p>aaa</p>
+<p>UrbanVerse-Gen generates <strong>interactive Isaac Sim USD scenes</strong> by:</p>
+<ul class="simple">
+<li><p>fitting road / sidewalk planes (sidewalk +15 cm)</p></li>
+<li><p>applying matched PBR ground materials</p></li>
+<li><p>selecting HDRI dome for lighting / background</p></li>
+<li><p>placing objects using metric 3D centroids + yaw orientation</p></li>
+<li><p>assigning physics (mass, friction, restitution)</p></li>
+<li><p>resolving small penetrations</p></li>
+<li><p>exporting USD scenes</p></li>
+</ul>
+<section id="id3">
+<h3>API<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uv</span><span class="o">.</span><span class="n">gen</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span>
+    <span class="n">materialized_graph_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+</pre></div>
+</div>
 </section>
-<section id="exporting-simulation-scenes">
-<h2>Exporting Simulation Scenes<a class="headerlink" href="#exporting-simulation-scenes" title="Permalink to this heading">#</a></h2>
-<p>aaa</p>
+<section id="example-pipeline-step-4">
+<h3>Example (pipeline step 4)<a class="headerlink" href="#example-pipeline-step-4" title="Permalink to this heading">#</a></h3>
+<p>Continuing seamlessly:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">generated_dir</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">gen</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span>
+    <span class="n">materialized_graph_path</span><span class="o">=</span><span class="s2">&quot;outputs/tokyo/materialized_scene_with_cousins.pkl.gz&quot;</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;outputs/tokyo&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Generated scenes located at:&quot;</span><span class="p">,</span> <span class="n">generated_dir</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id4">
+<h3>Output Structure<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>outputs/tokyo/
+├── scene_cousin_01/
+│    └── scene.usd
+├── scene_cousin_02/
+│    └── scene.usd
+...
+└── scene_cousin_05/
+     └── scene.usd
+</pre></div>
+</div>
+<p>Each folder contains a fully interactive simulation scene compatible with Isaac Sim.</p>
+</section>
+</section>
+<section id="summary-end-to-end-example-pipeline">
+<h2>Summary: End-to-End Example Pipeline<a class="headerlink" href="#summary-end-to-end-example-pipeline" title="Permalink to this heading">#</a></h2>
+<p>The entire pipeline uses <strong>one output directory</strong> and is run as:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
+
+<span class="c1"># Step 1 — Normalize input video into frames</span>
+<span class="n">image_dir</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">gen</span><span class="o">.</span><span class="n">prepare_input_video</span><span class="p">(</span>
+    <span class="n">input_source</span><span class="o">=</span><span class="s2">&quot;https://www.AnonymousURL/ForDoubleBlindReview&quot;</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;outputs/tokyo&quot;</span><span class="p">,</span>
+    <span class="n">start_time</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+    <span class="n">end_time</span><span class="o">=</span><span class="mi">110</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Step 2 — Distill the real-world video into a metric 3D scene graph</span>
+<span class="n">distilled_path</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">gen</span><span class="o">.</span><span class="n">scene_distillation</span><span class="p">(</span>
+    <span class="n">image_dir</span><span class="o">=</span><span class="n">image_dir</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;outputs/tokyo&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Step 3 — Retrieve digital cousins from UrbanVerse-100K</span>
+<span class="n">materialized_path</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">gen</span><span class="o">.</span><span class="n">materialization</span><span class="p">(</span>
+    <span class="n">distilled_graph_dir</span><span class="o">=</span><span class="s2">&quot;outputs/tokyo&quot;</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;outputs/tokyo&quot;</span><span class="p">,</span>
+    <span class="n">k_cousins</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Step 4 — Generate interactive USD simulation scenes</span>
+<span class="n">generated_dir</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">gen</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span>
+    <span class="n">materialized_graph_path</span><span class="o">=</span><span class="n">materialized_path</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;outputs/tokyo&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Scenes generated at:&quot;</span><span class="p">,</span> <span class="n">generated_dir</span><span class="p">)</span>
+</pre></div>
+</div>
 </section>
 </section>
 
@@ -571,11 +838,30 @@
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-your-video">Prepare Your Video</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extracting-semantic-scene-layout-from-videos">Extracting Semantic Scene Layout from Videos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#retrieving-3d-assets-and-materialsfrom-urbanverse-100k">Retrieving 3D Assets and Materialsfrom UrbanVerse-100K</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-and-instantiating-simulation-scenes">Creating and Instantiating Simulation Scenes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exporting-simulation-scenes">Exporting Simulation Scenes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-your-video">Prepare Your Video</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#api">API</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-pipeline-step-1">Examples (pipeline step 1)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extracting-semantic-scene-layout-from-videos">Extracting Semantic Scene Layout from Videos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">API</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-pipeline-step-2">Example (pipeline step 2)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output-structure">Output Structure</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#retrieving-3d-assets-and-materials-from-urbanverse-100k">Retrieving 3D Assets and Materials from UrbanVerse-100K</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">API</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-pipeline-step-3">Example (pipeline step 3)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output">Output</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-and-instantiating-simulation-scenes">Creating and Instantiating Simulation Scenes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">API</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-pipeline-step-4">Example (pipeline step 4)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Output Structure</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-end-to-end-example-pipeline">Summary: End-to-End Example Pipeline</a></li>
 </ul>
   </nav></div>
 
