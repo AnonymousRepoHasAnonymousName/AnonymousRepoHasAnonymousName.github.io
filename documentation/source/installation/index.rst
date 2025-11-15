@@ -1,7 +1,7 @@
 .. _urbanverse-installation-root:
 
-Local Installation
-==================
+.. Local Installation
+.. ==================
 
 .. image:: https://img.shields.io/badge/IsaacSim-4.5.0-silver.svg
    :target: https://docs.isaacsim.omniverse.nvidia.com/latest/index.html

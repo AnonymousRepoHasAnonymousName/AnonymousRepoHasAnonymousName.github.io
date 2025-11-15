@@ -1,9 +1,5 @@
 .. _urbanverse-installation-root:
 
-Getting Started with UrbanVerse
-===============================
-
-
 .. note::
 
     We recommend system requirements with at least 32GB RAM and 16GB VRAM for URBAN-SIM.
@@ -21,6 +17,7 @@ For users getting started with URBAN-SIM, we recommend installing URBAN-SIM by c
 .. toctree::
     :maxdepth: 3
 
+    Introduction to Quickstart Guide <intro_quickstart>
     Use UrbanVerse-100K with APIs <urbanverse_100k>
     Real-to-Sim Scene Generation with UrbanVerse-Gen <urbanverse_gen>
     Use Built-in UrbanVerse Scenes <urbanverse_scenes>

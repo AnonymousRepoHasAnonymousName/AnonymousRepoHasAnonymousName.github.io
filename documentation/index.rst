@@ -67,32 +67,51 @@ Table of Contents
 =================
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
    :caption: Installation
 
-   source/setup/installation/index
+   source/installation/index
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
    :caption: Quickstart Guide
 
-   source/setup/quickstart/index
+   source/quickstart/intro_quickstart
+   source/quickstart/urbanverse_100k
+   source/quickstart/urbanverse_gen
+   source/quickstart/urbanverse_scenes
+   source/quickstart/craftbench
+   source/quickstart/train_your_own_robots
+   source/quickstart/test_your_robots
 
 .. toctree::
    :maxdepth: 3
-   :caption: RL Training with UrbanVerse
+   :caption: Robot Learning with UrbanVerse
    :titlesonly:
    
-   source/overview/simulation
-   source/overview/environments
-   source/overview/configuration
-   source/overview/reinforcement-learning/index
+   source/robot_learning/simulation
+   source/robot_learning/environments
+   source/robot_learning/configuration
+   source/robot_learning/reinforcement_learning/index
+   source/robot_learning/imitation_learning/index
 
 .. toctree::
    :maxdepth: 3
    :caption: Developer
 
    source/developer/code-structure/index
+   source/developer/collecting_data
+   source/developer/adding_new_robots
+   source/developer/adding_new_assets
+   source/developer/vr_interface
+
+.. toctree::
+   :maxdepth: 3
+   :caption: UrbanVerse Community
+
+   source/community/contributing
+   source/community/communication
+   source/community/coding_standards
 
 .. toctree::
    :maxdepth: 1

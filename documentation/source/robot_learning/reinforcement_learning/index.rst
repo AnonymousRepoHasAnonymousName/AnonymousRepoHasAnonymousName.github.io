@@ -1,4 +1,4 @@
-Reinforcement Learning in URBAN-SIM
+Reinforcement Learning
 ===================================
 
 URBAN-SIM provides a modular and extensible framework for reinforcement learning (RL) in complex urban environments.  
