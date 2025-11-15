@@ -1,7 +1,7 @@
 Simulation
 =======================
 
-URBAN-SIM supports both **synchronous** and **asynchronous** multi-environment simulations. These two modes differ in how environments are spawned.
+UrbanVerse supports both **synchronous** and **asynchronous** multi-environment simulations. These two modes differ in how environments are spawned.
 
 ⏱️ Synchronous Simulation
 -------------------------

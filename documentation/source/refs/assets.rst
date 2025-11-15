@@ -1,7 +1,7 @@
-Assets in URBAN-SIM
+Assets in UrbanVerse
 =====================
 
-URBAN-SIM relies on a set of standardized assets to build scenes, configure robots, and define environment dynamics.  
+UrbanVerse relies on a set of standardized assets to build scenes, configure robots, and define environment dynamics.  
 These assets are typically downloaded from HuggingFace on first run or via our provided download scripts.
 
 Asset Structure

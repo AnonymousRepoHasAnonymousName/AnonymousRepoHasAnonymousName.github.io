@@ -3,7 +3,7 @@
 Learning Module
 ===============
 
-The `urbansim/learning` directory defines the **training and inference logic** for reinforcement learning (RL) in URBAN-SIM. It builds on top of the modular environment and policy definitions and supports distributed training, curriculum learning, and video logging.
+The `urbansim/learning` directory defines the **training and inference logic** for reinforcement learning (RL) in UrbanVerse. It builds on top of the modular environment and policy definitions and supports distributed training, curriculum learning, and video logging.
 
 Training Entrypoint
 --------------------
@@ -46,7 +46,7 @@ The primary script for training is:
 Inference and Evaluation
 --------------------------
 
-In addition to training, URBAN-SIM also supports **policy inference** and **demo playback** via the `play.py` script.
+In addition to training, UrbanVerse also supports **policy inference** and **demo playback** via the `play.py` script.
 
 - **play.py**
   A standalone script to run trained policies in simulation environments.  

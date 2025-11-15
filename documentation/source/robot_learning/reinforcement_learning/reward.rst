@@ -1,7 +1,7 @@
 Reward
 =================
 
-The reward function in URBAN-SIM is modular and composed of multiple weighted terms.  
+The reward function in UrbanVerse is modular and composed of multiple weighted terms.  
 Each term corresponds to a specific behavior or outcome in the MDP (Markov Decision Process),  
 and is defined using a `RewTerm` with an associated function, weight, and optional parameters.
 

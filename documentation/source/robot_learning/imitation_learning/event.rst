@@ -1,7 +1,7 @@
 Events
 =================
 
-In URBAN-SIM, **events** are simulation-time triggers that modify the environment state or robot behavior  
+In UrbanVerse, **events** are simulation-time triggers that modify the environment state or robot behavior  
 without terminating the episode. Events can occur on reset, periodically, or under specific conditions.  
 They are defined using the `EventTerm` class and grouped under an `EventCfg`.
 

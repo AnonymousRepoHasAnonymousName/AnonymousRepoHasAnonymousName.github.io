@@ -1,6 +1,6 @@
 # Copyright (c) 2025-2030, UrbanSim Project Developers from Zhou Lab @ UCLA.
 # All rights reserved.
-# Author: Honglin He
+# Author: Anonymous Authors of UrbanVerse
 # SPDX-License-Identifier: BSD-3-Clause
 # Acknowledgment:
 # The template is from IsaacLab: https://github.com/isaac-sim/IsaacLab
@@ -39,9 +39,9 @@ sys.path.insert(0, os.path.abspath("../meta_source/metadrive/metadrive"))
 
 # -- Project information -----------------------------------------------------
 
-project = "URBAN-SIM"
-copyright = "2025-2030, The URBAN-SIM Project Developers. " + "[URBAN-SIM is built upon NVIDIA Isaac Sim&Lab and extends its capabilities for urban robot learning tasks]"
-author = "Honglin He"
+project = "UrbanVerse"
+copyright = "2025-2030, The UrbanVerse Project Developers. " + "[UrbanVerse is built upon NVIDIA Isaac Sim&Lab and extends its capabilities for urban robot learning tasks]"
+author = "Anonymous Authors of UrbanVerse"
 
 # Read version from the package
 with open(os.path.join(os.path.dirname(__file__), "..", "VERSION")) as f:
@@ -224,7 +224,7 @@ language = "en"
 
 import sphinx_book_theme
 
-html_title = "URBAN-SIM Documentation"
+html_title = "UrbanVerse Documentation"
 html_theme_path = [sphinx_book_theme.get_html_theme_path()]
 html_theme = "sphinx_book_theme"
 html_favicon = ""
@@ -240,26 +240,26 @@ html_css_files = ["custom.css"]
 
 html_theme_options = {
     "collapse_navigation": True,
-    "repository_url": "https://github.com/metadriverse/urban-sim",
+    "repository_url": "https://github.com/metadriverse/UrbanVerse",
     "use_repository_button": True,
     "use_issues_button": True,
     "use_edit_page_button": True,
     "show_toc_level": 1,
     "use_sidenotes": True,
     "logo": {
-        "text": "URBAN-SIM Documentation",
+        "text": "UrbanVerse Documentation",
     },
     "icon_links": [
         {
             "name": "GitHub",
-            "url": "https://github.com/metadriverse/urban-sim",
+            "url": "https://github.com/metadriverse/UrbanVerse",
             "icon": "fa-brands fa-square-github",
             "type": "fontawesome",
         },
         {
             "name": "Stars",
-            "url": "https://img.shields.io/github/stars/metadriverse/urban-sim?color=fedcba",
-            "icon": "https://img.shields.io/github/stars/metadriverse/urban-sim?color=fedcba",
+            "url": "https://img.shields.io/github/stars/metadriverse/UrbanVerse?color=fedcba",
+            "icon": "https://img.shields.io/github/stars/metadriverse/UrbanVerse?color=fedcba",
             "type": "url",
         },
         {

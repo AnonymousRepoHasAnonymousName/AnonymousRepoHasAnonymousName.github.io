@@ -1,7 +1,7 @@
 Installation Verification
 =============
 
-After installing URBAN-SIM and caching assets, it is important to verify that the installation was successful and that all components are functioning correctly. 
+After installing UrbanVerse and caching assets, it is important to verify that the installation was successful and that all components are functioning correctly. 
 Try to use the code to run a simple simulation and check if the environment loads correctly.
 
 .. code:: bash
@@ -16,7 +16,7 @@ Try to use the code to run a simple simulation and check if the environment load
      - `dynamic`: Includes static obstacles and moving pedestrians
    - `--use_async`: Launches environments in asynchronous stepping mode, enabling diverse simulation timings across parallel agents.
 
-If the simulation runs without errors and the environment loads correctly, your installation is successful. If you encounter any issues, please refer to the troubleshooting section in the URBAN-SIM documentation or seek help from the community forums.
+If the simulation runs without errors and the environment loads correctly, your installation is successful. If you encounter any issues, please refer to the troubleshooting section in the UrbanVerse documentation or seek help from the community forums.
 The target environment should look like these:
 
 .. figure:: ../../../assets/async_dynamic.gif 

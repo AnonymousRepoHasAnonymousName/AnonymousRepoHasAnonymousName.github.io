@@ -1,7 +1,7 @@
 Environments
 =======================
 
-This section describes the different categories of environments available in URBAN-SIM.
+This section describes the different categories of environments available in UrbanVerse.
 
 Environments for RL Training
 ----------------------------
@@ -65,7 +65,7 @@ and register it in gymnasium:
 Environment Generation Pipeline
 --------------------------------------------------
 
-URBAN-SIM supports two distinct pipelines for scenario generation, each suited to different use cases in training and evaluation.
+UrbanVerse supports two distinct pipelines for scenario generation, each suited to different use cases in training and evaluation.
 
 Environments with Random Object Placement
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

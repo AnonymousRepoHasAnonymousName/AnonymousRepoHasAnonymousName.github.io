@@ -1,7 +1,7 @@
 UrbanScene: Scenario Construction
 ==================================
 
-The `UrbanScene` class in URBAN-SIM is a central abstraction responsible for creating and managing dynamic urban environments for training and evaluation.
+The `UrbanScene` class in UrbanVerse is a central abstraction responsible for creating and managing dynamic urban environments for training and evaluation.
 
 It extends `InteractiveScene` from Isaac Lab, and supports both predefined maps and procedurally generated scenes with varying complexity.
 

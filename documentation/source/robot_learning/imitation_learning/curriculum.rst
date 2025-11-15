@@ -1,7 +1,7 @@
 Curriculum Learning
 ====================
 
-URBAN-SIM supports curriculum learning by gradually adjusting task difficulty during training.  
+UrbanVerse supports curriculum learning by gradually adjusting task difficulty during training.  
 Each curriculum behavior is defined as a `CurrTerm` function and bound via `CurriculumCfg`.
 
 A common use case is to expand the movement range or goal distance as training progresses.

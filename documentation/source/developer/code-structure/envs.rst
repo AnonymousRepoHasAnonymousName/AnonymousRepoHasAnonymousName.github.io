@@ -1,7 +1,7 @@
 Environment: Spawning and simulation for learning
 =============
 
-The `envs` module contains the foundational environment classes for simulation and reinforcement learning within URBAN-SIM.  
+The `envs` module contains the foundational environment classes for simulation and reinforcement learning within UrbanVerse.  
 These classes wrap around the simulation backend and manager-based modular design from IsaacLab, enabling scalable, customizable RL environments.
 
 Overview
@@ -45,7 +45,7 @@ Core Files
 The hierarchy is:
 
 - `ManagerBasedRLEnv` (from IsaacLab)  
-  - `AbstractRLEnv` (URBAN-SIM RL base class)  
+  - `AbstractRLEnv` (UrbanVerse RL base class)  
     - `PGEnv`, `PredefinedEnv`, etc. (concrete tasks)
 
 Workflow Summary

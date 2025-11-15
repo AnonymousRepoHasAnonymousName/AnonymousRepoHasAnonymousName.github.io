@@ -1,7 +1,7 @@
-Code Structure in URBAN-SIM
+Code Structure in UrbanVerse
 ===========================
 
-URBAN-SIM is organized to support extensibility, debugging, and algorithmic innovation.  
+UrbanVerse is organized to support extensibility, debugging, and algorithmic innovation.  
 This section introduces core components of the codebase and their intended roles in the simulation and learning pipeline.
 
 .. toctree::
