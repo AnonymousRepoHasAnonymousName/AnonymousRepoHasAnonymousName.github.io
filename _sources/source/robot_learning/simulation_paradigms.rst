@@ -1,96 +1,173 @@
-.. _urbanverse-robot-learning-simulation:
+.. _urbanverse-robot-learning-simulation-paradigms:
 
 Simulation Paradigms
 =======================
 
-UrbanVerse supports both **synchronous** and **asynchronous** (recommended) multi-environment simulations. These two modes differ in how environments are spawned.
-
-⏱️ Synchronous Simulation
--------------------------
-
-In synchronous mode, all environments are advanced **together in lock-step**. They share the **same scene layout**, including map structure, object placement, and pedestrian routes. This setting is ideal for:
-
-- Controlled debugging
-- Frame-aligned evaluation
-- Consistent benchmarking across environments
-
-.. code-block:: bash
-
-   python urbansim/envs/separate_envs/random_env.py --num_envs 16 --scenario_type {clean,static,dynamic}
-
-**Example Scenario Types:**
-
-- ``clean``: Empty environment without obstacles
-- ``static``: With static obstacles
-- ``dynamic``: With both static and dynamic (e.g., pedestrians) elements
-
-⚡ Asynchronous Simulation
---------------------------
-
-In asynchronous mode, each environment is generated **independently**, allowing for diverse scenario layouts, object instances, appearances, etc. This is especially useful for improving robustness, or simulating real-world noise.
-
-.. code-block:: bash
-
-   python urbansim/envs/separate_envs/random_env.py --num_envs 16 --scenario_type {clean,static,dynamic} --use_async
-
-**Advantages:**
-
-- Enables greater variation in observation-action loops
-- Closer to real-world multi-agent or multi-robot setups
-- Can increase training speed under high environment counts
-
-🔄 Semantic Differences: Synchronous vs. Asynchronous Scenarios
----------------------------------------------------------------
-
-In **synchronous simulation**, all environments share the **same scene layout**, obstacle placement, and map structure. This is ideal for evaluation and debugging where controlled consistency is needed.
-
-In **asynchronous simulation**, each environment instance is procedurally varied. This allows:
-
-- Diverse layouts and building placements
-- Varying pedestrian paths and densities
-- Scene-level randomness in lighting or asset combinations
-
-This diversity helps improve the generalization and robustness of navigation policies.
+UrbanVerse supports both **synchronous** and **asynchronous** (recommended) multi-environment
+simulation. These two modes determine how **scene layouts** and **digital cousin variants** are
+assigned across parallel environments during robot training.
 
 .. note::
 
-   ✅ Asynchronous simulation is ideal for large-scale training across diverse environments.
+   **What are layouts and cousins in UrbanVerse?**
 
-🖼️ Scenario Visualizations
+   - A **scene layout** corresponds to the *real-world 3D urban structure* reconstructed from a
+     city-tour video: road and sidewalk geometry, building layout, and object placements.
+
+     Examples: ``Tokyo_0001``, ``Beijing_0001``, ..., and ``Los_Angeles_0001``
+
+   - A **digital cousin** is a *variant* of the same layout created by UrbanVerse-Gen.  
+     All cousins share the **same placement of objects**, but differ in:
+     
+       • Retrived 3D assets for each instance in the scene (different cars, buildings, furniture)  
+       • Object appearances (different colors, textures, materials)  
+       • Textures & PBR materials (road/sidewalk variants)  
+       • HDRI sky (lighting, illumination)  
+
+     Example cousins of the same layout: ``Tokyo_0001/scene.usd``, ``Tokyo_0002/scene.usd``, and ``Tokyo_0032/scene.usd``
+
+
+   Synchronous simulation varies cousins but keeps layout fixed;  
+   asynchronous simulation varies both layouts *and* cousins.
+
+UrbanVerse exposes a unified navigation API:
+
+.. code-block:: python
+
+   import urbanverse as uv
+
+
+🎭 Synchronous Simulation
+-------------------------
+
+In **synchronous simulation**, all parallel environments share **one single layout**, but each
+environment loads a **different cousin** of that layout.
+
+This means:
+
+- same topological geometry  
+- same drivable paths  
+- same sidewalk elevations  
+- different assets, textures, HDRIs  
+
+Useful for:
+
+- controlled debugging  
+- aligned episodes  
+- appearance diversity tests with fixed geometry  
+
+**Example: Using 32 cousins of one layout**
+
+Assume:
+
+.. code-block:: text
+
+   $URBANVERSE_SCENE_ROOT/
+    ├── Tokyo_0001/scene.usd
+    ├── Tokyo_0002/scene.usd
+    ...
+    └── Tokyo_0032/scene.usd
+
+Synchronous training setup:
+
+.. code-block:: python
+
+   import os
+   import urbanverse as uv
+
+   root = os.environ["URBANVERSE_SCENE_ROOT"]
+
+   scene_paths = [
+       f"{root}/Tokyo_{i:03d}/scene.usd"
+       for i in range(1, 33)
+   ]
+
+   env = uv.navigation.rl.create_env_from_scenes(
+       scene_paths=scene_paths,     # same layout, 32 cousins
+       robot_type="coco_wheeled",
+       async_sim=False,             # synchronous mode
+       num_envs=32,
+   )
+
+   uv.navigation.rl.train(
+       env=env,
+       training_cfg=training_cfg,
+       output_dir="outputs/ppo_tokyo_sync",
+   )
+
+Result:
+
+- **Layout fixed**  
+- **Cousins vary across envs**  
+- **Perfect for controlled experimental diagnostics**  
+
+
+👬👬 Asynchronous Simulation
 --------------------------
 
-Different scenario types can be combined with both simulation modes. For example:
+In **asynchronous simulation**, each parallel environment loads a **different layout–cousin pair**.
+This is the *recommended* mode for policy generalization and large-scale PPO training.
 
-- ``clean`` (empty world)
-- ``static`` (with immovable structures)
-- ``dynamic`` (with moving pedestrians)
+Commonly used during training in UrbanVerse:
 
-.. list-table::
-   :widths: 33 33 33
-   :header-rows: 0
+- multiple layouts extracted from different city-tour videos  
+- multiple cousins per layout  
 
-   * - .. image:: ../../assets/sync_clean.gif
-         :width: 100%
-     - .. image:: ../../assets/sync_static.gif
-         :width: 100%
-     - .. image:: ../../assets/sync_dynamic.gif
-         :width: 100%
+**Example: 4 layouts × 5 cousins each (20 scenes total)**
 
-   * - Sync - Clean
-     - Sync - Static
-     - Sync - Dynamic
+.. code-block:: python
 
-.. list-table::
-   :widths: 33 33 33
-   :header-rows: 0
+   import os
+   import urbanverse as uv
 
-   * - .. image:: ../../assets/async_clean.gif
-         :width: 100%
-     - .. image:: ../../assets/async_static.gif
-         :width: 100%
-     - .. image:: ../../assets/async_dynamic.gif
-         :width: 100%
+   root = os.environ["URBANVERSE_SCENE_ROOT"]
 
-   * - Async - Clean
-     - Async - Static
-     - Async - Dynamic
+   base_layouts = [
+       "Tokyo",
+       "Beijing",
+       "CapeTown",
+       "LosAngeles",
+   ]
+
+   scene_pool = []
+   for layout in base_layouts:
+       for i in range(1, 6):
+           scene_pool.append(f"{root}/{layout}_{i:04d}/scene.usd")
+
+   env = uv.navigation.rl.create_env_from_scenes(
+       scene_paths=scene_pool,       # different layouts + cousins
+       robot_type="coco_wheeled",
+       async_sim=True,               # asynchronous mode
+       num_envs=32,
+   )
+
+   uv.navigation.rl.train(
+       env=env,
+       training_cfg=training_cfg,
+       output_dir="outputs/ppo_multicity_async",
+   )
+
+Characteristics of asynchronous mode:
+
+- different **layouts** per environment  
+- different **cousins** per layout  
+- environments run **independently**  
+- maximally diverse visual + geometric distribution  
+- better robustness and transfer  
+
+
+🔄 Comparison: Synchronous vs Asynchronous
+-------------------------------------------
+
++----------------------+----------------------------+--------------------------------+
+|                      | **Synchronous**            | **Asynchronous**               |
++======================+============================+================================+
+| Layout               | Same across all envs       | Different across envs          |
++----------------------+----------------------------+--------------------------------+
+| Cousin Variant       | Different                  | Different                      |
++----------------------+----------------------------+--------------------------------+
+| Episode Counters     | Aligned                    | Independent                    |
++----------------------+----------------------------+--------------------------------+
+| Best For             | Debugging, controlled eval | Large-scale policy trainin     |
++----------------------+----------------------------+--------------------------------+
+

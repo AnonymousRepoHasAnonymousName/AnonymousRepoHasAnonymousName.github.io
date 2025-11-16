@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Configurations &#8212; UrbanVerse Documentation</title>
+    <title>Robot Configuration &#8212; UrbanVerse Documentation</title>
   
   
   
@@ -52,11 +52,11 @@
     <script src="../../_static/copybutton.js"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script src="../../_static/design-tabs.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'source/robot_learning/configuration';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'source/robot_learning/robot_configuration';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Robot Configuration" href="robot_configuration.html" />
-    <link rel="prev" title="Simulation Paradigms" href="simulation_paradigms.html" />
+    <link rel="next" title="Reinforcement Learning" href="reinforcement_learning/index.html" />
+    <link rel="prev" title="Configurations" href="configuration.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="1.0.0" />
@@ -224,8 +224,8 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Robot Learning with UrbanVerse</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="simulation_paradigms.html">Simulation Paradigms</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Configurations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="robot_configuration.html">Robot Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configurations</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Robot Configuration</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="reinforcement_learning/index.html">Reinforcement Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="reinforcement_learning/scene.html">Scene Configuration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reinforcement_learning/action.html">Action Space</a></li>
@@ -350,7 +350,7 @@
       
       
       
-      <li><a href="https://github.com/metadriverse/urban-sim/edit/main/source/robot_learning/configuration.rst" target="_blank"
+      <li><a href="https://github.com/metadriverse/urban-sim/edit/main/source/robot_learning/robot_configuration.rst" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -367,7 +367,7 @@
       
       
       
-      <li><a href="https://github.com/metadriverse/urban-sim/issues/new?title=Issue%20on%20page%20%2Fsource/robot_learning/configuration.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/metadriverse/urban-sim/issues/new?title=Issue%20on%20page%20%2Fsource/robot_learning/robot_configuration.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -397,7 +397,7 @@
       
       
       
-      <li><a href="../../_sources/source/robot_learning/configuration.rst" target="_blank"
+      <li><a href="../../_sources/source/robot_learning/robot_configuration.rst" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -473,7 +473,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Configurations</h1>
+    <h1>Robot Configuration</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -483,20 +483,14 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#envcfg-the-environment-schema">EnvCfg: The Environment Schema</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scene-configuration">Scene Configuration</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-parameters">Key Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supported-robots">Supported Robots</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wheeled-robots">Wheeled Robots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quadruped-robots">Quadruped Robots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#humanoid-robots">Humanoid Robots</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#observation-configuration">Observation Configuration</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fields">Fields</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#action-configuration">Action Configuration</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reward-configuration">Reward Configuration</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#termination-configuration">Termination Configuration</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curriculum-configuration">Curriculum Configuration</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-initialization">Dynamic Initialization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-robot-loading-logic">Dynamic Robot Loading Logic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#robot-spawn-initialization">Robot Spawn Initialization</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
             </nav>
@@ -509,203 +503,160 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="configurations">
-<span id="urbanverse-robot-learning-configuration"></span><h1>Configurations<a class="headerlink" href="#configurations" title="Permalink to this heading">#</a></h1>
-<p>UrbanVerse uses a structured configuration system to define training environments for
-goal-directed navigation.
-Similar to the configuration style used in robotics simulation frameworks, UrbanVerse
-encapsulates all environment parameters—scenes, robot embodiment, observation and
-action spaces, rewards, and termination logic—under a unified configuration object.</p>
-<p>The central configuration entry point is <code class="docutils literal notranslate"><span class="pre">EnvCfg</span></code>.
-This class specifies <strong>how an UrbanVerse navigation environment should be built</strong>, and is
-consumed by the high-level training API:</p>
-<p><code class="docutils literal notranslate"><span class="pre">uv.navigation.rl.create_env(cfg)</span></code></p>
-<p>This page introduces the roles of each configuration component, their hierarchy, and how they
-together define a full reinforcement learning environment.</p>
-<section id="envcfg-the-environment-schema">
-<h2>EnvCfg: The Environment Schema<a class="headerlink" href="#envcfg-the-environment-schema" title="Permalink to this heading">#</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">EnvCfg</span></code> is a lightweight configuration schema describing the full training environment:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">urbanverse.navigation.config</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">EnvCfg</span><span class="p">,</span> <span class="n">SceneCfg</span><span class="p">,</span> <span class="n">ObservationCfg</span><span class="p">,</span> <span class="n">ActionCfg</span><span class="p">,</span>
-    <span class="n">RewardCfg</span><span class="p">,</span> <span class="n">TerminationCfg</span><span class="p">,</span> <span class="n">CurriculumCfg</span>
-<span class="p">)</span>
+  <section id="robot-configuration">
+<span id="urbanverse-robot-learning-robot-configuration"></span><h1>Robot Configuration<a class="headerlink" href="#robot-configuration" title="Permalink to this heading">#</a></h1>
+<p>UrbanVerse provides a unified interface for working with multiple robot embodiments.
+Robots differ in mobility type (wheeled, holonomic, quadruped, humanoid), action interface,
+and physical configuration. The robot is selected via:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cfg</span> <span class="o">=</span> <span class="n">EnvCfg</span><span class="p">(</span><span class="n">robot_type</span><span class="o">=</span><span class="s2">&quot;coco_wheeled&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>UrbanVerse automatically loads the correct configuration, action space, and environment
+modifier based on the provided name.</p>
+<section id="supported-robots">
+<h2>Supported Robots<a class="headerlink" href="#supported-robots" title="Permalink to this heading">#</a></h2>
+<section id="wheeled-robots">
+<h3>Wheeled Robots<a class="headerlink" href="#wheeled-robots" title="Permalink to this heading">#</a></h3>
+<p><strong>COCO Wheeled Delivery Robot:</strong></p>
+<ul class="simple">
+<li><p><strong>Identifier</strong>: <code class="docutils literal notranslate"><span class="pre">coco_wheeled</span></code></p></li>
+<li><p><strong>Config module</strong>: <code class="docutils literal notranslate"><span class="pre">urbanverse.robots.coco.COCOCfg</span></code></p></li>
+<li><p><strong>Action space</strong>: <code class="docutils literal notranslate"><span class="pre">COCOVelocityActionCfg</span></code>
+(continuous linear &amp; angular velocities)</p></li>
+<li><p><strong>Environment modifier</strong>: <code class="docutils literal notranslate"><span class="pre">COCONavModifyEnv</span></code></p></li>
+<li><p><strong>Default spawn height</strong>: <code class="docutils literal notranslate"><span class="pre">z</span> <span class="pre">≈</span> <span class="pre">0.40</span></code></p></li>
+</ul>
+<p><strong>NVIDIA Carter (Holonomic Omnidirectional):</strong></p>
+<ul class="simple">
+<li><p><strong>Identifier</strong>: <code class="docutils literal notranslate"><span class="pre">nvidia_carter</span></code></p></li>
+<li><p><strong>Config module</strong>: <code class="docutils literal notranslate"><span class="pre">urbanverse.robots.carter.CarterCfg</span></code></p></li>
+<li><p><strong>Action space</strong>: <code class="docutils literal notranslate"><span class="pre">CarterVelocityActionCfg</span></code>
+(vx, vy, yaw-rate)</p></li>
+<li><p><strong>Environment modifier</strong>: <code class="docutils literal notranslate"><span class="pre">CarterNavModifyEnv</span></code></p></li>
+<li><p><strong>Default spawn height</strong>: <code class="docutils literal notranslate"><span class="pre">z</span> <span class="pre">≈</span> <span class="pre">0.45</span></code></p></li>
+</ul>
+<p><strong>TurtleBot3:</strong></p>
+<ul class="simple">
+<li><p><strong>Identifier</strong>: <code class="docutils literal notranslate"><span class="pre">turtlebot3</span></code></p></li>
+<li><p><strong>Config module</strong>: <code class="docutils literal notranslate"><span class="pre">urbanverse.robots.turtlebot3.TurtlebotCfg</span></code></p></li>
+<li><p><strong>Action space</strong>: <code class="docutils literal notranslate"><span class="pre">TurtlebotActionCfg</span></code></p></li>
+<li><p><strong>Environment modifier</strong>: <code class="docutils literal notranslate"><span class="pre">TurtlebotModifyEnv</span></code></p></li>
+<li><p><strong>Default spawn height</strong>: <code class="docutils literal notranslate"><span class="pre">z</span> <span class="pre">≈</span> <span class="pre">0.18</span></code></p></li>
+</ul>
+</section>
+<section id="quadruped-robots">
+<h3>Quadruped Robots<a class="headerlink" href="#quadruped-robots" title="Permalink to this heading">#</a></h3>
+<p><strong>Unitree Go2:</strong></p>
+<ul class="simple">
+<li><p><strong>Identifier</strong>: <code class="docutils literal notranslate"><span class="pre">unitree_go2</span></code></p></li>
+<li><p><strong>Config module</strong>: <code class="docutils literal notranslate"><span class="pre">urbanverse.robots.unitree_go2.Go2Cfg</span></code></p></li>
+<li><p><strong>Action space</strong>: <code class="docutils literal notranslate"><span class="pre">Go2NavActionCfg</span></code>
+(joint or velocity-based)</p></li>
+<li><p><strong>Environment modifier</strong>: <code class="docutils literal notranslate"><span class="pre">Go2NavModifyEnv</span></code></p></li>
+<li><p><strong>Default spawn height</strong>: <code class="docutils literal notranslate"><span class="pre">z</span> <span class="pre">≈</span> <span class="pre">0.30</span></code></p></li>
+</ul>
+<p><strong>ANYmal (C / D):</strong></p>
+<ul class="simple">
+<li><p><strong>Identifier</strong>: <code class="docutils literal notranslate"><span class="pre">anymal</span></code></p></li>
+<li><p><strong>Config module</strong>: <code class="docutils literal notranslate"><span class="pre">urbanverse.robots.anymal.ANYmalCfg</span></code></p></li>
+<li><p><strong>Action space</strong>: <code class="docutils literal notranslate"><span class="pre">ANYmalActionCfg</span></code></p></li>
+<li><p><strong>Environment modifier</strong>: <code class="docutils literal notranslate"><span class="pre">ANYmalNavModifyEnv</span></code></p></li>
+<li><p><strong>Default spawn height</strong>: <code class="docutils literal notranslate"><span class="pre">z</span> <span class="pre">≈</span> <span class="pre">0.32</span></code></p></li>
+</ul>
+</section>
+<section id="humanoid-robots">
+<h3>Humanoid Robots<a class="headerlink" href="#humanoid-robots" title="Permalink to this heading">#</a></h3>
+<p><strong>Booster Robotics T1 (Humanoid):</strong></p>
+<ul class="simple">
+<li><p><strong>Identifier</strong>: <code class="docutils literal notranslate"><span class="pre">booster_t1</span></code></p></li>
+<li><p><strong>Config module</strong>: <code class="docutils literal notranslate"><span class="pre">urbanverse.robots.booster_t1.T1Cfg</span></code></p></li>
+<li><p><strong>Action space</strong>: <code class="docutils literal notranslate"><span class="pre">T1HumanoidActionCfg</span></code>
+(joint-angle or torque-based, depending on mode)</p></li>
+<li><p><strong>Environment modifier</strong>: <code class="docutils literal notranslate"><span class="pre">T1NavModifyEnv</span></code></p></li>
+<li><p><strong>Default spawn height</strong>: <code class="docutils literal notranslate"><span class="pre">z</span> <span class="pre">≈</span> <span class="pre">1.0</span></code></p></li>
+</ul>
+<p><strong>Unitree G1 (Humanoid):</strong></p>
+<ul class="simple">
+<li><p><strong>Identifier</strong>: <code class="docutils literal notranslate"><span class="pre">unitree_g1</span></code></p></li>
+<li><p><strong>Config module</strong>: <code class="docutils literal notranslate"><span class="pre">urbanverse.robots.unitree_g1.G1Cfg</span></code></p></li>
+<li><p><strong>Action space</strong>: <code class="docutils literal notranslate"><span class="pre">G1NavActionCfg</span></code></p></li>
+<li><p><strong>Environment modifier</strong>: <code class="docutils literal notranslate"><span class="pre">G1NavModifyEnv</span></code></p></li>
+<li><p><strong>Default spawn height</strong>: <code class="docutils literal notranslate"><span class="pre">z</span> <span class="pre">≈</span> <span class="pre">0.74</span></code></p></li>
+</ul>
+</section>
+</section>
+<section id="dynamic-robot-loading-logic">
+<h2>Dynamic Robot Loading Logic<a class="headerlink" href="#dynamic-robot-loading-logic" title="Permalink to this heading">#</a></h2>
+<p>UrbanVerse loads robot components automatically:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">robot_type</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">robot_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
 
-<span class="n">cfg</span> <span class="o">=</span> <span class="n">EnvCfg</span><span class="p">(</span>
-    <span class="n">scenes</span><span class="o">=</span><span class="n">SceneCfg</span><span class="p">(</span><span class="n">scene_paths</span><span class="o">=</span><span class="n">my_scene_list</span><span class="p">),</span>
-    <span class="n">robot_type</span><span class="o">=</span><span class="s2">&quot;coco_wheeled&quot;</span><span class="p">,</span>
-    <span class="n">observations</span><span class="o">=</span><span class="n">ObservationCfg</span><span class="p">(),</span>
-    <span class="n">actions</span><span class="o">=</span><span class="n">ActionCfg</span><span class="p">(),</span>
-    <span class="n">rewards</span><span class="o">=</span><span class="n">RewardCfg</span><span class="p">(),</span>
-    <span class="n">terminations</span><span class="o">=</span><span class="n">TerminationCfg</span><span class="p">(),</span>
-    <span class="n">curriculum</span><span class="o">=</span><span class="n">CurriculumCfg</span><span class="p">(),</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-<p>Once initialized, an environment is created via:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">env</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">navigation</span><span class="o">.</span><span class="n">rl</span><span class="o">.</span><span class="n">create_env</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">robot_type</span> <span class="o">==</span> <span class="s2">&quot;coco_wheeled&quot;</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">urbanverse.robots.coco</span><span class="w"> </span><span class="kn">import</span> <span class="n">COCOCfg</span><span class="p">,</span> <span class="n">COCOVelocityActionCfg</span><span class="p">,</span> <span class="n">COCONavModifyEnv</span>
+    <span class="n">robot_cfg</span> <span class="o">=</span> <span class="n">COCOCfg</span>
+    <span class="n">action_cfg</span> <span class="o">=</span> <span class="n">COCOVelocityActionCfg</span>
+    <span class="n">modify_env_fn</span> <span class="o">=</span> <span class="n">COCONavModifyEnv</span>
 
-<span class="n">uv</span><span class="o">.</span><span class="n">navigation</span><span class="o">.</span><span class="n">rl</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
-    <span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">,</span>
-    <span class="n">training_cfg</span><span class="o">=</span><span class="n">training_cfg</span><span class="p">,</span>
-    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;outputs/ppo_run&quot;</span><span class="p">,</span>
-<span class="p">)</span>
+<span class="k">elif</span> <span class="n">robot_type</span> <span class="o">==</span> <span class="s2">&quot;nvidia_carter&quot;</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">urbanverse.robots.carter</span><span class="w"> </span><span class="kn">import</span> <span class="n">CarterCfg</span><span class="p">,</span> <span class="n">CarterVelocityActionCfg</span><span class="p">,</span> <span class="n">CarterNavModifyEnv</span>
+    <span class="n">robot_cfg</span> <span class="o">=</span> <span class="n">CarterCfg</span>
+    <span class="n">action_cfg</span> <span class="o">=</span> <span class="n">CarterVelocityActionCfg</span>
+    <span class="n">modify_env_fn</span> <span class="o">=</span> <span class="n">CarterNavModifyEnv</span>
+
+<span class="k">elif</span> <span class="n">robot_type</span> <span class="o">==</span> <span class="s2">&quot;turtlebot3&quot;</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">urbanverse.robots.turtlebot3</span><span class="w"> </span><span class="kn">import</span> <span class="n">TurtlebotCfg</span><span class="p">,</span> <span class="n">TurtlebotActionCfg</span><span class="p">,</span> <span class="n">TurtlebotModifyEnv</span>
+    <span class="n">robot_cfg</span> <span class="o">=</span> <span class="n">TurtlebotCfg</span>
+    <span class="n">action_cfg</span> <span class="o">=</span> <span class="n">TurtlebotActionCfg</span>
+    <span class="n">modify_env_fn</span> <span class="o">=</span> <span class="n">TurtlebotModifyEnv</span>
+
+<span class="k">elif</span> <span class="n">robot_type</span> <span class="o">==</span> <span class="s2">&quot;unitree_go2&quot;</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">urbanverse.robots.unitree_go2</span><span class="w"> </span><span class="kn">import</span> <span class="n">Go2Cfg</span><span class="p">,</span> <span class="n">Go2NavActionCfg</span><span class="p">,</span> <span class="n">Go2NavModifyEnv</span>
+    <span class="n">robot_cfg</span> <span class="o">=</span> <span class="n">Go2Cfg</span>
+    <span class="n">action_cfg</span> <span class="o">=</span> <span class="n">Go2NavActionCfg</span>
+    <span class="n">modify_env_fn</span> <span class="o">=</span> <span class="n">Go2NavModifyEnv</span>
+
+<span class="k">elif</span> <span class="n">robot_type</span> <span class="o">==</span> <span class="s2">&quot;anymal&quot;</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">urbanverse.robots.anymal</span><span class="w"> </span><span class="kn">import</span> <span class="n">ANYmalCfg</span><span class="p">,</span> <span class="n">ANYmalActionCfg</span><span class="p">,</span> <span class="n">ANYmalNavModifyEnv</span>
+    <span class="n">robot_cfg</span> <span class="o">=</span> <span class="n">ANYmalCfg</span>
+    <span class="n">action_cfg</span> <span class="o">=</span> <span class="n">ANYmalActionCfg</span>
+    <span class="n">modify_env_fn</span> <span class="o">=</span> <span class="n">ANYmalNavModifyEnv</span>
+
+<span class="k">elif</span> <span class="n">robot_type</span> <span class="o">==</span> <span class="s2">&quot;booster_t1&quot;</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">urbanverse.robots.booster_t1</span><span class="w"> </span><span class="kn">import</span> <span class="n">T1Cfg</span><span class="p">,</span> <span class="n">T1HumanoidActionCfg</span><span class="p">,</span> <span class="n">T1NavModifyEnv</span>
+    <span class="n">robot_cfg</span> <span class="o">=</span> <span class="n">T1Cfg</span>
+    <span class="n">action_cfg</span> <span class="o">=</span> <span class="n">T1HumanoidActionCfg</span>
+    <span class="n">modify_env_fn</span> <span class="o">=</span> <span class="n">T1NavModifyEnv</span>
+
+<span class="k">elif</span> <span class="n">robot_type</span> <span class="o">==</span> <span class="s2">&quot;unitree_g1&quot;</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">urbanverse.robots.unitree_g1</span><span class="w"> </span><span class="kn">import</span> <span class="n">G1Cfg</span><span class="p">,</span> <span class="n">G1NavActionCfg</span><span class="p">,</span> <span class="n">G1NavModifyEnv</span>
+    <span class="n">robot_cfg</span> <span class="o">=</span> <span class="n">G1Cfg</span>
+    <span class="n">action_cfg</span> <span class="o">=</span> <span class="n">G1NavActionCfg</span>
+    <span class="n">modify_env_fn</span> <span class="o">=</span> <span class="n">G1NavModifyEnv</span>
 </pre></div>
 </div>
-<p>The remainder of this section explains each field in detail.</p>
 </section>
-<section id="scene-configuration">
-<h2>Scene Configuration<a class="headerlink" href="#scene-configuration" title="Permalink to this heading">#</a></h2>
-<p>UrbanVerse scenes are <strong>real-to-sim USD environments</strong> reconstructed by UrbanVerse-Gen or
-provided as part of UrbanVerse-160 / CraftBench.
-Scene configuration specifies <em>which</em> scenes to load and <em>how</em> they should be distributed
-across parallel simulation instances.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">SceneCfg</span><span class="p">(</span>
-    <span class="n">scene_paths</span><span class="o">=</span><span class="p">[</span>
-        <span class="s2">&quot;/path/UrbanVerse-160/Asia_Japan_Tokyo_0001/scene_cousin_01/scene.usd&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;/path/UrbanVerse-160/Africa_SouthAfrica_CapeTown_0002/scene_cousin_03/scene.usd&quot;</span><span class="p">,</span>
-        <span class="o">...</span>
-    <span class="p">],</span>
-    <span class="n">async_sim</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">env_spacing</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span>
-<span class="p">)</span>
+<section id="robot-spawn-initialization">
+<h2>Robot Spawn Initialization<a class="headerlink" href="#robot-spawn-initialization" title="Permalink to this heading">#</a></h2>
+<p>UrbanVerse ensures each robot spawns safely on the navigable ground plane extracted from the scene.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">xy</span><span class="p">,</span> <span class="n">yaw</span> <span class="o">=</span> <span class="n">sample_valid_robot_pose</span><span class="p">(</span><span class="n">scene</span><span class="p">)</span>
+<span class="n">robot_cfg</span><span class="o">.</span><span class="n">init_state</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="p">[</span><span class="n">xy</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">xy</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">default_height</span><span class="p">]</span>
+<span class="n">robot_cfg</span><span class="o">.</span><span class="n">init_state</span><span class="o">.</span><span class="n">yaw</span> <span class="o">=</span> <span class="n">yaw</span>
 </pre></div>
 </div>
-<section id="key-parameters">
-<h3>Key Parameters<a class="headerlink" href="#key-parameters" title="Permalink to this heading">#</a></h3>
-<ul>
-<li><p><strong>scene_paths</strong>
-A list of USD scenes. Each path may represent a different <strong>layout</strong> (city) and/or
-different <strong>digital cousin variants</strong> of the same layout.</p></li>
-<li><p><strong>async_sim</strong>
-- <code class="docutils literal notranslate"><span class="pre">True</span></code>: each environment loads a different scene in parallel (recommended)</p>
-<blockquote>
-<div><p>– ideal for generalization</p>
-</div></blockquote>
+<p>Guarantees:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">False</span></code>: all environments use the same layout but different cousin variants
-– ideal for debugging and controlled experiments</p></li>
+<li><p>safe sidewalk/road placement</p></li>
+<li><p>no collision at spawn</p></li>
+<li><p>consistent behavior across UrbanVerse-160 / CraftBench / user-generated scenes</p></li>
 </ul>
-</li>
-<li><p><strong>env_spacing</strong>
-The horizontal offset between parallel environments in the simulator.</p></li>
-</ul>
-<p>UrbanVerse ensures that each training worker receives a valid scene and that scenes can be
-shuffled or rotated between episodes through the RL API.</p>
-</section>
-</section>
-<section id="observation-configuration">
-<h2>Observation Configuration<a class="headerlink" href="#observation-configuration" title="Permalink to this heading">#</a></h2>
-<p>The UrbanVerse navigation task uses a compact sensor specification suitable for on-policy RL:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ObservationCfg</span><span class="p">(</span>
-    <span class="n">rgb_size</span><span class="o">=</span><span class="p">(</span><span class="mi">135</span><span class="p">,</span> <span class="mi">240</span><span class="p">),</span>
-    <span class="n">use_depth</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">include_goal_vector</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-<section id="fields">
-<h3>Fields<a class="headerlink" href="#fields" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p><strong>rgb_size</strong> – resolution of the onboard camera</p></li>
-<li><p><strong>use_depth</strong> – whether a depth channel is included</p></li>
-<li><p><strong>include_goal_vector</strong> – the relative (dx, dy) distance to the goal is appended to the
-observation buffer</p></li>
-</ul>
-<p>This aligns with the network architecture described in the UrbanVerse paper.</p>
-</section>
-</section>
-<section id="action-configuration">
-<h2>Action Configuration<a class="headerlink" href="#action-configuration" title="Permalink to this heading">#</a></h2>
-<p>Actions define the control interface for the robot.
-UrbanVerse exposes a continuous velocity-command interface for <code class="docutils literal notranslate"><span class="pre">coco_wheeled</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ActionCfg</span><span class="p">(</span>
-    <span class="n">action_dim</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>         <span class="c1"># linear_x, angular_z</span>
-    <span class="n">linear_limit</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
-    <span class="n">angular_limit</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-<p>This configuration is passed into the environment and later used by the PPO actor network.</p>
-</section>
-<section id="reward-configuration">
-<h2>Reward Configuration<a class="headerlink" href="#reward-configuration" title="Permalink to this heading">#</a></h2>
-<p>Rewards in UrbanVerse reflect the design presented in the paper, balancing:</p>
-<ul class="simple">
-<li><p>arrival reward</p></li>
-<li><p>collision penalty</p></li>
-<li><p>coarse &amp; fine waypoint tracking</p></li>
-<li><p>velocity alignment</p></li>
-</ul>
-<p>These fields are bundled in <code class="docutils literal notranslate"><span class="pre">RewardCfg</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">RewardCfg</span><span class="p">(</span>
-    <span class="n">arrived_reward</span><span class="o">=</span><span class="mf">2000.0</span><span class="p">,</span>
-    <span class="n">collision_penalty</span><span class="o">=-</span><span class="mf">200.0</span><span class="p">,</span>
-    <span class="n">tracking_fine_std</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
-    <span class="n">tracking_fine_weight</span><span class="o">=</span><span class="mf">50.0</span><span class="p">,</span>
-    <span class="n">tracking_coarse_std</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span>
-    <span class="n">tracking_coarse_weight</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>
-    <span class="n">velocity_weight</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-<p>This schema allows reproducible experiments across UrbanVerse scenes.</p>
-</section>
-<section id="termination-configuration">
-<h2>Termination Configuration<a class="headerlink" href="#termination-configuration" title="Permalink to this heading">#</a></h2>
-<p>UrbanVerse defines a minimal set of clear termination conditions:</p>
-<ul class="simple">
-<li><p>success (goal reached)</p></li>
-<li><p>collision</p></li>
-<li><p>timeout (episode length exceeded)</p></li>
-<li><p>out-of-bounds / leaving traversable regions</p></li>
-</ul>
-<p>These are collected in:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">TerminationCfg</span><span class="p">(</span>
-    <span class="n">max_episode_steps</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
-    <span class="n">enable_collision</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">enable_success</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">enable_timeout</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="curriculum-configuration">
-<h2>Curriculum Configuration<a class="headerlink" href="#curriculum-configuration" title="Permalink to this heading">#</a></h2>
-<p>An optional curriculum can be enabled to gradually increase training difficulty by:</p>
-<ul class="simple">
-<li><p>expanding goal distance ranges</p></li>
-<li><p>introducing lighting or cousin jitter</p></li>
-<li><p>varying robot initialization poses</p></li>
-</ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">CurriculumCfg</span><span class="p">(</span>
-    <span class="n">enable_goal_distance_curriculum</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">enable_cousin_jitter</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-<p>Curriculum settings are optional but often accelerate early-stage learning.</p>
-</section>
-<section id="dynamic-initialization">
-<h2>Dynamic Initialization<a class="headerlink" href="#dynamic-initialization" title="Permalink to this heading">#</a></h2>
-<p>Robot spawn points are automatically sampled from <strong>drivable road regions</strong> of each scene:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">robot_cfg</span><span class="o">.</span><span class="n">init_state</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">sample_valid_spawn_point</span><span class="p">()</span>
-<span class="n">robot_cfg</span><span class="o">.</span><span class="n">init_state</span><span class="o">.</span><span class="n">yaw</span> <span class="o">=</span> <span class="n">sample_valid_heading</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>This ensures valid initialization across diverse city layouts.</p>
 </section>
 <section id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this heading">#</a></h2>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">EnvCfg</span></code> defines the entire UrbanVerse training environment</p></li>
-<li><p>It specifies scenes, robots, observations, actions, rewards, terminations, and optional curriculum</p></li>
-<li><p>Configuration style mirrors established robotics-simulation documentation practices</p></li>
-<li><p>The API remains simple:</p>
-<p><code class="docutils literal notranslate"><span class="pre">env</span> <span class="pre">=</span> <span class="pre">uv.navigation.rl.create_env(cfg)</span></code>
-<code class="docutils literal notranslate"><span class="pre">uv.navigation.rl.train(env,</span> <span class="pre">...)</span></code></p>
-</li>
+<ul class="simple">
+<li><p>UrbanVerse now supports <strong>wheeled</strong>, <strong>holonomic</strong>, <strong>quadruped</strong>, <strong>humanoid</strong> robots.</p></li>
+<li><p>Robot selection uses a single field: <code class="docutils literal notranslate"><span class="pre">robot_type=&quot;unitree_g1&quot;</span></code>.</p></li>
+<li><p>System automatically loads config, action space, and env modifiers.</p></li>
+<li><p>Fully compatible with <strong>UrbanVerse-160</strong>, <strong>CraftBench</strong>, and <strong>UrbanVerse-Gen</strong> scenes.</p></li>
 </ul>
-<p>This structuring ensures clarity, reproducibility, and extensibility for robot learning research in UrbanVerse.</p>
 </section>
 </section>
 
@@ -721,20 +672,20 @@ UrbanVerse exposes a continuous velocity-command interface for <code class="docu
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="simulation_paradigms.html"
+       href="configuration.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Simulation Paradigms</p>
+        <p class="prev-next-title">Configurations</p>
       </div>
     </a>
     <a class="right-next"
-       href="robot_configuration.html"
+       href="reinforcement_learning/index.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Robot Configuration</p>
+        <p class="prev-next-title">Reinforcement Learning</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -755,20 +706,14 @@ UrbanVerse exposes a continuous velocity-command interface for <code class="docu
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#envcfg-the-environment-schema">EnvCfg: The Environment Schema</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scene-configuration">Scene Configuration</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-parameters">Key Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supported-robots">Supported Robots</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wheeled-robots">Wheeled Robots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quadruped-robots">Quadruped Robots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#humanoid-robots">Humanoid Robots</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#observation-configuration">Observation Configuration</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fields">Fields</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#action-configuration">Action Configuration</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reward-configuration">Reward Configuration</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#termination-configuration">Termination Configuration</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curriculum-configuration">Curriculum Configuration</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-initialization">Dynamic Initialization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-robot-loading-logic">Dynamic Robot Loading Logic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#robot-spawn-initialization">Robot Spawn Initialization</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
   </nav></div>

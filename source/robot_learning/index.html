@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>&lt;no title&gt; &#8212; URBAN-SIM Documentation</title>
+    <title>&lt;no title&gt; &#8212; UrbanVerse Documentation</title>
   
   
   
@@ -135,7 +135,7 @@
   
   
   
-    <p class="title logo__title">URBAN-SIM Documentation</p>
+    <p class="title logo__title">UrbanVese Documentation</p>
   
 </a></div>
         <div class="sidebar-primary-item"><ul class="navbar-icon-links"
@@ -224,8 +224,8 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Robot Learning with UrbanVerse</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="simulation_paradigms.html">Simulation Paradigms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="configuration.html">Environment Configurations</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="robot_configuration.html">Robot Configuration</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="reinforcement_learning/index.html">Reinforcement Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="reinforcement_learning/scene.html">Scene Configuration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reinforcement_learning/action.html">Action Space</a></li>
@@ -501,22 +501,39 @@ through binary download/source file to use the latest features and improvements.
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="simulation_paradigms.html">Simulation Paradigms</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="simulation_paradigms.html#synchronous-simulation">⏱️ Synchronous Simulation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="simulation_paradigms.html#asynchronous-simulation">⚡ Asynchronous Simulation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="simulation_paradigms.html#semantic-differences-synchronous-vs-asynchronous-scenarios">🔄 Semantic Differences: Synchronous vs. Asynchronous Scenarios</a></li>
-<li class="toctree-l2"><a class="reference internal" href="simulation_paradigms.html#scenario-visualizations">🖼️ Scenario Visualizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simulation_paradigms.html#synchronous-simulation">🎭 Synchronous Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simulation_paradigms.html#asynchronous-simulation">👬👬 Asynchronous Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simulation_paradigms.html#comparison-synchronous-vs-asynchronous">🔄 Comparison: Synchronous vs Asynchronous</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="configuration.html">Environment Configurations</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="configuration.html#scene-configuration">Scene Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="configuration.html#simulation-configuration">Simulation Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="configuration.html#mdp-configuration">MDP Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configurations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#envcfg-the-environment-schema">EnvCfg: The Environment Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#scene-configuration">Scene Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="configuration.html#key-parameters">Key Parameters</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="configuration.html#robot-configuration">Robot Configuration</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="configuration.html#supported-robots">Supported Robots</a></li>
-<li class="toctree-l2"><a class="reference internal" href="configuration.html#dynamic-initialization">Dynamic Initialization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#observation-configuration">Observation Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="configuration.html#fields">Fields</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="configuration.html#action-configuration">Action Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#reward-configuration">Reward Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#termination-configuration">Termination Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#curriculum-configuration">Curriculum Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#dynamic-initialization">Dynamic Initialization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="robot_configuration.html">Robot Configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="robot_configuration.html#supported-robots">Supported Robots</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="robot_configuration.html#wheeled-robots">Wheeled Robots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="robot_configuration.html#quadruped-robots">Quadruped Robots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="robot_configuration.html#humanoid-robots">Humanoid Robots</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="robot_configuration.html#dynamic-robot-loading-logic">Dynamic Robot Loading Logic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="robot_configuration.html#robot-spawn-initialization">Robot Spawn Initialization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="robot_configuration.html#summary">Summary</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="reinforcement_learning/index.html">Reinforcement Learning</a><ul>
@@ -661,7 +678,7 @@ By Honglin He
 
   <p class="copyright">
     
-      © Copyright 2025-2030, The URBAN-SIM Project Developers. [URBAN-SIM is built upon NVIDIA Isaac Sim&amp;Lab and extends its capabilities for urban robot learning tasks].
+      © Copyright 2025-2030, The UrbanVerse Project Developers. [UrbanVerse is built upon NVIDIA Isaac Sim&amp;Lab and extends its capabilities for urban robot learning tasks].
       <br/>
     
   </p>

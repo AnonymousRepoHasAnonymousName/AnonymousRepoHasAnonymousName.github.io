@@ -67,7 +67,7 @@ Table of Contents
 =================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Installation
 
    source/installation/binaries_installation
@@ -76,7 +76,7 @@ Table of Contents
    source/installation/verifying_installation
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Quickstart Guide
 
    source/quickstart/intro_quickstart
@@ -88,18 +88,17 @@ Table of Contents
    source/quickstart/test_your_robots
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 1
    :caption: Robot Learning with UrbanVerse
-   :titlesonly:
    
    source/robot_learning/simulation_paradigms
-   source/robot_learning/environments
    source/robot_learning/configuration
+   source/robot_learning/robot_configuration
    source/robot_learning/reinforcement_learning/index
    source/robot_learning/imitation_learning/index
-
+   
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 1
    :caption: Developer
 
    source/developer/code-structure/index
@@ -110,7 +109,7 @@ Table of Contents
    source/developer/vr_interface
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 1
    :caption: UrbanVerse Community
 
    source/community/contributing

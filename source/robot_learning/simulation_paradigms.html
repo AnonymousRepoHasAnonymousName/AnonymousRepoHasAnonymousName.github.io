@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Simulation Paradigms &#8212; URBAN-SIM Documentation</title>
+    <title>Simulation Paradigms &#8212; UrbanVerse Documentation</title>
   
   
   
@@ -55,7 +55,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'source/robot_learning/simulation_paradigms';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Environment Configurations" href="configuration.html" />
+    <link rel="next" title="Configurations" href="configuration.html" />
     <link rel="prev" title="Test Your Robots on CraftBench" href="../quickstart/test_your_robots.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -135,7 +135,7 @@
   
   
   
-    <p class="title logo__title">URBAN-SIM Documentation</p>
+    <p class="title logo__title">UrbanVese Documentation</p>
   
 </a></div>
         <div class="sidebar-primary-item"><ul class="navbar-icon-links"
@@ -224,8 +224,8 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Robot Learning with UrbanVerse</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Simulation Paradigms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="configuration.html">Environment Configurations</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="robot_configuration.html">Robot Configuration</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="reinforcement_learning/index.html">Reinforcement Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="reinforcement_learning/scene.html">Scene Configuration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reinforcement_learning/action.html">Action Space</a></li>
@@ -483,10 +483,9 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#synchronous-simulation">⏱️ Synchronous Simulation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asynchronous-simulation">⚡ Asynchronous Simulation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#semantic-differences-synchronous-vs-asynchronous-scenarios">🔄 Semantic Differences: Synchronous vs. Asynchronous Scenarios</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scenario-visualizations">🖼️ Scenario Visualizations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#synchronous-simulation">🎭 Synchronous Simulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asynchronous-simulation">👬👬 Asynchronous Simulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-synchronous-vs-asynchronous">🔄 Comparison: Synchronous vs Asynchronous</a></li>
 </ul>
             </nav>
         </div>
@@ -499,100 +498,171 @@
                 <article class="bd-article">
                   
   <section id="simulation-paradigms">
-<span id="urbanverse-robot-learning-simulation"></span><h1>Simulation Paradigms<a class="headerlink" href="#simulation-paradigms" title="Permalink to this heading">#</a></h1>
-<p>UrbanVerse supports both <strong>synchronous</strong> and <strong>asynchronous</strong> (recommended) multi-environment simulations. These two modes differ in how environments are spawned.</p>
-<section id="synchronous-simulation">
-<h2>⏱️ Synchronous Simulation<a class="headerlink" href="#synchronous-simulation" title="Permalink to this heading">#</a></h2>
-<p>In synchronous mode, all environments are advanced <strong>together in lock-step</strong>. They share the <strong>same scene layout</strong>, including map structure, object placement, and pedestrian routes. This setting is ideal for:</p>
-<ul class="simple">
-<li><p>Controlled debugging</p></li>
-<li><p>Frame-aligned evaluation</p></li>
-<li><p>Consistent benchmarking across environments</p></li>
+<span id="urbanverse-robot-learning-simulation-paradigms"></span><h1>Simulation Paradigms<a class="headerlink" href="#simulation-paradigms" title="Permalink to this heading">#</a></h1>
+<p>UrbanVerse supports both <strong>synchronous</strong> and <strong>asynchronous</strong> (recommended) multi-environment
+simulation. These two modes determine how <strong>scene layouts</strong> and <strong>digital cousin variants</strong> are
+assigned across parallel environments during robot training.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>What are layouts and cousins in UrbanVerse?</strong></p>
+<ul>
+<li><p>A <strong>scene layout</strong> corresponds to the <em>real-world 3D urban structure</em> reconstructed from a
+city-tour video: road and sidewalk geometry, building layout, and object placements.</p>
+<p>Examples: <code class="docutils literal notranslate"><span class="pre">Tokyo_0001</span></code>, <code class="docutils literal notranslate"><span class="pre">Beijing_0001</span></code>, …, and <code class="docutils literal notranslate"><span class="pre">Los_Angeles_0001</span></code></p>
+</li>
+<li><p>A <strong>digital cousin</strong> is a <em>variant</em> of the same layout created by UrbanVerse-Gen.
+All cousins share the <strong>same placement of objects</strong>, but differ in:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Retrived 3D assets for each instance in the scene (different cars, buildings, furniture)</p></li>
+<li><p>Object appearances (different colors, textures, materials)</p></li>
+<li><p>Textures &amp; PBR materials (road/sidewalk variants)</p></li>
+<li><p>HDRI sky (lighting, illumination)</p></li>
 </ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>urbansim/envs/separate_envs/random_env.py<span class="w"> </span>--num_envs<span class="w"> </span><span class="m">16</span><span class="w"> </span>--scenario_type<span class="w"> </span><span class="o">{</span>clean,static,dynamic<span class="o">}</span>
+</div></blockquote>
+<p>Example cousins of the same layout: <code class="docutils literal notranslate"><span class="pre">Tokyo_0001/scene.usd</span></code>, <code class="docutils literal notranslate"><span class="pre">Tokyo_0002/scene.usd</span></code>, and <code class="docutils literal notranslate"><span class="pre">Tokyo_0032/scene.usd</span></code></p>
+</li>
+</ul>
+<p>Synchronous simulation varies cousins but keeps layout fixed;
+asynchronous simulation varies both layouts <em>and</em> cousins.</p>
+</div>
+<p>UrbanVerse exposes a unified navigation API:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
 </pre></div>
 </div>
-<p><strong>Example Scenario Types:</strong></p>
+<section id="synchronous-simulation">
+<h2>🎭 Synchronous Simulation<a class="headerlink" href="#synchronous-simulation" title="Permalink to this heading">#</a></h2>
+<p>In <strong>synchronous simulation</strong>, all parallel environments share <strong>one single layout</strong>, but each
+environment loads a <strong>different cousin</strong> of that layout.</p>
+<p>This means:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">clean</span></code>: Empty environment without obstacles</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">static</span></code>: With static obstacles</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">dynamic</span></code>: With both static and dynamic (e.g., pedestrians) elements</p></li>
+<li><p>same topological geometry</p></li>
+<li><p>same drivable paths</p></li>
+<li><p>same sidewalk elevations</p></li>
+<li><p>different assets, textures, HDRIs</p></li>
+</ul>
+<p>Useful for:</p>
+<ul class="simple">
+<li><p>controlled debugging</p></li>
+<li><p>aligned episodes</p></li>
+<li><p>appearance diversity tests with fixed geometry</p></li>
+</ul>
+<p><strong>Example: Using 32 cousins of one layout</strong></p>
+<p>Assume:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$URBANVERSE_SCENE_ROOT/
+ ├── Tokyo_0001/scene.usd
+ ├── Tokyo_0002/scene.usd
+ ...
+ └── Tokyo_0032/scene.usd
+</pre></div>
+</div>
+<p>Synchronous training setup:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
+
+<span class="n">root</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;URBANVERSE_SCENE_ROOT&quot;</span><span class="p">]</span>
+
+<span class="n">scene_paths</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">root</span><span class="si">}</span><span class="s2">/Tokyo_</span><span class="si">{</span><span class="n">i</span><span class="si">:</span><span class="s2">03d</span><span class="si">}</span><span class="s2">/scene.usd&quot;</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">33</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="n">env</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">navigation</span><span class="o">.</span><span class="n">rl</span><span class="o">.</span><span class="n">create_env_from_scenes</span><span class="p">(</span>
+    <span class="n">scene_paths</span><span class="o">=</span><span class="n">scene_paths</span><span class="p">,</span>     <span class="c1"># same layout, 32 cousins</span>
+    <span class="n">robot_type</span><span class="o">=</span><span class="s2">&quot;coco_wheeled&quot;</span><span class="p">,</span>
+    <span class="n">async_sim</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>             <span class="c1"># synchronous mode</span>
+    <span class="n">num_envs</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">uv</span><span class="o">.</span><span class="n">navigation</span><span class="o">.</span><span class="n">rl</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
+    <span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">,</span>
+    <span class="n">training_cfg</span><span class="o">=</span><span class="n">training_cfg</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;outputs/ppo_tokyo_sync&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Result:</p>
+<ul class="simple">
+<li><p><strong>Layout fixed</strong></p></li>
+<li><p><strong>Cousins vary across envs</strong></p></li>
+<li><p><strong>Perfect for controlled experimental diagnostics</strong></p></li>
 </ul>
 </section>
 <section id="asynchronous-simulation">
-<h2>⚡ Asynchronous Simulation<a class="headerlink" href="#asynchronous-simulation" title="Permalink to this heading">#</a></h2>
-<p>In asynchronous mode, each environment is generated <strong>independently</strong>, allowing for diverse scenario layouts, object instances, appearances, etc. This is especially useful for improving robustness, or simulating real-world noise.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>urbansim/envs/separate_envs/random_env.py<span class="w"> </span>--num_envs<span class="w"> </span><span class="m">16</span><span class="w"> </span>--scenario_type<span class="w"> </span><span class="o">{</span>clean,static,dynamic<span class="o">}</span><span class="w"> </span>--use_async
+<h2>👬👬 Asynchronous Simulation<a class="headerlink" href="#asynchronous-simulation" title="Permalink to this heading">#</a></h2>
+<p>In <strong>asynchronous simulation</strong>, each parallel environment loads a <strong>different layout–cousin pair</strong>.
+This is the <em>recommended</em> mode for policy generalization and large-scale PPO training.</p>
+<p>Commonly used during training in UrbanVerse:</p>
+<ul class="simple">
+<li><p>multiple layouts extracted from different city-tour videos</p></li>
+<li><p>multiple cousins per layout</p></li>
+</ul>
+<p><strong>Example: 4 layouts × 5 cousins each (20 scenes total)</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
+
+<span class="n">root</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;URBANVERSE_SCENE_ROOT&quot;</span><span class="p">]</span>
+
+<span class="n">base_layouts</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;Tokyo&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Beijing&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CapeTown&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LosAngeles&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">scene_pool</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">layout</span> <span class="ow">in</span> <span class="n">base_layouts</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
+        <span class="n">scene_pool</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">root</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">layout</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">i</span><span class="si">:</span><span class="s2">04d</span><span class="si">}</span><span class="s2">/scene.usd&quot;</span><span class="p">)</span>
+
+<span class="n">env</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">navigation</span><span class="o">.</span><span class="n">rl</span><span class="o">.</span><span class="n">create_env_from_scenes</span><span class="p">(</span>
+    <span class="n">scene_paths</span><span class="o">=</span><span class="n">scene_pool</span><span class="p">,</span>       <span class="c1"># different layouts + cousins</span>
+    <span class="n">robot_type</span><span class="o">=</span><span class="s2">&quot;coco_wheeled&quot;</span><span class="p">,</span>
+    <span class="n">async_sim</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>               <span class="c1"># asynchronous mode</span>
+    <span class="n">num_envs</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">uv</span><span class="o">.</span><span class="n">navigation</span><span class="o">.</span><span class="n">rl</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
+    <span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">,</span>
+    <span class="n">training_cfg</span><span class="o">=</span><span class="n">training_cfg</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;outputs/ppo_multicity_async&quot;</span><span class="p">,</span>
+<span class="p">)</span>
 </pre></div>
 </div>
-<p><strong>Advantages:</strong></p>
+<p>Characteristics of asynchronous mode:</p>
 <ul class="simple">
-<li><p>Enables greater variation in observation-action loops</p></li>
-<li><p>Closer to real-world multi-agent or multi-robot setups</p></li>
-<li><p>Can increase training speed under high environment counts</p></li>
+<li><p>different <strong>layouts</strong> per environment</p></li>
+<li><p>different <strong>cousins</strong> per layout</p></li>
+<li><p>environments run <strong>independently</strong></p></li>
+<li><p>maximally diverse visual + geometric distribution</p></li>
+<li><p>better robustness and transfer</p></li>
 </ul>
 </section>
-<section id="semantic-differences-synchronous-vs-asynchronous-scenarios">
-<h2>🔄 Semantic Differences: Synchronous vs. Asynchronous Scenarios<a class="headerlink" href="#semantic-differences-synchronous-vs-asynchronous-scenarios" title="Permalink to this heading">#</a></h2>
-<p>In <strong>synchronous simulation</strong>, all environments share the <strong>same scene layout</strong>, obstacle placement, and map structure. This is ideal for evaluation and debugging where controlled consistency is needed.</p>
-<p>In <strong>asynchronous simulation</strong>, each environment instance is procedurally varied. This allows:</p>
-<ul class="simple">
-<li><p>Diverse layouts and building placements</p></li>
-<li><p>Varying pedestrian paths and densities</p></li>
-<li><p>Scene-level randomness in lighting or asset combinations</p></li>
-</ul>
-<p>This diversity helps improve the generalization and robustness of navigation policies.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>✅ Asynchronous simulation is ideal for large-scale training across diverse environments.</p>
-</div>
-</section>
-<section id="scenario-visualizations">
-<h2>🖼️ Scenario Visualizations<a class="headerlink" href="#scenario-visualizations" title="Permalink to this heading">#</a></h2>
-<p>Different scenario types can be combined with both simulation modes. For example:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">clean</span></code> (empty world)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">static</span></code> (with immovable structures)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">dynamic</span></code> (with moving pedestrians)</p></li>
-</ul>
+<section id="comparison-synchronous-vs-asynchronous">
+<h2>🔄 Comparison: Synchronous vs Asynchronous<a class="headerlink" href="#comparison-synchronous-vs-asynchronous" title="Permalink to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
-<colgroup>
-<col style="width: 33.3%" />
-<col style="width: 33.3%" />
-<col style="width: 33.3%" />
-</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p><strong>Synchronous</strong></p></th>
+<th class="head"><p><strong>Asynchronous</strong></p></th>
+</tr>
+</thead>
 <tbody>
-<tr class="row-odd"><td><a class="reference internal image-reference" href="../../_images/sync_clean.gif"><img alt="../../_images/sync_clean.gif" src="../../_images/sync_clean.gif" style="width: 100%;" /></a>
-</td>
-<td><a class="reference internal image-reference" href="../../_images/sync_static.gif"><img alt="../../_images/sync_static.gif" src="../../_images/sync_static.gif" style="width: 100%;" /></a>
-</td>
-<td><a class="reference internal image-reference" href="../../_images/sync_dynamic.gif"><img alt="../../_images/sync_dynamic.gif" src="../../_images/sync_dynamic.gif" style="width: 100%;" /></a>
-</td>
+<tr class="row-even"><td><p>Layout</p></td>
+<td><p>Same across all envs</p></td>
+<td><p>Different across envs</p></td>
 </tr>
-<tr class="row-even"><td><p>Sync - Clean</p></td>
-<td><p>Sync - Static</p></td>
-<td><p>Sync - Dynamic</p></td>
+<tr class="row-odd"><td><p>Cousin Variant</p></td>
+<td><p>Different</p></td>
+<td><p>Different</p></td>
 </tr>
-</tbody>
-</table>
-</div>
-<div class="pst-scrollable-table-container"><table class="table">
-<colgroup>
-<col style="width: 33.3%" />
-<col style="width: 33.3%" />
-<col style="width: 33.3%" />
-</colgroup>
-<tbody>
-<tr class="row-odd"><td><a class="reference internal image-reference" href="../../_images/async_clean.gif"><img alt="../../_images/async_clean.gif" src="../../_images/async_clean.gif" style="width: 100%;" /></a>
-</td>
-<td><a class="reference internal image-reference" href="../../_images/async_static.gif"><img alt="../../_images/async_static.gif" src="../../_images/async_static.gif" style="width: 100%;" /></a>
-</td>
-<td><a class="reference internal image-reference" href="../../_images/async_dynamic.gif"><img alt="../../_images/async_dynamic.gif" src="../../_images/async_dynamic.gif" style="width: 100%;" /></a>
-</td>
+<tr class="row-even"><td><p>Episode Counters</p></td>
+<td><p>Aligned</p></td>
+<td><p>Independent</p></td>
 </tr>
-<tr class="row-even"><td><p>Async - Clean</p></td>
-<td><p>Async - Static</p></td>
-<td><p>Async - Dynamic</p></td>
+<tr class="row-odd"><td><p>Best For</p></td>
+<td><p>Debugging, controlled eval</p></td>
+<td><p>Large-scale policy trainin</p></td>
 </tr>
 </tbody>
 </table>
@@ -625,7 +695,7 @@
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Environment Configurations</p>
+        <p class="prev-next-title">Configurations</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -646,10 +716,9 @@
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#synchronous-simulation">⏱️ Synchronous Simulation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asynchronous-simulation">⚡ Asynchronous Simulation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#semantic-differences-synchronous-vs-asynchronous-scenarios">🔄 Semantic Differences: Synchronous vs. Asynchronous Scenarios</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scenario-visualizations">🖼️ Scenario Visualizations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#synchronous-simulation">🎭 Synchronous Simulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asynchronous-simulation">👬👬 Asynchronous Simulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-synchronous-vs-asynchronous">🔄 Comparison: Synchronous vs Asynchronous</a></li>
 </ul>
   </nav></div>
 
@@ -674,7 +743,7 @@ By Honglin He
 
   <p class="copyright">
     
-      © Copyright 2025-2030, The URBAN-SIM Project Developers. [URBAN-SIM is built upon NVIDIA Isaac Sim&amp;Lab and extends its capabilities for urban robot learning tasks].
+      © Copyright 2025-2030, The UrbanVerse Project Developers. [UrbanVerse is built upon NVIDIA Isaac Sim&amp;Lab and extends its capabilities for urban robot learning tasks].
       <br/>
     
   </p>

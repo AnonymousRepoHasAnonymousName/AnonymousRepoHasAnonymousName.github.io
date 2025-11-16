@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Welcome to UrbanVerse! &#8212; URBAN-SIM Documentation</title>
+    <title>Welcome to UrbanVerse! &#8212; UrbanVerse Documentation</title>
   
   
   
@@ -136,7 +136,7 @@
   
   
   
-    <p class="title logo__title">URBAN-SIM Documentation</p>
+    <p class="title logo__title">UrbanVese Documentation</p>
   
 </a></div>
         <div class="sidebar-primary-item"><ul class="navbar-icon-links"
@@ -225,8 +225,8 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Robot Learning with UrbanVerse</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="source/robot_learning/simulation_paradigms.html">Simulation Paradigms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="source/robot_learning/configuration.html">Environment Configurations</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="source/robot_learning/configuration.html">Configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/robot_learning/robot_configuration.html">Robot Configuration</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="source/robot_learning/reinforcement_learning/index.html">Reinforcement Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="source/robot_learning/reinforcement_learning/scene.html">Scene Configuration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="source/robot_learning/reinforcement_learning/action.html">Action Space</a></li>
@@ -568,171 +568,40 @@ It supports a wide range of learning paradigms, including reinforcement learning
 <div class="toctree-wrapper compound">
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Installation</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="source/installation/binaries_installation.html">Installation via Pre-Built Binaries</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="source/installation/binaries_installation.html#installing-isaac-sim">Installing Isaac Sim</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/installation/binaries_installation.html#installing-urbanverse">Installing UrbanVerse</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="source/installation/asset_caching.html">UrbanVerse-100K Asset Caching</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="source/installation/asset_caching.html#dataset-structure">Dataset Structure</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/installation/asset_caching.html#asset-license-distribution">Asset License Distribution</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/installation/asset_caching.html#downloading-urbanverse-100k-from-hugging-face">Downloading UrbanVerse-100K from Hugging Face</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/installation/asset_caching.html#verifying-your-local-cache">Verifying Your Local Cache</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/installation/asset_caching.html#linking-urbanverse-100k-with-urbanverse">Linking UrbanVerse-100K with UrbanVerse</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/installation/asset_caching.html#using-asset-caching-in-urbanverse-gen">Using Asset Caching in UrbanVerse-Gen</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/installation/asset_caching.html#troubleshooting">Troubleshooting</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="source/installation/scene_caching.html">UrbanVerse Scene Caching</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="source/installation/scene_caching.html#urbanverse-160-real-to-sim-scenes">UrbanVerse-160 (Real-to-Sim Scenes)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/installation/scene_caching.html#craftbench-artist-designed-scenes">CraftBench (Artist-Designed Scenes)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/installation/scene_caching.html#using-cached-scenes-in-urbanverse">Using Cached Scenes in UrbanVerse</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="source/installation/verifying_installation.html">Installation Verification</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="source/installation/verifying_installation.html#verifying-scene-generation-minimal-test">Verifying Scene Generation (Minimal Test)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/installation/verifying_installation.html#verifying-multi-scene-loading-urbanverse-160">Verifying Multi-Scene Loading (UrbanVerse-160)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/installation/verifying_installation.html#verifying-robot-initialization">Verifying Robot Initialization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/installation/verifying_installation.html#what-a-successful-verification-looks-like">What a Successful Verification Looks Like</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/installation/verifying_installation.html#troubleshooting">Troubleshooting</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="source/installation/binaries_installation.html">Installation via Pre-Built Binaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/installation/asset_caching.html">UrbanVerse-100K Asset Caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/installation/scene_caching.html">UrbanVerse Scene Caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/installation/verifying_installation.html">Installation Verification</a></li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Quickstart Guide</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="source/quickstart/intro_quickstart.html">Introduction to Quickstart Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="source/quickstart/urbanverse_100k.html">Use UrbanVerse-100K with APIs</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/urbanverse_100k.html#interactive-dataset-overview-sunburst-plot">Interactive Dataset Overview (Sunburst Plot)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/urbanverse_100k.html#quick-exploration-of-categories-and-components">Quick Exploration of Categories and Components</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/urbanverse_100k.html#loading-categories">Loading Categories</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/urbanverse_100k.html#loading-uids">Loading UIDs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/urbanverse_100k.html#loading-annotations">Loading Annotations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/urbanverse_100k.html#per-object-annotation-example-in-urbanverse-100k">Per-object Annotation Example in UrbanVerse-100K</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/urbanverse_100k.html#full-list-of-annotation-fields">Full List of Annotation Fields</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/urbanverse_100k.html#filtering-by-attributes">Filtering by Attributes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/urbanverse_100k.html#downloading-assets">Downloading Assets</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="source/quickstart/urbanverse_gen.html">Real-to-Sim Scene Generation with UrbanVerse-Gen</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/urbanverse_gen.html#prepare-your-video">Prepare Your Video</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/urbanverse_gen.html#extracting-semantic-scene-layout-from-videos">Extracting Semantic Scene Layout from Videos</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/urbanverse_gen.html#retrieving-3d-assets-and-materials-from-urbanverse-100k">Retrieving 3D Assets and Materials from UrbanVerse-100K</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/urbanverse_gen.html#creating-and-instantiating-simulation-scenes">Creating and Instantiating Simulation Scenes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/urbanverse_gen.html#summary-end-to-end-example-pipeline">Summary: End-to-End Example Pipeline</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="source/quickstart/urbanverse_scenes.html">Use Built-in UrbanVerse Scenes</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/urbanverse_scenes.html#prerequisite">Prerequisite</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/urbanverse_scenes.html#loading-urbanverse-160-scenes">Loading UrbanVerse-160 Scenes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/urbanverse_scenes.html#inspecting-scene-metadata-optional">Inspecting Scene Metadata (Optional)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/urbanverse_scenes.html#spawning-urbanverse-160-scenes-in-isaac-sim-ui">Spawning UrbanVerse-160 Scenes in Isaac Sim UI</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/urbanverse_scenes.html#filtering-scenes-by-statistics-optional">Filtering Scenes by Statistics (Optional)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/urbanverse_scenes.html#summary">Summary</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="source/quickstart/craftbench.html">Use Built-in CraftBench Scenes</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/craftbench.html#prerequisite">Prerequisite</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/craftbench.html#loading-craftbench-scenes">Loading CraftBench Scenes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/craftbench.html#previewing-scenes-optional">Previewing Scenes (Optional)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/craftbench.html#spawning-craftbench-scenes-in-isaacsim-ui">Spawning CraftBench Scenes in IsaacSim UI</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/craftbench.html#filtering-craftbench-scenes-by-attributes-optional">Filtering CraftBench Scenes by Attributes (Optional)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/craftbench.html#summary">Summary</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="source/quickstart/train_your_own_robots.html">Train Your Robots in UrbanVerse</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/train_your_own_robots.html#prerequisites">Prerequisites</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/train_your_own_robots.html#launch-training-from-cli">Launch Training from CLI</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/train_your_own_robots.html#selecting-scenes-for-training">Selecting Scenes for Training</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/train_your_own_robots.html#navigation-task-configuration">Navigation Task Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/train_your_own_robots.html#ppo-training-configuration">PPO Training Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/train_your_own_robots.html#reward-configuration">Reward Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/train_your_own_robots.html#high-level-training-api">High-Level Training API</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/train_your_own_robots.html#end-to-end-example-python">End-to-End Example (Python)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/train_your_own_robots.html#gymnasium-environment-registration-advanced">Gymnasium Environment Registration (Advanced)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/train_your_own_robots.html#configuration-classes-conceptual-notes">Configuration Classes (Conceptual Notes)</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="source/quickstart/test_your_robots.html">Test Your Robots on CraftBench</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/test_your_robots.html#prerequisite">Prerequisite</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/test_your_robots.html#loading-craftbench-scenes">Loading CraftBench Scenes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/test_your_robots.html#loading-a-trained-policy">Loading a Trained Policy</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/test_your_robots.html#evaluation-api">Evaluation API</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/test_your_robots.html#metric-definitions">Metric Definitions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/test_your_robots.html#end-to-end-example">End-to-End Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/quickstart/test_your_robots.html#summary">Summary</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="source/quickstart/urbanverse_100k.html">Use UrbanVerse-100K with APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/quickstart/urbanverse_gen.html">Real-to-Sim Scene Generation with UrbanVerse-Gen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/quickstart/urbanverse_scenes.html">Use Built-in UrbanVerse Scenes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/quickstart/craftbench.html">Use Built-in CraftBench Scenes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/quickstart/train_your_own_robots.html">Train Your Robots in UrbanVerse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/quickstart/test_your_robots.html">Test Your Robots on CraftBench</a></li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Robot Learning with UrbanVerse</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="source/robot_learning/simulation_paradigms.html">Simulation Paradigms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="source/robot_learning/configuration.html">Environment Configurations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="source/robot_learning/configuration.html#robot-configuration">Robot Configuration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="source/robot_learning/reinforcement_learning/index.html">Reinforcement Learning</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="source/robot_learning/reinforcement_learning/scene.html">Scene Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/robot_learning/reinforcement_learning/action.html">Action Space</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/robot_learning/reinforcement_learning/observation.html">Observation Space</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/robot_learning/reinforcement_learning/reward.html">Reward</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/robot_learning/reinforcement_learning/reset.html">Termination Conditions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/robot_learning/reinforcement_learning/curriculum.html">Curriculum Learning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/robot_learning/reinforcement_learning/event.html">Events</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="source/robot_learning/imitation_learning/index.html">Imitation Learning</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="source/robot_learning/imitation_learning/scene.html">Scene Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/robot_learning/imitation_learning/action.html">Action Space</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/robot_learning/imitation_learning/observation.html">Observation Space</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/robot_learning/imitation_learning/reward.html">Reward</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/robot_learning/imitation_learning/reset.html">Termination Conditions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/robot_learning/imitation_learning/curriculum.html">Curriculum Learning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/robot_learning/imitation_learning/event.html">Events</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="source/robot_learning/configuration.html">Configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/robot_learning/robot_configuration.html">Robot Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/robot_learning/reinforcement_learning/index.html">Reinforcement Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/robot_learning/imitation_learning/index.html">Imitation Learning</a></li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="source/developer/code-structure/index.html">Code Structure in UrbanVerse</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="source/developer/code-structure/envs.html">Environment: Spawning and simulation for learning</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="source/developer/code-structure/envs.html#overview">Overview</a></li>
-<li class="toctree-l3"><a class="reference internal" href="source/developer/code-structure/envs.html#workflow-summary">Workflow Summary</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="source/developer/code-structure/learning.html">Learning Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="source/developer/code-structure/learning.html#training-entrypoint">Training Entrypoint</a></li>
-<li class="toctree-l3"><a class="reference internal" href="source/developer/code-structure/learning.html#inference-and-evaluation">Inference and Evaluation</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="source/developer/code-structure/primitives.html">Primitives Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="source/developer/code-structure/primitives.html#navigation-random-env-cfg-py">Navigation: random_env_cfg.py</a></li>
-<li class="toctree-l3"><a class="reference internal" href="source/developer/code-structure/primitives.html#robot">Robot</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="source/developer/code-structure/scene.html">UrbanScene: Scenario Construction</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="source/developer/code-structure/scene.html#core-responsibilities">Core Responsibilities</a></li>
-<li class="toctree-l3"><a class="reference internal" href="source/developer/code-structure/scene.html#key-methods">Key Methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="source/developer/code-structure/scene.html#scenario-generation-modes">Scenario Generation Modes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="source/developer/code-structure/scene.html#use-cases">Use Cases</a></li>
-<li class="toctree-l3"><a class="reference internal" href="source/developer/code-structure/scene.html#related-files">Related Files</a></li>
-<li class="toctree-l3"><a class="reference internal" href="source/developer/code-structure/scene.html#takeaway">Takeaway</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="source/developer/code-structure/index.html#module-overview">Module Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/developer/code-structure/index.html#developer-notes">Developer Notes</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="source/developer/code-structure/index.html">Code Structure in UrbanVerse</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source/developer/collecting_data.html">Collecting Data in UrbanVerse</a></li>
-<li class="toctree-l1"><a class="reference internal" href="source/developer/realworld_deployment.html">Deploying UrbanVerse Policy in Real-World</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="source/developer/realworld_deployment.html#general">General</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/developer/realworld_deployment.html#unitree-go2">Unitree Go2</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/developer/realworld_deployment.html#wheeled-delivery-robot">Wheeled Delivery Robot</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="source/developer/realworld_deployment.html">Deploying UrbanVerse Policy in Real-World</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source/developer/adding_new_robots.html">Adding New Robots to UrbanVerse</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source/developer/adding_new_assets.html">Adding New Assets to UrbanVerse-100K</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source/developer/vr_interface.html">Configuring VR Interface</a></li>
@@ -741,27 +610,9 @@ It supports a wide range of learning paradigms, including reinforcement learning
 <div class="toctree-wrapper compound">
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">UrbanVerse Community</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="source/community/contributing.html">Contributing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="source/community/contributing.html#report-bugs-and-issues">Report Bugs and Issues</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/community/contributing.html#request-features">Request Features</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/community/contributing.html#code-contributions">Code Contributions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/community/contributing.html#artifacts-contributions">Artifacts Contributions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/community/contributing.html#documentation-contributions">Documentation Contributions</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="source/community/communication.html">Communication Channels</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="source/community/communication.html#github">GitHub</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/community/communication.html#discord">Discord</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/community/communication.html#slack">Slack</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/community/communication.html#email">Email</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="source/community/coding_standards.html">Coding Standards</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="source/community/coding_standards.html#general">General</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/community/coding_standards.html#python">Python</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/community/coding_standards.html#c">C++</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="source/community/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/community/communication.html">Communication Channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/community/coding_standards.html">Coding Standards</a></li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
@@ -850,7 +701,7 @@ By Honglin He
 
   <p class="copyright">
     
-      © Copyright 2025-2030, The URBAN-SIM Project Developers. [URBAN-SIM is built upon NVIDIA Isaac Sim&amp;Lab and extends its capabilities for urban robot learning tasks].
+      © Copyright 2025-2030, The UrbanVerse Project Developers. [UrbanVerse is built upon NVIDIA Isaac Sim&amp;Lab and extends its capabilities for urban robot learning tasks].
       <br/>
     
   </p>
