@@ -18,8 +18,8 @@ sys.path.insert(0, os.path.abspath("../meta_source/metadrive/metadrive"))
 # -- Project information -----------------------------------------------------
 
 project = "UrbanVerse"
-copyright = "2025-2030, The UrbanVerse Project Developers. " + "[UrbanVerse is built upon NVIDIA Isaac Sim&Lab and extends its capabilities for urban robot learning tasks]"
-author = "Honglin He"
+copyright = "2025-2030, The Anonymous UrbanVerse Project Developers. " + "[UrbanVerse is built upon NVIDIA Isaac Sim&Lab and extends its capabilities for urban robot learning tasks]"
+author = "The Anonymous UrbanVerse Project Developers"
 
 # Read version from the package
 with open(os.path.join(os.path.dirname(__file__), "..", "VERSION")) as f:
