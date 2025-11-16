@@ -110,3 +110,33 @@ a {
     text-align: center;
     vertical-align: middle;
 }
+
+/* Hide the theme switcher button */
+.theme-switch-button,
+button.theme-switch-button,
+.btn.theme-switch-button,
+.pst-navbar-icon.theme-switch-button,
+button.pst-navbar-icon.theme-switch-button,
+.article-header-buttons .theme-switch-button,
+.header-article-items__end .theme-switch-button,
+.header-article-item .theme-switch-button,
+button.btn.btn-sm.nav-link.pst-navbar-icon.theme-switch-button {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    overflow: hidden !important;
+}
+
+/* Force light theme */
+html {
+    color-scheme: light;
+}
+
+html[data-theme] {
+    color-scheme: light;
+}

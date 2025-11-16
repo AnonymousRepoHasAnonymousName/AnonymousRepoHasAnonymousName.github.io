@@ -110,3 +110,17 @@ a {
     text-align: center;
     vertical-align: middle;
 }
+
+/* Hide the theme switcher button */
+.theme-switch-button {
+    display: none !important;
+}
+
+/* Force light theme */
+html {
+    color-scheme: light;
+}
+
+html[data-theme] {
+    color-scheme: light;
+}

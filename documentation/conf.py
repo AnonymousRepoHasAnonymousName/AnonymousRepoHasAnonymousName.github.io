@@ -213,8 +213,9 @@ html_last_updated_fmt = None  # Disable last updated date display
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ["source/_static/css", "assets"]
+html_static_path = ["source/_static", "source/_static/css", "assets"]
 html_css_files = ["custom.css"]
+html_js_files = ["remove-theme-switcher.js"]
 
 html_theme_options = {
     "collapse_navigation": True,
@@ -225,6 +226,8 @@ html_theme_options = {
     "use_download_button": False,
     "show_toc_level": 1,
     "use_sidenotes": True,
+    "theme_switcher": False,  # Add this line to disable theme switcher
+    "default_mode": "light",  # Add this line to force light mode
     "logo": {
         "text": "📖 UrbanVese Documentation (Fully Anonymous)",
     },
