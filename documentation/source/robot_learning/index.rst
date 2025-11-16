@@ -18,7 +18,8 @@ For users getting started with UrbanVerse, we recommend installing UrbanVerse by
     :maxdepth: 3
 
     Simulation Paradigms <simulation_paradigms>
-    Configuration <configuration>
+    Configurations <configuration>
+    Robot Configuration <robot_configuration>
     Reinforcement Learning <reinforcement_learning/index>
     Imitation Learning <imitation_learning/index>
 

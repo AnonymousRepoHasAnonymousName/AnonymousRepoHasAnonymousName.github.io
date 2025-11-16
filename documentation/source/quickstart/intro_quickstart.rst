@@ -2,7 +2,7 @@
 
 
 Introduction to Quickstart Guide
-=============================
+================================
 
 UrbanVerse is built on top of the Isaac ecosystem. Therefore, it is required to first install Isaac Sim
 before using UrbanVerse. We highly recommend installing Isaac Sim and our project 

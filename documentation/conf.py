@@ -11,14 +11,14 @@ sys.path.insert(0, os.path.abspath("../isaac_source/isaaclab_mimic"))
 sys.path.insert(0, os.path.abspath("../isaac_source/isaaclab_mimic/isaaclab_mimic"))
 sys.path.insert(0, os.path.abspath("../isaac_source/isaaclab_assets"))
 sys.path.insert(0, os.path.abspath("../isaac_source/isaaclab_assets/isaaclab_assets"))
-sys.path.insert(0, os.path.abspath("../urbansim"))
+sys.path.insert(0, os.path.abspath("../urbanverse"))
 sys.path.insert(0, os.path.abspath("../meta_source/metaurban/metaurban"))
 sys.path.insert(0, os.path.abspath("../meta_source/metadrive/metadrive"))
 
 # -- Project information -----------------------------------------------------
 
-project = "URBAN-SIM"
-copyright = "2025-2030, The URBAN-SIM Project Developers. " + "[URBAN-SIM is built upon NVIDIA Isaac Sim&Lab and extends its capabilities for urban robot learning tasks]"
+project = "UrbanVerse"
+copyright = "2025-2030, The UrbanVerse Project Developers. " + "[UrbanVerse is built upon NVIDIA Isaac Sim&Lab and extends its capabilities for urban robot learning tasks]"
 author = "Honglin He"
 
 # Read version from the package
@@ -202,7 +202,7 @@ language = "en"
 
 import sphinx_book_theme
 
-html_title = "URBAN-SIM Documentation"
+html_title = "UrbanVerse Documentation"
 html_theme_path = [sphinx_book_theme.get_html_theme_path()]
 html_theme = "sphinx_book_theme"
 html_favicon = ""
@@ -225,7 +225,7 @@ html_theme_options = {
     "show_toc_level": 1,
     "use_sidenotes": True,
     "logo": {
-        "text": "URBAN-SIM Documentation",
+        "text": "UrbanVese Documentation",
     },
     "icon_links": [
         {
