@@ -60,7 +60,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="1.0.0" />
-    <meta name="docbuild:last-update" content="Nov 15, 2025"/>
+    <meta name="docbuild:last-update" content="Nov 16, 2025"/>
   </head>
   
   
@@ -219,7 +219,7 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Use Built-in UrbanVerse Scenes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="craftbench.html">Use Built-in CraftBench Scenes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="train_your_own_robots.html">Train Your Robots in UrbanVerse</a></li>
-<li class="toctree-l1"><a class="reference internal" href="test_your_robots.html">Test Your Robots in CraftBench</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test_your_robots.html">Test Your Robots on CraftBench</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Robot Learning with UrbanVerse</span></p>
 <ul class="nav bd-sidenav">
@@ -484,9 +484,28 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-urbanverse-160-scenes">Loading UrbanVerse-160 Scenes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-scenes-by-statistics">Filtering Scenes by Statistics</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downloading-urbanverse-160-scenes">Downloading UrbanVerse-160 Scenes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisite">Prerequisite</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-urbanverse-160-scenes">Loading UrbanVerse-160 Scenes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#api">API</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inspecting-scene-metadata-optional">Inspecting Scene Metadata (Optional)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">API</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spawning-urbanverse-160-scenes-in-isaac-sim-ui">Spawning UrbanVerse-160 Scenes in Isaac Sim UI</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">API</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-scenes-by-statistics-optional">Filtering Scenes by Statistics (Optional)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">API</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
             </nav>
         </div>
@@ -499,19 +518,183 @@
                 <article class="bd-article">
                   
   <section id="use-built-in-urbanverse-scenes">
-<span id="urbanverse-urbanverse-scenes"></span><h1>Use Built-in UrbanVerse Scenes<a class="headerlink" href="#use-built-in-urbanverse-scenes" title="Permalink to this heading">#</a></h1>
-<p>aaa</p>
+<span id="urbanverse-quickstart-scenes"></span><h1>Use Built-in UrbanVerse Scenes<a class="headerlink" href="#use-built-in-urbanverse-scenes" title="Permalink to this heading">#</a></h1>
+<p>UrbanVerse comes with a curated set of <strong>160 fully assembled, metric-scale 3D scenes</strong>
+extracted from city-tour videos and generated using UrbanVerse-Gen.
+These scenes are ready to be <strong>loaded, visualized, edited, or used for training</strong> in Isaac Sim.</p>
+<p>This quickstart page shows how to:</p>
+<ul class="simple">
+<li><p>load the built-in UrbanVerse-160 scenes,</p></li>
+<li><p>inspect scene metadata,</p></li>
+<li><p>and open them directly in Isaac Sim UI for visual debugging.</p></li>
+</ul>
+<p>All APIs follow the standard UrbanVerse convention:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
+</pre></div>
+</div>
+<section id="prerequisite">
+<h2>Prerequisite<a class="headerlink" href="#prerequisite" title="Permalink to this heading">#</a></h2>
+<p>Before using UrbanVerse-160, ensure you have set:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">URBANVERSE_SCENE_ROOT</span><span class="o">=</span><span class="s2">&quot;/path/to/UrbanVerse-160&quot;</span>
+</pre></div>
+</div>
+<p>Inside this folder, each scene is organized as:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>UrbanVerse-160/
+├── CapeTown_0001/
+│    └── scene.usd
+├── Tokyo_0003/
+│    └── scene.usd
+├── Seoul_0007/
+│    └── scene.usd
+└── ...
+</pre></div>
+</div>
+<p>Each folder contains a standalone simulation environment compatible with Isaac Sim.</p>
+</section>
 <section id="loading-urbanverse-160-scenes">
 <h2>Loading UrbanVerse-160 Scenes<a class="headerlink" href="#loading-urbanverse-160-scenes" title="Permalink to this heading">#</a></h2>
-<p>aaa</p>
+<p>UrbanVerse provides a simple loader for discovering all available scenes.</p>
+<section id="api">
+<h3>API<a class="headerlink" href="#api" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uv</span><span class="o">.</span><span class="n">scenes</span><span class="o">.</span><span class="n">load_urbanverse_scenes</span><span class="p">(</span>
+    <span class="n">scene_root</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">scene_root</span></code> is not provided, the environment variable
+<code class="docutils literal notranslate"><span class="pre">$URBANVERSE_SCENE_ROOT</span></code> is used automatically.</p>
 </section>
-<section id="filtering-scenes-by-statistics">
-<h2>Filtering Scenes by Statistics<a class="headerlink" href="#filtering-scenes-by-statistics" title="Permalink to this heading">#</a></h2>
-<p>aaa</p>
+<section id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
+
+<span class="n">scene_paths</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">scenes</span><span class="o">.</span><span class="n">load_urbanverse_scenes</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total UrbanVerse scenes:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">scene_paths</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Example:&quot;</span><span class="p">,</span> <span class="n">scene_paths</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Typical output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Total UrbanVerse scenes: 160
+Example: /data/UrbanVerse-160/CapeTown_0001/scene.usd
+</pre></div>
+</div>
 </section>
-<section id="downloading-urbanverse-160-scenes">
-<h2>Downloading UrbanVerse-160 Scenes<a class="headerlink" href="#downloading-urbanverse-160-scenes" title="Permalink to this heading">#</a></h2>
-<p>aaa</p>
+</section>
+<section id="inspecting-scene-metadata-optional">
+<h2>Inspecting Scene Metadata (Optional)<a class="headerlink" href="#inspecting-scene-metadata-optional" title="Permalink to this heading">#</a></h2>
+<p>Each scene folder includes <code class="docutils literal notranslate"><span class="pre">metadata.json</span></code> containing information such as:</p>
+<ul class="simple">
+<li><p>city / country</p></li>
+<li><p>approximate route length</p></li>
+<li><p>number of object instances</p></li>
+<li><p>number of unique object categories</p></li>
+<li><p>ground area (road / sidewalk)</p></li>
+<li><p>sky HDRI name</p></li>
+</ul>
+<section id="id1">
+<h3>API<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uv</span><span class="o">.</span><span class="n">scenes</span><span class="o">.</span><span class="n">load_metadata</span><span class="p">(</span><span class="n">scene_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span>
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h3>Example<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">meta</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">scenes</span><span class="o">.</span><span class="n">load_metadata</span><span class="p">(</span><span class="n">scene_paths</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">meta</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="spawning-urbanverse-160-scenes-in-isaac-sim-ui">
+<h2>Spawning UrbanVerse-160 Scenes in Isaac Sim UI<a class="headerlink" href="#spawning-urbanverse-160-scenes-in-isaac-sim-ui" title="Permalink to this heading">#</a></h2>
+<p>UrbanVerse provides a helper utility to launch Isaac Sim in UI mode and load a specific scene.</p>
+<p>This is useful for:</p>
+<ul class="simple">
+<li><p>checking 3D reconstruction accuracy,</p></li>
+<li><p>verifying object placement &amp; physics,</p></li>
+<li><p>debugging robot interaction,</p></li>
+<li><p>visualizing ground materials &amp; HDRI lighting.</p></li>
+</ul>
+<section id="id3">
+<h3>API<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uv</span><span class="o">.</span><span class="n">scenes</span><span class="o">.</span><span class="n">launch_in_isaacsim</span><span class="p">(</span>
+    <span class="n">scene_usd_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">headless</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id4">
+<h3>Example<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<p>The snippet below loads <strong>CapeTown_0001</strong> directly in Isaac Sim UI:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
+
+<span class="n">scene_paths</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">scenes</span><span class="o">.</span><span class="n">load_urbanverse_scenes</span><span class="p">()</span>
+
+<span class="n">uv</span><span class="o">.</span><span class="n">scenes</span><span class="o">.</span><span class="n">launch_in_isaacsim</span><span class="p">(</span>
+    <span class="n">scene_usd_path</span><span class="o">=</span><span class="n">scene_paths</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>   <span class="c1"># CapeTown_0001</span>
+    <span class="n">headless</span><span class="o">=</span><span class="kc">False</span>                    <span class="c1"># open full UI</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Running this opens Isaac Sim, showing the entire UrbanVerse scene with:</p>
+<ul class="simple">
+<li><p>textured road &amp; sidewalk,</p></li>
+<li><p>photorealistic HDRI dome lighting,</p></li>
+<li><p>fully placed objects (cars, pedestrians, street furniture, etc.),</p></li>
+<li><p>real-world metric scale and geometry.</p></li>
+</ul>
+<p>You can freely move the camera, inspect assets, toggle physics, and debug your robot setup.</p>
+</section>
+</section>
+<section id="filtering-scenes-by-statistics-optional">
+<h2>Filtering Scenes by Statistics (Optional)<a class="headerlink" href="#filtering-scenes-by-statistics-optional" title="Permalink to this heading">#</a></h2>
+<p>Many users want to choose scenes by characteristics — e.g., scenes with:</p>
+<ul class="simple">
+<li><p>long route trajectories,</p></li>
+<li><p>high object density.</p></li>
+</ul>
+<p>UrbanVerse provides a metadata-based filter:</p>
+<section id="id5">
+<h3>API<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uv</span><span class="o">.</span><span class="n">scenes</span><span class="o">.</span><span class="n">filter_scenes</span><span class="p">(</span>
+    <span class="n">scenes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">min_objects</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">max_objects</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">min_route_length</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">city</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="id6">
+<h3>Example<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<p>Select scenes containing at least 200 objects and with a route length over 250 m:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
+
+<span class="n">scene_paths</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">scenes</span><span class="o">.</span><span class="n">load_urbanverse_scenes</span><span class="p">()</span>
+<span class="n">filtered</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">scenes</span><span class="o">.</span><span class="n">filter_scenes</span><span class="p">(</span>
+    <span class="n">scenes</span><span class="o">=</span><span class="n">scene_paths</span><span class="p">,</span>
+    <span class="n">min_objects</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+    <span class="n">min_route_length</span><span class="o">=</span><span class="mf">250.0</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Filtered scenes:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">filtered</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this heading">#</a></h2>
+<p>This page demonstrates how to:</p>
+<ul class="simple">
+<li><p>load the 160 built-in UrbanVerse scenes,</p></li>
+<li><p>inspect metadata,</p></li>
+<li><p>visualize scenes in Isaac Sim UI,</p></li>
+<li><p>optionally filter scenes by statistics.</p></li>
+</ul>
+<p>UrbanVerse-160 offers a diverse set of real-world grounded environments — use them for
+debugging, visualization, training preparation, and experimentation.</p>
 </section>
 </section>
 
@@ -561,9 +744,28 @@
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-urbanverse-160-scenes">Loading UrbanVerse-160 Scenes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-scenes-by-statistics">Filtering Scenes by Statistics</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downloading-urbanverse-160-scenes">Downloading UrbanVerse-160 Scenes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisite">Prerequisite</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-urbanverse-160-scenes">Loading UrbanVerse-160 Scenes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#api">API</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inspecting-scene-metadata-optional">Inspecting Scene Metadata (Optional)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">API</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spawning-urbanverse-160-scenes-in-isaac-sim-ui">Spawning UrbanVerse-160 Scenes in Isaac Sim UI</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">API</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-scenes-by-statistics-optional">Filtering Scenes by Statistics (Optional)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">API</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
   </nav></div>
 
@@ -597,7 +799,7 @@ By Anonymous Authors of UrbanVerse
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Nov 15, 2025.
+  Last updated on Nov 16, 2025.
   <br/>
 </p>
   </div>

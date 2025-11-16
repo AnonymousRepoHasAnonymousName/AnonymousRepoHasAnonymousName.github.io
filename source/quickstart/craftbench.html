@@ -60,7 +60,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="1.0.0" />
-    <meta name="docbuild:last-update" content="Nov 15, 2025"/>
+    <meta name="docbuild:last-update" content="Nov 16, 2025"/>
   </head>
   
   
@@ -219,7 +219,7 @@
 <li class="toctree-l1"><a class="reference internal" href="urbanverse_scenes.html">Use Built-in UrbanVerse Scenes</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Use Built-in CraftBench Scenes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="train_your_own_robots.html">Train Your Robots in UrbanVerse</a></li>
-<li class="toctree-l1"><a class="reference internal" href="test_your_robots.html">Test Your Robots in CraftBench</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test_your_robots.html">Test Your Robots on CraftBench</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Robot Learning with UrbanVerse</span></p>
 <ul class="nav bd-sidenav">
@@ -484,9 +484,28 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-urbanverse-160-scenes">Loading UrbanVerse-160 Scenes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-scenes-by-types">Filtering Scenes by Types</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downloading-craftbench-scenes">Downloading CraftBench Scenes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisite">Prerequisite</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-craftbench-scenes">Loading CraftBench Scenes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#api">API</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#previewing-scenes-optional">Previewing Scenes (Optional)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">API</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spawning-craftbench-scenes-in-isaacsim-ui">Spawning CraftBench Scenes in IsaacSim UI</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">API</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-craftbench-scenes-by-attributes-optional">Filtering CraftBench Scenes by Attributes (Optional)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">API</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
             </nav>
         </div>
@@ -499,19 +518,177 @@
                 <article class="bd-article">
                   
   <section id="use-built-in-craftbench-scenes">
-<span id="urbanverse-craftbench"></span><h1>Use Built-in CraftBench Scenes<a class="headerlink" href="#use-built-in-craftbench-scenes" title="Permalink to this heading">#</a></h1>
-<p>aaa</p>
-<section id="loading-urbanverse-160-scenes">
-<h2>Loading UrbanVerse-160 Scenes<a class="headerlink" href="#loading-urbanverse-160-scenes" title="Permalink to this heading">#</a></h2>
-<p>aaa</p>
+<span id="urbanverse-quickstart-craftbench"></span><h1>Use Built-in CraftBench Scenes<a class="headerlink" href="#use-built-in-craftbench-scenes" title="Permalink to this heading">#</a></h1>
+<p>CraftBench is a curated benchmark of <strong>high-quality, artist-designed 3D urban scenes</strong>
+created by professional environment artists.
+These scenes complement UrbanVerse-160 by providing <strong>clean, controllable, visually refined</strong>
+simulation environments—ideal for benchmarking, policy evaluation, and qualitative inspection.</p>
+<p>Each CraftBench scene includes:</p>
+<ul class="simple">
+<li><p>a fully assembled <strong>USD environment</strong> (<cite>scene.usd</cite>)</p></li>
+<li><p>a <strong>flythrough video</strong> (<cite>preview.mp4</cite>) for quick browsing</p></li>
+<li><p>high-quality <strong>PBR materials</strong>, <strong>HDRI lighting</strong>, and consistent native scale</p></li>
+</ul>
+<p>This page explains how to:</p>
+<ul class="simple">
+<li><p>load CraftBench scenes,</p></li>
+<li><p>inspect scene metadata,</p></li>
+<li><p>open scenes in Isaac Sim UI for interactive exploration.</p></li>
+</ul>
+<section id="prerequisite">
+<h2>Prerequisite<a class="headerlink" href="#prerequisite" title="Permalink to this heading">#</a></h2>
+<p>Before using CraftBench, ensure you have set:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">URBANVERSE_CRAFTBENCH_ROOT</span><span class="o">=</span><span class="s2">&quot;/path/to/UrbanVerse-CraftBench&quot;</span>
+</pre></div>
+</div>
+<p>The directory structure is:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>UrbanVerse-CraftBench/
+├── CraftBench_0001/
+│    ├── scene.usd
+│    └── preview.mp4
+├── CraftBench_0002/
+│    ├── scene.usd
+│    └── preview.mp4
+└── ...
+</pre></div>
+</div>
 </section>
-<section id="filtering-scenes-by-types">
-<h2>Filtering Scenes by Types<a class="headerlink" href="#filtering-scenes-by-types" title="Permalink to this heading">#</a></h2>
-<p>aaa</p>
+<section id="loading-craftbench-scenes">
+<h2>Loading CraftBench Scenes<a class="headerlink" href="#loading-craftbench-scenes" title="Permalink to this heading">#</a></h2>
+<p>UrbanVerse provides a simple, unified API for loading all CraftBench scene paths.</p>
+<section id="api">
+<h3>API<a class="headerlink" href="#api" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uv</span><span class="o">.</span><span class="n">scenes</span><span class="o">.</span><span class="n">load_craftbench_scenes</span><span class="p">(</span>
+    <span class="n">scene_root</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">scene_root</span></code> is not given, the value of
+<code class="docutils literal notranslate"><span class="pre">$URBANVERSE_CRAFTBENCH_ROOT</span></code> is used.</p>
 </section>
-<section id="downloading-craftbench-scenes">
-<h2>Downloading CraftBench Scenes<a class="headerlink" href="#downloading-craftbench-scenes" title="Permalink to this heading">#</a></h2>
-<p>aaa</p>
+<section id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
+
+<span class="n">craft_scenes</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">scenes</span><span class="o">.</span><span class="n">load_craftbench_scenes</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total CraftBench scenes:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">craft_scenes</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Example:&quot;</span><span class="p">,</span> <span class="n">craft_scenes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Typical console output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Total CraftBench scenes: 10
+Example: /data/UrbanVerse-CraftBench/CraftBench_0001/scene.usd
+</pre></div>
+</div>
+</section>
+</section>
+<section id="previewing-scenes-optional">
+<h2>Previewing Scenes (Optional)<a class="headerlink" href="#previewing-scenes-optional" title="Permalink to this heading">#</a></h2>
+<p>Each CraftBench scene includes a short 10–20 second flythrough video, allowing you
+to quickly browse the artistic environment.</p>
+<section id="id1">
+<h3>API<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uv</span><span class="o">.</span><span class="n">scenes</span><span class="o">.</span><span class="n">get_preview_video</span><span class="p">(</span><span class="n">scene_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h3>Example<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">preview</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">scenes</span><span class="o">.</span><span class="n">get_preview_video</span><span class="p">(</span><span class="n">craft_scenes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">preview</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Outputs something like:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/data/UrbanVerse-CraftBench/CraftBench_0001/preview.mp4
+</pre></div>
+</div>
+</section>
+</section>
+<section id="spawning-craftbench-scenes-in-isaacsim-ui">
+<h2>Spawning CraftBench Scenes in IsaacSim UI<a class="headerlink" href="#spawning-craftbench-scenes-in-isaacsim-ui" title="Permalink to this heading">#</a></h2>
+<p>CraftBench scenes are ready-to-run USD environments compatible with Isaac Sim.
+UrbanVerse provides a direct helper to open these scenes in the Isaac Sim UI.</p>
+<section id="id3">
+<h3>API<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uv</span><span class="o">.</span><span class="n">scenes</span><span class="o">.</span><span class="n">launch_in_isaacsim</span><span class="p">(</span>
+    <span class="n">scene_usd_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">headless</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id4">
+<h3>Example<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<p>To inspect <strong>CraftBench_0001</strong> in Isaac Sim:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
+
+<span class="n">craft_scenes</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">scenes</span><span class="o">.</span><span class="n">load_craftbench_scenes</span><span class="p">()</span>
+
+<span class="n">uv</span><span class="o">.</span><span class="n">scenes</span><span class="o">.</span><span class="n">launch_in_isaacsim</span><span class="p">(</span>
+    <span class="n">scene_usd_path</span><span class="o">=</span><span class="n">craft_scenes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+    <span class="n">headless</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>This opens Isaac Sim UI and loads the selected CraftBench environment, allowing
+you to:</p>
+<ul class="simple">
+<li><p>orbit the camera around the environment,</p></li>
+<li><p>inspect object geometry, materials, and lighting,</p></li>
+<li><p>place robots manually,</p></li>
+<li><p>debug navigation behavior,</p></li>
+<li><p>test simulation stability.</p></li>
+</ul>
+<p>CraftBench scenes offer consistent, high-quality lighting and geometry, making
+them ideal for <strong>evaluation</strong>, <strong>ablation studies</strong>, or <strong>policy demonstrations</strong>.</p>
+</section>
+</section>
+<section id="filtering-craftbench-scenes-by-attributes-optional">
+<h2>Filtering CraftBench Scenes by Attributes (Optional)<a class="headerlink" href="#filtering-craftbench-scenes-by-attributes-optional" title="Permalink to this heading">#</a></h2>
+<p>CraftBench metadata includes fields such as:</p>
+<ul class="simple">
+<li><p>scene type (CBD, bar street, residential block, etc.)</p></li>
+<li><p>number of objects</p></li>
+<li><p>complexity level</p></li>
+<li><p>lighting type (sunny, overcast, sunset)</p></li>
+<li><p>material richness</p></li>
+</ul>
+<section id="id5">
+<h3>API<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uv</span><span class="o">.</span><span class="n">scenes</span><span class="o">.</span><span class="n">filter_craftbench</span><span class="p">(</span>
+    <span class="n">scenes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">min_objects</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">complexity</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="id6">
+<h3>Example<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<p>Select all <strong>high-complexity street scenes</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">filtered</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">scenes</span><span class="o">.</span><span class="n">filter_craftbench</span><span class="p">(</span>
+    <span class="n">scenes</span><span class="o">=</span><span class="n">craft_scenes</span><span class="p">,</span>
+    <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;bar street&quot;</span><span class="p">,</span>
+    <span class="n">complexity</span><span class="o">=</span><span class="s2">&quot;high&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Filtered:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">filtered</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this heading">#</a></h2>
+<p>This quickstart page shows how to:</p>
+<ul class="simple">
+<li><p>load the artist-designed CraftBench scenes,</p></li>
+<li><p>preview them using included videos,</p></li>
+<li><p>and launch them in Isaac Sim UI for inspection and debugging.</p></li>
+</ul>
+<p>CraftBench provides <strong>high-quality, aesthetically consistent</strong> environments that
+are perfect for testing your trained UrbanVerse RL policies, running benchmarks,
+or creating demonstration videos.</p>
 </section>
 </section>
 
@@ -561,9 +738,28 @@
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-urbanverse-160-scenes">Loading UrbanVerse-160 Scenes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-scenes-by-types">Filtering Scenes by Types</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downloading-craftbench-scenes">Downloading CraftBench Scenes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisite">Prerequisite</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-craftbench-scenes">Loading CraftBench Scenes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#api">API</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#previewing-scenes-optional">Previewing Scenes (Optional)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">API</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spawning-craftbench-scenes-in-isaacsim-ui">Spawning CraftBench Scenes in IsaacSim UI</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">API</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-craftbench-scenes-by-attributes-optional">Filtering CraftBench Scenes by Attributes (Optional)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">API</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
   </nav></div>
 
@@ -597,7 +793,7 @@ By Anonymous Authors of UrbanVerse
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Nov 15, 2025.
+  Last updated on Nov 16, 2025.
   <br/>
 </p>
   </div>

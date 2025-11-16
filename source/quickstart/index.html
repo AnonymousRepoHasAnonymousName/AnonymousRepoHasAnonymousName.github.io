@@ -58,7 +58,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="1.0.0" />
-    <meta name="docbuild:last-update" content="Nov 15, 2025"/>
+    <meta name="docbuild:last-update" content="Nov 16, 2025"/>
   </head>
   
   
@@ -219,7 +219,7 @@
 <li class="toctree-l1"><a class="reference internal" href="urbanverse_scenes.html">Use Built-in UrbanVerse Scenes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="craftbench.html">Use Built-in CraftBench Scenes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="train_your_own_robots.html">Train Your Robots in UrbanVerse</a></li>
-<li class="toctree-l1"><a class="reference internal" href="test_your_robots.html">Test Your Robots in CraftBench</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test_your_robots.html">Test Your Robots on CraftBench</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Robot Learning with UrbanVerse</span></p>
 <ul class="nav bd-sidenav">
@@ -542,26 +542,112 @@ through binary download/source file to use the latest features and improvements.
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="urbanverse_scenes.html">Use Built-in UrbanVerse Scenes</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="urbanverse_scenes.html#loading-urbanverse-160-scenes">Loading UrbanVerse-160 Scenes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="urbanverse_scenes.html#filtering-scenes-by-statistics">Filtering Scenes by Statistics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="urbanverse_scenes.html#downloading-urbanverse-160-scenes">Downloading UrbanVerse-160 Scenes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="urbanverse_scenes.html#prerequisite">Prerequisite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="urbanverse_scenes.html#loading-urbanverse-160-scenes">Loading UrbanVerse-160 Scenes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="urbanverse_scenes.html#api">API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="urbanverse_scenes.html#example">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="urbanverse_scenes.html#inspecting-scene-metadata-optional">Inspecting Scene Metadata (Optional)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="urbanverse_scenes.html#id1">API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="urbanverse_scenes.html#id2">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="urbanverse_scenes.html#spawning-urbanverse-160-scenes-in-isaac-sim-ui">Spawning UrbanVerse-160 Scenes in Isaac Sim UI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="urbanverse_scenes.html#id3">API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="urbanverse_scenes.html#id4">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="urbanverse_scenes.html#filtering-scenes-by-statistics-optional">Filtering Scenes by Statistics (Optional)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="urbanverse_scenes.html#id5">API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="urbanverse_scenes.html#id6">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="urbanverse_scenes.html#summary">Summary</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="craftbench.html">Use CraftBench Scenes</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="craftbench.html#loading-urbanverse-160-scenes">Loading UrbanVerse-160 Scenes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="craftbench.html#filtering-scenes-by-types">Filtering Scenes by Types</a></li>
-<li class="toctree-l2"><a class="reference internal" href="craftbench.html#downloading-craftbench-scenes">Downloading CraftBench Scenes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="craftbench.html#prerequisite">Prerequisite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="craftbench.html#loading-craftbench-scenes">Loading CraftBench Scenes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="craftbench.html#api">API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="craftbench.html#example">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="craftbench.html#previewing-scenes-optional">Previewing Scenes (Optional)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="craftbench.html#id1">API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="craftbench.html#id2">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="craftbench.html#spawning-craftbench-scenes-in-isaacsim-ui">Spawning CraftBench Scenes in IsaacSim UI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="craftbench.html#id3">API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="craftbench.html#id4">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="craftbench.html#filtering-craftbench-scenes-by-attributes-optional">Filtering CraftBench Scenes by Attributes (Optional)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="craftbench.html#id5">API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="craftbench.html#id6">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="craftbench.html#summary">Summary</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="train_your_own_robots.html">Train Your Robots in UrbanVerse</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="train_your_own_robots.html#using-built-in-robots">Using Built-in Robots</a></li>
-<li class="toctree-l2"><a class="reference internal" href="train_your_own_robots.html#creating-your-own-robots">Creating Your Own Robots</a></li>
-<li class="toctree-l2"><a class="reference internal" href="train_your_own_robots.html#training-your-robots">Training Your Robots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="train_your_own_robots.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="train_your_own_robots.html#launch-training-from-cli">Launch Training from CLI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="train_your_own_robots.html#suggested-cli-arguments">Suggested CLI arguments</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="train_your_own_robots.html#selecting-scenes-for-training">Selecting Scenes for Training</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="train_your_own_robots.html#option-a-custom-list-of-usd-scene-paths">Option A — Custom list of USD scene paths</a></li>
+<li class="toctree-l3"><a class="reference internal" href="train_your_own_robots.html#option-b-use-urbanverse-160-scenes">Option B — Use UrbanVerse-160 scenes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="train_your_own_robots.html#navigation-task-configuration">Navigation Task Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="train_your_own_robots.html#id3">API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="train_your_own_robots.html#id4">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="train_your_own_robots.html#ppo-training-configuration">PPO Training Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="train_your_own_robots.html#id5">API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="train_your_own_robots.html#id6">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="train_your_own_robots.html#reward-configuration">Reward Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="train_your_own_robots.html#id7">API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="train_your_own_robots.html#id8">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="train_your_own_robots.html#high-level-training-api">High-Level Training API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="train_your_own_robots.html#id9">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="train_your_own_robots.html#end-to-end-example-python">End-to-End Example (Python)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="train_your_own_robots.html#gymnasium-environment-registration-advanced">Gymnasium Environment Registration (Advanced)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="train_your_own_robots.html#configuration-classes-conceptual-notes">Configuration Classes (Conceptual Notes)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="test_your_robots.html">Test Your Robots in CraftBench</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="test_your_robots.html#preparing-trained-policies">Preparing Trained Policies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="test_your_robots.html#testing-your-robots">Testing Your Robots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_your_robots.html#prerequisite">Prerequisite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_your_robots.html#loading-craftbench-scenes">Loading CraftBench Scenes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="test_your_robots.html#api">API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="test_your_robots.html#example">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="test_your_robots.html#loading-a-trained-policy">Loading a Trained Policy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="test_your_robots.html#id1">API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="test_your_robots.html#id2">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="test_your_robots.html#evaluation-api">Evaluation API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="test_your_robots.html#id3">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="test_your_robots.html#metric-definitions">Metric Definitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_your_robots.html#end-to-end-example">End-to-End Example</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="test_your_robots.html#output-example">Output Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="test_your_robots.html#summary">Summary</a></li>
 </ul>
 </li>
 </ul>
@@ -613,7 +699,7 @@ By Anonymous Authors of UrbanVerse
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Nov 15, 2025.
+  Last updated on Nov 16, 2025.
   <br/>
 </p>
   </div>

@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Test Your Robots in CraftBench &#8212; UrbanVerse Documentation</title>
+    <title>Test Your Robots on CraftBench &#8212; UrbanVerse Documentation</title>
   
   
   
@@ -60,7 +60,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="1.0.0" />
-    <meta name="docbuild:last-update" content="Nov 15, 2025"/>
+    <meta name="docbuild:last-update" content="Nov 16, 2025"/>
   </head>
   
   
@@ -219,7 +219,7 @@
 <li class="toctree-l1"><a class="reference internal" href="urbanverse_scenes.html">Use Built-in UrbanVerse Scenes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="craftbench.html">Use Built-in CraftBench Scenes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="train_your_own_robots.html">Train Your Robots in UrbanVerse</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Test Your Robots in CraftBench</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Test Your Robots on CraftBench</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Robot Learning with UrbanVerse</span></p>
 <ul class="nav bd-sidenav">
@@ -474,7 +474,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Test Your Robots in CraftBench</h1>
+    <h1>Test Your Robots on CraftBench</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -484,8 +484,27 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-trained-policies">Preparing Trained Policies</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-your-robots">Testing Your Robots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisite">Prerequisite</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-craftbench-scenes">Loading CraftBench Scenes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#api">API</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-a-trained-policy">Loading a Trained Policy</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">API</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-api">Evaluation API</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">API</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metric-definitions">Metric Definitions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#end-to-end-example">End-to-End Example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output-example">Output Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
             </nav>
         </div>
@@ -497,16 +516,176 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="test-your-robots-in-craftbench">
-<span id="urbanverse-quick-test"></span><h1>Test Your Robots in CraftBench<a class="headerlink" href="#test-your-robots-in-craftbench" title="Permalink to this heading">#</a></h1>
-<p>aaa</p>
-<section id="preparing-trained-policies">
-<h2>Preparing Trained Policies<a class="headerlink" href="#preparing-trained-policies" title="Permalink to this heading">#</a></h2>
-<p>aaa</p>
+  <section id="test-your-robots-on-craftbench">
+<span id="urbanverse-quickstart-test"></span><h1>Test Your Robots on CraftBench<a class="headerlink" href="#test-your-robots-on-craftbench" title="Permalink to this heading">#</a></h1>
+<p>Once you have trained a navigation policy in UrbanVerse, you can evaluate it on
+<strong>UrbanVerse-CraftBench</strong> — a curated collection of <strong>artist-designed, high-quality
+urban test scenes</strong>. These scenes contain clean geometry, consistent scale, and rich
+visual detail, making them ideal for benchmarking policy generalization.</p>
+<p>UrbanVerse provides a unified evaluation API for navigation policies, producing:</p>
+<ul class="simple">
+<li><p><strong>Success Rate (SR)</strong></p></li>
+<li><p><strong>Route Completion (RC)</strong></p></li>
+<li><p><strong>Collision Times (CT)</strong></p></li>
+<li><p><strong>Distance to Goal (DTG)</strong></p></li>
+</ul>
+<p>All evaluation APIs follow the same high-level convention:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
+</pre></div>
+</div>
+<section id="prerequisite">
+<h2>Prerequisite<a class="headerlink" href="#prerequisite" title="Permalink to this heading">#</a></h2>
+<p>Before running CraftBench evaluation, ensure you have set:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">URBANVERSE_CRAFTBENCH_ROOT</span><span class="o">=</span><span class="s2">&quot;/path/to/UrbanVerse-CraftBench&quot;</span>
+</pre></div>
+</div>
+<p>This directory should contain the 10 high-quality CraftBench scenes (each a folder
+containing a <code class="docutils literal notranslate"><span class="pre">scene.usd</span></code> and a <code class="docutils literal notranslate"><span class="pre">flythrough.mp4</span></code>).</p>
 </section>
-<section id="testing-your-robots">
-<h2>Testing Your Robots<a class="headerlink" href="#testing-your-robots" title="Permalink to this heading">#</a></h2>
-<p>aaa</p>
+<section id="loading-craftbench-scenes">
+<h2>Loading CraftBench Scenes<a class="headerlink" href="#loading-craftbench-scenes" title="Permalink to this heading">#</a></h2>
+<p>You can load CraftBench scenes using:</p>
+<section id="api">
+<h3>API<a class="headerlink" href="#api" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uv</span><span class="o">.</span><span class="n">navigation</span><span class="o">.</span><span class="n">eval</span><span class="o">.</span><span class="n">load_craftbench_scenes</span><span class="p">(</span>
+    <span class="n">scene_root</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">scene_root</span></code> is <code class="docutils literal notranslate"><span class="pre">None</span></code>, it defaults to <code class="docutils literal notranslate"><span class="pre">$URBANVERSE_CRAFTBENCH_ROOT</span></code>.</p>
+</section>
+<section id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
+
+<span class="n">craft_scenes</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">navigation</span><span class="o">.</span><span class="n">eval</span><span class="o">.</span><span class="n">load_craftbench_scenes</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Loaded CraftBench scenes:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">craft_scenes</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">craft_scenes</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="loading-a-trained-policy">
+<h2>Loading a Trained Policy<a class="headerlink" href="#loading-a-trained-policy" title="Permalink to this heading">#</a></h2>
+<p>UrbanVerse saves policy checkpoints in the directory specified during training (e.g.,
+<code class="docutils literal notranslate"><span class="pre">outputs/coco_nav</span></code>).</p>
+<p>You can load a trained PPO policy using:</p>
+<section id="id1">
+<h3>API<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uv</span><span class="o">.</span><span class="n">navigation</span><span class="o">.</span><span class="n">eval</span><span class="o">.</span><span class="n">load_policy</span><span class="p">(</span>
+    <span class="n">checkpoint_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">device</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;cuda&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Policy&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h3>Example<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
+
+<span class="n">policy</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">navigation</span><span class="o">.</span><span class="n">eval</span><span class="o">.</span><span class="n">load_policy</span><span class="p">(</span>
+    <span class="n">checkpoint_path</span><span class="o">=</span><span class="s2">&quot;outputs/coco_nav/checkpoints/epoch_1500.pt&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="evaluation-api">
+<h2>Evaluation API<a class="headerlink" href="#evaluation-api" title="Permalink to this heading">#</a></h2>
+<p>The core evaluation function is:</p>
+<section id="id3">
+<h3>API<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uv</span><span class="o">.</span><span class="n">navigation</span><span class="o">.</span><span class="n">eval</span><span class="o">.</span><span class="n">evaluate_navigation_policy</span><span class="p">(</span>
+    <span class="n">policy</span><span class="p">,</span>
+    <span class="n">scene_paths</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">robot_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">num_episodes_per_scene</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="n">max_episode_seconds</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">30.0</span><span class="p">,</span>
+    <span class="n">goal_tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">device</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;cuda&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span>
+</pre></div>
+</div>
+<p>The returned dictionary contains aggregated metrics:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+    &quot;SR&quot;: 0.78,         # Success Rate
+    &quot;RC&quot;: 0.85,         # Route Completion
+    &quot;CT&quot;: 0.42,         # Collision Times (avg)
+    &quot;DTG&quot;: 1.87,        # Distance to Goal (meters)
+    &quot;per_scene&quot;: { ... }  # detailed metrics
+}
+</pre></div>
+</div>
+</section>
+</section>
+<section id="metric-definitions">
+<h2>Metric Definitions<a class="headerlink" href="#metric-definitions" title="Permalink to this heading">#</a></h2>
+<p><strong>Success Rate (SR):</strong>
+Fraction of episodes where the robot reaches the goal within the tolerance.</p>
+<p><strong>Route Completion (RC):</strong>
+Average fraction of the path completed before termination.</p>
+<p><strong>Collision Times (CT):</strong>
+Mean number of collision events per episode.</p>
+<p><strong>Distance to Goal (DTG):</strong>
+Final Euclidean distance to the goal when the episode ends.</p>
+</section>
+<section id="end-to-end-example">
+<h2>End-to-End Example<a class="headerlink" href="#end-to-end-example" title="Permalink to this heading">#</a></h2>
+<p>Below is a full example demonstrating loading CraftBench scenes, loading a trained
+policy, and running evaluation.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
+
+<span class="c1"># 1. Load CraftBench scenes</span>
+<span class="n">craft_scenes</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">navigation</span><span class="o">.</span><span class="n">eval</span><span class="o">.</span><span class="n">load_craftbench_scenes</span><span class="p">()</span>
+
+<span class="c1"># 2. Load a trained navigation policy</span>
+<span class="n">policy</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">navigation</span><span class="o">.</span><span class="n">eval</span><span class="o">.</span><span class="n">load_policy</span><span class="p">(</span>
+    <span class="n">checkpoint_path</span><span class="o">=</span><span class="s2">&quot;outputs/coco_nav/checkpoints/epoch_1500.pt&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># 3. Run evaluation</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">navigation</span><span class="o">.</span><span class="n">eval</span><span class="o">.</span><span class="n">evaluate_navigation_policy</span><span class="p">(</span>
+    <span class="n">policy</span><span class="o">=</span><span class="n">policy</span><span class="p">,</span>
+    <span class="n">scene_paths</span><span class="o">=</span><span class="n">craft_scenes</span><span class="p">,</span>
+    <span class="n">robot_type</span><span class="o">=</span><span class="s2">&quot;coco_wheeled&quot;</span><span class="p">,</span>
+    <span class="n">num_episodes_per_scene</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>    <span class="c1"># evaluate 10 trajectories per test scene</span>
+    <span class="n">goal_tolerance</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">max_episode_seconds</span><span class="o">=</span><span class="mf">30.0</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Overall CraftBench Evaluation:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="output-example">
+<h3>Output Example<a class="headerlink" href="#output-example" title="Permalink to this heading">#</a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+    &quot;SR&quot;: 0.72,
+    &quot;RC&quot;: 0.81,
+    &quot;CT&quot;: 0.56,
+    &quot;DTG&quot;: 1.94,
+    &quot;per_scene&quot;: {
+        &quot;CraftBench_0001&quot;: {&quot;SR&quot;: 0.7, &quot;RC&quot;: 0.84, &quot;CT&quot;: 0.4, &quot;DTG&quot;: 1.8},
+        &quot;CraftBench_0002&quot;: {&quot;SR&quot;: 0.8, &quot;RC&quot;: 0.90, &quot;CT&quot;: 0.3, &quot;DTG&quot;: 1.2},
+        ...
+    }
+}
+</pre></div>
+</div>
+</section>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this heading">#</a></h2>
+<p>This page demonstrates how to:</p>
+<ul class="simple">
+<li><p>load CraftBench scenes,</p></li>
+<li><p>load a trained RL policy,</p></li>
+<li><p>run an UrbanVerse-compliant navigation evaluator,</p></li>
+<li><p>compute SR, RC, CT, and DTG metrics.</p></li>
+</ul>
+<p>CraftBench serves as UrbanVerse’s <strong>standardized, challenging generalization
+benchmark</strong>, allowing you to objectively measure real-world readiness of your trained
+navigation policies.</p>
 </section>
 </section>
 
@@ -556,8 +735,27 @@
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-trained-policies">Preparing Trained Policies</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-your-robots">Testing Your Robots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisite">Prerequisite</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-craftbench-scenes">Loading CraftBench Scenes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#api">API</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-a-trained-policy">Loading a Trained Policy</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">API</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-api">Evaluation API</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">API</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metric-definitions">Metric Definitions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#end-to-end-example">End-to-End Example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output-example">Output Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
   </nav></div>
 
@@ -591,7 +789,7 @@ By Anonymous Authors of UrbanVerse
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Nov 15, 2025.
+  Last updated on Nov 16, 2025.
   <br/>
 </p>
   </div>
