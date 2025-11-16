@@ -1,4 +1,4 @@
-.. _urbanverse-il-dataset-format:
+.. _urbanverse-robot-learning-il-guide-dataset-format:
 
 Demonstration Dataset Format
 =============================

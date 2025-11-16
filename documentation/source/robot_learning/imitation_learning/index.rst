@@ -1,4 +1,4 @@
-.. _urbanverse-il-index:
+.. _urbanverse-robot-learning-il-guide-root:
 
 Imitation Learning in UrbanVerse
 ==================================
@@ -7,10 +7,10 @@ This chapter explains how to train Behavior Cloning (BC) policies for goal-direc
 
 UrbanVerse provides a unified framework for imitation learning, including consistent data formats, streamlined training APIs, and comprehensive evaluation tools that work seamlessly with UrbanVerse-160, CraftBench, and custom scenes.
 
-What You'll Learn
-------------------
+Documentation Overview
+-----------------------
 
-This guide covers the complete imitation learning workflow:
+This documentation covers the complete imitation learning workflow:
 
 - **Collecting expert demonstrations** through teleoperation (keyboard, joystick, gamepad, VR) or importing external data
 - **Understanding the demonstration dataset format** and how observations and actions are structured
@@ -31,10 +31,10 @@ This guide covers the complete imitation learning workflow:
    evaluation
    best_practices
 
-Quick Start
+Basic Usage
 -----------
 
-Here's a minimal example that collects demonstrations and trains a BC policy:
+The following example demonstrates how to collect demonstrations and train a BC policy:
 
 .. code-block:: python
 
@@ -73,10 +73,10 @@ Here's a minimal example that collects demonstrations and trains a BC policy:
    print(f"Success Rate: {results['SR']:.2%}")
    print(f"Route Completion: {results['RC']:.2%}")
 
-Why Imitation Learning?
-------------------------
+Benefits of Imitation Learning
+--------------------------------
 
-Imitation learning offers several advantages for training navigation policies:
+Imitation learning provides several advantages for training navigation policies:
 
 - **Fast bootstrapping**: Learn from expert demonstrations without designing reward functions
 - **Real-world data integration**: Incorporate teleoperated demonstrations from actual robot deployments

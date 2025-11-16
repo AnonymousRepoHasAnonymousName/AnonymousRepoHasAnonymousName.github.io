@@ -5,8 +5,8 @@ Progressive Learning: Curriculum Strategies
 
 Curriculum learning gradually increases task difficulty as your policy improves, accelerating training and often leading to better final performance. UrbanVerse provides built-in curriculum mechanisms that automatically scale navigation challenges, helping your policy learn basic behaviors before tackling complex scenarios.
 
-Why Use Curriculum Learning?
------------------------------
+Curriculum Learning Overview
+------------------------------
 
 Training a navigation policy from scratch in complex urban environments can be challenging. Starting with nearby goals and simple scenarios, then progressively expanding to long-range navigation across diverse scenes, helps the policy:
 - **Learn fundamental skills first** (basic obstacle avoidance, goal following)
@@ -21,8 +21,8 @@ Enable curriculum learning with simple boolean flags:
 
 .. code-block:: python
 
-   from urbanverse.navigation.config import EnvCfg, CurriculumCfg
    import urbanverse as uv
+   from urbanverse.navigation.config import EnvCfg, CurriculumCfg
 
    cfg = EnvCfg(
        robot_type="coco_wheeled",

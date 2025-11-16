@@ -32,9 +32,9 @@ Scene configuration is straightforward: provide a list of USD scene file paths a
 
 .. code-block:: python
 
-   from urbanverse.navigation.config import EnvCfg, SceneCfg
-   import urbanverse as uv
    import os
+   import urbanverse as uv
+   from urbanverse.navigation.config import EnvCfg, SceneCfg
 
    # Collect scenes from UrbanVerse-160
    scene_root = os.environ.get("URBANVERSE_SCENE_ROOT", "/path/to/UrbanVerse-160")
@@ -94,8 +94,8 @@ Here's a complete example that sets up training across multiple cities with prop
 .. code-block:: python
 
    import os
-   from urbanverse.navigation.config import EnvCfg, SceneCfg
    import urbanverse as uv
+   from urbanverse.navigation.config import EnvCfg, SceneCfg
 
    scene_root = os.environ.get("URBANVERSE_SCENE_ROOT")
 

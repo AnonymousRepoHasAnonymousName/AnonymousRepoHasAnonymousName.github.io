@@ -1,4 +1,4 @@
-.. _urbanverse-il-introduction:
+.. _urbanverse-robot-learning-il-guide-introduction:
 
 Introduction to Imitation Learning
 ===================================
@@ -26,8 +26,8 @@ UrbanVerse implements **Behavior Cloning**, a straightforward form of imitation 
 
 The key advantage of BC is its simplicity: it's essentially a regression problem where the policy learns to map observations to actions by minimizing prediction error on the demonstration dataset.
 
-Why Use Imitation Learning in UrbanVerse?
-------------------------------------------
+Benefits of Imitation Learning in UrbanVerse
+---------------------------------------------
 
 **Low-Cost Bootstrapping**  
 Unlike RL, which requires extensive exploration and reward engineering, BC can quickly learn basic navigation behaviors from a relatively small number of expert demonstrations. This makes it ideal for getting started with navigation tasks or prototyping new robot platforms.

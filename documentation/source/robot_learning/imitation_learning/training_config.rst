@@ -1,4 +1,4 @@
-.. _urbanverse-il-training-config:
+.. _urbanverse-robot-learning-il-guide-training-config:
 
 BC Training Configuration
 ==========================

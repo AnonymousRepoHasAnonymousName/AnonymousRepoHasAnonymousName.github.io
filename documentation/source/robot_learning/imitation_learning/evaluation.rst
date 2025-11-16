@@ -1,4 +1,4 @@
-.. _urbanverse-il-evaluation:
+.. _urbanverse-robot-learning-il-guide-evaluation:
 
 Evaluating BC Policies
 =======================

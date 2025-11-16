@@ -14,8 +14,8 @@ For wheeled robots like COCO, actions are straightforward velocity commands:
 
 .. code-block:: python
 
-   from urbanverse.navigation.config import EnvCfg, ActionCfg
    import urbanverse as uv
+   from urbanverse.navigation.config import EnvCfg, ActionCfg
 
    cfg = EnvCfg(
        robot_type="coco_wheeled",

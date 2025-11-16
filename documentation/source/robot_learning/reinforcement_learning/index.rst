@@ -1,11 +1,22 @@
 .. _urbanverse-robot-learning-rl-guide-root:
 
-Reinforcement Learning Guide
+Reinforcement Learning in UrbanVerse
 =====================================
 
 UrbanVerse offers a comprehensive reinforcement learning framework designed specifically for training navigation policies in photorealistic urban environments. Built on Isaac Lab's robust simulation infrastructure, UrbanVerse enables efficient parallel training across diverse real-to-sim city scenes, supporting everything from simple point navigation to complex multi-agent interactions.
 
 This section walks through the essential building blocks for configuring and training RL agents in UrbanVerse's rich urban simulation environments.
+
+Documentation Overview
+-----------------------
+
+This documentation covers the complete reinforcement learning workflow:
+
+- **Configuring RL environments** with scenes, observations, actions, rewards, and termination conditions
+- **Understanding the seven key components** that define the learning task
+- **Setting up curriculum learning** to gradually increase task difficulty
+- **Using UrbanVerse's RL APIs** for environment creation and training
+- **Best practices** for effective reinforcement learning in urban navigation tasks
 
 .. toctree::
    :maxdepth: 1
@@ -52,18 +63,18 @@ Gradually increase task difficulty. Start with nearby goals and simple scenes, t
 Inject variability and randomization. Customize robot initialization, dynamic agent spawning, and environmental variations to improve policy robustness.  
 → :doc:`event`
 
-Getting Started: Your First RL Environment
--------------------------------------------
+Basic Usage
+-----------
 
-Here's a minimal example that creates a complete RL environment for training a COCO wheeled robot:
+The following example demonstrates how to create a complete RL environment for training a COCO wheeled robot:
 
 .. code-block:: python
 
+   import urbanverse as uv
    from urbanverse.navigation.config import (
        EnvCfg, SceneCfg, ObservationCfg, ActionCfg,
        RewardCfg, TerminationCfg, CurriculumCfg
    )
-   import urbanverse as uv
 
    # Define your training configuration
    cfg = EnvCfg(
@@ -88,3 +99,15 @@ Here's a minimal example that creates a complete RL environment for training a C
    )
 
 Each component can be customized independently, allowing you to experiment with different configurations, robot types, and training strategies. The following pages dive deep into each component, providing detailed explanations, examples, and best practices for training effective navigation policies in UrbanVerse.
+
+Benefits of Reinforcement Learning
+------------------------------------
+
+Reinforcement learning provides several advantages for training navigation policies:
+
+- **Learn from experience**: Policies improve through trial and error, discovering robust navigation strategies
+- **Exceed expert performance**: RL can learn behaviors that go beyond what's demonstrated in expert data
+- **Handle complex scenarios**: Effective for long-horizon tasks requiring sophisticated planning and decision-making
+- **Combine with imitation learning**: Use BC policies as warm starts, then fine-tune with RL for best results
+
+UrbanVerse's reinforcement learning framework is designed to work seamlessly with the same scenes, robots, and observation/action spaces used in imitation learning, making it easy to combine both approaches.
