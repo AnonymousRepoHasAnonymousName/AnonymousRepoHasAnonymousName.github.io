@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Imitation Learning in UrbanVerse &#8212; UrbanVerse Documentation</title>
+    <title>BC Training Configuration &#8212; UrbanVerse Documentation</title>
   
   
   
@@ -52,11 +52,11 @@
     <script src="../../../_static/copybutton.js"></script>
     <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script src="../../../_static/design-tabs.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'source/robot_learning/imitation_learning/index';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'source/robot_learning/imitation_learning/training_config';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Introduction to Imitation Learning" href="introduction.html" />
-    <link rel="prev" title="Environment Events and Initialization" href="../reinforcement_learning/event.html" />
+    <link rel="next" title="UrbanVerse IL APIs" href="api_reference.html" />
+    <link rel="prev" title="Demonstration Dataset Format" href="dataset_format.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="1.0.0" />
@@ -236,11 +236,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../reinforcement_learning/event.html">Environment Events and Initialization</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Imitation Learning in UrbanVerse</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Imitation Learning in UrbanVerse</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="introduction.html">Introduction to Imitation Learning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data_collection.html">Collecting Expert Demonstrations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dataset_format.html">Demonstration Dataset Format</a></li>
-<li class="toctree-l2"><a class="reference internal" href="training_config.html">BC Training Configuration</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">BC Training Configuration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api_reference.html">UrbanVerse IL APIs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="end_to_end_example.html">End-to-End Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="evaluation.html">Evaluating BC Policies</a></li>
@@ -351,7 +351,7 @@
       
       
       
-      <li><a href="https://github.com/metadriverse/urban-sim/edit/main/source/robot_learning/imitation_learning/index.rst" target="_blank"
+      <li><a href="https://github.com/metadriverse/urban-sim/edit/main/source/robot_learning/imitation_learning/training_config.rst" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -368,7 +368,7 @@
       
       
       
-      <li><a href="https://github.com/metadriverse/urban-sim/issues/new?title=Issue%20on%20page%20%2Fsource/robot_learning/imitation_learning/index.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/metadriverse/urban-sim/issues/new?title=Issue%20on%20page%20%2Fsource/robot_learning/imitation_learning/training_config.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -398,7 +398,7 @@
       
       
       
-      <li><a href="../../../_sources/source/robot_learning/imitation_learning/index.rst" target="_blank"
+      <li><a href="../../../_sources/source/robot_learning/imitation_learning/training_config.rst" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -474,7 +474,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Imitation Learning in UrbanVerse</h1>
+    <h1>BC Training Configuration</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -484,9 +484,20 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-you-ll-learn">What You’ll Learn</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-start">Quick Start</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-imitation-learning">Why Imitation Learning?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-architecture">Model Architecture</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture-overview">Architecture Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#default-architecture-specifications">Default Architecture Specifications</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-hyperparameters">Training Hyperparameters</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#default-configuration">Default Configuration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameter-descriptions">Hyperparameter Descriptions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-function">Loss Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-augmentation">Data Augmentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-process">Training Process</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-training-configuration">Customizing Training Configuration</a></li>
 </ul>
             </nav>
         </div>
@@ -498,84 +509,190 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="imitation-learning-in-urbanverse">
-<span id="urbanverse-il-index"></span><h1>Imitation Learning in UrbanVerse<a class="headerlink" href="#imitation-learning-in-urbanverse" title="Permalink to this heading">#</a></h1>
-<p>This chapter explains how to train Behavior Cloning (BC) policies for goal-directed navigation in UrbanVerse scenes. You can learn from expert demonstrations collected directly within UrbanVerse’s simulation environment, or import real-world teleoperated demonstrations mapped into UrbanVerse’s urban scenes.</p>
-<p>UrbanVerse provides a unified framework for imitation learning, including consistent data formats, streamlined training APIs, and comprehensive evaluation tools that work seamlessly with UrbanVerse-160, CraftBench, and custom scenes.</p>
-<section id="what-you-ll-learn">
-<h2>What You’ll Learn<a class="headerlink" href="#what-you-ll-learn" title="Permalink to this heading">#</a></h2>
-<p>This guide covers the complete imitation learning workflow:</p>
-<ul class="simple">
-<li><p><strong>Collecting expert demonstrations</strong> through teleoperation (keyboard, joystick, gamepad, VR) or importing external data</p></li>
-<li><p><strong>Understanding the demonstration dataset format</strong> and how observations and actions are structured</p></li>
-<li><p><strong>Configuring BC training</strong> with appropriate architectures, hyperparameters, and loss functions</p></li>
-<li><p><strong>Using UrbanVerse’s IL APIs</strong> for training, inference, and evaluation</p></li>
-<li><p><strong>Best practices</strong> for effective behavior cloning in urban navigation tasks</p></li>
-</ul>
-<div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Imitation Learning Guide</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Imitation Learning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="data_collection.html">Collecting Expert Demonstrations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dataset_format.html">Demonstration Dataset Format</a></li>
-<li class="toctree-l1"><a class="reference internal" href="training_config.html">BC Training Configuration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api_reference.html">UrbanVerse IL APIs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="end_to_end_example.html">End-to-End Example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="evaluation.html">Evaluating BC Policies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="best_practices.html">Best Practices and Tips</a></li>
-</ul>
-</div>
-</section>
-<section id="quick-start">
-<h2>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this heading">#</a></h2>
-<p>Here’s a minimal example that collects demonstrations and trains a BC policy:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
+  <section id="bc-training-configuration">
+<span id="urbanverse-il-training-config"></span><h1>BC Training Configuration<a class="headerlink" href="#bc-training-configuration" title="Permalink to this heading">#</a></h1>
+<p>Behavior cloning training involves configuring the neural network architecture, training hyperparameters, and loss functions. UrbanVerse provides sensible defaults aligned with best practices, while allowing full customization for specialized use cases.</p>
+<section id="model-architecture">
+<h2>Model Architecture<a class="headerlink" href="#model-architecture" title="Permalink to this heading">#</a></h2>
+<p>UrbanVerse’s BC policy network is designed specifically for goal-directed navigation, combining visual perception with spatial awareness.</p>
+<section id="architecture-overview">
+<h3>Architecture Overview<a class="headerlink" href="#architecture-overview" title="Permalink to this heading">#</a></h3>
+<p>The BC policy network consists of three main components:</p>
+<p><strong>1. Visual Encoder (CNN)</strong>
+Processes RGB camera images to extract visual features:
+- Convolutional layers for spatial feature extraction
+- Batch normalization and ReLU activations
+- Output: Compact visual feature vector</p>
+<p><strong>2. Goal Vector Processor (MLP)</strong>
+Processes the goal-relative position vector:
+- Small fully-connected network
+- Output: Processed goal representation</p>
+<p><strong>3. Policy Head (MLP)</strong>
+Combines visual and goal features to predict actions:
+- Concatenates visual features + goal features + optional robot state
+- 2-layer MLP with ReLU activations
+- Output: Action predictions (deterministic or Gaussian)</p>
+<p><strong>Architecture Diagram:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>RGB Image (135×240×3)
+     ↓
+[CNN Encoder]
+     ↓
+Visual Features (256-dim)
+     ↓
+┌─────────────────┐
+│  Concatenate    │
+└─────────────────┘
+     ↓
+[MLP Policy Head]
+     ↓
+Actions (action_dim)
 
-<span class="c1"># 1. Collect expert demonstrations</span>
-<span class="n">demo_dir</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">navigation</span><span class="o">.</span><span class="n">il</span><span class="o">.</span><span class="n">collect_data</span><span class="p">(</span>
-    <span class="n">scene_paths</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;/path/to/UrbanVerse-160/CapeTown_0001/scene.usd&quot;</span><span class="p">],</span>
-    <span class="n">robot_type</span><span class="o">=</span><span class="s2">&quot;coco_wheeled&quot;</span><span class="p">,</span>
-    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;demos/cape_town_teleop&quot;</span><span class="p">,</span>
-    <span class="n">control_mode</span><span class="o">=</span><span class="s2">&quot;teleop_gamepad&quot;</span><span class="p">,</span>
-    <span class="n">max_episodes</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
-<span class="p">)</span>
-
-<span class="c1"># 2. Train Behavior Cloning policy</span>
-<span class="n">checkpoint_path</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">navigation</span><span class="o">.</span><span class="n">il</span><span class="o">.</span><span class="n">train_bc</span><span class="p">(</span>
-    <span class="n">demo_dir</span><span class="o">=</span><span class="n">demo_dir</span><span class="p">,</span>
-    <span class="n">robot_type</span><span class="o">=</span><span class="s2">&quot;coco_wheeled&quot;</span><span class="p">,</span>
-    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;outputs/bc_coco_capetown&quot;</span><span class="p">,</span>
-<span class="p">)</span>
-
-<span class="c1"># 3. Load and use the policy</span>
-<span class="n">policy</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">navigation</span><span class="o">.</span><span class="n">il</span><span class="o">.</span><span class="n">load_bc_policy</span><span class="p">(</span>
-    <span class="n">checkpoint_path</span><span class="o">=</span><span class="n">checkpoint_path</span><span class="p">,</span>
-    <span class="n">robot_type</span><span class="o">=</span><span class="s2">&quot;coco_wheeled&quot;</span><span class="p">,</span>
-<span class="p">)</span>
-
-<span class="c1"># 4. Evaluate the policy</span>
-<span class="n">results</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">navigation</span><span class="o">.</span><span class="n">il</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span>
-    <span class="n">policy</span><span class="o">=</span><span class="n">policy</span><span class="p">,</span>
-    <span class="n">scene_paths</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;/path/to/UrbanVerse-160/Tokyo_0001/scene.usd&quot;</span><span class="p">],</span>
-    <span class="n">robot_type</span><span class="o">=</span><span class="s2">&quot;coco_wheeled&quot;</span><span class="p">,</span>
-    <span class="n">num_episodes</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
-<span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Success Rate: </span><span class="si">{</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;SR&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Route Completion: </span><span class="si">{</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;RC&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+Goal Vector (2-dim)
+     ↓
+[MLP Processor]
+     ↓
+Goal Features (64-dim)
 </pre></div>
 </div>
 </section>
-<section id="why-imitation-learning">
-<h2>Why Imitation Learning?<a class="headerlink" href="#why-imitation-learning" title="Permalink to this heading">#</a></h2>
-<p>Imitation learning offers several advantages for training navigation policies:</p>
+<section id="default-architecture-specifications">
+<h3>Default Architecture Specifications<a class="headerlink" href="#default-architecture-specifications" title="Permalink to this heading">#</a></h3>
+<p><strong>Visual Encoder:</strong>
+- Input: RGB image (135×240×3)
+- Architecture: ResNet-style CNN with 4-5 convolutional blocks
+- Output dimension: 256 features</p>
+<p><strong>Goal Processor:</strong>
+- Input: Goal vector (2-dim)
+- Architecture: 2-layer MLP (64 hidden units)
+- Output dimension: 64 features</p>
+<p><strong>Policy Head:</strong>
+- Input: Concatenated features (256 + 64 + robot_state_dim)
+- Architecture: 2-layer MLP (256 hidden units, ReLU)
+- Output: Action predictions (deterministic or Gaussian)</p>
+<p><strong>Action Output:</strong>
+- <strong>Deterministic</strong>: Direct action predictions (default for most robots)
+- <strong>Gaussian</strong>: Mean and variance predictions (useful for uncertainty estimation)</p>
+</section>
+</section>
+<section id="training-hyperparameters">
+<h2>Training Hyperparameters<a class="headerlink" href="#training-hyperparameters" title="Permalink to this heading">#</a></h2>
+<p>UrbanVerse provides default hyperparameters that work well for most navigation tasks:</p>
+<section id="default-configuration">
+<h3>Default Configuration<a class="headerlink" href="#default-configuration" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">train_cfg</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;learning_rate&quot;</span><span class="p">:</span> <span class="mf">1e-4</span><span class="p">,</span>           <span class="c1"># Adam optimizer learning rate</span>
+    <span class="s2">&quot;batch_size&quot;</span><span class="p">:</span> <span class="mi">256</span><span class="p">,</span>               <span class="c1"># Training batch size</span>
+    <span class="s2">&quot;train_epochs&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>              <span class="c1"># Number of training epochs</span>
+    <span class="s2">&quot;weight_decay&quot;</span><span class="p">:</span> <span class="mf">1e-5</span><span class="p">,</span>            <span class="c1"># L2 regularization</span>
+    <span class="s2">&quot;action_smoothing&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>       <span class="c1"># Optional action smoothing</span>
+    <span class="s2">&quot;dropout&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>                  <span class="c1"># Dropout rate (if enabled)</span>
+    <span class="s2">&quot;validation_split&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>         <span class="c1"># Fraction of data for validation</span>
+    <span class="s2">&quot;early_stopping&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>          <span class="c1"># Stop if validation loss plateaus</span>
+    <span class="s2">&quot;data_augmentation&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;random_crop&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s2">&quot;color_jitter&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s2">&quot;horizontal_flip&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="hyperparameter-descriptions">
+<h3>Hyperparameter Descriptions<a class="headerlink" href="#hyperparameter-descriptions" title="Permalink to this heading">#</a></h3>
+<p><strong>Learning Rate</strong> (<code class="docutils literal notranslate"><span class="pre">learning_rate=1e-4</span></code>)
+Controls how quickly the model updates during training. Lower values (1e-5) provide more stable training but slower convergence. Higher values (1e-3) can speed up training but risk instability.</p>
+<p><strong>Batch Size</strong> (<code class="docutils literal notranslate"><span class="pre">batch_size=256</span></code>)
+Number of (observation, action) pairs processed together. Larger batches provide more stable gradients but require more memory. Smaller batches (128) can improve generalization but slow training.</p>
+<p><strong>Training Epochs</strong> (<code class="docutils literal notranslate"><span class="pre">train_epochs=50-100</span></code>)
+Number of complete passes through the dataset. More epochs can improve performance but risk overfitting. Monitor validation loss to determine optimal stopping point.</p>
+<p><strong>Weight Decay</strong> (<code class="docutils literal notranslate"><span class="pre">weight_decay=1e-5</span></code>)
+L2 regularization to prevent overfitting. Higher values (1e-4) provide stronger regularization but may underfit. Lower values (1e-6) allow more model flexibility.</p>
+<p><strong>Action Smoothing</strong> (<code class="docutils literal notranslate"><span class="pre">action_smoothing=False</span></code>)
+Optional temporal smoothing of expert actions to reduce noise and create smoother policies. Useful when demonstrations are noisy.</p>
+<p><strong>Dropout</strong> (<code class="docutils literal notranslate"><span class="pre">dropout=0.1</span></code>)
+Randomly zeroes a fraction of activations during training to prevent overfitting. Typically applied to fully-connected layers.</p>
+</section>
+</section>
+<section id="loss-function">
+<h2>Loss Function<a class="headerlink" href="#loss-function" title="Permalink to this heading">#</a></h2>
+<p>UrbanVerse uses Mean Squared Error (MSE) loss for continuous action spaces:</p>
+<p><strong>MSE Loss (Default):</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>loss = MSE(predicted_actions, expert_actions)
+
+# For each timestep:
+loss_t = mean((predicted_action - expert_action)²)
+</pre></div>
+</div>
+<p>This loss function works well for deterministic action prediction and is the standard choice for behavior cloning.</p>
+<p><strong>Gaussian Policy Loss (Optional):</strong></p>
+<p>For uncertainty-aware policies, you can use a Gaussian policy that predicts both mean and variance:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Policy outputs: (mean, log_std)</span>
+<span class="n">loss</span> <span class="o">=</span> <span class="o">-</span><span class="n">log_prob</span><span class="p">(</span><span class="n">expert_action</span> <span class="o">|</span> <span class="n">mean</span><span class="p">,</span> <span class="n">std</span><span class="p">)</span>
+
+<span class="c1"># Negative log-likelihood of expert action under predicted distribution</span>
+</pre></div>
+</div>
+<p>This approach provides uncertainty estimates and can improve robustness, especially when demonstrations have natural variability.</p>
+</section>
+<section id="data-augmentation">
+<h2>Data Augmentation<a class="headerlink" href="#data-augmentation" title="Permalink to this heading">#</a></h2>
+<p>Data augmentation can improve generalization by creating variations of training data:</p>
+<p><strong>Supported Augmentations:</strong></p>
 <ul class="simple">
-<li><p><strong>Fast bootstrapping</strong>: Learn from expert demonstrations without designing reward functions</p></li>
-<li><p><strong>Real-world data integration</strong>: Incorporate teleoperated demonstrations from actual robot deployments</p></li>
-<li><p><strong>Warm start for RL</strong>: Use BC policies as initialization for reinforcement learning, accelerating training</p></li>
-<li><p><strong>Human-in-the-loop</strong>: Leverage human expertise and intuition for complex navigation scenarios</p></li>
+<li><p><strong>Color Jitter</strong>: Random brightness, contrast, saturation adjustments</p></li>
+<li><p><strong>Random Crop</strong>: Crop and resize images (use with caution for navigation)</p></li>
+<li><p><strong>Horizontal Flip</strong>: Mirror images (not recommended for goal navigation due to goal vector asymmetry)</p></li>
 </ul>
-<p>UrbanVerse’s imitation learning framework is designed to work seamlessly with the same scenes, robots, and observation/action spaces used in reinforcement learning, making it easy to combine both approaches.</p>
+<p><strong>Example Configuration:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">train_cfg</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;data_augmentation&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;color_jitter&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;brightness&quot;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
+            <span class="s2">&quot;contrast&quot;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
+            <span class="s2">&quot;saturation&quot;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;random_crop&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>  <span class="c1"># Usually disabled for navigation</span>
+        <span class="s2">&quot;horizontal_flip&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>  <span class="c1"># Disabled (goal vector not symmetric)</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="training-process">
+<h2>Training Process<a class="headerlink" href="#training-process" title="Permalink to this heading">#</a></h2>
+<p>The BC training process follows a standard supervised learning workflow:</p>
+<ol class="arabic simple">
+<li><p><strong>Data Loading</strong>: Load demonstration episodes, split into train/validation sets</p></li>
+<li><p><strong>Batch Sampling</strong>: Sample random batches of (observation, action) pairs</p></li>
+<li><p><strong>Forward Pass</strong>: Predict actions from observations</p></li>
+<li><p><strong>Loss Computation</strong>: Compare predictions to expert actions</p></li>
+<li><p><strong>Backward Pass</strong>: Update network weights via gradient descent</p></li>
+<li><p><strong>Validation</strong>: Evaluate on held-out validation set</p></li>
+<li><p><strong>Checkpointing</strong>: Save model checkpoints periodically</p></li>
+</ol>
+<p>Training typically runs for 50-100 epochs, with early stopping if validation loss plateaus.</p>
+</section>
+<section id="customizing-training-configuration">
+<h2>Customizing Training Configuration<a class="headerlink" href="#customizing-training-configuration" title="Permalink to this heading">#</a></h2>
+<p>You can customize any aspect of the training configuration:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">custom_train_cfg</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;learning_rate&quot;</span><span class="p">:</span> <span class="mf">5e-5</span><span class="p">,</span>      <span class="c1"># Slower learning</span>
+    <span class="s2">&quot;batch_size&quot;</span><span class="p">:</span> <span class="mi">128</span><span class="p">,</span>          <span class="c1"># Smaller batches</span>
+    <span class="s2">&quot;train_epochs&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>        <span class="c1"># More epochs</span>
+    <span class="s2">&quot;weight_decay&quot;</span><span class="p">:</span> <span class="mf">1e-4</span><span class="p">,</span>       <span class="c1"># Stronger regularization</span>
+    <span class="s2">&quot;action_smoothing&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>   <span class="c1"># Enable smoothing</span>
+    <span class="s2">&quot;dropout&quot;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>             <span class="c1"># Higher dropout</span>
+<span class="p">}</span>
+
+<span class="n">checkpoint</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">navigation</span><span class="o">.</span><span class="n">il</span><span class="o">.</span><span class="n">train_bc</span><span class="p">(</span>
+    <span class="n">demo_dir</span><span class="o">=</span><span class="s2">&quot;demos/my_demos&quot;</span><span class="p">,</span>
+    <span class="n">robot_type</span><span class="o">=</span><span class="s2">&quot;coco_wheeled&quot;</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;outputs/bc_custom&quot;</span><span class="p">,</span>
+    <span class="n">train_cfg</span><span class="o">=</span><span class="n">custom_train_cfg</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>The training configuration system is flexible, allowing you to experiment with different architectures, hyperparameters, and training strategies to optimize performance for your specific use case.</p>
 </section>
 </section>
 
@@ -591,20 +708,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../reinforcement_learning/event.html"
+       href="dataset_format.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Environment Events and Initialization</p>
+        <p class="prev-next-title">Demonstration Dataset Format</p>
       </div>
     </a>
     <a class="right-next"
-       href="introduction.html"
+       href="api_reference.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Introduction to Imitation Learning</p>
+        <p class="prev-next-title">UrbanVerse IL APIs</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -625,9 +742,20 @@
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-you-ll-learn">What You’ll Learn</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-start">Quick Start</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-imitation-learning">Why Imitation Learning?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-architecture">Model Architecture</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture-overview">Architecture Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#default-architecture-specifications">Default Architecture Specifications</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-hyperparameters">Training Hyperparameters</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#default-configuration">Default Configuration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameter-descriptions">Hyperparameter Descriptions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-function">Loss Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-augmentation">Data Augmentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-process">Training Process</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-training-configuration">Customizing Training Configuration</a></li>
 </ul>
   </nav></div>
 

@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Imitation Learning in UrbanVerse &#8212; UrbanVerse Documentation</title>
+    <title>Evaluating BC Policies &#8212; UrbanVerse Documentation</title>
   
   
   
@@ -52,11 +52,11 @@
     <script src="../../../_static/copybutton.js"></script>
     <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script src="../../../_static/design-tabs.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'source/robot_learning/imitation_learning/index';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'source/robot_learning/imitation_learning/evaluation';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Introduction to Imitation Learning" href="introduction.html" />
-    <link rel="prev" title="Environment Events and Initialization" href="../reinforcement_learning/event.html" />
+    <link rel="next" title="Best Practices and Tips" href="best_practices.html" />
+    <link rel="prev" title="End-to-End Example" href="end_to_end_example.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="1.0.0" />
@@ -236,14 +236,14 @@
 <li class="toctree-l2"><a class="reference internal" href="../reinforcement_learning/event.html">Environment Events and Initialization</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Imitation Learning in UrbanVerse</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Imitation Learning in UrbanVerse</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="introduction.html">Introduction to Imitation Learning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data_collection.html">Collecting Expert Demonstrations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dataset_format.html">Demonstration Dataset Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="training_config.html">BC Training Configuration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api_reference.html">UrbanVerse IL APIs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="end_to_end_example.html">End-to-End Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="evaluation.html">Evaluating BC Policies</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Evaluating BC Policies</a></li>
 <li class="toctree-l2"><a class="reference internal" href="best_practices.html">Best Practices and Tips</a></li>
 </ul>
 </details></li>
@@ -351,7 +351,7 @@
       
       
       
-      <li><a href="https://github.com/metadriverse/urban-sim/edit/main/source/robot_learning/imitation_learning/index.rst" target="_blank"
+      <li><a href="https://github.com/metadriverse/urban-sim/edit/main/source/robot_learning/imitation_learning/evaluation.rst" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -368,7 +368,7 @@
       
       
       
-      <li><a href="https://github.com/metadriverse/urban-sim/issues/new?title=Issue%20on%20page%20%2Fsource/robot_learning/imitation_learning/index.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/metadriverse/urban-sim/issues/new?title=Issue%20on%20page%20%2Fsource/robot_learning/imitation_learning/evaluation.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -398,7 +398,7 @@
       
       
       
-      <li><a href="../../../_sources/source/robot_learning/imitation_learning/index.rst" target="_blank"
+      <li><a href="../../../_sources/source/robot_learning/imitation_learning/evaluation.rst" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -474,7 +474,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Imitation Learning in UrbanVerse</h1>
+    <h1>Evaluating BC Policies</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -484,9 +484,17 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-you-ll-learn">What You’ll Learn</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-start">Quick Start</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-imitation-learning">Why Imitation Learning?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-metrics">Evaluation Metrics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#success-rate-sr">Success Rate (SR)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#route-completion-rc">Route Completion (RC)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#collision-times-ct">Collision Times (CT)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distance-to-goal-dtg">Distance-to-Goal (DTG)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-evaluation">Running Evaluation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-scenarios">Evaluation Scenarios</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-results">Interpreting Results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-evaluation">Advanced Evaluation</a></li>
 </ul>
             </nav>
         </div>
@@ -498,84 +506,204 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="imitation-learning-in-urbanverse">
-<span id="urbanverse-il-index"></span><h1>Imitation Learning in UrbanVerse<a class="headerlink" href="#imitation-learning-in-urbanverse" title="Permalink to this heading">#</a></h1>
-<p>This chapter explains how to train Behavior Cloning (BC) policies for goal-directed navigation in UrbanVerse scenes. You can learn from expert demonstrations collected directly within UrbanVerse’s simulation environment, or import real-world teleoperated demonstrations mapped into UrbanVerse’s urban scenes.</p>
-<p>UrbanVerse provides a unified framework for imitation learning, including consistent data formats, streamlined training APIs, and comprehensive evaluation tools that work seamlessly with UrbanVerse-160, CraftBench, and custom scenes.</p>
-<section id="what-you-ll-learn">
-<h2>What You’ll Learn<a class="headerlink" href="#what-you-ll-learn" title="Permalink to this heading">#</a></h2>
-<p>This guide covers the complete imitation learning workflow:</p>
-<ul class="simple">
-<li><p><strong>Collecting expert demonstrations</strong> through teleoperation (keyboard, joystick, gamepad, VR) or importing external data</p></li>
-<li><p><strong>Understanding the demonstration dataset format</strong> and how observations and actions are structured</p></li>
-<li><p><strong>Configuring BC training</strong> with appropriate architectures, hyperparameters, and loss functions</p></li>
-<li><p><strong>Using UrbanVerse’s IL APIs</strong> for training, inference, and evaluation</p></li>
-<li><p><strong>Best practices</strong> for effective behavior cloning in urban navigation tasks</p></li>
-</ul>
-<div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Imitation Learning Guide</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction to Imitation Learning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="data_collection.html">Collecting Expert Demonstrations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dataset_format.html">Demonstration Dataset Format</a></li>
-<li class="toctree-l1"><a class="reference internal" href="training_config.html">BC Training Configuration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api_reference.html">UrbanVerse IL APIs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="end_to_end_example.html">End-to-End Example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="evaluation.html">Evaluating BC Policies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="best_practices.html">Best Practices and Tips</a></li>
-</ul>
-</div>
+  <section id="evaluating-bc-policies">
+<span id="urbanverse-il-evaluation"></span><h1>Evaluating BC Policies<a class="headerlink" href="#evaluating-bc-policies" title="Permalink to this heading">#</a></h1>
+<p>Evaluation is crucial for understanding how well your behavior cloning policy performs and identifying areas for improvement. UrbanVerse provides comprehensive evaluation tools that compute standard navigation metrics consistent with CraftBench evaluation protocols.</p>
+<section id="evaluation-metrics">
+<h2>Evaluation Metrics<a class="headerlink" href="#evaluation-metrics" title="Permalink to this heading">#</a></h2>
+<p>UrbanVerse’s evaluation system computes four key metrics that capture different aspects of navigation performance:</p>
+<section id="success-rate-sr">
+<h3>Success Rate (SR)<a class="headerlink" href="#success-rate-sr" title="Permalink to this heading">#</a></h3>
+<p><strong>Definition</strong>: Fraction of episodes where the robot successfully reaches the goal within the distance threshold.</p>
+<p><strong>Formula</strong>: <code class="docutils literal notranslate"><span class="pre">SR</span> <span class="pre">=</span> <span class="pre">(number</span> <span class="pre">of</span> <span class="pre">successful</span> <span class="pre">episodes)</span> <span class="pre">/</span> <span class="pre">(total</span> <span class="pre">episodes)</span></code></p>
+<p><strong>Interpretation</strong>:
+- <strong>High SR (0.7-1.0)</strong>: Policy reliably completes navigation tasks
+- <strong>Medium SR (0.4-0.7)</strong>: Policy works but may struggle with some scenarios
+- <strong>Low SR (&lt;0.4)</strong>: Policy needs improvement or more training data</p>
+<p><strong>Typical BC Performance</strong>:
+- Similar scenes (same city): 50-70% SR
+- Different scenes (cross-city): 30-50% SR
+- CraftBench (unseen artist scenes): 20-40% SR</p>
 </section>
-<section id="quick-start">
-<h2>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this heading">#</a></h2>
-<p>Here’s a minimal example that collects demonstrations and trains a BC policy:</p>
+<section id="route-completion-rc">
+<h3>Route Completion (RC)<a class="headerlink" href="#route-completion-rc" title="Permalink to this heading">#</a></h3>
+<p><strong>Definition</strong>: Average fraction of the planned route completed before episode termination.</p>
+<p><strong>Formula</strong>: <code class="docutils literal notranslate"><span class="pre">RC</span> <span class="pre">=</span> <span class="pre">mean(completed_distance</span> <span class="pre">/</span> <span class="pre">total_route_distance)</span></code></p>
+<p><strong>Interpretation</strong>:
+- <strong>High RC (0.8-1.0)</strong>: Policy makes significant progress toward goals
+- <strong>Medium RC (0.5-0.8)</strong>: Policy gets partway but may struggle with final approach
+- <strong>Low RC (&lt;0.5)</strong>: Policy has difficulty making progress</p>
+<p><strong>Why RC Matters</strong>:
+RC provides insight into partial success. A policy might have low SR (doesn’t reach goals) but high RC (gets close), indicating it needs improvement in final approach rather than overall navigation.</p>
+</section>
+<section id="collision-times-ct">
+<h3>Collision Times (CT)<a class="headerlink" href="#collision-times-ct" title="Permalink to this heading">#</a></h3>
+<p><strong>Definition</strong>: Average number of collisions per episode.</p>
+<p><strong>Formula</strong>: <code class="docutils literal notranslate"><span class="pre">CT</span> <span class="pre">=</span> <span class="pre">mean(collisions_per_episode)</span></code></p>
+<p><strong>Interpretation</strong>:
+- <strong>Low CT (&lt;1.0)</strong>: Policy navigates safely with few collisions
+- <strong>Medium CT (1.0-3.0)</strong>: Some collision issues, may need more safety-focused training
+- <strong>High CT (&gt;3.0)</strong>: Significant safety concerns</p>
+<p><strong>Note</strong>: CT counts all collisions, including minor contacts. Some policies may have occasional collisions but still achieve good navigation performance.</p>
+</section>
+<section id="distance-to-goal-dtg">
+<h3>Distance-to-Goal (DTG)<a class="headerlink" href="#distance-to-goal-dtg" title="Permalink to this heading">#</a></h3>
+<p><strong>Definition</strong>: Average final distance to goal for unsuccessful episodes (in meters).</p>
+<p><strong>Formula</strong>: <code class="docutils literal notranslate"><span class="pre">DTG</span> <span class="pre">=</span> <span class="pre">mean(final_distance_to_goal</span> <span class="pre">|</span> <span class="pre">episode_not_successful)</span></code></p>
+<p><strong>Interpretation</strong>:
+- <strong>Low DTG (&lt;2.0 m)</strong>: Policy gets very close to goals but doesn’t quite reach them
+- <strong>Medium DTG (2.0-5.0 m)</strong>: Policy makes progress but struggles with final approach
+- <strong>High DTG (&gt;5.0 m)</strong>: Policy has difficulty navigating toward goals</p>
+<p><strong>Use Case</strong>: DTG helps diagnose why episodes fail. Low DTG suggests the policy needs better precision, while high DTG indicates fundamental navigation issues.</p>
+</section>
+</section>
+<section id="running-evaluation">
+<h2>Running Evaluation<a class="headerlink" href="#running-evaluation" title="Permalink to this heading">#</a></h2>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">evaluate</span></code> API to compute all metrics:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
 
-<span class="c1"># 1. Collect expert demonstrations</span>
-<span class="n">demo_dir</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">navigation</span><span class="o">.</span><span class="n">il</span><span class="o">.</span><span class="n">collect_data</span><span class="p">(</span>
-    <span class="n">scene_paths</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;/path/to/UrbanVerse-160/CapeTown_0001/scene.usd&quot;</span><span class="p">],</span>
-    <span class="n">robot_type</span><span class="o">=</span><span class="s2">&quot;coco_wheeled&quot;</span><span class="p">,</span>
-    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;demos/cape_town_teleop&quot;</span><span class="p">,</span>
-    <span class="n">control_mode</span><span class="o">=</span><span class="s2">&quot;teleop_gamepad&quot;</span><span class="p">,</span>
-    <span class="n">max_episodes</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
-<span class="p">)</span>
-
-<span class="c1"># 2. Train Behavior Cloning policy</span>
-<span class="n">checkpoint_path</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">navigation</span><span class="o">.</span><span class="n">il</span><span class="o">.</span><span class="n">train_bc</span><span class="p">(</span>
-    <span class="n">demo_dir</span><span class="o">=</span><span class="n">demo_dir</span><span class="p">,</span>
-    <span class="n">robot_type</span><span class="o">=</span><span class="s2">&quot;coco_wheeled&quot;</span><span class="p">,</span>
-    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;outputs/bc_coco_capetown&quot;</span><span class="p">,</span>
-<span class="p">)</span>
-
-<span class="c1"># 3. Load and use the policy</span>
+<span class="c1"># Load your trained policy</span>
 <span class="n">policy</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">navigation</span><span class="o">.</span><span class="n">il</span><span class="o">.</span><span class="n">load_bc_policy</span><span class="p">(</span>
-    <span class="n">checkpoint_path</span><span class="o">=</span><span class="n">checkpoint_path</span><span class="p">,</span>
+    <span class="n">checkpoint_path</span><span class="o">=</span><span class="s2">&quot;outputs/bc_coco_policy/checkpoints/best.pt&quot;</span><span class="p">,</span>
     <span class="n">robot_type</span><span class="o">=</span><span class="s2">&quot;coco_wheeled&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="c1"># 4. Evaluate the policy</span>
+<span class="c1"># Evaluate on test scenes</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">navigation</span><span class="o">.</span><span class="n">il</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span>
     <span class="n">policy</span><span class="o">=</span><span class="n">policy</span><span class="p">,</span>
-    <span class="n">scene_paths</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;/path/to/UrbanVerse-160/Tokyo_0001/scene.usd&quot;</span><span class="p">],</span>
+    <span class="n">scene_paths</span><span class="o">=</span><span class="p">[</span>
+        <span class="s2">&quot;/path/to/CraftBench/scene_001/scene.usd&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;/path/to/CraftBench/scene_002/scene.usd&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
     <span class="n">robot_type</span><span class="o">=</span><span class="s2">&quot;coco_wheeled&quot;</span><span class="p">,</span>
-    <span class="n">num_episodes</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+    <span class="n">num_episodes</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>  <span class="c1"># More episodes = more reliable statistics</span>
+    <span class="n">max_episode_steps</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Success Rate: </span><span class="si">{</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;SR&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Route Completion: </span><span class="si">{</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;RC&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1"># Access individual metrics</span>
+<span class="n">success_rate</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;SR&#39;</span><span class="p">]</span>
+<span class="n">route_completion</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;RC&#39;</span><span class="p">]</span>
+<span class="n">collision_times</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;CT&#39;</span><span class="p">]</span>
+<span class="n">distance_to_goal</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;DTG&#39;</span><span class="p">]</span>
+
+<span class="c1"># Access detailed episode information</span>
+<span class="n">episode_lengths</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;episode_lengths&#39;</span><span class="p">]</span>  <span class="c1"># List of episode lengths</span>
+<span class="n">outcomes</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;outcomes&#39;</span><span class="p">]</span>                <span class="c1"># List of outcomes</span>
 </pre></div>
 </div>
 </section>
-<section id="why-imitation-learning">
-<h2>Why Imitation Learning?<a class="headerlink" href="#why-imitation-learning" title="Permalink to this heading">#</a></h2>
-<p>Imitation learning offers several advantages for training navigation policies:</p>
-<ul class="simple">
-<li><p><strong>Fast bootstrapping</strong>: Learn from expert demonstrations without designing reward functions</p></li>
-<li><p><strong>Real-world data integration</strong>: Incorporate teleoperated demonstrations from actual robot deployments</p></li>
-<li><p><strong>Warm start for RL</strong>: Use BC policies as initialization for reinforcement learning, accelerating training</p></li>
-<li><p><strong>Human-in-the-loop</strong>: Leverage human expertise and intuition for complex navigation scenarios</p></li>
-</ul>
-<p>UrbanVerse’s imitation learning framework is designed to work seamlessly with the same scenes, robots, and observation/action spaces used in reinforcement learning, making it easy to combine both approaches.</p>
+<section id="evaluation-scenarios">
+<h2>Evaluation Scenarios<a class="headerlink" href="#evaluation-scenarios" title="Permalink to this heading">#</a></h2>
+<p><strong>In-Distribution Evaluation</strong>
+Evaluate on scenes similar to those used for training:
+- Same city layouts (e.g., train on CapeTown, test on different CapeTown scenes)
+- Expected: Higher success rates (50-70%)
+- Use case: Validate that the policy learned from demonstrations</p>
+<p><strong>Out-of-Distribution Evaluation</strong>
+Evaluate on scenes different from training:
+- Different cities (e.g., train on CapeTown, test on Tokyo)
+- Expected: Lower success rates (30-50%)
+- Use case: Test generalization capabilities</p>
+<p><strong>CraftBench Evaluation</strong>
+Evaluate on artist-crafted test scenes:
+- High-fidelity, professionally designed scenes
+- Expected: Lower success rates (20-40%) due to domain gap
+- Use case: Final policy assessment and benchmarking</p>
+</section>
+<section id="interpreting-results">
+<h2>Interpreting Results<a class="headerlink" href="#interpreting-results" title="Permalink to this heading">#</a></h2>
+<p><strong>Good BC Policy Performance:</strong>
+- SR &gt; 0.5 on similar scenes
+- RC &gt; 0.7 (policy makes good progress)
+- CT &lt; 2.0 (relatively safe navigation)
+- DTG &lt; 3.0 m for failed episodes (gets close to goals)</p>
+<p><strong>Signs of Overfitting:</strong>
+- High SR on training scenes but low SR on test scenes
+- Large performance gap between similar and different scenes
+- <strong>Solution</strong>: Collect more diverse demonstrations, use data augmentation</p>
+<p><strong>Signs of Underfitting:</strong>
+- Low SR across all scenes
+- High DTG (policy doesn’t make progress toward goals)
+- <strong>Solution</strong>: Collect more demonstrations, train for more epochs, check data quality</p>
+<p><strong>Common Issues and Solutions:</strong></p>
+<div class="pst-scrollable-table-container"><table class="table" id="id1">
+<caption><span class="caption-text">Common BC Training Issues and Solutions</span><a class="headerlink" href="#id1" title="Permalink to this table">#</a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 30.0%" />
+<col style="width: 45.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Issue</p></th>
+<th class="head"><p>Symptom</p></th>
+<th class="head"><p>Solution</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Insufficient data</p></td>
+<td><p>Low SR, high variance</p></td>
+<td><p>Collect more demonstrations (50+ episodes)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Poor demonstrations</p></td>
+<td><p>Low SR, high CT</p></td>
+<td><p>Improve teleoperation quality, filter bad episodes</p></td>
+</tr>
+<tr class="row-even"><td><p>Overfitting</p></td>
+<td><p>Large train/test gap</p></td>
+<td><p>Add data augmentation, collect diverse scenes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Action mismatch</p></td>
+<td><p>Policy outputs invalid actions</p></td>
+<td><p>Verify action format matches robot type</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="advanced-evaluation">
+<h2>Advanced Evaluation<a class="headerlink" href="#advanced-evaluation" title="Permalink to this heading">#</a></h2>
+<p><strong>Per-Scene Analysis:</strong></p>
+<p>Evaluate on individual scenes to identify which scenarios are challenging:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">scene_results</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">scene_path</span> <span class="ow">in</span> <span class="n">test_scenes</span><span class="p">:</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">navigation</span><span class="o">.</span><span class="n">il</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span>
+        <span class="n">policy</span><span class="o">=</span><span class="n">policy</span><span class="p">,</span>
+        <span class="n">scene_paths</span><span class="o">=</span><span class="p">[</span><span class="n">scene_path</span><span class="p">],</span>  <span class="c1"># Single scene</span>
+        <span class="n">robot_type</span><span class="o">=</span><span class="s2">&quot;coco_wheeled&quot;</span><span class="p">,</span>
+        <span class="n">num_episodes</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">scene_results</span><span class="p">[</span><span class="n">scene_path</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;SR&#39;</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">scene_path</span><span class="si">}</span><span class="s2">: SR = </span><span class="si">{</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;SR&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Failure Mode Analysis:</strong></p>
+<p>Examine episode outcomes to understand failure patterns:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">navigation</span><span class="o">.</span><span class="n">il</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+
+<span class="n">outcomes</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;outcomes&#39;</span><span class="p">]</span>
+<span class="n">num_success</span> <span class="o">=</span> <span class="n">outcomes</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;success&#39;</span><span class="p">)</span>
+<span class="n">num_collision</span> <span class="o">=</span> <span class="n">outcomes</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;collision&#39;</span><span class="p">)</span>
+<span class="n">num_timeout</span> <span class="o">=</span> <span class="n">outcomes</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;timeout&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Success: </span><span class="si">{</span><span class="n">num_success</span><span class="si">}</span><span class="s2">, Collision: </span><span class="si">{</span><span class="n">num_collision</span><span class="si">}</span><span class="s2">, Timeout: </span><span class="si">{</span><span class="n">num_timeout</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Comparison with Expert:</strong></p>
+<p>Compare BC policy performance to expert demonstrations:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Expert performance (from demonstrations)</span>
+<span class="n">expert_sr</span> <span class="o">=</span> <span class="mf">0.95</span>  <span class="c1"># Expert typically succeeds</span>
+
+<span class="c1"># BC policy performance</span>
+<span class="n">bc_results</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">navigation</span><span class="o">.</span><span class="n">il</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">bc_sr</span> <span class="o">=</span> <span class="n">bc_results</span><span class="p">[</span><span class="s1">&#39;SR&#39;</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expert SR: </span><span class="si">{</span><span class="n">expert_sr</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;BC Policy SR: </span><span class="si">{</span><span class="n">bc_sr</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Performance gap: </span><span class="si">{</span><span class="p">(</span><span class="n">expert_sr</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">bc_sr</span><span class="p">)</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A typical performance gap is 20-40%: BC policies learn from demonstrations but don’t always match expert performance, especially in challenging scenarios.</p>
+<p>The evaluation metrics provide comprehensive insight into policy performance, helping you identify strengths, weaknesses, and areas for improvement in your behavior cloning pipeline.</p>
 </section>
 </section>
 
@@ -591,20 +719,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../reinforcement_learning/event.html"
+       href="end_to_end_example.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Environment Events and Initialization</p>
+        <p class="prev-next-title">End-to-End Example</p>
       </div>
     </a>
     <a class="right-next"
-       href="introduction.html"
+       href="best_practices.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Introduction to Imitation Learning</p>
+        <p class="prev-next-title">Best Practices and Tips</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -625,9 +753,17 @@
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-you-ll-learn">What You’ll Learn</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-start">Quick Start</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-imitation-learning">Why Imitation Learning?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-metrics">Evaluation Metrics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#success-rate-sr">Success Rate (SR)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#route-completion-rc">Route Completion (RC)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#collision-times-ct">Collision Times (CT)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distance-to-goal-dtg">Distance-to-Goal (DTG)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-evaluation">Running Evaluation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-scenarios">Evaluation Scenarios</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-results">Interpreting Results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-evaluation">Advanced Evaluation</a></li>
 </ul>
   </nav></div>
 

@@ -1,0 +1,808 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Demonstration Dataset Format &#8212; UrbanVerse Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/sphinxcontrib/icon/node_modules/@fortawesome/fontawesome-free/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.4cbf315f70debaebd550c87a6162cf0f.min.css" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/sphinxcontrib/icon/node_modules/@fortawesome/fontawesome-free/js/all.min.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'source/robot_learning/imitation_learning/dataset_format';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="BC Training Configuration" href="training_config.html" />
+    <link rel="prev" title="Collecting Expert Demonstrations" href="data_collection.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="1.0.0" />
+    <meta name="docbuild:last-update" content="Nov 16, 2025"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">UrbanVese Documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><ul class="navbar-icon-links"
+    aria-label="Quick Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/metadriverse/urban-sim" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://img.shields.io/github/stars/metadriverse/urban-sim?color=fedcba" title="Stars" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="https://img.shields.io/github/stars/metadriverse/urban-sim?color=fedcba" class="icon-link-image" alt="Stars"/></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/isaac-sim/IsaacLab" title="Isaac Lab" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="https://img.shields.io/badge/IsaacLab-2.0.1-silver.svg" class="icon-link-image" alt="Isaac Lab"/></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://developer.nvidia.com/isaac-sim" title="Isaac Sim" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="https://img.shields.io/badge/IsaacSim-4.5.0-silver.svg" class="icon-link-image" alt="Isaac Sim"/></a>
+        </li>
+</ul></div>
+        <div class="sidebar-primary-item">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Installation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../installation/binaries_installation.html">Installation via Pre-Built Binaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation/asset_caching.html">UrbanVerse-100K Asset Caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation/scene_caching.html">UrbanVerse Scene Caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation/verifying_installation.html">Installation Verification</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Quickstart Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/intro_quickstart.html">Introduction to Quickstart Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/urbanverse_100k.html">Use UrbanVerse-100K with APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/urbanverse_gen.html">Real-to-Sim Scene Generation with UrbanVerse-Gen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/urbanverse_scenes.html">Use Built-in UrbanVerse Scenes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/craftbench.html">Use Built-in CraftBench Scenes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/train_your_own_robots.html">Train Your Robots in UrbanVerse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/test_your_robots.html">Test Your Robots on CraftBench</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Robot Learning with UrbanVerse</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../simulation_paradigms.html">Simulation Paradigms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configuration.html">General Configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../robot_configuration.html">Robot Configurations</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reinforcement_learning/index.html">Reinforcement Learning Guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reinforcement_learning/scene.html">Working with Urban Scenes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reinforcement_learning/action.html">Defining Robot Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reinforcement_learning/observation.html">What Your Policy Sees: Observations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reinforcement_learning/reward.html">Designing the Reward Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reinforcement_learning/reset.html">When Episodes End: Termination Conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reinforcement_learning/curriculum.html">Progressive Learning: Curriculum Strategies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reinforcement_learning/event.html">Environment Events and Initialization</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Imitation Learning in UrbanVerse</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="introduction.html">Introduction to Imitation Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_collection.html">Collecting Expert Demonstrations</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Demonstration Dataset Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="training_config.html">BC Training Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html">UrbanVerse IL APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="end_to_end_example.html">End-to-End Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="evaluation.html">Evaluating BC Policies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="best_practices.html">Best Practices and Tips</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../developer/code-structure/index.html">Code Structure in UrbanVerse</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../developer/code-structure/envs.html">Environment: Spawning and simulation for learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../developer/code-structure/learning.html">Learning Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../developer/code-structure/primitives.html">Primitives Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../developer/code-structure/scene.html">UrbanScene: Scenario Construction</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/collecting_data.html">Collecting Data in UrbanVerse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/realworld_deployment.html">Deploying UrbanVerse Policy in Real-World</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/adding_new_robots.html">Adding New Robots to UrbanVerse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/adding_new_assets.html">Adding New Assets to UrbanVerse-100K</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/vr_interface.html">Configuring VR Interface</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">UrbanVerse Community</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../community/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../community/communication.html">Communication Channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../community/coding_standards.html">Coding Standards</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../refs/assets.html">Assets in UrbanVerse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../refs/issues.html">Known Issues and Limitations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../refs/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../refs/3license.html">Third-Party License Notice</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/metadriverse/urban-sim" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/metadriverse/urban-sim/edit/main/source/robot_learning/imitation_learning/dataset_format.rst" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/metadriverse/urban-sim/issues/new?title=Issue%20on%20page%20%2Fsource/robot_learning/imitation_learning/dataset_format.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/source/robot_learning/imitation_learning/dataset_format.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Demonstration Dataset Format</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-directory-structure">Dataset Directory Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#observation-format">Observation Format</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#action-format">Action Format</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#episode-metadata">Episode Metadata</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-index">Dataset Index</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-alignment">Temporal Alignment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-demonstration-data">Working with Demonstration Data</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="demonstration-dataset-format">
+<span id="urbanverse-il-dataset-format"></span><h1>Demonstration Dataset Format<a class="headerlink" href="#demonstration-dataset-format" title="Permalink to this heading">#</a></h1>
+<p>UrbanVerse uses a standardized, simple dataset format for behavior cloning that ensures consistency across different data collection methods and makes it easy to work with demonstration data. Understanding this format is essential for creating custom data collection tools, debugging training issues, and analyzing demonstration quality.</p>
+<section id="dataset-directory-structure">
+<h2>Dataset Directory Structure<a class="headerlink" href="#dataset-directory-structure" title="Permalink to this heading">#</a></h2>
+<p>All demonstration datasets follow a consistent directory layout:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>demos/
+├── episode_000/
+│   ├── obs.npy          # Observation array (N, ...)
+│   ├── act.npy          # Action array (N, action_dim)
+│   └── meta.json        # Episode metadata
+├── episode_001/
+│   ├── obs.npy
+│   ├── act.npy
+│   └── meta.json
+├── episode_002/
+│   └── ...
+└── dataset_index.json   # Dataset-level metadata and statistics
+</pre></div>
+</div>
+<p>Each episode directory contains one complete navigation trajectory from start to goal (or termination).</p>
+</section>
+<section id="observation-format">
+<h2>Observation Format<a class="headerlink" href="#observation-format" title="Permalink to this heading">#</a></h2>
+<p>Observations are stored as NumPy arrays in <code class="docutils literal notranslate"><span class="pre">obs.npy</span></code> files. Each observation is a structured array containing:</p>
+<p><strong>For COCO Wheeled Robot (example):</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">obs</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;rgb&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">135</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">),</span>      <span class="c1"># RGB camera image</span>
+    <span class="s2">&quot;goal_vector&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span>      <span class="c1"># (dx, dy) relative to goal</span>
+    <span class="s2">&quot;robot_state&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">...</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span>    <span class="c1"># Velocity, pose, etc.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Observation Components:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>RGB Image</strong> (<code class="docutils literal notranslate"><span class="pre">rgb</span></code>)
+- Shape: <code class="docutils literal notranslate"><span class="pre">(height,</span> <span class="pre">width,</span> <span class="pre">3)</span></code>
+- Type: <code class="docutils literal notranslate"><span class="pre">uint8</span></code> (values 0-255)
+- Default resolution: 135×240 pixels (configurable)
+- Format: Standard RGB color image from onboard camera</p></li>
+<li><p><strong>Goal Vector</strong> (<code class="docutils literal notranslate"><span class="pre">goal_vector</span></code>)
+- Shape: <code class="docutils literal notranslate"><span class="pre">(2,)</span></code>
+- Type: <code class="docutils literal notranslate"><span class="pre">float32</span></code>
+- Content: <code class="docutils literal notranslate"><span class="pre">[dx,</span> <span class="pre">dy]</span></code> - relative position from robot to goal in meters
+- Normalized: Typically normalized to unit length or clipped to reasonable ranges</p></li>
+<li><p><strong>Robot State</strong> (<code class="docutils literal notranslate"><span class="pre">robot_state</span></code>, optional)
+- Shape: Variable depending on robot type
+- Type: <code class="docutils literal notranslate"><span class="pre">float32</span></code>
+- Content: Proprioceptive information (linear velocity, angular velocity, joint positions, etc.)</p></li>
+</ol>
+<p><strong>Observation Array Structure:</strong></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">obs.npy</span></code> file contains a sequence of observations:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">obs_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;episode_000/obs.npy&quot;</span><span class="p">)</span>
+<span class="c1"># Shape: (episode_length, obs_dim)</span>
+<span class="c1"># For COCO: (N, 135*240*3 + 2 + state_dim)</span>
+
+<span class="c1"># Access first observation</span>
+<span class="n">first_obs</span> <span class="o">=</span> <span class="n">obs_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="action-format">
+<h2>Action Format<a class="headerlink" href="#action-format" title="Permalink to this heading">#</a></h2>
+<p>Actions are stored as NumPy arrays in <code class="docutils literal notranslate"><span class="pre">act.npy</span></code> files. The action format depends on the robot type:</p>
+<p><strong>COCO Wheeled Robot:</strong>
+- Shape: <code class="docutils literal notranslate"><span class="pre">(episode_length,</span> <span class="pre">2)</span></code>
+- Content: <code class="docutils literal notranslate"><span class="pre">[linear_velocity,</span> <span class="pre">angular_velocity]</span></code>
+- Type: <code class="docutils literal notranslate"><span class="pre">float32</span></code>
+- Range: Typically normalized to <code class="docutils literal notranslate"><span class="pre">[-1,</span> <span class="pre">1]</span></code> before scaling</p>
+<p><strong>Unitree Go2 (Quadruped):</strong>
+- Shape: <code class="docutils literal notranslate"><span class="pre">(episode_length,</span> <span class="pre">12)</span></code>
+- Content: Joint velocity commands for 12 joints
+- Type: <code class="docutils literal notranslate"><span class="pre">float32</span></code></p>
+<p><strong>Unitree G1 (Humanoid):</strong>
+- Shape: <code class="docutils literal notranslate"><span class="pre">(episode_length,</span> <span class="pre">action_dim)</span></code>
+- Content: Joint-angle or torque-based controls
+- Type: <code class="docutils literal notranslate"><span class="pre">float32</span></code></p>
+<p><strong>Action Array Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">act_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;episode_000/act.npy&quot;</span><span class="p">)</span>
+<span class="c1"># Shape: (episode_length, action_dim)</span>
+<span class="c1"># For COCO: (N, 2)</span>
+
+<span class="c1"># Access first action</span>
+<span class="n">first_action</span> <span class="o">=</span> <span class="n">act_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># [v_linear, v_angular]</span>
+</pre></div>
+</div>
+</section>
+<section id="episode-metadata">
+<h2>Episode Metadata<a class="headerlink" href="#episode-metadata" title="Permalink to this heading">#</a></h2>
+<p>Each episode directory contains a <code class="docutils literal notranslate"><span class="pre">meta.json</span></code> file with episode-level information:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;episode_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;episode_000&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;scene_path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/path/to/UrbanVerse-160/CapeTown_0001/scene.usd&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;robot_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;coco_wheeled&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;episode_length&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">287</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;start_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;end_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">28.7</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;goal_position&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">15.3</span><span class="p">,</span><span class="w"> </span><span class="mf">8.7</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;start_position&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">2.1</span><span class="p">,</span><span class="w"> </span><span class="mf">1.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;outcome&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;termination_reason&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;goal_reached&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;collection_timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-01-15T10:30:00Z&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;control_mode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;teleop_gamepad&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Metadata Fields:</strong></p>
+<ul class="simple">
+<li><p><strong>episode_id</strong>: Unique identifier for this episode</p></li>
+<li><p><strong>scene_path</strong>: USD scene file used for this demonstration</p></li>
+<li><p><strong>robot_type</strong>: Robot embodiment identifier</p></li>
+<li><p><strong>episode_length</strong>: Number of timesteps in this episode</p></li>
+<li><p><strong>start_time / end_time</strong>: Timestamps (in seconds) for episode start and end</p></li>
+<li><p><strong>goal_position</strong>: 3D goal position <code class="docutils literal notranslate"><span class="pre">[x,</span> <span class="pre">y,</span> <span class="pre">z]</span></code> in scene coordinates</p></li>
+<li><p><strong>start_position</strong>: 3D starting position <code class="docutils literal notranslate"><span class="pre">[x,</span> <span class="pre">y,</span> <span class="pre">z]</span></code></p></li>
+<li><p><strong>outcome</strong>: Episode result (<code class="docutils literal notranslate"><span class="pre">&quot;success&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;collision&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;timeout&quot;</span></code>)</p></li>
+<li><p><strong>termination_reason</strong>: Why the episode ended</p></li>
+<li><p><strong>collection_timestamp</strong>: When the demonstration was collected</p></li>
+<li><p><strong>control_mode</strong>: Teleoperation method used</p></li>
+</ul>
+</section>
+<section id="dataset-index">
+<h2>Dataset Index<a class="headerlink" href="#dataset-index" title="Permalink to this heading">#</a></h2>
+<p>The root dataset directory contains <code class="docutils literal notranslate"><span class="pre">dataset_index.json</span></code> with dataset-level information:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span>{
+    &quot;dataset_version&quot;: &quot;1.0&quot;,
+    &quot;robot_type&quot;: &quot;coco_wheeled&quot;,
+    &quot;num_episodes&quot;: 20,
+    &quot;total_timesteps&quot;: 5423,
+    &quot;episode_ids&quot;: [&quot;episode_000&quot;, &quot;episode_001&quot;, ...],
+    &quot;scene_paths&quot;: [
+        &quot;/path/to/UrbanVerse-160/CapeTown_0001/scene.usd&quot;,
+        &quot;/path/to/UrbanVerse-160/Tokyo_0002/scene.usd&quot;
+    ],
+    &quot;collection_date&quot;: &quot;2024-01-15&quot;,
+    &quot;statistics&quot;: {
+        &quot;avg_episode_length&quot;: 271.15,
+        &quot;success_rate&quot;: 0.85,
+        &quot;avg_goal_distance&quot;: 12.3
+    }
+}
+</pre></div>
+</div>
+<p>This index file provides a quick overview of the dataset and is used by training and evaluation tools to understand the dataset structure.</p>
+</section>
+<section id="temporal-alignment">
+<h2>Temporal Alignment<a class="headerlink" href="#temporal-alignment" title="Permalink to this heading">#</a></h2>
+<p>Observations and actions are temporally aligned:</p>
+<ul class="simple">
+<li><p><strong>Synchronous sampling</strong>: Each observation corresponds to the state at timestep <code class="docutils literal notranslate"><span class="pre">t</span></code></p></li>
+<li><p><strong>Action application</strong>: Each action is applied at timestep <code class="docutils literal notranslate"><span class="pre">t</span></code> and affects the state at <code class="docutils literal notranslate"><span class="pre">t+1</span></code></p></li>
+<li><p><strong>Frame skipping</strong>: Optional frame skipping can be configured (e.g., use every 4th frame) to reduce dataset size</p></li>
+</ul>
+<p><strong>Standard alignment:</strong>
+- Observation at timestep <code class="docutils literal notranslate"><span class="pre">t</span></code> → Action at timestep <code class="docutils literal notranslate"><span class="pre">t</span></code> → Next observation at timestep <code class="docutils literal notranslate"><span class="pre">t+1</span></code></p>
+<p>This ensures that the policy learns to predict actions based on current observations, matching the inference-time behavior.</p>
+</section>
+<section id="working-with-demonstration-data">
+<h2>Working with Demonstration Data<a class="headerlink" href="#working-with-demonstration-data" title="Permalink to this heading">#</a></h2>
+<p>You can easily load and inspect demonstration data:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+<span class="c1"># Load an episode</span>
+<span class="n">episode_dir</span> <span class="o">=</span> <span class="s2">&quot;demos/episode_000&quot;</span>
+
+<span class="n">obs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">episode_dir</span><span class="si">}</span><span class="s2">/obs.npy&quot;</span><span class="p">)</span>
+<span class="n">act</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">episode_dir</span><span class="si">}</span><span class="s2">/act.npy&quot;</span><span class="p">)</span>
+<span class="n">meta</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">episode_dir</span><span class="si">}</span><span class="s2">/meta.json&quot;</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Episode length: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Observation shape: </span><span class="si">{</span><span class="n">obs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Action shape: </span><span class="si">{</span><span class="n">act</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Outcome: </span><span class="si">{</span><span class="n">meta</span><span class="p">[</span><span class="s1">&#39;outcome&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Visualize trajectory</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">goal_vecs</span> <span class="o">=</span> <span class="n">obs</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">2</span><span class="p">:]</span>  <span class="c1"># Extract goal vectors</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">goal_vecs</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">goal_vecs</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;dx (meters)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;dy (meters)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Goal Vector Trajectory&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This standardized format ensures that all UrbanVerse IL tools (training, evaluation, analysis) work seamlessly with demonstration data, regardless of how it was collected.</p>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="data_collection.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Collecting Expert Demonstrations</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="training_config.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">BC Training Configuration</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-directory-structure">Dataset Directory Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#observation-format">Observation Format</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#action-format">Action Format</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#episode-metadata">Episode Metadata</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-index">Dataset Index</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-alignment">Temporal Alignment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-demonstration-data">Working with Demonstration Data</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Honglin He
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025-2030, The UrbanVerse Project Developers. [UrbanVerse is built upon NVIDIA Isaac Sim&amp;Lab and extends its capabilities for urban robot learning tasks].
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on Nov 16, 2025.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

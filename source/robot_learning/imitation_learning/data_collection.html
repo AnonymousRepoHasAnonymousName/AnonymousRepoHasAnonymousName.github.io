@@ -1,0 +1,848 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Collecting Expert Demonstrations &#8212; UrbanVerse Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/sphinxcontrib/icon/node_modules/@fortawesome/fontawesome-free/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.4cbf315f70debaebd550c87a6162cf0f.min.css" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/sphinxcontrib/icon/node_modules/@fortawesome/fontawesome-free/js/all.min.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'source/robot_learning/imitation_learning/data_collection';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Demonstration Dataset Format" href="dataset_format.html" />
+    <link rel="prev" title="Introduction to Imitation Learning" href="introduction.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="1.0.0" />
+    <meta name="docbuild:last-update" content="Nov 16, 2025"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">UrbanVese Documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><ul class="navbar-icon-links"
+    aria-label="Quick Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/metadriverse/urban-sim" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://img.shields.io/github/stars/metadriverse/urban-sim?color=fedcba" title="Stars" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="https://img.shields.io/github/stars/metadriverse/urban-sim?color=fedcba" class="icon-link-image" alt="Stars"/></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/isaac-sim/IsaacLab" title="Isaac Lab" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="https://img.shields.io/badge/IsaacLab-2.0.1-silver.svg" class="icon-link-image" alt="Isaac Lab"/></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://developer.nvidia.com/isaac-sim" title="Isaac Sim" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="https://img.shields.io/badge/IsaacSim-4.5.0-silver.svg" class="icon-link-image" alt="Isaac Sim"/></a>
+        </li>
+</ul></div>
+        <div class="sidebar-primary-item">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Installation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../installation/binaries_installation.html">Installation via Pre-Built Binaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation/asset_caching.html">UrbanVerse-100K Asset Caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation/scene_caching.html">UrbanVerse Scene Caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation/verifying_installation.html">Installation Verification</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Quickstart Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/intro_quickstart.html">Introduction to Quickstart Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/urbanverse_100k.html">Use UrbanVerse-100K with APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/urbanverse_gen.html">Real-to-Sim Scene Generation with UrbanVerse-Gen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/urbanverse_scenes.html">Use Built-in UrbanVerse Scenes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/craftbench.html">Use Built-in CraftBench Scenes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/train_your_own_robots.html">Train Your Robots in UrbanVerse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/test_your_robots.html">Test Your Robots on CraftBench</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Robot Learning with UrbanVerse</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../simulation_paradigms.html">Simulation Paradigms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configuration.html">General Configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../robot_configuration.html">Robot Configurations</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reinforcement_learning/index.html">Reinforcement Learning Guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reinforcement_learning/scene.html">Working with Urban Scenes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reinforcement_learning/action.html">Defining Robot Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reinforcement_learning/observation.html">What Your Policy Sees: Observations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reinforcement_learning/reward.html">Designing the Reward Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reinforcement_learning/reset.html">When Episodes End: Termination Conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reinforcement_learning/curriculum.html">Progressive Learning: Curriculum Strategies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reinforcement_learning/event.html">Environment Events and Initialization</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Imitation Learning in UrbanVerse</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="introduction.html">Introduction to Imitation Learning</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Collecting Expert Demonstrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dataset_format.html">Demonstration Dataset Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="training_config.html">BC Training Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html">UrbanVerse IL APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="end_to_end_example.html">End-to-End Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="evaluation.html">Evaluating BC Policies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="best_practices.html">Best Practices and Tips</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../developer/code-structure/index.html">Code Structure in UrbanVerse</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../developer/code-structure/envs.html">Environment: Spawning and simulation for learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../developer/code-structure/learning.html">Learning Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../developer/code-structure/primitives.html">Primitives Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../developer/code-structure/scene.html">UrbanScene: Scenario Construction</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/collecting_data.html">Collecting Data in UrbanVerse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/realworld_deployment.html">Deploying UrbanVerse Policy in Real-World</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/adding_new_robots.html">Adding New Robots to UrbanVerse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/adding_new_assets.html">Adding New Assets to UrbanVerse-100K</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/vr_interface.html">Configuring VR Interface</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">UrbanVerse Community</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../community/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../community/communication.html">Communication Channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../community/coding_standards.html">Coding Standards</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../refs/assets.html">Assets in UrbanVerse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../refs/issues.html">Known Issues and Limitations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../refs/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../refs/3license.html">Third-Party License Notice</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/metadriverse/urban-sim" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/metadriverse/urban-sim/edit/main/source/robot_learning/imitation_learning/data_collection.rst" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/metadriverse/urban-sim/issues/new?title=Issue%20on%20page%20%2Fsource/robot_learning/imitation_learning/data_collection.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/source/robot_learning/imitation_learning/data_collection.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Collecting Expert Demonstrations</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-data-collection-pathways">Two Data Collection Pathways</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#method-a-teleoperation-collection">Method A: Teleoperation Collection</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#collecting-demonstrations-via-teleoperation">Collecting Demonstrations via Teleoperation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#api-reference-uv-navigation-il-collect-data">API Reference: <code class="docutils literal notranslate"><span class="pre">uv.navigation.il.collect_data</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#teleoperation-controls">Teleoperation Controls</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices-for-teleoperation">Best Practices for Teleoperation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#method-b-importing-external-demonstrations">Method B: Importing External Demonstrations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-external-data">Importing External Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#api-reference-uv-navigation-il-import-external">API Reference: <code class="docutils literal notranslate"><span class="pre">uv.navigation.il.import_external</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#supported-import-formats">Supported Import Formats</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-converting-ros-bag-to-urbanverse-format">Example: Converting ROS Bag to UrbanVerse Format</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-quality-considerations">Data Quality Considerations</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="collecting-expert-demonstrations">
+<span id="urbanverse-il-data-collection"></span><h1>Collecting Expert Demonstrations<a class="headerlink" href="#collecting-expert-demonstrations" title="Permalink to this heading">#</a></h1>
+<p>Expert demonstrations are the foundation of behavior cloning. UrbanVerse provides flexible tools for collecting demonstrations either directly within the simulation environment or by importing external demonstration data from real-world deployments.</p>
+<section id="two-data-collection-pathways">
+<h2>Two Data Collection Pathways<a class="headerlink" href="#two-data-collection-pathways" title="Permalink to this heading">#</a></h2>
+<p>UrbanVerse supports two primary methods for obtaining expert demonstrations:</p>
+<p><strong>A. Teleoperation Inside UrbanVerse</strong>
+Manually control the robot using keyboard, joystick, gamepad, or VR interfaces while navigating to goals in UrbanVerse scenes. This method provides direct control over demonstration quality and scene diversity.</p>
+<p><strong>B. Importing External Demonstrations</strong>
+Convert demonstration logs from external sources (e.g., ROS bags, real-world robot teleoperation) into UrbanVerse’s standardized format. This enables incorporating real-world navigation data into your training pipeline.</p>
+</section>
+<section id="method-a-teleoperation-collection">
+<h2>Method A: Teleoperation Collection<a class="headerlink" href="#method-a-teleoperation-collection" title="Permalink to this heading">#</a></h2>
+<p>UrbanVerse’s teleoperation interface allows you to manually control robots while the system automatically records observations, actions, and metadata. This is the most straightforward way to collect demonstrations.</p>
+<section id="collecting-demonstrations-via-teleoperation">
+<h3>Collecting Demonstrations via Teleoperation<a class="headerlink" href="#collecting-demonstrations-via-teleoperation" title="Permalink to this heading">#</a></h3>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">collect_data</span></code> API to start a teleoperation session:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
+
+<span class="n">demo_dir</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">navigation</span><span class="o">.</span><span class="n">il</span><span class="o">.</span><span class="n">collect_data</span><span class="p">(</span>
+    <span class="n">scene_paths</span><span class="o">=</span><span class="p">[</span>
+        <span class="s2">&quot;/path/to/UrbanVerse-160/CapeTown_0001/scene.usd&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;/path/to/UrbanVerse-160/Tokyo_0002/scene.usd&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="n">robot_type</span><span class="o">=</span><span class="s2">&quot;coco_wheeled&quot;</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;demos/my_teleop_collection&quot;</span><span class="p">,</span>
+    <span class="n">control_mode</span><span class="o">=</span><span class="s2">&quot;teleop_gamepad&quot;</span><span class="p">,</span>  <span class="c1"># or &quot;teleop_keyboard&quot;, &quot;teleop_joystick&quot;, &quot;teleop_vr&quot;</span>
+    <span class="n">max_episodes</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Demonstrations saved to: </span><span class="si">{</span><span class="n">demo_dir</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="api-reference-uv-navigation-il-collect-data">
+<h3>API Reference: <code class="docutils literal notranslate"><span class="pre">uv.navigation.il.collect_data</span></code><a class="headerlink" href="#api-reference-uv-navigation-il-collect-data" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uv</span><span class="o">.</span><span class="n">navigation</span><span class="o">.</span><span class="n">il</span><span class="o">.</span><span class="n">collect_data</span><span class="p">(</span>
+    <span class="n">scene_paths</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">robot_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">control_mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;teleop_gamepad&quot;</span><span class="p">,</span>
+    <span class="n">max_episodes</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="n">episode_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">300</span><span class="p">,</span>
+    <span class="n">goal_sampling</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;random&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+</pre></div>
+</div>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><p><strong>scene_paths</strong> (list[str]): List of USD scene file paths to collect demonstrations in</p></li>
+<li><p><strong>robot_type</strong> (str): Robot embodiment identifier (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;coco_wheeled&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;unitree_go2&quot;</span></code>)</p></li>
+<li><p><strong>output_dir</strong> (str): Directory where demonstration data will be saved</p></li>
+<li><p><strong>control_mode</strong> (str): Teleoperation interface to use:
+- <code class="docutils literal notranslate"><span class="pre">&quot;teleop_keyboard&quot;</span></code>: Keyboard controls (arrow keys for movement)
+- <code class="docutils literal notranslate"><span class="pre">&quot;teleop_gamepad&quot;</span></code>: Gamepad/controller (recommended for smooth control)
+- <code class="docutils literal notranslate"><span class="pre">&quot;teleop_joystick&quot;</span></code>: Joystick interface
+- <code class="docutils literal notranslate"><span class="pre">&quot;teleop_vr&quot;</span></code>: VR headset and controllers (if VR support is enabled)</p></li>
+<li><p><strong>max_episodes</strong> (int): Maximum number of demonstration episodes to collect</p></li>
+<li><p><strong>episode_length</strong> (int): Maximum steps per episode (episode ends on goal reached, collision, or timeout)</p></li>
+<li><p><strong>goal_sampling</strong> (str): How to sample goal positions:
+- <code class="docutils literal notranslate"><span class="pre">&quot;random&quot;</span></code>: Random goals from drivable regions
+- <code class="docutils literal notranslate"><span class="pre">&quot;curriculum&quot;</span></code>: Gradually increasing goal distances
+- <code class="docutils literal notranslate"><span class="pre">&quot;fixed&quot;</span></code>: Fixed goal positions for consistency</p></li>
+</ul>
+<p><strong>Returns:</strong></p>
+<ul class="simple">
+<li><p><strong>str</strong>: Path to the created demonstration dataset directory</p></li>
+</ul>
+<p><strong>Output Structure:</strong></p>
+<p>The function creates a dataset directory with the following structure:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>output_dir/
+├── episode_000/
+│   ├── obs.npy          # Observations array
+│   ├── act.npy          # Expert actions array
+│   └── meta.json        # Episode metadata
+├── episode_001/
+├── episode_002/
+└── dataset_index.json   # Dataset summary and statistics
+</pre></div>
+</div>
+</section>
+<section id="teleoperation-controls">
+<h3>Teleoperation Controls<a class="headerlink" href="#teleoperation-controls" title="Permalink to this heading">#</a></h3>
+<p><strong>Keyboard Controls</strong> (<code class="docutils literal notranslate"><span class="pre">teleop_keyboard</span></code>):
+- Arrow keys: Forward/backward, left/right rotation
+- Space: Emergency stop
+- Enter: End current episode and start next</p>
+<p><strong>Gamepad Controls</strong> (<code class="docutils literal notranslate"><span class="pre">teleop_gamepad</span></code>):
+- Left stick: Forward/backward movement
+- Right stick: Rotation
+- A button: End episode
+- B button: Emergency stop</p>
+<p><strong>Joystick Controls</strong> (<code class="docutils literal notranslate"><span class="pre">teleop_joystick</span></code>):
+- Joystick axes: Velocity commands
+- Buttons: Episode control</p>
+<p><strong>VR Controls</strong> (<code class="docutils literal notranslate"><span class="pre">teleop_vr</span></code>):
+- VR controllers: Natural hand-based control
+- Grip buttons: Episode control</p>
+</section>
+<section id="best-practices-for-teleoperation">
+<h3>Best Practices for Teleoperation<a class="headerlink" href="#best-practices-for-teleoperation" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Collect diverse scenarios</strong>: Navigate to goals at various distances and in different scene regions</p></li>
+<li><p><strong>Include recovery behaviors</strong>: Demonstrate how to recover from near-collisions or difficult situations</p></li>
+<li><p><strong>Maintain consistent quality</strong>: Try to demonstrate smooth, efficient navigation paths</p></li>
+<li><p><strong>Vary scene conditions</strong>: Collect demonstrations across different UrbanVerse scenes to improve generalization</p></li>
+<li><p><strong>Record sufficient data</strong>: Aim for 20-50 episodes per scene for robust learning</p></li>
+</ul>
+</section>
+</section>
+<section id="method-b-importing-external-demonstrations">
+<h2>Method B: Importing External Demonstrations<a class="headerlink" href="#method-b-importing-external-demonstrations" title="Permalink to this heading">#</a></h2>
+<p>If you have demonstration data from external sources (real-world robot deployments, other simulators, or different data formats), UrbanVerse provides tools to convert them into the standard BC dataset format.</p>
+<section id="importing-external-data">
+<h3>Importing External Data<a class="headerlink" href="#importing-external-data" title="Permalink to this heading">#</a></h3>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">import_external</span></code> API to convert external demonstration logs:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
+
+<span class="n">demo_dir</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">navigation</span><span class="o">.</span><span class="n">il</span><span class="o">.</span><span class="n">import_external</span><span class="p">(</span>
+    <span class="n">demo_source</span><span class="o">=</span><span class="s2">&quot;/path/to/ros_bag/demo.bag&quot;</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;demos/imported_ros_data&quot;</span><span class="p">,</span>
+    <span class="n">mapping_cfg</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;rosbag&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;topic_obs&quot;</span><span class="p">:</span> <span class="s2">&quot;/camera/rgb/image_raw&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;topic_act&quot;</span><span class="p">:</span> <span class="s2">&quot;/cmd_vel&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;topic_goal&quot;</span><span class="p">:</span> <span class="s2">&quot;/navigation/goal&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;coordinate_transform&quot;</span><span class="p">:</span> <span class="s2">&quot;ros_to_urbanverse&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="api-reference-uv-navigation-il-import-external">
+<h3>API Reference: <code class="docutils literal notranslate"><span class="pre">uv.navigation.il.import_external</span></code><a class="headerlink" href="#api-reference-uv-navigation-il-import-external" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uv</span><span class="o">.</span><span class="n">navigation</span><span class="o">.</span><span class="n">il</span><span class="o">.</span><span class="n">import_external</span><span class="p">(</span>
+    <span class="n">demo_source</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">mapping_cfg</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+</pre></div>
+</div>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><p><strong>demo_source</strong> (str): Path to external demonstration data (ROS bag, CSV, HDF5, etc.)</p></li>
+<li><p><strong>output_dir</strong> (str): Directory where converted demonstrations will be saved</p></li>
+<li><p><strong>mapping_cfg</strong> (dict): Configuration dictionary specifying:
+- <code class="docutils literal notranslate"><span class="pre">format</span></code>: Source data format (<code class="docutils literal notranslate"><span class="pre">&quot;rosbag&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;csv&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;hdf5&quot;</span></code>, etc.)
+- Topic/field mappings for observations, actions, and goals
+- Coordinate transformations (if needed)
+- Temporal alignment parameters</p></li>
+</ul>
+<p><strong>Returns:</strong></p>
+<ul class="simple">
+<li><p><strong>str</strong>: Path to the created demonstration dataset directory</p></li>
+</ul>
+</section>
+<section id="supported-import-formats">
+<h3>Supported Import Formats<a class="headerlink" href="#supported-import-formats" title="Permalink to this heading">#</a></h3>
+<p><strong>ROS Bag Files:</strong>
+- Extract image topics, command velocity topics, and goal position topics
+- Handle timestamp synchronization and coordinate frame transformations
+- Convert ROS coordinate conventions to UrbanVerse conventions</p>
+<p><strong>CSV/HDF5 Files:</strong>
+- Flexible field mapping for custom data formats
+- Support for various observation and action representations</p>
+<p><strong>Custom Formats:</strong>
+- Extensible interface for adding support for additional data formats</p>
+</section>
+<section id="example-converting-ros-bag-to-urbanverse-format">
+<h3>Example: Converting ROS Bag to UrbanVerse Format<a class="headerlink" href="#example-converting-ros-bag-to-urbanverse-format" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
+
+<span class="c1"># Convert ROS bag with navigation demonstrations</span>
+<span class="n">demo_dir</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">navigation</span><span class="o">.</span><span class="n">il</span><span class="o">.</span><span class="n">import_external</span><span class="p">(</span>
+    <span class="n">demo_source</span><span class="o">=</span><span class="s2">&quot;real_world_demos/robot_nav_2024.bag&quot;</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;demos/real_world_imported&quot;</span><span class="p">,</span>
+    <span class="n">mapping_cfg</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;rosbag&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;topic_obs&quot;</span><span class="p">:</span> <span class="s2">&quot;/front_camera/image_raw&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;topic_act&quot;</span><span class="p">:</span> <span class="s2">&quot;/mobile_base/cmd_vel&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;topic_goal&quot;</span><span class="p">:</span> <span class="s2">&quot;/move_base_simple/goal&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;topic_pose&quot;</span><span class="p">:</span> <span class="s2">&quot;/odom&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;coordinate_transform&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;ros_to_urbanverse&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;frame_id&quot;</span><span class="p">:</span> <span class="s2">&quot;map&quot;</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;temporal_sync&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;nearest_neighbor&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;tolerance&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>  <span class="c1"># seconds</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>The import process automatically:
+- Extracts relevant topics/fields from the source data
+- Synchronizes timestamps across different data streams
+- Transforms coordinates to UrbanVerse’s coordinate system
+- Validates data consistency and completeness
+- Saves everything in UrbanVerse’s standard BC dataset format</p>
+</section>
+</section>
+<section id="data-quality-considerations">
+<h2>Data Quality Considerations<a class="headerlink" href="#data-quality-considerations" title="Permalink to this heading">#</a></h2>
+<p>Regardless of collection method, ensure your demonstrations:</p>
+<ul class="simple">
+<li><p><strong>Cover diverse scenarios</strong>: Include various goal distances, scene regions, and navigation challenges</p></li>
+<li><p><strong>Maintain temporal consistency</strong>: Observations and actions should be properly synchronized</p></li>
+<li><p><strong>Include sufficient diversity</strong>: Avoid overfitting to specific navigation patterns</p></li>
+<li><p><strong>Record metadata</strong>: Goal positions, episode outcomes, and scene information help with analysis</p></li>
+</ul>
+<p>The next section details the exact format of UrbanVerse’s demonstration datasets, enabling you to understand the data structure and potentially create custom data collection tools.</p>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="introduction.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction to Imitation Learning</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="dataset_format.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Demonstration Dataset Format</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-data-collection-pathways">Two Data Collection Pathways</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#method-a-teleoperation-collection">Method A: Teleoperation Collection</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#collecting-demonstrations-via-teleoperation">Collecting Demonstrations via Teleoperation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#api-reference-uv-navigation-il-collect-data">API Reference: <code class="docutils literal notranslate"><span class="pre">uv.navigation.il.collect_data</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#teleoperation-controls">Teleoperation Controls</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices-for-teleoperation">Best Practices for Teleoperation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#method-b-importing-external-demonstrations">Method B: Importing External Demonstrations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-external-data">Importing External Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#api-reference-uv-navigation-il-import-external">API Reference: <code class="docutils literal notranslate"><span class="pre">uv.navigation.il.import_external</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#supported-import-formats">Supported Import Formats</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-converting-ros-bag-to-urbanverse-format">Example: Converting ROS Bag to UrbanVerse Format</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-quality-considerations">Data Quality Considerations</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Honglin He
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025-2030, The UrbanVerse Project Developers. [UrbanVerse is built upon NVIDIA Isaac Sim&amp;Lab and extends its capabilities for urban robot learning tasks].
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on Nov 16, 2025.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
