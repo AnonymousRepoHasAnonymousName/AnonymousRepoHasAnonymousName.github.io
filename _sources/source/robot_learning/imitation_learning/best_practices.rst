@@ -1,4 +1,4 @@
-.. _urbanverse-il-best-practices:
+.. _urbanverse-robot-learning-il-guide-best-practices:
 
 Best Practices and Tips
 ========================

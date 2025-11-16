@@ -1,4 +1,4 @@
-.. _urbanverse-il-api-reference:
+.. _urbanverse-robot-learning-il-guide-api-reference:
 
 UrbanVerse IL APIs
 ===================

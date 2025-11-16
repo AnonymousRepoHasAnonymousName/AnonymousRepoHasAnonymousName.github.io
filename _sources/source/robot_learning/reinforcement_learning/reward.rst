@@ -23,8 +23,8 @@ Reward configuration lets you tune the relative importance of different behavior
 
 .. code-block:: python
 
-   from urbanverse.navigation.config import EnvCfg, RewardCfg
    import urbanverse as uv
+   from urbanverse.navigation.config import EnvCfg, RewardCfg
 
    cfg = EnvCfg(
        robot_type="coco_wheeled",

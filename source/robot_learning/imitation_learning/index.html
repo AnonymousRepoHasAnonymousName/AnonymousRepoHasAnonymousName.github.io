@@ -226,7 +226,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../simulation_paradigms.html">Simulation Paradigms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../configuration.html">General Configurations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../robot_configuration.html">Robot Configurations</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../reinforcement_learning/index.html">Reinforcement Learning Guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reinforcement_learning/index.html">Reinforcement Learning in UrbanVerse</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../reinforcement_learning/scene.html">Working with Urban Scenes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reinforcement_learning/action.html">Defining Robot Actions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reinforcement_learning/observation.html">What Your Policy Sees: Observations</a></li>
@@ -484,9 +484,9 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-you-ll-learn">What You’ll Learn</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-start">Quick Start</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-imitation-learning">Why Imitation Learning?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation-overview">Documentation Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-usage">Basic Usage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benefits-of-imitation-learning">Benefits of Imitation Learning</a></li>
 </ul>
             </nav>
         </div>
@@ -499,12 +499,12 @@
                 <article class="bd-article">
                   
   <section id="imitation-learning-in-urbanverse">
-<span id="urbanverse-il-index"></span><h1>Imitation Learning in UrbanVerse<a class="headerlink" href="#imitation-learning-in-urbanverse" title="Permalink to this heading">#</a></h1>
+<span id="urbanverse-robot-learning-il-guide-root"></span><h1>Imitation Learning in UrbanVerse<a class="headerlink" href="#imitation-learning-in-urbanverse" title="Permalink to this heading">#</a></h1>
 <p>This chapter explains how to train Behavior Cloning (BC) policies for goal-directed navigation in UrbanVerse scenes. You can learn from expert demonstrations collected directly within UrbanVerse’s simulation environment, or import real-world teleoperated demonstrations mapped into UrbanVerse’s urban scenes.</p>
 <p>UrbanVerse provides a unified framework for imitation learning, including consistent data formats, streamlined training APIs, and comprehensive evaluation tools that work seamlessly with UrbanVerse-160, CraftBench, and custom scenes.</p>
-<section id="what-you-ll-learn">
-<h2>What You’ll Learn<a class="headerlink" href="#what-you-ll-learn" title="Permalink to this heading">#</a></h2>
-<p>This guide covers the complete imitation learning workflow:</p>
+<section id="documentation-overview">
+<h2>Documentation Overview<a class="headerlink" href="#documentation-overview" title="Permalink to this heading">#</a></h2>
+<p>This documentation covers the complete imitation learning workflow:</p>
 <ul class="simple">
 <li><p><strong>Collecting expert demonstrations</strong> through teleoperation (keyboard, joystick, gamepad, VR) or importing external data</p></li>
 <li><p><strong>Understanding the demonstration dataset format</strong> and how observations and actions are structured</p></li>
@@ -526,9 +526,9 @@
 </ul>
 </div>
 </section>
-<section id="quick-start">
-<h2>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this heading">#</a></h2>
-<p>Here’s a minimal example that collects demonstrations and trains a BC policy:</p>
+<section id="basic-usage">
+<h2>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this heading">#</a></h2>
+<p>The following example demonstrates how to collect demonstrations and train a BC policy:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
 
 <span class="c1"># 1. Collect expert demonstrations</span>
@@ -566,9 +566,9 @@
 </pre></div>
 </div>
 </section>
-<section id="why-imitation-learning">
-<h2>Why Imitation Learning?<a class="headerlink" href="#why-imitation-learning" title="Permalink to this heading">#</a></h2>
-<p>Imitation learning offers several advantages for training navigation policies:</p>
+<section id="benefits-of-imitation-learning">
+<h2>Benefits of Imitation Learning<a class="headerlink" href="#benefits-of-imitation-learning" title="Permalink to this heading">#</a></h2>
+<p>Imitation learning provides several advantages for training navigation policies:</p>
 <ul class="simple">
 <li><p><strong>Fast bootstrapping</strong>: Learn from expert demonstrations without designing reward functions</p></li>
 <li><p><strong>Real-world data integration</strong>: Incorporate teleoperated demonstrations from actual robot deployments</p></li>
@@ -625,9 +625,9 @@
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-you-ll-learn">What You’ll Learn</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-start">Quick Start</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-imitation-learning">Why Imitation Learning?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation-overview">Documentation Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-usage">Basic Usage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benefits-of-imitation-learning">Benefits of Imitation Learning</a></li>
 </ul>
   </nav></div>
 

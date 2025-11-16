@@ -21,8 +21,8 @@ Termination configuration is straightforward and intuitive:
 
 .. code-block:: python
 
-   from urbanverse.navigation.config import EnvCfg, TerminationCfg
    import urbanverse as uv
+   from urbanverse.navigation.config import EnvCfg, TerminationCfg
 
    cfg = EnvCfg(
        robot_type="coco_wheeled",

@@ -226,7 +226,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../simulation_paradigms.html">Simulation Paradigms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../configuration.html">General Configurations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../robot_configuration.html">Robot Configurations</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Reinforcement Learning Guide</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Reinforcement Learning in UrbanVerse</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="scene.html">Working with Urban Scenes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="action.html">Defining Robot Actions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="observation.html">What Your Policy Sees: Observations</a></li>
@@ -484,7 +484,7 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-curriculum-learning">Why Use Curriculum Learning?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curriculum-learning-overview">Curriculum Learning Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curriculum-configuration">Curriculum Configuration</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#built-in-curriculum-strategies">Built-in Curriculum Strategies</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-curriculum-updates-work">How Curriculum Updates Work</a></li>
@@ -505,8 +505,8 @@
   <section id="progressive-learning-curriculum-strategies">
 <span id="urbanverse-robot-learning-rl-guide-curriculum"></span><h1>Progressive Learning: Curriculum Strategies<a class="headerlink" href="#progressive-learning-curriculum-strategies" title="Permalink to this heading">#</a></h1>
 <p>Curriculum learning gradually increases task difficulty as your policy improves, accelerating training and often leading to better final performance. UrbanVerse provides built-in curriculum mechanisms that automatically scale navigation challenges, helping your policy learn basic behaviors before tackling complex scenarios.</p>
-<section id="why-use-curriculum-learning">
-<h2>Why Use Curriculum Learning?<a class="headerlink" href="#why-use-curriculum-learning" title="Permalink to this heading">#</a></h2>
+<section id="curriculum-learning-overview">
+<h2>Curriculum Learning Overview<a class="headerlink" href="#curriculum-learning-overview" title="Permalink to this heading">#</a></h2>
 <p>Training a navigation policy from scratch in complex urban environments can be challenging. Starting with nearby goals and simple scenarios, then progressively expanding to long-range navigation across diverse scenes, helps the policy:
 - <strong>Learn fundamental skills first</strong> (basic obstacle avoidance, goal following)
 - <strong>Build confidence</strong> before facing harder challenges
@@ -516,8 +516,8 @@
 <section id="curriculum-configuration">
 <h2>Curriculum Configuration<a class="headerlink" href="#curriculum-configuration" title="Permalink to this heading">#</a></h2>
 <p>Enable curriculum learning with simple boolean flags:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">urbanverse.navigation.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">EnvCfg</span><span class="p">,</span> <span class="n">CurriculumCfg</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">urbanverse.navigation.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">EnvCfg</span><span class="p">,</span> <span class="n">CurriculumCfg</span>
 
 <span class="n">cfg</span> <span class="o">=</span> <span class="n">EnvCfg</span><span class="p">(</span>
     <span class="n">robot_type</span><span class="o">=</span><span class="s2">&quot;coco_wheeled&quot;</span><span class="p">,</span>
@@ -647,7 +647,7 @@ For fixed-difficulty training, disable curriculum learning:</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-curriculum-learning">Why Use Curriculum Learning?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curriculum-learning-overview">Curriculum Learning Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curriculum-configuration">Curriculum Configuration</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#built-in-curriculum-strategies">Built-in Curriculum Strategies</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-curriculum-updates-work">How Curriculum Updates Work</a></li>

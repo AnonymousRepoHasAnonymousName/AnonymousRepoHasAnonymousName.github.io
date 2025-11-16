@@ -1,4 +1,4 @@
-.. _urbanverse-il-data-collection:
+.. _urbanverse-robot-learning-il-guide-data-collection:
 
 Collecting Expert Demonstrations
 ==================================

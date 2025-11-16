@@ -23,8 +23,8 @@ Observation configuration is simple and intuitive:
 
 .. code-block:: python
 
-   from urbanverse.navigation.config import EnvCfg, ObservationCfg
    import urbanverse as uv
+   from urbanverse.navigation.config import EnvCfg, ObservationCfg
 
    cfg = EnvCfg(
        robot_type="coco_wheeled",

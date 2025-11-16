@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Reinforcement Learning Guide &#8212; UrbanVerse Documentation</title>
+    <title>Reinforcement Learning in UrbanVerse &#8212; UrbanVerse Documentation</title>
   
   
   
@@ -226,7 +226,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../simulation_paradigms.html">Simulation Paradigms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../configuration.html">General Configurations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../robot_configuration.html">Robot Configurations</a></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Reinforcement Learning Guide</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Reinforcement Learning in UrbanVerse</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="scene.html">Working with Urban Scenes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="action.html">Defining Robot Actions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="observation.html">What Your Policy Sees: Observations</a></li>
@@ -474,7 +474,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Reinforcement Learning Guide</h1>
+    <h1>Reinforcement Learning in UrbanVerse</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -484,8 +484,10 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation-overview">Documentation Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-rl-environment-architecture">The RL Environment Architecture</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-your-first-rl-environment">Getting Started: Your First RL Environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-usage">Basic Usage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benefits-of-reinforcement-learning">Benefits of Reinforcement Learning</a></li>
 </ul>
             </nav>
         </div>
@@ -497,10 +499,20 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="reinforcement-learning-guide">
-<span id="urbanverse-robot-learning-rl-guide-root"></span><h1>Reinforcement Learning Guide<a class="headerlink" href="#reinforcement-learning-guide" title="Permalink to this heading">#</a></h1>
+  <section id="reinforcement-learning-in-urbanverse">
+<span id="urbanverse-robot-learning-rl-guide-root"></span><h1>Reinforcement Learning in UrbanVerse<a class="headerlink" href="#reinforcement-learning-in-urbanverse" title="Permalink to this heading">#</a></h1>
 <p>UrbanVerse offers a comprehensive reinforcement learning framework designed specifically for training navigation policies in photorealistic urban environments. Built on Isaac Lab’s robust simulation infrastructure, UrbanVerse enables efficient parallel training across diverse real-to-sim city scenes, supporting everything from simple point navigation to complex multi-agent interactions.</p>
 <p>This section walks through the essential building blocks for configuring and training RL agents in UrbanVerse’s rich urban simulation environments.</p>
+<section id="documentation-overview">
+<h2>Documentation Overview<a class="headerlink" href="#documentation-overview" title="Permalink to this heading">#</a></h2>
+<p>This documentation covers the complete reinforcement learning workflow:</p>
+<ul class="simple">
+<li><p><strong>Configuring RL environments</strong> with scenes, observations, actions, rewards, and termination conditions</p></li>
+<li><p><strong>Understanding the seven key components</strong> that define the learning task</p></li>
+<li><p><strong>Setting up curriculum learning</strong> to gradually increase task difficulty</p></li>
+<li><p><strong>Using UrbanVerse’s RL APIs</strong> for environment creation and training</p></li>
+<li><p><strong>Best practices</strong> for effective reinforcement learning in urban navigation tasks</p></li>
+</ul>
 <div class="toctree-wrapper compound">
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">RL Environment Components</span></p>
 <ul>
@@ -513,6 +525,7 @@
 <li class="toctree-l1"><a class="reference internal" href="event.html">Environment Events and Initialization</a></li>
 </ul>
 </div>
+</section>
 <section id="the-rl-environment-architecture">
 <h2>The RL Environment Architecture<a class="headerlink" href="#the-rl-environment-architecture" title="Permalink to this heading">#</a></h2>
 <p>Training a navigation policy in UrbanVerse involves configuring seven key components that work together to define the learning task:</p>
@@ -538,14 +551,14 @@ Gradually increase task difficulty. Start with nearby goals and simple scenes, t
 Inject variability and randomization. Customize robot initialization, dynamic agent spawning, and environmental variations to improve policy robustness.
 → <a class="reference internal" href="event.html"><span class="doc">Environment Events and Initialization</span></a></p>
 </section>
-<section id="getting-started-your-first-rl-environment">
-<h2>Getting Started: Your First RL Environment<a class="headerlink" href="#getting-started-your-first-rl-environment" title="Permalink to this heading">#</a></h2>
-<p>Here’s a minimal example that creates a complete RL environment for training a COCO wheeled robot:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">urbanverse.navigation.config</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<section id="basic-usage">
+<h2>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this heading">#</a></h2>
+<p>The following example demonstrates how to create a complete RL environment for training a COCO wheeled robot:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">urbanverse.navigation.config</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">EnvCfg</span><span class="p">,</span> <span class="n">SceneCfg</span><span class="p">,</span> <span class="n">ObservationCfg</span><span class="p">,</span> <span class="n">ActionCfg</span><span class="p">,</span>
     <span class="n">RewardCfg</span><span class="p">,</span> <span class="n">TerminationCfg</span><span class="p">,</span> <span class="n">CurriculumCfg</span>
 <span class="p">)</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
 
 <span class="c1"># Define your training configuration</span>
 <span class="n">cfg</span> <span class="o">=</span> <span class="n">EnvCfg</span><span class="p">(</span>
@@ -571,6 +584,17 @@ Inject variability and randomization. Customize robot initialization, dynamic ag
 </pre></div>
 </div>
 <p>Each component can be customized independently, allowing you to experiment with different configurations, robot types, and training strategies. The following pages dive deep into each component, providing detailed explanations, examples, and best practices for training effective navigation policies in UrbanVerse.</p>
+</section>
+<section id="benefits-of-reinforcement-learning">
+<h2>Benefits of Reinforcement Learning<a class="headerlink" href="#benefits-of-reinforcement-learning" title="Permalink to this heading">#</a></h2>
+<p>Reinforcement learning provides several advantages for training navigation policies:</p>
+<ul class="simple">
+<li><p><strong>Learn from experience</strong>: Policies improve through trial and error, discovering robust navigation strategies</p></li>
+<li><p><strong>Exceed expert performance</strong>: RL can learn behaviors that go beyond what’s demonstrated in expert data</p></li>
+<li><p><strong>Handle complex scenarios</strong>: Effective for long-horizon tasks requiring sophisticated planning and decision-making</p></li>
+<li><p><strong>Combine with imitation learning</strong>: Use BC policies as warm starts, then fine-tune with RL for best results</p></li>
+</ul>
+<p>UrbanVerse’s reinforcement learning framework is designed to work seamlessly with the same scenes, robots, and observation/action spaces used in imitation learning, making it easy to combine both approaches.</p>
 </section>
 </section>
 
@@ -620,8 +644,10 @@ Inject variability and randomization. Customize robot initialization, dynamic ag
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation-overview">Documentation Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-rl-environment-architecture">The RL Environment Architecture</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-your-first-rl-environment">Getting Started: Your First RL Environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-usage">Basic Usage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benefits-of-reinforcement-learning">Benefits of Reinforcement Learning</a></li>
 </ul>
   </nav></div>
 

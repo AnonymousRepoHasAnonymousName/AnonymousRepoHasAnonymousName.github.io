@@ -1,4 +1,4 @@
-.. _urbanverse-il-end-to-end:
+.. _urbanverse-robot-learning-il-guide-end-to-end:
 
 End-to-End Example
 ===================

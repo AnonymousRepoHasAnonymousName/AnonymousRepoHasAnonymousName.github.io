@@ -226,7 +226,7 @@
 <li class="toctree-l1"><a class="reference internal" href="simulation_paradigms.html">Simulation Paradigms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="configuration.html">General Configurations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="robot_configuration.html">Robot Configurations</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="reinforcement_learning/index.html">Reinforcement Learning Guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="reinforcement_learning/index.html">Reinforcement Learning in UrbanVerse</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="reinforcement_learning/scene.html">Working with Urban Scenes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reinforcement_learning/action.html">Defining Robot Actions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reinforcement_learning/observation.html">What Your Policy Sees: Observations</a></li>
@@ -538,74 +538,23 @@ through binary download/source file to use the latest features and improvements.
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="reinforcement_learning/index.html">Reinforcement Learning Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="reinforcement_learning/scene.html">Working with Urban Scenes</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/scene.html#understanding-scene-sources">Understanding Scene Sources</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/scene.html#configuring-scene-loading">Configuring Scene Loading</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/scene.html#key-configuration-parameters">Key Configuration Parameters</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/scene.html#scene-distribution-strategies">Scene Distribution Strategies</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/scene.html#practical-example-multi-city-training-setup">Practical Example: Multi-City Training Setup</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="reinforcement_learning/action.html">Defining Robot Actions</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/action.html#how-actions-work">How Actions Work</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/action.html#robot-specific-action-spaces">Robot-Specific Action Spaces</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/action.html#action-processing-pipeline">Action Processing Pipeline</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/action.html#example-training-with-coco-actions">Example: Training with COCO Actions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/action.html#customizing-action-spaces">Customizing Action Spaces</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="reinforcement_learning/observation.html">What Your Policy Sees: Observations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/observation.html#observation-components">Observation Components</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/observation.html#configuring-observations">Configuring Observations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/observation.html#standard-observation-setup">Standard Observation Setup</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/observation.html#example-observation-structure">Example Observation Structure</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/observation.html#customizing-the-observation-space">Customizing the Observation Space</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/observation.html#design-considerations">Design Considerations</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="reinforcement_learning/reward.html">Designing the Reward Function</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/reward.html#reward-function-philosophy">Reward Function Philosophy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/reward.html#configuring-rewards">Configuring Rewards</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/reward.html#understanding-reward-terms">Understanding Reward Terms</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/reward.html#reward-computation">Reward Computation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/reward.html#tuning-reward-weights">Tuning Reward Weights</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/reward.html#best-practices">Best Practices</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="reinforcement_learning/reset.html">When Episodes End: Termination Conditions</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/reset.html#termination-strategy">Termination Strategy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/reset.html#configuring-terminations">Configuring Terminations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/reset.html#the-four-termination-modes">The Four Termination Modes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/reset.html#termination-behavior">Termination Behavior</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/reset.html#tuning-termination-parameters">Tuning Termination Parameters</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/reset.html#impact-on-learning">Impact on Learning</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="reinforcement_learning/curriculum.html">Progressive Learning: Curriculum Strategies</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/curriculum.html#why-use-curriculum-learning">Why Use Curriculum Learning?</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/curriculum.html#curriculum-configuration">Curriculum Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/curriculum.html#built-in-curriculum-strategies">Built-in Curriculum Strategies</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/curriculum.html#how-curriculum-updates-work">How Curriculum Updates Work</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/curriculum.html#example-goal-distance-progression">Example: Goal Distance Progression</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/curriculum.html#customizing-curriculum">Customizing Curriculum</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/curriculum.html#best-practices">Best Practices</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="reinforcement_learning/event.html">Environment Events and Initialization</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/event.html#automatic-robot-spawn-initialization">Automatic Robot Spawn Initialization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/event.html#how-it-works">How It Works</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/event.html#benefits-of-automatic-initialization">Benefits of Automatic Initialization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/event.html#example-episode-reset-flow">Example: Episode Reset Flow</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/event.html#advanced-custom-events">Advanced: Custom Events</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/event.html#design-philosophy">Design Philosophy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reinforcement_learning/index.html#documentation-overview">Documentation Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/scene.html">Working with Urban Scenes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/action.html">Defining Robot Actions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/observation.html">What Your Policy Sees: Observations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/reward.html">Designing the Reward Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/reset.html">When Episodes End: Termination Conditions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/curriculum.html">Progressive Learning: Curriculum Strategies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/event.html">Environment Events and Initialization</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="reinforcement_learning/index.html#the-rl-environment-architecture">The RL Environment Architecture</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reinforcement_learning/index.html#getting-started-your-first-rl-environment">Getting Started: Your First RL Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reinforcement_learning/index.html#basic-usage">Basic Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reinforcement_learning/index.html#benefits-of-reinforcement-learning">Benefits of Reinforcement Learning</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="imitation_learning/index.html">Imitation Learning Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="imitation_learning/index.html#what-you-ll-learn">What You’ll Learn</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="imitation_learning/index.html#documentation-overview">Documentation Overview</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="imitation_learning/introduction.html">Introduction to Imitation Learning</a></li>
 <li class="toctree-l3"><a class="reference internal" href="imitation_learning/data_collection.html">Collecting Expert Demonstrations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="imitation_learning/dataset_format.html">Demonstration Dataset Format</a></li>
@@ -616,8 +565,8 @@ through binary download/source file to use the latest features and improvements.
 <li class="toctree-l3"><a class="reference internal" href="imitation_learning/best_practices.html">Best Practices and Tips</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="imitation_learning/index.html#quick-start">Quick Start</a></li>
-<li class="toctree-l2"><a class="reference internal" href="imitation_learning/index.html#why-imitation-learning">Why Imitation Learning?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="imitation_learning/index.html#basic-usage">Basic Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="imitation_learning/index.html#benefits-of-imitation-learning">Benefits of Imitation Learning</a></li>
 </ul>
 </li>
 </ul>

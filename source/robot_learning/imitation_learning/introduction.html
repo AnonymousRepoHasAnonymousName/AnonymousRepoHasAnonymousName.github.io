@@ -226,7 +226,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../simulation_paradigms.html">Simulation Paradigms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../configuration.html">General Configurations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../robot_configuration.html">Robot Configurations</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../reinforcement_learning/index.html">Reinforcement Learning Guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reinforcement_learning/index.html">Reinforcement Learning in UrbanVerse</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../reinforcement_learning/scene.html">Working with Urban Scenes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reinforcement_learning/action.html">Defining Robot Actions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reinforcement_learning/observation.html">What Your Policy Sees: Observations</a></li>
@@ -486,7 +486,7 @@
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-imitation-learning">What is Imitation Learning?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#behavior-cloning-bc-in-urbanverse">Behavior Cloning (BC) in UrbanVerse</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-imitation-learning-in-urbanverse">Why Use Imitation Learning in UrbanVerse?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benefits-of-imitation-learning-in-urbanverse">Benefits of Imitation Learning in UrbanVerse</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supported-robot-types">Supported Robot Types</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-to-use-imitation-learning-vs-reinforcement-learning">When to Use Imitation Learning vs. Reinforcement Learning</a></li>
 </ul>
@@ -501,7 +501,7 @@
                 <article class="bd-article">
                   
   <section id="introduction-to-imitation-learning">
-<span id="urbanverse-il-introduction"></span><h1>Introduction to Imitation Learning<a class="headerlink" href="#introduction-to-imitation-learning" title="Permalink to this heading">#</a></h1>
+<span id="urbanverse-robot-learning-il-guide-introduction"></span><h1>Introduction to Imitation Learning<a class="headerlink" href="#introduction-to-imitation-learning" title="Permalink to this heading">#</a></h1>
 <p>Imitation learning is a powerful paradigm for training navigation policies by learning directly from expert demonstrations, rather than through trial-and-error reinforcement learning. In UrbanVerse, imitation learning enables you to bootstrap navigation policies quickly, incorporate real-world teleoperation data, and create effective warm starts for RL fine-tuning.</p>
 <section id="what-is-imitation-learning">
 <h2>What is Imitation Learning?<a class="headerlink" href="#what-is-imitation-learning" title="Permalink to this heading">#</a></h2>
@@ -521,8 +521,8 @@
 </ol>
 <p>The key advantage of BC is its simplicity: it’s essentially a regression problem where the policy learns to map observations to actions by minimizing prediction error on the demonstration dataset.</p>
 </section>
-<section id="why-use-imitation-learning-in-urbanverse">
-<h2>Why Use Imitation Learning in UrbanVerse?<a class="headerlink" href="#why-use-imitation-learning-in-urbanverse" title="Permalink to this heading">#</a></h2>
+<section id="benefits-of-imitation-learning-in-urbanverse">
+<h2>Benefits of Imitation Learning in UrbanVerse<a class="headerlink" href="#benefits-of-imitation-learning-in-urbanverse" title="Permalink to this heading">#</a></h2>
 <p><strong>Low-Cost Bootstrapping</strong>
 Unlike RL, which requires extensive exploration and reward engineering, BC can quickly learn basic navigation behaviors from a relatively small number of expert demonstrations. This makes it ideal for getting started with navigation tasks or prototyping new robot platforms.</p>
 <p><strong>Learning from Teleoperation</strong>
@@ -613,7 +613,7 @@ Many successful navigation systems combine both approaches: use BC for initial p
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-imitation-learning">What is Imitation Learning?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#behavior-cloning-bc-in-urbanverse">Behavior Cloning (BC) in UrbanVerse</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-imitation-learning-in-urbanverse">Why Use Imitation Learning in UrbanVerse?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benefits-of-imitation-learning-in-urbanverse">Benefits of Imitation Learning in UrbanVerse</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supported-robot-types">Supported Robot Types</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-to-use-imitation-learning-vs-reinforcement-learning">When to Use Imitation Learning vs. Reinforcement Learning</a></li>
 </ul>
