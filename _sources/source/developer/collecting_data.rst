@@ -5,6 +5,10 @@ Collecting Data in UrbanVerse
 
 UrbanVerse provides comprehensive tools for collecting offline data from simulation scenes, including RGB images, depth images, point clouds, semantic segmentation, bounding boxes, instance segmentation, and surface normals. This data collection system follows Isaac Sim's sensor and rendering architecture.
 
+.. figure:: ../../assets/multi_modality.png
+   :width: 100%
+   :alt: Multi-modality Data Collection in UrbanVerse
+
 Overview
 ---------
 

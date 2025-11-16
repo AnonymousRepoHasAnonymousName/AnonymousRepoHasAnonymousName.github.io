@@ -188,6 +188,16 @@
 <li class="toctree-l1"><a class="reference internal" href="source/installation/scene_caching.html">UrbanVerse Scene Caching</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source/installation/verifying_installation.html">Installation Verification</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Gallery</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="source/gallery/urbanverse_100k.html">UrbanVerse-100K Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/gallery/urbanverse_gen.html">UrbanVerse-Gen Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/gallery/urbanverse_160_scenes.html">UrbanVerse-160 Scenes Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/gallery/craftbench.html">CraftBench Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/gallery/real_world_longhorizon.html">Real-World Long-Horizon Navigation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/gallery/real_world_sidebyside.html">Real-World Side-by-Side Comparisons</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/gallery/yt_video_collection.html">YouTube Video Collection</a></li>
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Quickstart Guide</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="source/quickstart/intro_quickstart.html">Introduction to Quickstart Guide</a></li>
@@ -380,16 +390,13 @@
 <h1>Welcome to UrbanVerse!<a class="headerlink" href="#welcome-to-urbanverse" title="Permalink to this heading">#</a></h1>
 <div style="background-color: #d4edda; border-left: 4px solid #28a745; padding: 12px 16px; margin: 16px 0; border-radius: 4px;">
     <strong>Note: This documentation is <span style="color: #007bff;">fully anonymized for double-blind review</span>.</strong>  All external links and identity-related content have been removed or replaced with anonymized placeholders.
-</div><figure class="align-default">
-<a class="reference internal image-reference" href="_images/teaser_v7.png"><img alt="UrbanVerse Overview" src="_images/teaser_v7.png" style="width: 100%;" /></a>
-</figure>
-</section>
+</div><video width="100%" autoplay loop muted playsinline controls style="display: block; margin: 1em 0;">
+    <source src="../../_static/short_teaser_v9_muted.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video></section>
 <section id="urbanverse">
 <h1>UrbanVerse<a class="headerlink" href="#urbanverse" title="Permalink to this heading">#</a></h1>
-<video width="100%" autoplay loop muted playsinline style="display: block; margin: 1em 0;">
-    <source src="_static/city_tour_montage.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-</video><p><strong>UrbanVerse</strong> is a unified real-to-sim system built on the UrbanVerse platform with Nvidia IsaacLab as the simulation engine for robot learning in urban environments.
+<p><strong>UrbanVerse</strong> is a unified real-to-sim system built on the UrbanVerse platform with Nvidia IsaacLab as the simulation engine for robot learning in urban environments.
 It converts casually captured, uncalibrated city-tour videos into fully interactive simulation scenes, enabling users to build realistic, layout-accurate environments and train their own robots at scale.</p>
 <section id="core-components">
 <h2>Core Components<a class="headerlink" href="#core-components" title="Permalink to this heading">#</a></h2>
@@ -409,14 +416,60 @@ It converts casually captured, uncalibrated city-tour videos into fully interact
 </section>
 <section id="open-source-release">
 <h2>Open-Source Release<a class="headerlink" href="#open-source-release" title="Permalink to this heading">#</a></h2>
-<p>We fully open-source the following resources of UrbanVerse to the community:</p>
-<ol class="arabic simple">
-<li><p>All assets in UrbanVerse-100K.</p></li>
-<li><p>The complete UrbanVerse-Gen pipeline for layout extraction, asset retrieval, and scene instantiation.</p></li>
-<li><p>Code for urban-navigation tasks (point navigation, obstacle avoidance, pedestrian interaction, etc.) for both training and evaluation.</p></li>
-<li><p>Tools for automatically annotating new 3D objects with semantic, physical, and affordance attributes using GPT-4.1.</p></li>
-<li><p>Multiple robot embodiments, including COCO wheeled delivery robots and robots natively supported by UrbanVerse (e.g., Unitree Go2 quadrupeds, Unitree G1 humanoids).</p></li>
-</ol>
+<p>We will fully open-source the following UrbanVerse resources for the community, and we stand by this commitment:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<colgroup>
+<col style="width: 41.2%" />
+<col style="width: 18.8%" />
+<col style="width: 18.8%" />
+<col style="width: 21.2%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Content</strong></p></th>
+<th class="head"><p><strong>Platform</strong></p></th>
+<th class="head"><p><strong>Format</strong></p></th>
+<th class="head"><p><strong>Release Month</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>UrbanVerse-100K Asset Database</p></td>
+<td><p>Hugging Face</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.glb</span></code> <code class="docutils literal notranslate"><span class="pre">.json</span></code> <code class="docutils literal notranslate"><span class="pre">.jpg</span></code> <code class="docutils literal notranslate"><span class="pre">.mdl</span></code> <code class="docutils literal notranslate"><span class="pre">.hdr</span></code></p></td>
+<td><p>January 2026</p></td>
+</tr>
+<tr class="row-odd"><td><p>160 UrbanVerse Scenes</p></td>
+<td><p>Hugging Face</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.usd</span></code></p></td>
+<td><p>January 2026</p></td>
+</tr>
+<tr class="row-even"><td><p>CraftBench Scenes</p></td>
+<td><p>Hugging Face</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.usd</span></code></p></td>
+<td><p>January 2026</p></td>
+</tr>
+<tr class="row-odd"><td><p>UrbanVerse-Gen Pipeline</p></td>
+<td><p>GitHub</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.py</span></code></p></td>
+<td><p>February 2026</p></td>
+</tr>
+<tr class="row-even"><td><p>RL Training Scripts and Checkpoints</p></td>
+<td><p>GitHub</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.py</span></code> <code class="docutils literal notranslate"><span class="pre">.pt</span></code></p></td>
+<td><p>February 2026</p></td>
+</tr>
+<tr class="row-odd"><td><p>UrbanVerse-100K Annotation Tool</p></td>
+<td><p>GitHub</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.py</span></code></p></td>
+<td><p>January 2026</p></td>
+</tr>
+<tr class="row-even"><td><p>Documentation &amp; Tutorials</p></td>
+<td><p>GitHub</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.html</span></code></p></td>
+<td><p>January 2026</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 <section id="simulation-platform">
 <h2>Simulation Platform<a class="headerlink" href="#simulation-platform" title="Permalink to this heading">#</a></h2>
@@ -444,6 +497,18 @@ It supports a wide range of learning paradigms, including reinforcement learning
 <li class="toctree-l1"><a class="reference internal" href="source/installation/asset_caching.html">UrbanVerse-100K Asset Caching</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source/installation/scene_caching.html">UrbanVerse Scene Caching</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source/installation/verifying_installation.html">Installation Verification</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Gallery</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="source/gallery/urbanverse_100k.html">UrbanVerse-100K Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/gallery/urbanverse_gen.html">UrbanVerse-Gen Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/gallery/urbanverse_160_scenes.html">UrbanVerse-160 Scenes Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/gallery/craftbench.html">CraftBench Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/gallery/real_world_longhorizon.html">Real-World Long-Horizon Navigation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/gallery/real_world_sidebyside.html">Real-World Side-by-Side Comparisons</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/gallery/yt_video_collection.html">YouTube Video Collection</a></li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
