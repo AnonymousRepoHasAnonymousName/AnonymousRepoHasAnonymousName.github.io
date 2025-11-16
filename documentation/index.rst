@@ -7,19 +7,16 @@ Welcome to UrbanVerse!
        <strong>Note: This documentation is <span style="color: #007bff;">fully anonymized for double-blind review</span>.</strong>  All external links and identity-related content have been removed or replaced with anonymized placeholders.
    </div>
 
-.. figure:: assets/teaser_v7.png
-   :width: 100%
-   :alt: UrbanVerse Overview
-
-UrbanVerse
-==========
 
 .. raw:: html
 
-   <video width="100%" autoplay loop muted playsinline style="display: block; margin: 1em 0;">
-       <source src="_static/city_tour_montage.mp4" type="video/mp4">
+   <video width="100%" autoplay loop muted playsinline controls style="display: block; margin: 1em 0;">
+       <source src="../../_static/short_teaser_v9_muted.mp4" type="video/mp4">
        Your browser does not support the video tag.
    </video>
+   
+UrbanVerse
+==========
 
 **UrbanVerse** is a unified real-to-sim system built on the UrbanVerse platform with Nvidia IsaacLab as the simulation engine for robot learning in urban environments.  
 It converts casually captured, uncalibrated city-tour videos into fully interactive simulation scenes, enabling users to build realistic, layout-accurate environments and train their own robots at scale.
@@ -46,13 +43,53 @@ We provide ready-to-use (pre-built) urban simulation environments for training a
 Open-Source Release
 -------------------
 
-We fully open-source the following resources of UrbanVerse to the community:
+We will fully open-source the following UrbanVerse resources for the community, and we stand by this commitment:
 
-1. All assets in UrbanVerse-100K.
-2. The complete UrbanVerse-Gen pipeline for layout extraction, asset retrieval, and scene instantiation.
-3. Code for urban-navigation tasks (point navigation, obstacle avoidance, pedestrian interaction, etc.) for both training and evaluation.
-4. Tools for automatically annotating new 3D objects with semantic, physical, and affordance attributes using GPT-4.1.
-5. Multiple robot embodiments, including COCO wheeled delivery robots and robots natively supported by UrbanVerse (e.g., Unitree Go2 quadrupeds, Unitree G1 humanoids).
+.. list-table::
+   :header-rows: 1
+   :widths: 33 15 15 17
+
+   * - **Content**
+     - **Platform**
+     - **Format**
+     - **Release Month**
+
+   * - UrbanVerse-100K Asset Database
+     - Hugging Face
+     - ``.glb`` ``.json`` ``.jpg`` ``.mdl`` ``.hdr``
+     - January 2026
+
+   * - 160 UrbanVerse Scenes
+     - Hugging Face
+     - ``.usd``
+     - January 2026
+
+   * - CraftBench Scenes
+     - Hugging Face
+     - ``.usd``
+     - January 2026
+
+   * - UrbanVerse-Gen Pipeline
+     - GitHub
+     - ``.py``
+     - February 2026
+
+   * - RL Training Scripts and Checkpoints
+     - GitHub
+     - ``.py`` ``.pt``
+     - February 2026
+
+   * - UrbanVerse-100K Annotation Tool
+     - GitHub
+     - ``.py``
+     - January 2026
+
+   * - Documentation & Tutorials
+     - GitHub
+     - ``.html``
+     - January 2026
+
+
 
 
 Simulation Platform
@@ -87,6 +124,19 @@ Table of Contents
    source/installation/asset_caching
    source/installation/scene_caching
    source/installation/verifying_installation
+
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Gallery
+
+   source/gallery/urbanverse_100k
+   source/gallery/urbanverse_gen
+   source/gallery/urbanverse_160_scenes
+   source/gallery/craftbench
+   source/gallery/real_world_longhorizon
+   source/gallery/real_world_sidebyside
+   source/gallery/yt_video_collection
 
 .. toctree::
    :maxdepth: 1

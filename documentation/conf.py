@@ -218,7 +218,7 @@ html_css_files = ["custom.css"]
 
 html_theme_options = {
     "collapse_navigation": True,
-    "repository_url": "https://github.com/metadriverse/urban-sim",
+    # "repository_url": "https://github.com/metadriverse/urban-sim",
     "use_repository_button": False,
     "use_issues_button": False,
     "use_edit_page_button": False,
