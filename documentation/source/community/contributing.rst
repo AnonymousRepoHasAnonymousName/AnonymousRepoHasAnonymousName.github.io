@@ -28,7 +28,7 @@ Getting Started
 
    .. code-block:: bash
 
-      git clone https://github.com/your-username/UrbanVerse.git
+      git clone https://Anonymous.com/AnonymousForDoubleBlindReview/UrbanVerse.git
       cd UrbanVerse
 
 3. **Create a branch** for your changes:

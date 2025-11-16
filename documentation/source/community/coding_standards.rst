@@ -61,22 +61,6 @@ UrbanVerse follows **PEP 8** (Python Enhancement Proposal 8), the official Pytho
    from urbanverse.navigation.config import EnvCfg
    from urbanverse.navigation.rl import create_env
 
-Code Formatting
----------------
-
-UrbanVerse uses **Black** for automatic code formatting:
-
-.. code-block:: bash
-
-   black urbanverse/
-
-**Key Black settings:**
-
-- Line length: 88 characters
-
-- String quote style: Double quotes (preferred)
-
-- Trailing commas: Yes (for multi-line structures)
 
 Type Hints
 ----------
@@ -143,25 +127,6 @@ Follow **Google-style docstrings** for documentation:
 
 - **Example**: Usage examples (optional)
 
-Linting
--------
-
-UrbanVerse uses **ruff** for linting and code quality checks:
-
-.. code-block:: bash
-
-   ruff check urbanverse/
-   ruff format urbanverse/
-
-**Common checks:**
-
-- Unused imports
-
-- Undefined variables
-
-- Code complexity
-
-- PEP 8 compliance
 
 Testing
 -------
@@ -188,27 +153,3 @@ Testing
            robot_type="coco_wheeled",
        )
        assert cfg.robot_type == "coco_wheeled"
-
-Best Practices
---------------
-
-- **Keep functions focused**: Each function should do one thing well
-
-- **Avoid deep nesting**: Use early returns and guard clauses
-
-- **Use meaningful names**: Variable and function names should be self-documenting
-
-- **Comment why, not what**: Code should be readable without comments explaining what it does
-
-- **Handle errors gracefully**: Use appropriate exception handling
-
-- **Write docstrings**: Document public APIs and complex logic
-
-For more details, refer to:
-
-- `PEP 8 <https://peps.python.org/pep-0008/>`_
-
-- `Black Documentation <https://black.readthedocs.io/>`_
-
-- `Ruff Documentation <https://docs.astral.sh/ruff/>`_
-

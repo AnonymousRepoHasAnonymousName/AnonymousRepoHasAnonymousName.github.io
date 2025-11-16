@@ -9,8 +9,8 @@ Welcome to the UrbanVerse community! This section provides information about how
    :maxdepth: 1
    :caption: Community
 
+   coding_standards
    contributing
    bug_reports
    communication
-   coding_standards
 
