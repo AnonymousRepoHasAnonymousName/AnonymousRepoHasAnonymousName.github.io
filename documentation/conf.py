@@ -11,15 +11,15 @@ sys.path.insert(0, os.path.abspath("../isaac_source/isaaclab_mimic"))
 sys.path.insert(0, os.path.abspath("../isaac_source/isaaclab_mimic/isaaclab_mimic"))
 sys.path.insert(0, os.path.abspath("../isaac_source/isaaclab_assets"))
 sys.path.insert(0, os.path.abspath("../isaac_source/isaaclab_assets/isaaclab_assets"))
-sys.path.insert(0, os.path.abspath("../urbanverse"))
+sys.path.insert(0, os.path.abspath("../urbansim"))
 sys.path.insert(0, os.path.abspath("../meta_source/metaurban/metaurban"))
 sys.path.insert(0, os.path.abspath("../meta_source/metadrive/metadrive"))
 
 # -- Project information -----------------------------------------------------
 
-project = "UrbanVerse"
-copyright = "2025-2030, The UrbanVerse Project Developers. " + "[UrbanVerse is built upon NVIDIA Isaac Sim&Lab and extends its capabilities for urban robot learning tasks]"
-author = "Anonymous Authors of UrbanVerse"
+project = "URBAN-SIM"
+copyright = "2025-2030, The URBAN-SIM Project Developers. " + "[URBAN-SIM is built upon NVIDIA Isaac Sim&Lab and extends its capabilities for urban robot learning tasks]"
+author = "Honglin He"
 
 # Read version from the package
 with open(os.path.join(os.path.dirname(__file__), "..", "VERSION")) as f:
@@ -202,7 +202,7 @@ language = "en"
 
 import sphinx_book_theme
 
-html_title = "UrbanVerse 1.0.0 Documentation (Fully Anonymous)"
+html_title = "URBAN-SIM Documentation"
 html_theme_path = [sphinx_book_theme.get_html_theme_path()]
 html_theme = "sphinx_book_theme"
 html_favicon = ""
@@ -213,33 +213,33 @@ html_last_updated_fmt = ""  # to reveal the build date in the pages meta
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ["source/_static/css", "assets"]
+html_static_path = ["source/_static/css"]
 html_css_files = ["custom.css"]
 
 html_theme_options = {
     "collapse_navigation": True,
-    "repository_url": "https://AnonymousURLForDoubleBlindReview",
+    "repository_url": "https://github.com/metadriverse/urban-sim",
     "use_repository_button": True,
     "use_issues_button": True,
     "use_edit_page_button": True,
     "show_toc_level": 1,
     "use_sidenotes": True,
     "logo": {
-        "text": "UrbanVerse 1.0.0 Documentation (Fully Anonymous)",
+        "text": "URBAN-SIM Documentation",
     },
     "icon_links": [
-        # {
-        #     "name": "GitHub",
-        #     "url": "https://AnonymousURLForDoubleBlindReview",
-        #     "icon": "fa-brands fa-square-github",
-        #     "type": "fontawesome",
-        # },
-        # {
-        #     "name": "Stars",
-        #     "url": "https://img.shields.io/github/stars/metadriverse/UrbanVerse?color=fedcba",
-        #     "icon": "https://img.shields.io/github/stars/metadriverse/UrbanVerse?color=fedcba",
-        #     "type": "url",
-        # },
+        {
+            "name": "GitHub",
+            "url": "https://github.com/metadriverse/urban-sim",
+            "icon": "fa-brands fa-square-github",
+            "type": "fontawesome",
+        },
+        {
+            "name": "Stars",
+            "url": "https://img.shields.io/github/stars/metadriverse/urban-sim?color=fedcba",
+            "icon": "https://img.shields.io/github/stars/metadriverse/urban-sim?color=fedcba",
+            "type": "url",
+        },
         {
         "name": "",
         "url": "",
@@ -248,13 +248,13 @@ html_theme_options = {
         },
         {
             "name": "Isaac Lab",
-            "url": "https://AnonymousURLForDoubleBlindReview",
+            "url": "https://github.com/isaac-sim/IsaacLab",
             "icon": "https://img.shields.io/badge/IsaacLab-2.0.1-silver.svg",
             "type": "url",
         },
         {
             "name": "Isaac Sim",
-            "url": "https://AnonymousURLForDoubleBlindReview",
+            "url": "https://developer.nvidia.com/isaac-sim",
             "icon": "https://img.shields.io/badge/IsaacSim-4.5.0-silver.svg",
             "type": "url",
         },
