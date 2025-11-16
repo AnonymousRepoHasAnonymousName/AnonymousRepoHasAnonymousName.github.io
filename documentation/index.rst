@@ -98,10 +98,14 @@ Table of Contents
    source/robot_learning/imitation_learning/index
    
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Developer Guide (Advanced)
 
-   source/developer/index
+   source/developer/collecting_data
+   source/developer/teleop_interface
+   source/developer/realworld_deployment
+   source/developer/adding_new_assets
+   source/developer/adding_new_robots
 
 .. toctree::
    :maxdepth: 1
