@@ -1,12 +1,25 @@
 Welcome to UrbanVerse!
 =====================
 
+.. raw:: html
+
+   <div style="background-color: #d4edda; border-left: 4px solid #28a745; padding: 12px 16px; margin: 16px 0; border-radius: 4px;">
+       <strong>Note: This documentation is <span style="color: #007bff;">fully anonymized for double-blind review</span>.</strong>  All external links and identity-related content have been removed or replaced with anonymized placeholders.
+   </div>
+
 .. figure:: assets/teaser_v7.png
    :width: 100%
    :alt: UrbanVerse Overview
 
 UrbanVerse
 ==========
+
+.. raw:: html
+
+   <video width="100%" autoplay loop muted playsinline style="display: block; margin: 1em 0;">
+       <source src="_static/city_tour_montage.mp4" type="video/mp4">
+       Your browser does not support the video tag.
+   </video>
 
 **UrbanVerse** is a unified real-to-sim system built on the UrbanVerse platform with Nvidia IsaacLab as the simulation engine for robot learning in urban environments.  
 It converts casually captured, uncalibrated city-tour videos into fully interactive simulation scenes, enabling users to build realistic, layout-accurate environments and train their own robots at scale.
