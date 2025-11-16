@@ -22,9 +22,9 @@ This gallery showcases examples from the UrbanVerse-100K dataset. For detailed u
 
          <div class="column is-half">
 
-           <div class="has-text-centered" style="margin-bottom: 1rem;" id="dataset-walkthrough">
+           <div class="has-text-centered" style="margin-bottom: 1rem; text-align: center;" id="dataset-walkthrough">
 
-             <h3 class="title is-5" style="background-color: black; color: white; padding: 6px 12px; display: inline-block; margin: 0; font-weight: normal; font-size: 1rem;">Object Assets Walkthrough.</h3>
+             <h3 class="title is-5" style="background-color: black; color: white; padding: 6px 12px; display: inline-block; margin: 0; font-weight: normal; font-size: 1rem;">Object Assets Walkthrough</h3>
 
            </div>
 
@@ -42,9 +42,9 @@ This gallery showcases examples from the UrbanVerse-100K dataset. For detailed u
 
          <div class="column is-half">
 
-           <div class="has-text-centered" style="margin-bottom: 1rem;" id="annotation-example">
+           <div class="has-text-centered" style="margin-bottom: 1rem; text-align: center;" id="annotation-example">
 
-             <h3 class="title is-5" style="background-color: black; color: white; padding: 6px 12px; display: inline-block; margin: 0; font-weight: normal; font-size: 1rem;">Example of Per-object Annotation.</h3>
+             <h3 class="title is-5" style="background-color: black; color: white; padding: 6px 12px; display: inline-block; margin: 0; font-weight: normal; font-size: 1rem;">Example of Per-object Annotation</h3>
 
            </div>
 
@@ -64,9 +64,9 @@ This gallery showcases examples from the UrbanVerse-100K dataset. For detailed u
 
          <div class="column is-one-third has-text-centered">
 
-           <div class="has-text-centered" style="margin-bottom: 0.75rem;" id="road-pbrs">
+           <div class="has-text-centered" style="margin-bottom: 0.75rem; text-align: center;" id="road-pbrs">
 
-             <h3 class="title is-5" style="background-color: black; color: white; padding: 6px 12px; display: inline-block; margin: 0; font-weight: normal; font-size: 1rem;">Examples of Road PBRs.</h3>
+             <h3 class="title is-5" style="background-color: black; color: white; padding: 6px 12px; display: inline-block; margin: 0; font-weight: normal; font-size: 1rem;">Examples of Road PBRs</h3>
 
            </div>
 
@@ -76,9 +76,9 @@ This gallery showcases examples from the UrbanVerse-100K dataset. For detailed u
 
          <div class="column is-one-third has-text-centered">
 
-           <div class="has-text-centered" style="margin-bottom: 0.75rem;" id="sidewalk-pbrs">
+           <div class="has-text-centered" style="margin-bottom: 0.75rem; text-align: center;" id="sidewalk-pbrs">
 
-             <h3 class="title is-5" style="background-color: black; color: white; padding: 6px 12px; display: inline-block; margin: 0; font-weight: normal; font-size: 1rem;">Examples of Sidewalk PBRs.</h3>
+             <h3 class="title is-5" style="background-color: black; color: white; padding: 6px 12px; display: inline-block; margin: 0; font-weight: normal; font-size: 1rem;">Examples of Sidewalk PBRs</h3>
 
            </div>
 
@@ -88,9 +88,9 @@ This gallery showcases examples from the UrbanVerse-100K dataset. For detailed u
 
          <div class="column is-one-third has-text-centered">
 
-           <div class="has-text-centered" style="margin-bottom: 0.75rem;" id="sky-hdris">
+           <div class="has-text-centered" style="margin-bottom: 0.75rem; text-align: center;" id="sky-hdris">
 
-             <h3 class="title is-5" style="background-color: black; color: white; padding: 6px 12px; display: inline-block; margin: 0; font-weight: normal; font-size: 1rem;">Examples of Sky HDRIs.</h3>
+             <h3 class="title is-5" style="background-color: black; color: white; padding: 6px 12px; display: inline-block; margin: 0; font-weight: normal; font-size: 1rem;">Examples of Sky HDRIs</h3>
 
            </div>
 
@@ -106,9 +106,9 @@ This gallery showcases examples from the UrbanVerse-100K dataset. For detailed u
 
          <div class="column is-full">
 
-           <div class="has-text-centered" style="margin-bottom: 1rem;" id="interactive-stats">
+           <div class="has-text-centered" style="margin-bottom: 1rem; text-align: center;" id="interactive-stats">
 
-             <h3 class="title is-5" style="background-color: black; color: white; padding: 6px 12px; display: inline-block; margin: 0; font-weight: normal; font-size: 1rem;">Interactive Statistics of Object Category Distributions in UrbanVerse-100K.</h3>
+             <h3 class="title is-5" style="background-color: black; color: white; padding: 6px 12px; display: inline-block; margin: 0; font-weight: normal; font-size: 1rem;">Interactive Statistics of Object Category Distributions in UrbanVerse-100K</h3>
 
            </div>
 
