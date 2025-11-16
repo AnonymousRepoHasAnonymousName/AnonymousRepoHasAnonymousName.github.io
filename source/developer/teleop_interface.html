@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Configuring VR Interface &#8212; UrbanVerse Documentation</title>
+    <title>Teleoperation Interfaces &#8212; UrbanVerse Documentation</title>
   
   
   
@@ -55,6 +55,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'source/developer/teleop_interface';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Real-world Deployment: Unitree Go2 Quadruped Example" href="realworld_deployment.html" />
+    <link rel="prev" title="Collecting Data in UrbanVerse" href="collecting_data.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="1.0.0" />
@@ -106,8 +108,6 @@
     <div class="bd-container__inner bd-page-width">
       
       
-      
-        
       
       <dialog id="pst-primary-sidebar-modal"></dialog>
       <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
@@ -248,8 +248,8 @@
 </ul>
 </details></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer</span></p>
-<ul class="nav bd-sidenav">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer (Advanced)</span></p>
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="code-structure/index.html">Code Structure in UrbanVerse</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="code-structure/envs.html">Environment: Spawning and simulation for learning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="code-structure/learning.html">Learning Module</a></li>
@@ -258,9 +258,10 @@
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="collecting_data.html">Collecting Data in UrbanVerse</a></li>
-<li class="toctree-l1"><a class="reference internal" href="realworld_deployment.html">Deploying UrbanVerse Policy in Real-World</a></li>
-<li class="toctree-l1"><a class="reference internal" href="adding_new_robots.html">Adding New Robots to UrbanVerse</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Teleoperation Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="realworld_deployment.html">Real-world Deployment: Unitree Go2 Quadruped Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="adding_new_assets.html">Adding New Assets to UrbanVerse-100K</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_new_robots.html">Adding New Robots to UrbanVerse</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">UrbanVerse Community</span></p>
 <ul class="nav bd-sidenav">
@@ -460,7 +461,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -471,11 +474,32 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Configuring VR Interface</h1>
+    <h1>Teleoperation Interfaces</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supported-interfaces">Supported Interfaces</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-usage">Basic Usage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keyboard-interface">Keyboard Interface</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#joystick-interface">Joystick Interface</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vr-interface-meta-oculus-quest-3">VR Interface (Meta Oculus Quest 3)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-keybindings">Custom Keybindings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#velocity-scaling">Velocity Scaling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recording-demonstrations">Recording Demonstrations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#api-reference">API Reference</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configure-teleoperation">Configure Teleoperation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-teleoperation">Start Teleoperation</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -485,9 +509,299 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="configuring-vr-interface">
-<h1>Configuring VR Interface<a class="headerlink" href="#configuring-vr-interface" title="Permalink to this heading">#</a></h1>
-<p>This page describes how to configure teleoperation interface in urbanverse scenes, including keyboard, joystick, and VR interface.</p>
+  <section id="teleoperation-interfaces">
+<span id="urbanverse-developer-teleop-interface"></span><h1>Teleoperation Interfaces<a class="headerlink" href="#teleoperation-interfaces" title="Permalink to this heading">#</a></h1>
+<p>UrbanVerse supports multiple teleoperation interfaces for manual robot control, including keyboard, joystick, and VR interfaces. This guide explains how to configure and use these interfaces in UrbanVerse scenes, following Isaac Sim’s input handling patterns.</p>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="../../_images/vr_output.gif"><img alt="VR Teleoperation in UrbanVerse" src="../../_images/vr_output.gif" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">Demo: A human teleoperating a COCO wheeled robot in UrbanVerse scenes for imitation learning data collection using the Joystick + VR interface with Meta Oculus Quest 3.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<p>Teleoperation interfaces enable manual control of robots in UrbanVerse scenes for:
+- <strong>Data Collection</strong>: Collecting expert demonstrations for imitation learning
+- <strong>Testing</strong>: Manually testing robot behaviors and scene interactions
+- <strong>Debugging</strong>: Interactive debugging of robot configurations and environments</p>
+<p>UrbanVerse provides built-in support for multiple input devices, following Isaac Sim’s input system architecture.</p>
+</section>
+<section id="supported-interfaces">
+<h2>Supported Interfaces<a class="headerlink" href="#supported-interfaces" title="Permalink to this heading">#</a></h2>
+<p>UrbanVerse supports the following teleoperation interfaces:</p>
+<ul class="simple">
+<li><p><strong>Keyboard</strong>: Basic keyboard controls for robot movement</p></li>
+<li><p><strong>Joystick</strong>: Joystick input for precise control</p></li>
+<li><p><strong>VR Interface</strong>: Meta Oculus Quest 3 headset and controllers for immersive teleoperation</p></li>
+</ul>
+</section>
+<section id="basic-usage">
+<h2>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this heading">#</a></h2>
+<p>Configure teleoperation for data collection:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
+
+<span class="c1"># Configure teleoperation interface</span>
+<span class="n">teleop_config</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">teleop</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span>
+    <span class="n">interface</span><span class="o">=</span><span class="s2">&quot;keyboard&quot;</span><span class="p">,</span>  <span class="c1"># or &quot;joystick&quot;, &quot;vr&quot;</span>
+    <span class="n">robot_type</span><span class="o">=</span><span class="s2">&quot;coco_wheeled&quot;</span><span class="p">,</span>
+    <span class="n">scene_path</span><span class="o">=</span><span class="s2">&quot;/path/to/scene.usd&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Start teleoperation session</span>
+<span class="n">uv</span><span class="o">.</span><span class="n">teleop</span><span class="o">.</span><span class="n">start</span><span class="p">(</span>
+    <span class="n">config</span><span class="o">=</span><span class="n">teleop_config</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;demos/teleop_session&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="keyboard-interface">
+<h2>Keyboard Interface<a class="headerlink" href="#keyboard-interface" title="Permalink to this heading">#</a></h2>
+<p>Keyboard controls provide basic robot movement:</p>
+<p><strong>Configuration:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
+
+<span class="n">teleop_config</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">teleop</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span>
+    <span class="n">interface</span><span class="o">=</span><span class="s2">&quot;keyboard&quot;</span><span class="p">,</span>
+    <span class="n">robot_type</span><span class="o">=</span><span class="s2">&quot;coco_wheeled&quot;</span><span class="p">,</span>
+    <span class="n">scene_path</span><span class="o">=</span><span class="s2">&quot;/path/to/scene.usd&quot;</span><span class="p">,</span>
+    <span class="n">keybindings</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;forward&quot;</span><span class="p">:</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;backward&quot;</span><span class="p">:</span> <span class="s2">&quot;s&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;left&quot;</span><span class="p">:</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;right&quot;</span><span class="p">:</span> <span class="s2">&quot;d&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;stop&quot;</span><span class="p">:</span> <span class="s2">&quot;space&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;reset&quot;</span><span class="p">:</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Default Keybindings:</strong></p>
+<ul class="simple">
+<li><p><strong>W / Up Arrow</strong>: Move forward</p></li>
+<li><p><strong>S / Down Arrow</strong>: Move backward</p></li>
+<li><p><strong>A / Left Arrow</strong>: Rotate left</p></li>
+<li><p><strong>D / Right Arrow</strong>: Rotate right</p></li>
+<li><p><strong>Space</strong>: Emergency stop</p></li>
+<li><p><strong>R</strong>: Reset robot position</p></li>
+<li><p><strong>Enter</strong>: End episode / Start next episode</p></li>
+</ul>
+<p><strong>Usage:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Start keyboard teleoperation</span>
+<span class="n">uv</span><span class="o">.</span><span class="n">teleop</span><span class="o">.</span><span class="n">start</span><span class="p">(</span>
+    <span class="n">config</span><span class="o">=</span><span class="n">teleop_config</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;demos/keyboard_teleop&quot;</span><span class="p">,</span>
+    <span class="n">record_demonstrations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># Record for BC training</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="joystick-interface">
+<h2>Joystick Interface<a class="headerlink" href="#joystick-interface" title="Permalink to this heading">#</a></h2>
+<p>Joystick interfaces provide precise analog control:</p>
+<p><strong>Configuration:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
+
+<span class="n">teleop_config</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">teleop</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span>
+    <span class="n">interface</span><span class="o">=</span><span class="s2">&quot;joystick&quot;</span><span class="p">,</span>
+    <span class="n">robot_type</span><span class="o">=</span><span class="s2">&quot;coco_wheeled&quot;</span><span class="p">,</span>
+    <span class="n">scene_path</span><span class="o">=</span><span class="s2">&quot;/path/to/scene.usd&quot;</span><span class="p">,</span>
+    <span class="n">joystick_id</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>  <span class="c1"># Joystick device ID</span>
+    <span class="n">axis_mapping</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;axis_0&quot;</span><span class="p">:</span> <span class="s2">&quot;linear_velocity&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;axis_1&quot;</span><span class="p">:</span> <span class="s2">&quot;angular_velocity&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="n">deadzone</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>  <span class="c1"># Deadzone threshold</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Usage:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uv</span><span class="o">.</span><span class="n">teleop</span><span class="o">.</span><span class="n">start</span><span class="p">(</span>
+    <span class="n">config</span><span class="o">=</span><span class="n">teleop_config</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;demos/joystick_teleop&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="vr-interface-meta-oculus-quest-3">
+<h2>VR Interface (Meta Oculus Quest 3)<a class="headerlink" href="#vr-interface-meta-oculus-quest-3" title="Permalink to this heading">#</a></h2>
+<p>UrbanVerse supports immersive teleoperation using Meta Oculus Quest 3 via Omniverse-supported APIs. This setup requires Isaac Sim deployed on Brev and uses OpenXR as the output plugin for Quest 3 connectivity.</p>
+<p><strong>Prerequisites:</strong></p>
+<ul class="simple">
+<li><p>Meta Oculus Quest 3 headset and controllers</p></li>
+<li><p>Isaac Sim deployed on Brev</p></li>
+<li><p>OpenXR runtime installed and configured</p></li>
+<li><p>Quest 3 connected to the same network as the Brev deployment</p></li>
+</ul>
+<p><strong>Configuration:</strong></p>
+<p>The VR interface uses Omniverse’s native VR support with OpenXR for Quest 3 connectivity:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">omni.isaac.core.utils.extensions</span><span class="w"> </span><span class="kn">import</span> <span class="n">enable_extension</span>
+
+<span class="c1"># Enable OpenXR extension for Quest 3</span>
+<span class="n">enable_extension</span><span class="p">(</span><span class="s2">&quot;omni.kit.openxr&quot;</span><span class="p">)</span>
+
+<span class="c1"># Configure VR teleoperation for Quest 3</span>
+<span class="n">teleop_config</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">teleop</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span>
+    <span class="n">interface</span><span class="o">=</span><span class="s2">&quot;vr&quot;</span><span class="p">,</span>
+    <span class="n">robot_type</span><span class="o">=</span><span class="s2">&quot;coco_wheeled&quot;</span><span class="p">,</span>
+    <span class="n">scene_path</span><span class="o">=</span><span class="s2">&quot;/path/to/scene.usd&quot;</span><span class="p">,</span>
+    <span class="n">vr_settings</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;headset_type&quot;</span><span class="p">:</span> <span class="s2">&quot;oculus_quest_3&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;openxr_runtime&quot;</span><span class="p">:</span> <span class="s2">&quot;oculus&quot;</span><span class="p">,</span>  <span class="c1"># Use Oculus OpenXR runtime</span>
+        <span class="s2">&quot;controller_mapping&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;left_joystick_y&quot;</span><span class="p">:</span> <span class="s2">&quot;linear_velocity&quot;</span><span class="p">,</span>  <span class="c1"># Forward/backward movement</span>
+            <span class="s2">&quot;right_joystick_x&quot;</span><span class="p">:</span> <span class="s2">&quot;angular_velocity&quot;</span><span class="p">,</span>  <span class="c1"># Rotation</span>
+            <span class="s2">&quot;left_trigger&quot;</span><span class="p">:</span> <span class="s2">&quot;emergency_stop&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;right_trigger&quot;</span><span class="p">:</span> <span class="s2">&quot;end_episode&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;left_grip&quot;</span><span class="p">:</span> <span class="s2">&quot;reset_robot&quot;</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;rendering&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;output_plugin&quot;</span><span class="p">:</span> <span class="s2">&quot;openxr&quot;</span><span class="p">,</span>  <span class="c1"># Use OpenXR for Quest 3 output</span>
+            <span class="s2">&quot;resolution&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1920</span><span class="p">,</span> <span class="mi">1832</span><span class="p">],</span>  <span class="c1"># Quest 3 per-eye resolution</span>
+            <span class="s2">&quot;refresh_rate&quot;</span><span class="p">:</span> <span class="mi">90</span><span class="p">,</span>  <span class="c1"># Quest 3 refresh rate</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>OpenXR Setup:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Install OpenXR Runtime</strong>: Ensure the Oculus OpenXR runtime is installed on your system</p></li>
+<li><p><strong>Configure OpenXR</strong>: Set Oculus as the active OpenXR runtime</p></li>
+<li><p><strong>Network Connection</strong>: Connect Quest 3 to the same network as your Brev deployment</p></li>
+<li><p><strong>Enable OpenXR in Isaac Sim</strong>: The configuration above automatically enables the OpenXR extension</p></li>
+</ol>
+<p><strong>Usage:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Start VR teleoperation with Quest 3</span>
+<span class="n">uv</span><span class="o">.</span><span class="n">teleop</span><span class="o">.</span><span class="n">start</span><span class="p">(</span>
+    <span class="n">config</span><span class="o">=</span><span class="n">teleop_config</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;demos/vr_quest3_teleop&quot;</span><span class="p">,</span>
+    <span class="n">enable_vr_rendering</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">vr_streaming</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># Stream to Quest 3 via network</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Quest 3 Controller Mapping:</strong></p>
+<ul class="simple">
+<li><p><strong>Left Joystick (Y-axis)</strong>: Linear velocity (forward/backward)</p></li>
+<li><p><strong>Right Joystick (X-axis)</strong>: Angular velocity (rotation)</p></li>
+<li><p><strong>Left Trigger</strong>: Emergency stop</p></li>
+<li><p><strong>Right Trigger</strong>: End episode / Start next episode</p></li>
+<li><p><strong>Left Grip</strong>: Reset robot position</p></li>
+<li><p><strong>Right Grip</strong>: Toggle recording</p></li>
+</ul>
+<p><strong>Network Streaming:</strong></p>
+<p>When using Isaac Sim on Brev, the VR rendering is streamed to Quest 3 over the network. Ensure:
+- Low-latency network connection (&lt; 50ms recommended)
+- Sufficient bandwidth for VR streaming (50+ Mbps recommended)
+- Quest 3 and Brev deployment on the same network or VPN</p>
+</section>
+<section id="custom-keybindings">
+<h2>Custom Keybindings<a class="headerlink" href="#custom-keybindings" title="Permalink to this heading">#</a></h2>
+<p>Customize keybindings for your workflow:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">teleop_config</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">teleop</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span>
+    <span class="n">interface</span><span class="o">=</span><span class="s2">&quot;keyboard&quot;</span><span class="p">,</span>
+    <span class="n">robot_type</span><span class="o">=</span><span class="s2">&quot;coco_wheeled&quot;</span><span class="p">,</span>
+    <span class="n">scene_path</span><span class="o">=</span><span class="s2">&quot;/path/to/scene.usd&quot;</span><span class="p">,</span>
+    <span class="n">keybindings</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;forward&quot;</span><span class="p">:</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;backward&quot;</span><span class="p">:</span> <span class="s2">&quot;s&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;left&quot;</span><span class="p">:</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;right&quot;</span><span class="p">:</span> <span class="s2">&quot;d&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;stop&quot;</span><span class="p">:</span> <span class="s2">&quot;space&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;reset&quot;</span><span class="p">:</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;record&quot;</span><span class="p">:</span> <span class="s2">&quot;t&quot;</span><span class="p">,</span>  <span class="c1"># Custom: Toggle recording</span>
+        <span class="s2">&quot;slow_mode&quot;</span><span class="p">:</span> <span class="s2">&quot;shift&quot;</span><span class="p">,</span>  <span class="c1"># Custom: Slow movement mode</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="velocity-scaling">
+<h2>Velocity Scaling<a class="headerlink" href="#velocity-scaling" title="Permalink to this heading">#</a></h2>
+<p>Adjust velocity scaling for different control sensitivities:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">teleop_config</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">teleop</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span>
+    <span class="n">interface</span><span class="o">=</span><span class="s2">&quot;keyboard&quot;</span><span class="p">,</span>
+    <span class="n">robot_type</span><span class="o">=</span><span class="s2">&quot;coco_wheeled&quot;</span><span class="p">,</span>
+    <span class="n">scene_path</span><span class="o">=</span><span class="s2">&quot;/path/to/scene.usd&quot;</span><span class="p">,</span>
+    <span class="n">velocity_scaling</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;linear_max&quot;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span>  <span class="c1"># Maximum linear velocity (m/s)</span>
+        <span class="s2">&quot;angular_max&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>  <span class="c1"># Maximum angular velocity (rad/s)</span>
+        <span class="s2">&quot;acceleration&quot;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>  <span class="c1"># Acceleration rate</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="recording-demonstrations">
+<h2>Recording Demonstrations<a class="headerlink" href="#recording-demonstrations" title="Permalink to this heading">#</a></h2>
+<p>Teleoperation can automatically record demonstrations for imitation learning:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uv</span><span class="o">.</span><span class="n">teleop</span><span class="o">.</span><span class="n">start</span><span class="p">(</span>
+    <span class="n">config</span><span class="o">=</span><span class="n">teleop_config</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;demos/my_demonstrations&quot;</span><span class="p">,</span>
+    <span class="n">record_demonstrations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">record_format</span><span class="o">=</span><span class="s2">&quot;urbanverse_bc&quot;</span><span class="p">,</span>  <span class="c1"># Format for BC training</span>
+    <span class="n">max_episodes</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+    <span class="n">episode_length</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>The recorded demonstrations are saved in UrbanVerse’s standard BC dataset format (see <a class="reference internal" href="../robot_learning/imitation_learning/dataset_format.html"><span class="doc">Demonstration Dataset Format</span></a>).</p>
+</section>
+<section id="api-reference">
+<h2>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this heading">#</a></h2>
+<section id="configure-teleoperation">
+<h3>Configure Teleoperation<a class="headerlink" href="#configure-teleoperation" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uv</span><span class="o">.</span><span class="n">teleop</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span>
+    <span class="n">interface</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">robot_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">scene_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">keybindings</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">gamepad_mapping</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">velocity_scaling</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TeleopConfig</span>
+</pre></div>
+</div>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><p><strong>interface</strong> (str): Teleoperation interface type (<code class="docutils literal notranslate"><span class="pre">&quot;keyboard&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;joystick&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;vr&quot;</span></code>)</p></li>
+<li><p><strong>robot_type</strong> (str): Robot embodiment identifier</p></li>
+<li><p><strong>scene_path</strong> (str): Path to USD scene file</p></li>
+<li><p><strong>keybindings</strong> (dict, optional): Custom keyboard keybindings</p></li>
+<li><p><strong>velocity_scaling</strong> (dict, optional): Velocity scaling parameters</p></li>
+<li><p><strong>vr_settings</strong> (dict, optional): VR-specific settings (for Quest 3, includes OpenXR configuration)</p></li>
+</ul>
+<p><strong>Returns:</strong></p>
+<ul class="simple">
+<li><p><strong>TeleopConfig</strong>: Configuration object for teleoperation session</p></li>
+</ul>
+</section>
+<section id="start-teleoperation">
+<h3>Start Teleoperation<a class="headerlink" href="#start-teleoperation" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uv</span><span class="o">.</span><span class="n">teleop</span><span class="o">.</span><span class="n">start</span><span class="p">(</span>
+    <span class="n">config</span><span class="p">:</span> <span class="n">TeleopConfig</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">record_demonstrations</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">max_episodes</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">episode_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">300</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+</pre></div>
+</div>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><p><strong>config</strong> (TeleopConfig): Teleoperation configuration</p></li>
+<li><p><strong>output_dir</strong> (str): Directory to save recordings (if enabled)</p></li>
+<li><p><strong>record_demonstrations</strong> (bool, optional): Whether to record demonstrations. Default: <code class="docutils literal notranslate"><span class="pre">False</span></code></p></li>
+<li><p><strong>max_episodes</strong> (int, optional): Maximum number of episodes. Default: <code class="docutils literal notranslate"><span class="pre">1</span></code></p></li>
+<li><p><strong>episode_length</strong> (int, optional): Maximum steps per episode. Default: <code class="docutils literal notranslate"><span class="pre">300</span></code></p></li>
+</ul>
+<p><strong>Returns:</strong></p>
+<ul class="simple">
+<li><p><strong>str</strong>: Path to output directory (if recording enabled)</p></li>
+</ul>
+</section>
+</section>
 </section>
 
 
@@ -501,12 +815,59 @@
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="collecting_data.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Collecting Data in UrbanVerse</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="realworld_deployment.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Real-world Deployment: Unitree Go2 Quadruped Example</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supported-interfaces">Supported Interfaces</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-usage">Basic Usage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keyboard-interface">Keyboard Interface</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#joystick-interface">Joystick Interface</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vr-interface-meta-oculus-quest-3">VR Interface (Meta Oculus Quest 3)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-keybindings">Custom Keybindings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#velocity-scaling">Velocity Scaling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recording-demonstrations">Recording Demonstrations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#api-reference">API Reference</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configure-teleoperation">Configure Teleoperation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-teleoperation">Start Teleoperation</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

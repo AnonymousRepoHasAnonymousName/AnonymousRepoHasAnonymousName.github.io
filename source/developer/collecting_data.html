@@ -55,7 +55,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'source/developer/collecting_data';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Deploying UrbanVerse Policy in Real-World" href="realworld_deployment.html" />
+    <link rel="next" title="Teleoperation Interfaces" href="teleop_interface.html" />
     <link rel="prev" title="UrbanScene: Scenario Construction" href="code-structure/scene.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -248,7 +248,7 @@
 </ul>
 </details></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer (Advanced)</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="code-structure/index.html">Code Structure in UrbanVerse</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="code-structure/envs.html">Environment: Spawning and simulation for learning</a></li>
@@ -258,9 +258,10 @@
 </ul>
 </details></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Collecting Data in UrbanVerse</a></li>
-<li class="toctree-l1"><a class="reference internal" href="realworld_deployment.html">Deploying UrbanVerse Policy in Real-World</a></li>
-<li class="toctree-l1"><a class="reference internal" href="adding_new_robots.html">Adding New Robots to UrbanVerse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="teleop_interface.html">Teleoperation Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="realworld_deployment.html">Real-world Deployment: Unitree Go2 Quadruped Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="adding_new_assets.html">Adding New Assets to UrbanVerse-100K</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_new_robots.html">Adding New Robots to UrbanVerse</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">UrbanVerse Community</span></p>
 <ul class="nav bd-sidenav">
@@ -460,7 +461,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -476,6 +479,32 @@
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supported-data-types">Supported Data Types</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-usage">Basic Usage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#api-reference">API Reference</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configure-data-collection">Configure Data Collection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-data-collection">Run Data Collection</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rgb-image-collection">RGB Image Collection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#depth-image-collection">Depth Image Collection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#point-cloud-collection">Point Cloud Collection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#semantic-segmentation-collection">Semantic Segmentation Collection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instance-segmentation-collection">Instance Segmentation Collection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bounding-box-collection">Bounding Box Collection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#surface-normal-collection">Surface Normal Collection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-strategies">Sampling Strategies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#robot-mounted-camera">Robot-Mounted Camera</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-processing">Batch Processing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-format">Data Format</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -486,8 +515,356 @@
                 <article class="bd-article">
                   
   <section id="collecting-data-in-urbanverse">
-<h1>Collecting Data in UrbanVerse<a class="headerlink" href="#collecting-data-in-urbanverse" title="Permalink to this heading">#</a></h1>
-<p>This page describe how to load urbanverse scenes and collect offline RGB images data, depth images data, and point cloud data, semantic segmentation, bbox, instance segmentation, and normal images data.</p>
+<span id="urbanverse-developer-collecting-data"></span><h1>Collecting Data in UrbanVerse<a class="headerlink" href="#collecting-data-in-urbanverse" title="Permalink to this heading">#</a></h1>
+<p>UrbanVerse provides comprehensive tools for collecting offline data from simulation scenes, including RGB images, depth images, point clouds, semantic segmentation, bounding boxes, instance segmentation, and surface normals. This data collection system follows Isaac Sim’s sensor and rendering architecture.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<p>UrbanVerse’s data collection system enables you to:</p>
+<ul class="simple">
+<li><p><strong>Collect multi-modal sensor data</strong> from UrbanVerse scenes</p></li>
+<li><p><strong>Generate ground truth annotations</strong> (semantic segmentation, bounding boxes, etc.)</p></li>
+<li><p><strong>Export data in standard formats</strong> for training and evaluation</p></li>
+<li><p><strong>Batch process multiple scenes</strong> for large-scale dataset creation</p></li>
+</ul>
+<p>This is useful for training perception models, generating synthetic datasets, and conducting offline analysis of UrbanVerse environments.</p>
+</section>
+<section id="supported-data-types">
+<h2>Supported Data Types<a class="headerlink" href="#supported-data-types" title="Permalink to this heading">#</a></h2>
+<p>UrbanVerse supports collecting the following data types:</p>
+<ul class="simple">
+<li><p><strong>RGB Images</strong>: Color images from camera sensors</p></li>
+<li><p><strong>Depth Images</strong>: Depth maps from depth cameras</p></li>
+<li><p><strong>Point Clouds</strong>: 3D point cloud data (PCL, PLY formats)</p></li>
+<li><p><strong>Semantic Segmentation</strong>: Pixel-level semantic labels</p></li>
+<li><p><strong>Instance Segmentation</strong>: Instance-level segmentation masks</p></li>
+<li><p><strong>Bounding Boxes</strong>: 2D and 3D bounding box annotations</p></li>
+<li><p><strong>Surface Normals</strong>: Surface normal maps</p></li>
+</ul>
+</section>
+<section id="basic-usage">
+<h2>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this heading">#</a></h2>
+<p>Collect data from a single scene:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
+
+<span class="c1"># Configure data collection</span>
+<span class="n">collection_config</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">collect</span><span class="p">(</span>
+    <span class="n">scene_path</span><span class="o">=</span><span class="s2">&quot;/path/to/UrbanVerse-160/Tokyo_0001/scene.usd&quot;</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;data_collection/tokyo_001&quot;</span><span class="p">,</span>
+    <span class="n">data_types</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;rgb&quot;</span><span class="p">,</span> <span class="s2">&quot;depth&quot;</span><span class="p">,</span> <span class="s2">&quot;semantic&quot;</span><span class="p">,</span> <span class="s2">&quot;bbox&quot;</span><span class="p">],</span>
+    <span class="n">num_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+    <span class="n">camera_config</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;resolution&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">480</span><span class="p">,</span> <span class="mi">640</span><span class="p">),</span>
+        <span class="s2">&quot;fov&quot;</span><span class="p">:</span> <span class="mf">60.0</span><span class="p">,</span>
+        <span class="s2">&quot;position&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">),</span>  <span class="c1"># Camera height</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+
+<span class="c1"># Run collection</span>
+<span class="n">collection_results</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">collection_config</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Collected </span><span class="si">{</span><span class="n">collection_results</span><span class="p">[</span><span class="s1">&#39;num_samples&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> samples&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="api-reference">
+<h2>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this heading">#</a></h2>
+<section id="configure-data-collection">
+<h3>Configure Data Collection<a class="headerlink" href="#configure-data-collection" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uv</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">collect</span><span class="p">(</span>
+    <span class="n">scene_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">data_types</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">num_samples</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">camera_config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+    <span class="n">robot_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">sampling_strategy</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;random&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataCollectionConfig</span>
+</pre></div>
+</div>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><p><strong>scene_path</strong> (str): Path to USD scene file</p></li>
+<li><p><strong>output_dir</strong> (str): Directory to save collected data</p></li>
+<li><p><strong>data_types</strong> (list[str]): List of data types to collect:
+- <code class="docutils literal notranslate"><span class="pre">&quot;rgb&quot;</span></code>: RGB images
+- <code class="docutils literal notranslate"><span class="pre">&quot;depth&quot;</span></code>: Depth images
+- <code class="docutils literal notranslate"><span class="pre">&quot;pointcloud&quot;</span></code>: Point clouds
+- <code class="docutils literal notranslate"><span class="pre">&quot;semantic&quot;</span></code>: Semantic segmentation
+- <code class="docutils literal notranslate"><span class="pre">&quot;instance&quot;</span></code>: Instance segmentation
+- <code class="docutils literal notranslate"><span class="pre">&quot;bbox&quot;</span></code>: Bounding boxes
+- <code class="docutils literal notranslate"><span class="pre">&quot;normal&quot;</span></code>: Surface normals</p></li>
+<li><p><strong>num_samples</strong> (int): Number of samples to collect</p></li>
+<li><p><strong>camera_config</strong> (dict): Camera configuration:
+- <code class="docutils literal notranslate"><span class="pre">resolution</span></code>: Image resolution (height, width)
+- <code class="docutils literal notranslate"><span class="pre">fov</span></code>: Field of view (degrees)
+- <code class="docutils literal notranslate"><span class="pre">position</span></code>: Camera position (x, y, z)
+- <code class="docutils literal notranslate"><span class="pre">orientation</span></code>: Camera orientation (optional)</p></li>
+<li><p><strong>robot_type</strong> (str, optional): Robot type for robot-mounted camera</p></li>
+<li><p><strong>sampling_strategy</strong> (str, optional): Sampling strategy (<code class="docutils literal notranslate"><span class="pre">&quot;random&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;grid&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;trajectory&quot;</span></code>). Default: <code class="docutils literal notranslate"><span class="pre">&quot;random&quot;</span></code></p></li>
+</ul>
+<p><strong>Returns:</strong></p>
+<ul class="simple">
+<li><p><strong>DataCollectionConfig</strong>: Configuration object for data collection</p></li>
+</ul>
+</section>
+<section id="run-data-collection">
+<h3>Run Data Collection<a class="headerlink" href="#run-data-collection" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uv</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">config</span><span class="p">:</span> <span class="n">DataCollectionConfig</span><span class="p">,</span>
+    <span class="n">headless</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">num_workers</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span>
+</pre></div>
+</div>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><p><strong>config</strong> (DataCollectionConfig): Data collection configuration</p></li>
+<li><p><strong>headless</strong> (bool, optional): Run in headless mode. Default: <code class="docutils literal notranslate"><span class="pre">True</span></code></p></li>
+<li><p><strong>num_workers</strong> (int, optional): Number of parallel workers. Default: <code class="docutils literal notranslate"><span class="pre">1</span></code></p></li>
+</ul>
+<p><strong>Returns:</strong></p>
+<ul class="simple">
+<li><p><strong>dict</strong>: Collection results with statistics and metadata</p></li>
+</ul>
+</section>
+</section>
+<section id="rgb-image-collection">
+<h2>RGB Image Collection<a class="headerlink" href="#rgb-image-collection" title="Permalink to this heading">#</a></h2>
+<p>Collect RGB images from scene cameras:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">collect</span><span class="p">(</span>
+    <span class="n">scene_path</span><span class="o">=</span><span class="s2">&quot;/path/to/scene.usd&quot;</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;data/rgb_images&quot;</span><span class="p">,</span>
+    <span class="n">data_types</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;rgb&quot;</span><span class="p">],</span>
+    <span class="n">num_samples</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span>
+    <span class="n">camera_config</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;resolution&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">480</span><span class="p">,</span> <span class="mi">640</span><span class="p">),</span>
+        <span class="s2">&quot;fov&quot;</span><span class="p">:</span> <span class="mf">60.0</span><span class="p">,</span>
+        <span class="s2">&quot;position&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">),</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>RGB images are saved as PNG files with corresponding camera pose metadata.</p>
+</section>
+<section id="depth-image-collection">
+<h2>Depth Image Collection<a class="headerlink" href="#depth-image-collection" title="Permalink to this heading">#</a></h2>
+<p>Collect depth images:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">collect</span><span class="p">(</span>
+    <span class="n">scene_path</span><span class="o">=</span><span class="s2">&quot;/path/to/scene.usd&quot;</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;data/depth_images&quot;</span><span class="p">,</span>
+    <span class="n">data_types</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;rgb&quot;</span><span class="p">,</span> <span class="s2">&quot;depth&quot;</span><span class="p">],</span>
+    <span class="n">num_samples</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span>
+    <span class="n">camera_config</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;resolution&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">480</span><span class="p">,</span> <span class="mi">640</span><span class="p">),</span>
+        <span class="s2">&quot;fov&quot;</span><span class="p">:</span> <span class="mf">60.0</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Depth images are saved as 16-bit PNG files (depth in millimeters).</p>
+</section>
+<section id="point-cloud-collection">
+<h2>Point Cloud Collection<a class="headerlink" href="#point-cloud-collection" title="Permalink to this heading">#</a></h2>
+<p>Collect 3D point clouds:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">collect</span><span class="p">(</span>
+    <span class="n">scene_path</span><span class="o">=</span><span class="s2">&quot;/path/to/scene.usd&quot;</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;data/pointclouds&quot;</span><span class="p">,</span>
+    <span class="n">data_types</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;pointcloud&quot;</span><span class="p">],</span>
+    <span class="n">num_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+    <span class="n">camera_config</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;resolution&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">480</span><span class="p">,</span> <span class="mi">640</span><span class="p">),</span>
+        <span class="s2">&quot;fov&quot;</span><span class="p">:</span> <span class="mf">60.0</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Point clouds are saved in PLY format with RGB colors.</p>
+</section>
+<section id="semantic-segmentation-collection">
+<h2>Semantic Segmentation Collection<a class="headerlink" href="#semantic-segmentation-collection" title="Permalink to this heading">#</a></h2>
+<p>Collect semantic segmentation masks:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">collect</span><span class="p">(</span>
+    <span class="n">scene_path</span><span class="o">=</span><span class="s2">&quot;/path/to/scene.usd&quot;</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;data/semantic_segmentation&quot;</span><span class="p">,</span>
+    <span class="n">data_types</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;rgb&quot;</span><span class="p">,</span> <span class="s2">&quot;semantic&quot;</span><span class="p">],</span>
+    <span class="n">num_samples</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span>
+    <span class="n">camera_config</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;resolution&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">480</span><span class="p">,</span> <span class="mi">640</span><span class="p">),</span>
+        <span class="s2">&quot;fov&quot;</span><span class="p">:</span> <span class="mf">60.0</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Semantic segmentation masks are saved as PNG files with class IDs. A class mapping file is generated automatically.</p>
+</section>
+<section id="instance-segmentation-collection">
+<h2>Instance Segmentation Collection<a class="headerlink" href="#instance-segmentation-collection" title="Permalink to this heading">#</a></h2>
+<p>Collect instance segmentation masks:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">collect</span><span class="p">(</span>
+    <span class="n">scene_path</span><span class="o">=</span><span class="s2">&quot;/path/to/scene.usd&quot;</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;data/instance_segmentation&quot;</span><span class="p">,</span>
+    <span class="n">data_types</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;rgb&quot;</span><span class="p">,</span> <span class="s2">&quot;instance&quot;</span><span class="p">],</span>
+    <span class="n">num_samples</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span>
+    <span class="n">camera_config</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;resolution&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">480</span><span class="p">,</span> <span class="mi">640</span><span class="p">),</span>
+        <span class="s2">&quot;fov&quot;</span><span class="p">:</span> <span class="mf">60.0</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Instance segmentation masks include unique instance IDs for each object.</p>
+</section>
+<section id="bounding-box-collection">
+<h2>Bounding Box Collection<a class="headerlink" href="#bounding-box-collection" title="Permalink to this heading">#</a></h2>
+<p>Collect 2D and 3D bounding boxes:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">collect</span><span class="p">(</span>
+    <span class="n">scene_path</span><span class="o">=</span><span class="s2">&quot;/path/to/scene.usd&quot;</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;data/bounding_boxes&quot;</span><span class="p">,</span>
+    <span class="n">data_types</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;rgb&quot;</span><span class="p">,</span> <span class="s2">&quot;bbox&quot;</span><span class="p">],</span>
+    <span class="n">num_samples</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span>
+    <span class="n">camera_config</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;resolution&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">480</span><span class="p">,</span> <span class="mi">640</span><span class="p">),</span>
+        <span class="s2">&quot;fov&quot;</span><span class="p">:</span> <span class="mf">60.0</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Bounding boxes are saved in COCO format JSON files with 2D and 3D annotations.</p>
+</section>
+<section id="surface-normal-collection">
+<h2>Surface Normal Collection<a class="headerlink" href="#surface-normal-collection" title="Permalink to this heading">#</a></h2>
+<p>Collect surface normal maps:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">collect</span><span class="p">(</span>
+    <span class="n">scene_path</span><span class="o">=</span><span class="s2">&quot;/path/to/scene.usd&quot;</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;data/surface_normals&quot;</span><span class="p">,</span>
+    <span class="n">data_types</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;rgb&quot;</span><span class="p">,</span> <span class="s2">&quot;normal&quot;</span><span class="p">],</span>
+    <span class="n">num_samples</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span>
+    <span class="n">camera_config</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;resolution&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">480</span><span class="p">,</span> <span class="mi">640</span><span class="p">),</span>
+        <span class="s2">&quot;fov&quot;</span><span class="p">:</span> <span class="mf">60.0</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Surface normals are saved as RGB images (normal vectors encoded as RGB).</p>
+</section>
+<section id="sampling-strategies">
+<h2>Sampling Strategies<a class="headerlink" href="#sampling-strategies" title="Permalink to this heading">#</a></h2>
+<p><strong>Random Sampling:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">collect</span><span class="p">(</span>
+    <span class="n">scene_path</span><span class="o">=</span><span class="s2">&quot;/path/to/scene.usd&quot;</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;data/random_samples&quot;</span><span class="p">,</span>
+    <span class="n">data_types</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;rgb&quot;</span><span class="p">],</span>
+    <span class="n">num_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+    <span class="n">sampling_strategy</span><span class="o">=</span><span class="s2">&quot;random&quot;</span><span class="p">,</span>
+    <span class="n">camera_config</span><span class="o">=</span><span class="p">{</span><span class="o">...</span><span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Grid Sampling:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">collect</span><span class="p">(</span>
+    <span class="n">scene_path</span><span class="o">=</span><span class="s2">&quot;/path/to/scene.usd&quot;</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;data/grid_samples&quot;</span><span class="p">,</span>
+    <span class="n">data_types</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;rgb&quot;</span><span class="p">],</span>
+    <span class="n">num_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+    <span class="n">sampling_strategy</span><span class="o">=</span><span class="s2">&quot;grid&quot;</span><span class="p">,</span>
+    <span class="n">grid_spacing</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span>  <span class="c1"># Meters between grid points</span>
+    <span class="n">camera_config</span><span class="o">=</span><span class="p">{</span><span class="o">...</span><span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Trajectory Sampling:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">collect</span><span class="p">(</span>
+    <span class="n">scene_path</span><span class="o">=</span><span class="s2">&quot;/path/to/scene.usd&quot;</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;data/trajectory_samples&quot;</span><span class="p">,</span>
+    <span class="n">data_types</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;rgb&quot;</span><span class="p">],</span>
+    <span class="n">num_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+    <span class="n">sampling_strategy</span><span class="o">=</span><span class="s2">&quot;trajectory&quot;</span><span class="p">,</span>
+    <span class="n">trajectory_path</span><span class="o">=</span><span class="s2">&quot;/path/to/trajectory.json&quot;</span><span class="p">,</span>
+    <span class="n">camera_config</span><span class="o">=</span><span class="p">{</span><span class="o">...</span><span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="robot-mounted-camera">
+<h2>Robot-Mounted Camera<a class="headerlink" href="#robot-mounted-camera" title="Permalink to this heading">#</a></h2>
+<p>Collect data using a robot-mounted camera:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">collect</span><span class="p">(</span>
+    <span class="n">scene_path</span><span class="o">=</span><span class="s2">&quot;/path/to/scene.usd&quot;</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;data/robot_camera&quot;</span><span class="p">,</span>
+    <span class="n">data_types</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;rgb&quot;</span><span class="p">,</span> <span class="s2">&quot;depth&quot;</span><span class="p">],</span>
+    <span class="n">num_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+    <span class="n">robot_type</span><span class="o">=</span><span class="s2">&quot;coco_wheeled&quot;</span><span class="p">,</span>
+    <span class="n">camera_config</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;mount&quot;</span><span class="p">:</span> <span class="s2">&quot;robot_base&quot;</span><span class="p">,</span>  <span class="c1"># or &quot;robot_head&quot;</span>
+        <span class="s2">&quot;offset&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">),</span>  <span class="c1"># Offset from mount point</span>
+        <span class="s2">&quot;resolution&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">480</span><span class="p">,</span> <span class="mi">640</span><span class="p">),</span>
+        <span class="s2">&quot;fov&quot;</span><span class="p">:</span> <span class="mf">60.0</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="batch-processing">
+<h2>Batch Processing<a class="headerlink" href="#batch-processing" title="Permalink to this heading">#</a></h2>
+<p>Collect data from multiple scenes:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">scene_root</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/UrbanVerse-160&quot;</span><span class="p">)</span>
+<span class="n">output_root</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data_collection/batch&quot;</span><span class="p">)</span>
+
+<span class="n">scene_paths</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">scene_root</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*/scene.usd&quot;</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">scene_path</span> <span class="ow">in</span> <span class="n">scene_paths</span><span class="p">:</span>
+    <span class="n">scene_name</span> <span class="o">=</span> <span class="n">scene_path</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span>
+    <span class="n">output_dir</span> <span class="o">=</span> <span class="n">output_root</span> <span class="o">/</span> <span class="n">scene_name</span>
+
+    <span class="n">config</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">collect</span><span class="p">(</span>
+        <span class="n">scene_path</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">scene_path</span><span class="p">),</span>
+        <span class="n">output_dir</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">output_dir</span><span class="p">),</span>
+        <span class="n">data_types</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;rgb&quot;</span><span class="p">,</span> <span class="s2">&quot;depth&quot;</span><span class="p">,</span> <span class="s2">&quot;semantic&quot;</span><span class="p">,</span> <span class="s2">&quot;bbox&quot;</span><span class="p">],</span>
+        <span class="n">num_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+        <span class="n">camera_config</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">&quot;resolution&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">480</span><span class="p">,</span> <span class="mi">640</span><span class="p">),</span>
+            <span class="s2">&quot;fov&quot;</span><span class="p">:</span> <span class="mf">60.0</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">)</span>
+
+    <span class="n">results</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ Collected from </span><span class="si">{</span><span class="n">scene_name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;num_samples&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> samples&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="data-format">
+<h2>Data Format<a class="headerlink" href="#data-format" title="Permalink to this heading">#</a></h2>
+<p>Collected data is organized in the following structure:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>output_dir/
+├── rgb/
+│   ├── 000000.png
+│   ├── 000001.png
+│   └── ...
+├── depth/
+│   ├── 000000.png
+│   ├── 000001.png
+│   └── ...
+├── semantic/
+│   ├── 000000.png
+│   ├── 000001.png
+│   └── ...
+├── bbox/
+│   └── annotations.json
+├── metadata/
+│   ├── camera_poses.json
+│   ├── class_mapping.json
+│   └── collection_info.json
+└── dataset_index.json
+</pre></div>
+</div>
+</section>
 </section>
 
 
@@ -511,11 +888,11 @@
       </div>
     </a>
     <a class="right-next"
-       href="realworld_deployment.html"
+       href="teleop_interface.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Deploying UrbanVerse Policy in Real-World</p>
+        <p class="prev-next-title">Teleoperation Interfaces</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -525,6 +902,40 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supported-data-types">Supported Data Types</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-usage">Basic Usage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#api-reference">API Reference</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configure-data-collection">Configure Data Collection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-data-collection">Run Data Collection</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rgb-image-collection">RGB Image Collection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#depth-image-collection">Depth Image Collection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#point-cloud-collection">Point Cloud Collection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#semantic-segmentation-collection">Semantic Segmentation Collection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instance-segmentation-collection">Instance Segmentation Collection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bounding-box-collection">Bounding Box Collection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#surface-normal-collection">Surface Normal Collection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-strategies">Sampling Strategies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#robot-mounted-camera">Robot-Mounted Camera</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-processing">Batch Processing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-format">Data Format</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
