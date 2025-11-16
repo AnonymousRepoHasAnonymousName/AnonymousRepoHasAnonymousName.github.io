@@ -485,7 +485,6 @@
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#component-overview">Component Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage-tip">Usage Tip</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-and-target-result">Example and Target Result</a></li>
 </ul>
             </nav>
         </div>
@@ -545,19 +544,6 @@ See: <a class="reference internal" href="event.html"><span class="doc">Events</s
 <p>Each component can be configured independently via the central <code class="docutils literal notranslate"><span class="pre">EnvCfg</span></code> class.
 You can also subclass individual configs to customize robot interfaces, rewards, observations, or scene logic.</p>
 </section>
-<section id="example-and-target-result">
-<h2>Example and Target Result<a class="headerlink" href="#example-and-target-result" title="Permalink to this heading">#</a></h2>
-<p>We have provided  several example environments that demonstrate the use of these components in practice.
-You can use the command:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>urbansim/learning/RL/train.py<span class="w"> </span>--env<span class="w"> </span>configs/env_configs/navigation/coco.yaml<span class="w"> </span>--enable_cameras<span class="w"> </span>--num_envs<span class="w"> </span><span class="m">256</span><span class="w"> </span>--headless<span class="w"> </span>--video
-</pre></div>
-</div>
-<p>You will get the target training curves saved in TensorBoard-compatible format, like</p>
-<a class="reference internal image-reference" href="../../../_images/reward.png"><img alt="RL Training Curve" class="align-center" src="../../../_images/reward.png" style="width: 100%;" /></a>
-<p>with additional details of each reward term, terminations, etc.</p>
-<a class="reference internal image-reference" href="../../../_images/detail.png"><img alt="RL Training Curve Detail" class="align-center" src="../../../_images/detail.png" style="width: 100%;" /></a>
-<p>as well as videos during training saved in the <code class="docutils literal notranslate"><span class="pre">logged_videos</span></code> directory.</p>
-</section>
 </section>
 
 
@@ -608,7 +594,6 @@ You can use the command:</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#component-overview">Component Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage-tip">Usage Tip</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-and-target-result">Example and Target Result</a></li>
 </ul>
   </nav></div>
 

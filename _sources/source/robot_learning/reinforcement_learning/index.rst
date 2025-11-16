@@ -54,29 +54,3 @@ Usage Tip
 
 Each component can be configured independently via the central ``EnvCfg`` class.  
 You can also subclass individual configs to customize robot interfaces, rewards, observations, or scene logic.
-
-Example and Target Result
------------------------------
-
-We have provided  several example environments that demonstrate the use of these components in practice.
-You can use the command:
-
-.. code-block:: bash
-
-   python urbansim/learning/RL/train.py --env configs/env_configs/navigation/coco.yaml --enable_cameras --num_envs 256 --headless --video
-
-You will get the target training curves saved in TensorBoard-compatible format, like
-
-.. image:: ../../../assets/reward.png
-   :alt: RL Training Curve
-   :width: 100%
-   :align: center
-
-with additional details of each reward term, terminations, etc.
-
-.. image:: ../../../assets/detail.png
-   :alt: RL Training Curve Detail
-   :width: 100%
-   :align: center
-
-as well as videos during training saved in the ``logged_videos`` directory.
