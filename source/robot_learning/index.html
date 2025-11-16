@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>&lt;no title&gt; &#8212; UrbanVerse Documentation</title>
+    <title>Robot Learning with UrbanVerse &#8212; UrbanVerse Documentation</title>
   
   
   
@@ -248,13 +248,16 @@
 </ul>
 </details></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer (Advanced)</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide (Advanced)</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../developer/collecting_data.html">Collecting Data in UrbanVerse</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../developer/teleop_interface.html">Teleoperation Interfaces</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../developer/realworld_deployment.html">Real-world Deployment: Unitree Go2 Quadruped Example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../developer/adding_new_assets.html">Adding New Assets to UrbanVerse-100K</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../developer/adding_new_robots.html">Adding New Robots to UrbanVerse</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../developer/index.html">Developer Guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developer/collecting_data.html">Collecting Data in UrbanVerse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer/teleop_interface.html">Teleoperation Interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer/realworld_deployment.html">Real-world Deployment: Unitree Go2 Quadruped Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer/adding_new_assets.html">Adding New Assets to UrbanVerse-100K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer/adding_new_robots.html">Adding New Robots to UrbanVerse</a></li>
+</ul>
+</details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -275,11 +278,8 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../refs/index.html">References</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../refs/license.html">License</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../refs/3license.html">Third-Party Licenses</a></li>
-</ul>
-</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../refs/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../refs/3license.html">Third-Party Licenses</a></li>
 </ul>
 
     </div>
@@ -466,9 +466,7 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
+
 </div></div>
       
     </div>
@@ -479,7 +477,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>Robot Learning with UrbanVerse</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -493,17 +491,25 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <div class="admonition note" id="urbanverse-robot-learning-root">
+  <section id="robot-learning-with-urbanverse">
+<span id="urbanverse-robot-learning-root"></span><h1>Robot Learning with UrbanVerse<a class="headerlink" href="#robot-learning-with-urbanverse" title="Permalink to this heading">#</a></h1>
+<p>This section provides comprehensive documentation for training navigation policies in UrbanVerse’s urban simulation environments. UrbanVerse supports both reinforcement learning and imitation learning paradigms, enabling you to train robots ranging from wheeled delivery platforms to humanoid robots in diverse, photorealistic city scenes.</p>
+<p>The robot learning documentation covers:</p>
+<ul class="simple">
+<li><p><strong>Simulation Paradigms</strong>: Understanding synchronous vs. asynchronous multi-environment simulation and how scene layouts and digital cousin variants are distributed across parallel training environments</p></li>
+<li><p><strong>Robot Configuration</strong>: Configuring different robot embodiments (wheeled, legged, humanoid) and their action spaces, including COCO, Unitree Go2, Unitree G1, and more</p></li>
+<li><p><strong>General Configurations</strong>: Understanding the <cite>EnvCfg</cite> configuration system that defines scenes, observations, actions, rewards, terminations, curriculum, and events</p></li>
+<li><p><strong>Reinforcement Learning</strong>: Complete guide to training RL policies with UrbanVerse, including environment configuration, reward design, curriculum learning, and training workflows</p></li>
+<li><p><strong>Imitation Learning</strong>: Complete guide to training Behavior Cloning policies, including data collection, dataset formats, training configuration, and evaluation</p></li>
+</ul>
+<div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>We recommend system requirements with at least 32GB RAM and 16GB VRAM for UrbanVerse.
 For workflows with rendering enabled, additional VRAM may be required.
 For the full list of system requirements for Isaac Sim, please refer to the
-<a class="reference external" href="https://docs.isaacsim.omniverse.nvidia.com/latest/installation/requirements.html#system-requirements">Isaac Sim system requirements</a>.</p>
+Isaac Sim system requirements.</p>
+<p>Before training policies, ensure you have completed the <a class="reference internal" href="../installation/index.html"><span class="doc">Installation</span></a> process and are familiar with <a class="reference internal" href="../quickstart/index.html"><span class="doc">Quickstart Guide</span></a> workflows.</p>
 </div>
-<p>UrbanVerse is built on top of the Isaac ecosystem. Therefore, it is required to first install Isaac Sim
-before using UrbanVerse. We highly recommend installing Isaac Sim and our project
-through binary download/source file to use the latest features and improvements.</p>
-<p>For users getting started with UrbanVerse, we recommend installing UrbanVerse by cloning the repo.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="simulation_paradigms.html">Simulation Paradigms</a><ul>
@@ -542,7 +548,7 @@ through binary download/source file to use the latest features and improvements.
 <li class="toctree-l2"><a class="reference internal" href="configuration.html#summary">Summary</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="reinforcement_learning/index.html">Reinforcement Learning Guide</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="reinforcement_learning/index.html">Reinforcement Learning in UrbanVerse</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="reinforcement_learning/index.html#documentation-overview">Documentation Overview</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/scene.html">Working with Urban Scenes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reinforcement_learning/action.html">Defining Robot Actions</a></li>
@@ -558,7 +564,7 @@ through binary download/source file to use the latest features and improvements.
 <li class="toctree-l2"><a class="reference internal" href="reinforcement_learning/index.html#benefits-of-reinforcement-learning">Benefits of Reinforcement Learning</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="imitation_learning/index.html">Imitation Learning Guide</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="imitation_learning/index.html">Imitation Learning in UrbanVerse</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="imitation_learning/index.html#documentation-overview">Documentation Overview</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="imitation_learning/introduction.html">Introduction to Imitation Learning</a></li>
 <li class="toctree-l3"><a class="reference internal" href="imitation_learning/data_collection.html">Collecting Expert Demonstrations</a></li>
@@ -576,6 +582,7 @@ through binary download/source file to use the latest features and improvements.
 </li>
 </ul>
 </div>
+</section>
 
 
                 </article>

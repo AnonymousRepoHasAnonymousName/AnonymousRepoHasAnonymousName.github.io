@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>&lt;no title&gt; &#8212; UrbanVerse Documentation</title>
+    <title>Quickstart Guide &#8212; UrbanVerse Documentation</title>
   
   
   
@@ -248,13 +248,16 @@
 </ul>
 </details></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer (Advanced)</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide (Advanced)</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../developer/collecting_data.html">Collecting Data in UrbanVerse</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../developer/teleop_interface.html">Teleoperation Interfaces</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../developer/realworld_deployment.html">Real-world Deployment: Unitree Go2 Quadruped Example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../developer/adding_new_assets.html">Adding New Assets to UrbanVerse-100K</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../developer/adding_new_robots.html">Adding New Robots to UrbanVerse</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../developer/index.html">Developer Guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developer/collecting_data.html">Collecting Data in UrbanVerse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer/teleop_interface.html">Teleoperation Interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer/realworld_deployment.html">Real-world Deployment: Unitree Go2 Quadruped Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer/adding_new_assets.html">Adding New Assets to UrbanVerse-100K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer/adding_new_robots.html">Adding New Robots to UrbanVerse</a></li>
+</ul>
+</details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -275,11 +278,8 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../refs/index.html">References</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../refs/license.html">License</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../refs/3license.html">Third-Party Licenses</a></li>
-</ul>
-</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../refs/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../refs/3license.html">Third-Party Licenses</a></li>
 </ul>
 
     </div>
@@ -466,9 +466,7 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
+
 </div></div>
       
     </div>
@@ -479,7 +477,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>Quickstart Guide</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -493,17 +491,25 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <div class="admonition note" id="urbanverse-quickstart-root">
+  <section id="quickstart-guide">
+<span id="urbanverse-quickstart-root"></span><h1>Quickstart Guide<a class="headerlink" href="#quickstart-guide" title="Permalink to this heading">#</a></h1>
+<p>This section provides step-by-step guides to get you started with UrbanVerse’s core features and workflows. Whether you want to explore the UrbanVerse-100K dataset, generate custom scenes from videos, use pre-built environments, or train navigation policies, these guides will help you get up and running quickly.</p>
+<p>The quickstart guide covers:</p>
+<ul class="simple">
+<li><p><strong>UrbanVerse-100K Dataset</strong>: Exploring and using the 102,530 3D urban assets, 288 ground materials, and 306 HDRI sky maps through Python APIs</p></li>
+<li><p><strong>UrbanVerse-Gen Pipeline</strong>: Converting raw city-tour videos into fully interactive 3D simulation environments</p></li>
+<li><p><strong>Pre-Built Scenes</strong>: Loading and using UrbanVerse-160 (160 real-to-sim scenes) and CraftBench (10 artist-designed test scenes)</p></li>
+<li><p><strong>Robot Training</strong>: Training goal-point navigation policies using reinforcement learning in UrbanVerse environments</p></li>
+<li><p><strong>Policy Evaluation</strong>: Testing trained policies on CraftBench scenes with standardized evaluation metrics</p></li>
+</ul>
+<div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>We recommend system requirements with at least 32GB RAM and 16GB VRAM for UrbanVerse.
 For workflows with rendering enabled, additional VRAM may be required.
 For the full list of system requirements for Isaac Sim, please refer to the
-<a class="reference external" href="https://docs.isaacsim.omniverse.nvidia.com/latest/installation/requirements.html#system-requirements">Isaac Sim system requirements</a>.</p>
+Isaac Sim system requirements.</p>
+<p>Before starting, ensure you have completed the <a class="reference internal" href="../installation/index.html"><span class="doc">Installation</span></a> process, including installing Isaac Sim, caching UrbanVerse-100K assets, and downloading scenes.</p>
 </div>
-<p>UrbanVerse is built on top of the Isaac ecosystem. Therefore, it is required to first install Isaac Sim
-before using UrbanVerse. We highly recommend installing Isaac Sim and our project
-through binary download/source file to use the latest features and improvements.</p>
-<p>For users getting started with UrbanVerse, we recommend installing UrbanVerse by cloning the repo.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="intro_quickstart.html">Introduction to Quickstart Guide</a></li>
@@ -657,6 +663,7 @@ through binary download/source file to use the latest features and improvements.
 </li>
 </ul>
 </div>
+</section>
 
 
                 </article>

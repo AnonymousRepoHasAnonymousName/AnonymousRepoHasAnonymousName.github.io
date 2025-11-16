@@ -248,13 +248,16 @@
 </ul>
 </details></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer (Advanced)</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide (Advanced)</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../developer/collecting_data.html">Collecting Data in UrbanVerse</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../developer/teleop_interface.html">Teleoperation Interfaces</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../developer/realworld_deployment.html">Real-world Deployment: Unitree Go2 Quadruped Example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../developer/adding_new_assets.html">Adding New Assets to UrbanVerse-100K</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../developer/adding_new_robots.html">Adding New Robots to UrbanVerse</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../developer/index.html">Developer Guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developer/collecting_data.html">Collecting Data in UrbanVerse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer/teleop_interface.html">Teleoperation Interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer/realworld_deployment.html">Real-world Deployment: Unitree Go2 Quadruped Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer/adding_new_assets.html">Adding New Assets to UrbanVerse-100K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer/adding_new_robots.html">Adding New Robots to UrbanVerse</a></li>
+</ul>
+</details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -275,11 +278,8 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../refs/index.html">References</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../refs/license.html">License</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../refs/3license.html">Third-Party Licenses</a></li>
-</ul>
-</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../refs/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../refs/3license.html">Third-Party Licenses</a></li>
 </ul>
 
     </div>
@@ -498,9 +498,15 @@
 <p>We recommend system requirements with at least 32GB RAM and 16GB VRAM for UrbanVerse.
 For workflows with rendering enabled, additional VRAM may be required.
 For the full list of system requirements for Isaac Sim, please refer to the
-<a class="reference external" href="https://docs.isaacsim.omniverse.nvidia.com/latest/installation/requirements.html#system-requirements">Isaac Sim system requirements</a>.</p>
+Isaac Sim system requirements.</p>
 </div>
-<p>UrbanVerse runs on top of the NVIDIA Isaac Sim simulation engine. This section covers the installation process, including setting up Isaac Sim, downloading assets, and verifying your installation.</p>
+<p>UrbanVerse runs on top of the NVIDIA Isaac Sim simulation engine. This section covers the complete installation process:</p>
+<ul class="simple">
+<li><p><strong>Installing Isaac Sim</strong>: Setting up Isaac Sim from pre-built binaries and configuring UrbanVerse source code</p></li>
+<li><p><strong>Caching UrbanVerse-100K Assets</strong>: Downloading the 102,530 3D object assets, 288 ground materials, and 306 HDRI sky maps from Hugging Face</p></li>
+<li><p><strong>Caching UrbanVerse Scenes</strong>: Downloading UrbanVerse-160 (160 real-to-sim environments) and CraftBench (10 artist-crafted test scenes) from Hugging Face</p></li>
+<li><p><strong>Verifying Installation</strong>: Testing that UrbanVerse-Gen, Isaac Sim integration, and scene loading work correctly</p></li>
+</ul>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="binaries_installation.html">Installation via Pre-Built Binaries</a><ul>
