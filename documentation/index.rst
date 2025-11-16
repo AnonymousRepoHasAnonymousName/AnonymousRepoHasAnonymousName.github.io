@@ -129,8 +129,9 @@ Table of Contents
    source/community/communication
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: References
 
-   source/refs/index
+   source/refs/license
+   source/refs/3license
 
