@@ -1,4 +1,0 @@
-Configuring VR Interface
-========================
-
-aaa
