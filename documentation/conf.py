@@ -18,7 +18,7 @@ sys.path.insert(0, os.path.abspath("../meta_source/metadrive/metadrive"))
 # -- Project information -----------------------------------------------------
 
 project = "UrbanVerse"
-copyright = "2025-2030, The Anonymous UrbanVerse Project Developers. " + "[UrbanVerse is built upon NVIDIA Isaac Sim&Lab and extends its capabilities for urban robot learning tasks]"
+copyright = "2025-2030, The Anonymous UrbanVerse Project Developers"
 author = "The Anonymous UrbanVerse Project Developers"
 
 # Read version from the package
@@ -202,13 +202,13 @@ language = "en"
 
 import sphinx_book_theme
 
-html_title = "UrbanVerse Documentation"
+html_title = "UrbanVerse Documentation (Fully Anonymous)"
 html_theme_path = [sphinx_book_theme.get_html_theme_path()]
 html_theme = "sphinx_book_theme"
 html_favicon = ""
 html_show_copyright = True
 html_show_sphinx = False
-html_last_updated_fmt = ""  # to reveal the build date in the pages meta
+html_last_updated_fmt = None  # Disable last updated date display
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -219,46 +219,28 @@ html_css_files = ["custom.css"]
 html_theme_options = {
     "collapse_navigation": True,
     "repository_url": "https://github.com/metadriverse/urban-sim",
-    "use_repository_button": True,
-    "use_issues_button": True,
-    "use_edit_page_button": True,
+    "use_repository_button": False,
+    "use_issues_button": False,
+    "use_edit_page_button": False,
+    "use_download_button": False,
     "show_toc_level": 1,
     "use_sidenotes": True,
     "logo": {
-        "text": "UrbanVese Documentation",
+        "text": "📖 UrbanVese Documentation (Fully Anonymous)",
     },
     "icon_links": [
         {
-            "name": "GitHub",
-            "url": "https://github.com/metadriverse/urban-sim",
-            "icon": "fa-brands fa-square-github",
-            "type": "fontawesome",
-        },
-        {
-            "name": "Stars",
-            "url": "https://img.shields.io/github/stars/metadriverse/urban-sim?color=fedcba",
-            "icon": "https://img.shields.io/github/stars/metadriverse/urban-sim?color=fedcba",
-            "type": "url",
-        },
-        {
-        "name": "",
-        "url": "",
-        "icon": "", 
-        "type": "separator"
-        },
-        {
             "name": "Isaac Lab",
-            "url": "https://github.com/isaac-sim/IsaacLab",
+            "url": "index.html",
             "icon": "https://img.shields.io/badge/IsaacLab-2.0.1-silver.svg",
             "type": "url",
         },
         {
             "name": "Isaac Sim",
-            "url": "https://developer.nvidia.com/isaac-sim",
+            "url": "index.html",
             "icon": "https://img.shields.io/badge/IsaacSim-4.5.0-silver.svg",
             "type": "url",
         },
-        
     ],
     "icon_links_label": "Quick Links",
 }

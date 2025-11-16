@@ -1,138 +1,293 @@
-Environment Configurations
-====================================
+import os
+import sys
 
-The `EnvCfg` class defines the configuration schema for UrbanVerse training environments.  
-It inherits from `ManagerBasedRLEnvCfg` in Isaac Lab and encapsulates settings for the simulation scene, observation/action space, rewards, curriculum, and termination logic.
+sys.path.insert(0, os.path.abspath("../isaac_source/isaaclab"))
+sys.path.insert(0, os.path.abspath("../isaac_source/isaaclab/isaaclab"))
+sys.path.insert(0, os.path.abspath("../isaac_source/isaaclab_tasks"))
+sys.path.insert(0, os.path.abspath("../isaac_source/isaaclab_tasks/isaaclab_tasks"))
+sys.path.insert(0, os.path.abspath("../isaac_source/isaaclab_rl"))
+sys.path.insert(0, os.path.abspath("../isaac_source/isaaclab_rl/isaaclab_rl"))
+sys.path.insert(0, os.path.abspath("../isaac_source/isaaclab_mimic"))
+sys.path.insert(0, os.path.abspath("../isaac_source/isaaclab_mimic/isaaclab_mimic"))
+sys.path.insert(0, os.path.abspath("../isaac_source/isaaclab_assets"))
+sys.path.insert(0, os.path.abspath("../isaac_source/isaaclab_assets/isaaclab_assets"))
+sys.path.insert(0, os.path.abspath("../urbanverse"))
+sys.path.insert(0, os.path.abspath("../meta_source/metaurban/metaurban"))
+sys.path.insert(0, os.path.abspath("../meta_source/metadrive/metadrive"))
 
-.. code-block:: python
+# -- Project information -----------------------------------------------------
 
-   @configclass
-   class EnvCfg(ManagerBasedRLEnvCfg):
-       """
-       Environment configuration schema for UrbanVerse.
-       Inherits from ManagerBasedRLEnvCfg.
-       """
+project = "UrbanVerse"
+copyright = "2025-2030, The Anonymous UrbanVerse Project Developers"
+author = "The Anonymous UrbanVerse Project Developers"
 
-       # Scene configuration
-       scene: SceneCfg = SceneCfg()
+# Read version from the package
+with open(os.path.join(os.path.dirname(__file__), "..", "VERSION")) as f:
+    full_version = f.read().strip()
+    version = ".".join(full_version.split(".")[:3])
 
-       # Simulation parameters
-       viewer: ViewerCfg = ViewerCfg()
-       observations: ObservationCfg = ObservationCfg()
-       actions: ActionCfg = ActionCfg()
-       commands: CommandCfg = CommandCfg()
+# -- General configuration ---------------------------------------------------
 
-       # MDP components
-       rewards: RewardCfg = RewardCfg()
-       terminations: TerminationCfg = TerminationCfg()
-       events: EventCfg = EventCfg()
-       curriculum: CurriculumCfg = CurriculumCfg()
+# Add any Sphinx extension module names here, as strings. They can be
+# extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
+# ones.
+extensions = [
+    "autodocsumm",
+    "myst_parser",
+    "sphinx.ext.napoleon",
+    "sphinxemoji.sphinxemoji",
+    "sphinx.ext.autodoc",
+    "sphinx.ext.autosummary",
+    "sphinx.ext.githubpages",
+    "sphinx.ext.intersphinx",
+    "sphinx.ext.mathjax",
+    "sphinx.ext.todo",
+    "sphinx.ext.viewcode",
+    "sphinxcontrib.bibtex",
+    "sphinxcontrib.icon",
+    "sphinx_copybutton",
+    "sphinx_design",
+    "sphinx_tabs.tabs",  # backwards compatibility for building docs on v1.0.0
+    "sphinx_multiversion",
+]
 
-       # Robot configuration
-       robot_name: str = "COCO"  # Default robot type
+# mathjax hacks
+mathjax3_config = {
+    "tex": {
+        "inlineMath": [["\\(", "\\)"]],
+        "displayMath": [["\\[", "\\]"]],
+    },
+}
 
-Scene Configuration
--------------------
+# panels hacks
+panels_add_bootstrap_css = False
+panels_add_fontawesome_css = True
 
-The `scene` field instantiates a `SceneCfg`-compatible class, determining how the environment is constructed.
+# supported file extensions for source files
+source_suffix = {
+    ".rst": "restructuredtext",
+    ".md": "markdown",
+}
 
-- If `pg_config` is **not provided**, the system defaults to random object placement:
+# make sure we don't have any unknown references
+# TODO: Enable this by default once we have fixed all the warnings
+# nitpicky = True
 
-  .. code-block:: python
+# put type hints inside the signature instead of the description (easier to maintain)
+autodoc_typehints = "signature"
+# autodoc_typehints_format = "fully-qualified"
+# document class *and* __init__ methods
+autoclass_content = "class"  #
+# separate class docstring from __init__ docstring
+autodoc_class_signature = "separated"
+# sort members by source order
+autodoc_member_order = "bysource"
+# inherit docstrings from base classes
+autodoc_inherit_docstrings = True
+# BibTeX configuration
+bibtex_bibfiles = ["source/_static/refs.bib"]
+# generate autosummary even if no references
+autosummary_generate = True
+autosummary_generate_overwrite = False
+# default autodoc settings
+autodoc_default_options = {
+    "autosummary": True,
+}
 
-     scene = scene_cfg(num_envs=..., env_spacing=...)
+# generate links to the documentation of objects in external projects
+intersphinx_mapping = {
+    "python": ("https://docs.python.org/3", None),
+    "numpy": ("https://numpy.org/doc/stable/", None),
+    "torch": ("https://pytorch.org/docs/stable/", None),
+    "isaac": ("https://docs.omniverse.nvidia.com/py/isaacsim", None),
+    "gymnasium": ("https://gymnasium.farama.org/", None),
+    "warp": ("https://nvidia.github.io/warp/", None),
+    "isaaclab": ("https://isaac-sim.github.io/IsaacLab/main/index.html", None),
+    "metaurban": ("https://metadriverse.github.io/metaurban/", None),
+}
 
-- If `pg_config` **is provided**, a procedural scenario is built:
+# Add any paths that contain templates here, relative to this directory.
+templates_path = []
 
-  .. code-block:: python
+# List of patterns, relative to source directory, that match files and
+# directories to ignore when looking for source files.
+# This pattern also affects html_static_path and html_extra_path.
+exclude_patterns = ["_build", "_redirect", "_templates", "Thumbs.db", ".DS_Store", "README.md", "licenses/*"]
 
-     scene = scene_cfg(
-         num_envs=...,
-         env_spacing=...,
-         pg_config=pg_config,
-         scenario_generation_method=...,
-     )
+# Mock out modules that are not available on RTD
+autodoc_mock_imports = [
+    "torch",
+    "torchvision",
+    "numpy",
+    "matplotlib",
+    "scipy",
+    "carb",
+    "warp",
+    "pxr",
+    "isaacsim",
+    "omni",
+    "omni.kit",
+    "omni.log",
+    "omni.usd",
+    "omni.client",
+    "omni.physx",
+    "omni.physics",
+    "pxr.PhysxSchema",
+    "pxr.PhysicsSchemaTools",
+    "omni.replicator",
+    "omni.isaac.core",
+    "omni.isaac.kit",
+    "omni.isaac.cloner",
+    "omni.isaac.urdf",
+    "omni.isaac.version",
+    "omni.isaac.motion_generation",
+    "omni.isaac.ui",
+    "isaacsim",
+    "isaacsim.core.api",
+    "isaacsim.core.cloner",
+    "isaacsim.core.version",
+    "isaacsim.robot_motion.motion_generation",
+    "isaacsim.gui.components",
+    "isaacsim.asset.importer.urdf",
+    "isaacsim.asset.importer.mjcf",
+    "omni.syntheticdata",
+    "omni.timeline",
+    "omni.ui",
+    "gym",
+    "skrl",
+    "stable_baselines3",
+    "rsl_rl",
+    "rl_games",
+    "ray",
+    "h5py",
+    "hid",
+    "prettytable",
+    "tqdm",
+    "tensordict",
+    "trimesh",
+    "toml",
+    "pink",
+    "pinocchio",
+    "nvidia.srl",
+    "flatdict",
+]
 
-Key options:
+# List of zero or more Sphinx-specific warning categories to be squelched (i.e.,
+# suppressed, ignored).
+suppress_warnings = [
+    # Generally speaking, we do want Sphinx to inform
+    # us about cross-referencing failures. Remove this entirely after Sphinx
+    # resolves this open issue:
+    #   https://github.com/sphinx-doc/sphinx/issues/4961
+    # Squelch mostly ignorable warnings resembling:
+    #     WARNING: more than one target found for cross-reference 'TypeHint':
+    #     beartype.door._doorcls.TypeHint, beartype.door.TypeHint
+    #
+    # Sphinx currently emits *MANY* of these warnings against our
+    # documentation. All of these warnings appear to be ignorable. Although we
+    # could explicitly squelch *SOME* of these warnings by canonicalizing
+    # relative to absolute references in docstrings, Sphinx emits still others
+    # of these warnings when parsing PEP-compliant type hints via static
+    # analysis. Since those hints are actual hints that *CANNOT* by definition
+    # by canonicalized, our only recourse is to squelch warnings altogether.
+    "ref.python",
+]
 
-- ``num_envs``: Number of parallel environments
-- ``env_spacing``: Spacing between environments in simulation world
-- ``pg_config``: Optional procedural generation config
-- ``scenario_generation_method``: Overrides default random placement
+# -- Internationalization ----------------------------------------------------
 
-Simulation Configuration
-------------------------
+# specifying the natural language populates some key tags
+language = "en"
 
-- ``viewer``: Defines viewer resolution, camera mode, etc. via `ViewerCfg`
-- ``observations``: Sensor and observation space definitions via `observation_cfg`
-- ``actions``: Action space definition (e.g., continuous, discrete) via `action_cfg`
-- ``commands``: External command signal structure via `command_cfg`
+# -- Options for HTML output -------------------------------------------------
 
-MDP Configuration
------------------
+import sphinx_book_theme
 
-- ``rewards``: Reward shaping logic via `reward_cfg`
-- ``terminations``: Termination condition logic via `termination_cfg`
-- ``events``: Optional triggerable in-sim events
-- ``curriculum``: Curriculum learning parameters via `curriculum_cfg`
+html_title = "UrbanVerse Documentation"
+html_theme_path = [sphinx_book_theme.get_html_theme_path()]
+html_theme = "sphinx_book_theme"
+html_favicon = ""
+html_show_copyright = True
+html_show_sphinx = False
+html_last_updated_fmt = ""  # to reveal the build date in the pages meta
 
-All these components are dynamically loaded based on the environment configuration, allowing for flexible and extensible environment setups.
+# Add any paths that contain custom static files (such as style sheets) here,
+# relative to this directory. They are copied after the builtin static files,
+# so a file named "default.css" will overwrite the builtin "default.css".
+html_static_path = ["source/_static/css"]
+html_css_files = ["custom.css"]
 
-Robot Configuration
-====================
+html_theme_options = {
+    "collapse_navigation": True,
+    "repository_url": "https://github.com/metadriverse/urban-sim",
+    "use_repository_button": True,
+    "use_issues_button": True,
+    "use_edit_page_button": True,
+    "show_toc_level": 1,
+    "use_sidenotes": True,
+    "logo": {
+        "text": "UrbanVese Documentation",
+    },
+    "icon_links": [
+        {
+            "name": "GitHub",
+            "url": "https://github.com/metadriverse/urban-sim",
+            "icon": "fa-brands fa-square-github",
+            "type": "fontawesome",
+        },
+        {
+            "name": "Stars",
+            "url": "https://img.shields.io/github/stars/metadriverse/urban-sim?color=fedcba",
+            "icon": "https://img.shields.io/github/stars/metadriverse/urban-sim?color=fedcba",
+            "type": "url",
+        },
+        {
+        "name": "",
+        "url": "",
+        "icon": "", 
+        "type": "separator"
+        },
+        {
+            "name": "Isaac Lab",
+            "url": "https://github.com/isaac-sim/IsaacLab",
+            "icon": "https://img.shields.io/badge/IsaacLab-2.0.1-silver.svg",
+            "type": "url",
+        },
+        {
+            "name": "Isaac Sim",
+            "url": "https://developer.nvidia.com/isaac-sim",
+            "icon": "https://img.shields.io/badge/IsaacSim-4.5.0-silver.svg",
+            "type": "url",
+        },
+        
+    ],
+    "icon_links_label": "Quick Links",
+}
 
-UrbanVerse supports multiple robot embodiments, each with its own physical parameters, control interface, and integration strategy.
+templates_path = [
+    "_templates",
+]
 
-The robot selection is determined via the ``robot_name`` field in the environment configuration, and dynamically loads the corresponding config modules.
+# Whitelist pattern for remotes
+smv_remote_whitelist = r"^.*$"
+# Whitelist pattern for branches (set to None to ignore all branches)
+smv_branch_whitelist = os.getenv("SMV_BRANCH_WHITELIST", r"^(main|devel)$")
+# Whitelist pattern for tags (set to None to ignore all tags)
+smv_tag_whitelist = os.getenv("SMV_TAG_WHITELIST", r"^v[1-9]\d*\.\d+\.\d+$")
+html_sidebars = {
+    "**": ["navbar-logo.html", "versioning.html", "icon-links.html", "search-field.html", "sbt-sidebar-nav.html"]
+}
 
-Supported Robots
-----------------
 
-1. **COCO** (wheeled base)
+# -- Advanced configuration -------------------------------------------------
 
-   - **Config**: ``COCO_CFG`` from ``urbansim.primitives.robot.coco``
-   - **Action space**: ``COCOVelocityActionsCfg``
-   - **Environment modifier**: ``COCONavModifyEnv``
-   - **Default height**: `z = 0.4`
 
-2. **Unitree Go2** (quadruped robot)
+def skip_member(app, what, name, obj, skip, options):
+    # List the names of the functions you want to skip here
+    exclusions = ["from_dict", "to_dict", "replace", "copy", "validate", "__post_init__"]
+    if name in exclusions:
+        return True
+    return None
 
-   - **Config**: ``UNITREE_GO2_CFG`` from ``urbansim.primitives.robot.unitree_go2``
-   - **Action space**: ``GO2NavActionsCfg``
-   - **Environment modifier**: ``GO2NavModifyEnv``
-   - **Default height**: `z = 0.3`
 
-3. **Unitree G1** (humanoid / bipedal)
-
-   - **Config**: ``G1_MINIMAL_CFG`` from ``urbansim.primitives.robot.unitree_g1``
-   - **Action space**: ``G1NavActionsCfg``
-   - **Environment modifier**: ``G1NavModifyEnv``
-   - **Default height**: `z = 0.74`
-
-Dynamic Initialization
-----------------------
-
-The configuration system selects robot-specific components based on name:
-
-.. code-block:: python
-
-   if robot_name.lower() == "unitree_go2":
-       from urbansim.primitives.robot.unitree_go2 import UNITREE_GO2_CFG, GO2NavActionsCfg, GO2NavModifyEnv
-       robot_cfg = UNITREE_GO2_CFG
-       action_cfg = GO2NavActionsCfg
-       modify_env_fn = GO2NavModifyEnv
-
-   # Set robot spawn position
-   robot_cfg.init_state.pos = env_config["Robot"].get("init_position", default_xyz)
-
-Action Configuration
----------------------
-
-Each robot defines its own ``action_cfg`` class, determining:
-
-- Control mode (e.g., velocity commands, joint torques)
-- Action dimension and limits
-- Mapping to simulation API
-
-These configurations are injected into the full environment config (e.g., ``EnvCfg``) to ensure proper wiring during instantiation.
-
+def setup(app):
+    app.connect("autodoc-skip-member", skip_member)
