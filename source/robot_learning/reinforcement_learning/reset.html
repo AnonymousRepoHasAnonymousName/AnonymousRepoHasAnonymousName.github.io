@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Termination Conditions &#8212; UrbanVerse Documentation</title>
+    <title>When Episodes End: Termination Conditions &#8212; UrbanVerse Documentation</title>
   
   
   
@@ -55,8 +55,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'source/robot_learning/reinforcement_learning/reset';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Curriculum Learning" href="curriculum.html" />
-    <link rel="prev" title="Reward" href="reward.html" />
+    <link rel="next" title="Progressive Learning: Curriculum Strategies" href="curriculum.html" />
+    <link rel="prev" title="Designing the Reward Function" href="reward.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="1.0.0" />
@@ -226,14 +226,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../simulation_paradigms.html">Simulation Paradigms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configurations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../robot_configuration.html">Robot Configuration</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Reinforcement Learning</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="scene.html">Scene Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="action.html">Action Space</a></li>
-<li class="toctree-l2"><a class="reference internal" href="observation.html">Observation Space</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reward.html">Reward</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Termination Conditions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="curriculum.html">Curriculum Learning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="event.html">Events</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Reinforcement Learning in UrbanVerse</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="scene.html">Working with Urban Scenes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="action.html">Defining Robot Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="observation.html">What Your Policy Sees: Observations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reward.html">Designing the Reward Function</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">When Episodes End: Termination Conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="curriculum.html">Progressive Learning: Curriculum Strategies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="event.html">Environment Events and Initialization</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../imitation_learning/index.html">Imitation Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -473,7 +473,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Termination Conditions</h1>
+    <h1>When Episodes End: Termination Conditions</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -483,8 +483,12 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#termination-binding">Termination Binding</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#termination-term-descriptions">Termination Term Descriptions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#termination-strategy">Termination Strategy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-terminations">Configuring Terminations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-four-termination-modes">The Four Termination Modes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#termination-behavior">Termination Behavior</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tuning-termination-parameters">Tuning Termination Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#impact-on-learning">Impact on Learning</a></li>
 </ul>
             </nav>
         </div>
@@ -496,52 +500,92 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="termination-conditions">
-<h1>Termination Conditions<a class="headerlink" href="#termination-conditions" title="Permalink to this heading">#</a></h1>
-<p>UrbanVerse uses a set of modular termination conditions to determine when an episode should end.
-Each condition is implemented as a <cite>DoneTerm</cite>, and bound via a <cite>TerminationsCfg</cite> config class.</p>
-<p>Taking <strong>COCO</strong> (a wheeled robot) as an example:</p>
-<section id="termination-binding">
-<h2>Termination Binding<a class="headerlink" href="#termination-binding" title="Permalink to this heading">#</a></h2>
-<p>When <code class="docutils literal notranslate"><span class="pre">robot_name</span> <span class="pre">=</span> <span class="pre">&quot;coco&quot;</span></code>, the following termination config is used:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@configclass</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">TerminationsCfg</span><span class="p">:</span>
-    <span class="n">time_out</span> <span class="o">=</span> <span class="n">DoneTerm</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">loc_mdp</span><span class="o">.</span><span class="n">time_out</span><span class="p">,</span> <span class="n">time_out</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+  <section id="when-episodes-end-termination-conditions">
+<h1>When Episodes End: Termination Conditions<a class="headerlink" href="#when-episodes-end-termination-conditions" title="Permalink to this heading">#</a></h1>
+<p>Episode termination defines when a navigation attempt concludes. UrbanVerse provides clear, configurable termination conditions that determine whether an episode ends in success, failure, or timeout, shaping both the learning dynamics and the behaviors your policy will learn.</p>
+<section id="termination-strategy">
+<h2>Termination Strategy<a class="headerlink" href="#termination-strategy" title="Permalink to this heading">#</a></h2>
+<p>Well-designed termination conditions are crucial for effective learning. They need to:
+- <strong>Clearly distinguish success from failure</strong> so the policy receives unambiguous feedback
+- <strong>Prevent episodes from running indefinitely</strong> to maintain training efficiency
+- <strong>Encourage desired behaviors</strong> by ending episodes at appropriate moments
+- <strong>Provide diverse learning experiences</strong> through varied episode lengths and outcomes</p>
+</section>
+<section id="configuring-terminations">
+<h2>Configuring Terminations<a class="headerlink" href="#configuring-terminations" title="Permalink to this heading">#</a></h2>
+<p>Termination configuration is straightforward and intuitive:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">urbanverse.navigation.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">EnvCfg</span><span class="p">,</span> <span class="n">TerminationCfg</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
 
-    <span class="n">collision</span> <span class="o">=</span> <span class="n">DoneTerm</span><span class="p">(</span>
-        <span class="n">func</span><span class="o">=</span><span class="n">nav_mdp</span><span class="o">.</span><span class="n">illegal_contact</span><span class="p">,</span>
-        <span class="n">time_out</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-        <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-            <span class="s2">&quot;sensor_cfg&quot;</span><span class="p">:</span> <span class="n">SceneEntityCfg</span><span class="p">(</span><span class="s2">&quot;contact_forces&quot;</span><span class="p">,</span> <span class="n">body_names</span><span class="o">=</span><span class="s2">&quot;body_link&quot;</span><span class="p">),</span>
-            <span class="s2">&quot;threshold&quot;</span><span class="p">:</span> <span class="mf">1.0</span>
-        <span class="p">},</span>
-    <span class="p">)</span>
-
-    <span class="n">arrive</span> <span class="o">=</span> <span class="n">DoneTerm</span><span class="p">(</span>
-        <span class="n">func</span><span class="o">=</span><span class="n">nav_mdp</span><span class="o">.</span><span class="n">arrive</span><span class="p">,</span>
-        <span class="n">time_out</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-        <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-            <span class="s2">&quot;threshold&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
-            <span class="s2">&quot;command_name&quot;</span><span class="p">:</span> <span class="s2">&quot;pose_command&quot;</span>
-        <span class="p">},</span>
-    <span class="p">)</span>
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">EnvCfg</span><span class="p">(</span>
+    <span class="n">robot_type</span><span class="o">=</span><span class="s2">&quot;coco_wheeled&quot;</span><span class="p">,</span>
+    <span class="n">terminations</span><span class="o">=</span><span class="n">TerminationCfg</span><span class="p">(</span>
+        <span class="n">max_episode_steps</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>      <span class="c1"># Maximum steps before timeout</span>
+        <span class="n">enable_collision</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>      <span class="c1"># End on collision</span>
+        <span class="n">enable_success</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>        <span class="c1"># End on goal reached</span>
+        <span class="n">enable_timeout</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>        <span class="c1"># End on step limit</span>
+    <span class="p">),</span>
+    <span class="o">...</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </section>
-<section id="termination-term-descriptions">
-<h2>Termination Term Descriptions<a class="headerlink" href="#termination-term-descriptions" title="Permalink to this heading">#</a></h2>
+<section id="the-four-termination-modes">
+<h2>The Four Termination Modes<a class="headerlink" href="#the-four-termination-modes" title="Permalink to this heading">#</a></h2>
+<p>UrbanVerse supports four distinct termination conditions, each serving a specific purpose:</p>
+<p><strong>1. Success: Goal Reached</strong> (<code class="docutils literal notranslate"><span class="pre">enable_success=True</span></code>)
+The episode ends successfully when the robot reaches its destination within a configurable distance threshold (typically ~1 meter). This is the desired outcome—the policy receives the arrival reward, and the episode is marked as successful in training logs.</p>
+<p><strong>2. Failure: Collision</strong> (<code class="docutils literal notranslate"><span class="pre">enable_collision=True</span></code>)
+The episode ends immediately if the robot collides with obstacles, walls, pedestrians, or other scene elements. This safety termination triggers the collision penalty and marks the episode as failed, providing clear negative feedback for unsafe behaviors.</p>
+<p><strong>3. Timeout: Step Limit</strong> (<code class="docutils literal notranslate"><span class="pre">enable_timeout=True</span></code>)
+The episode ends after a maximum number of steps (<code class="docutils literal notranslate"><span class="pre">max_episode_steps</span></code>) if neither success nor failure has occurred. This prevents episodes from running indefinitely and ensures training progresses efficiently. Timeout episodes are typically marked as incomplete rather than failed.</p>
+<p><strong>4. Failure: Out-of-Bounds</strong> (optional)
+Can be enabled to terminate when the robot leaves designated traversable regions (e.g., goes off-road, leaves the sidewalk, or enters restricted areas). This enforces navigation constraints and encourages the policy to stay within valid navigation zones.</p>
+</section>
+<section id="termination-behavior">
+<h2>Termination Behavior<a class="headerlink" href="#termination-behavior" title="Permalink to this heading">#</a></h2>
+<p>When any termination condition is met, the episode immediately ends:</p>
 <ul class="simple">
-<li><p><strong>time_out</strong>
-Ends episode after a predefined number of steps.</p></li>
-<li><p><strong>collision</strong>
-Terminates if contact force (e.g., from walls or pedestrians) exceeds a threshold.</p></li>
-<li><p><strong>arrive</strong>
-Terminates when the robot reaches its goal (within distance threshold).</p></li>
-<li><p><em>(Optional)</em> <strong>out_of_region</strong>
-Can be enabled to terminate the episode when the robot leaves a bounded region.</p></li>
+<li><p><strong>Success termination</strong> → Triggers arrival reward → Episode marked successful → Environment resets</p></li>
+<li><p><strong>Collision termination</strong> → Triggers collision penalty → Episode marked failed → Environment resets</p></li>
+<li><p><strong>Timeout termination</strong> → No special reward → Episode marked incomplete → Environment resets</p></li>
+<li><p><strong>Out-of-bounds termination</strong> → Typically triggers penalty → Episode marked failed → Environment resets</p></li>
 </ul>
-<p>Each <cite>DoneTerm</cite> can be used to trigger reward terms and is evaluated per timestep.
-Termination decisions also propagate into curriculum updates and training logs.</p>
+<p>The environment automatically resets after termination, sampling a new goal position, resetting the robot state, and preparing for the next episode.</p>
+</section>
+<section id="tuning-termination-parameters">
+<h2>Tuning Termination Parameters<a class="headerlink" href="#tuning-termination-parameters" title="Permalink to this heading">#</a></h2>
+<p><strong>Episode Length</strong>
+Adjust <code class="docutils literal notranslate"><span class="pre">max_episode_steps</span></code> based on your navigation task:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">TerminationCfg</span><span class="p">(</span>
+    <span class="n">max_episode_steps</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>  <span class="c1"># Longer episodes for distant goals</span>
+    <span class="o">...</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Shorter episodes (200-300 steps) work well for nearby navigation tasks and faster training. Longer episodes (500+ steps) are needed for long-range navigation across large urban scenes.</p>
+<p><strong>Goal Distance Threshold</strong>
+The success threshold determines how close the robot must get to the goal. A tighter threshold (e.g., 0.5 meters) requires more precise navigation, while a looser threshold (e.g., 2.0 meters) is more forgiving. This is typically configured in the goal sampling or arrival detection logic.</p>
+<p><strong>Selective Termination</strong>
+You can disable specific termination modes for specialized training scenarios:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">TerminationCfg</span><span class="p">(</span>
+    <span class="n">enable_collision</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># Don&#39;t end on collision (for collision recovery training)</span>
+    <span class="n">enable_timeout</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>    <span class="c1"># Allow unlimited episode length (for specific experiments)</span>
+    <span class="o">...</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="impact-on-learning">
+<h2>Impact on Learning<a class="headerlink" href="#impact-on-learning" title="Permalink to this heading">#</a></h2>
+<p>Termination conditions significantly influence what your policy learns:</p>
+<ul class="simple">
+<li><p><strong>Strict collision termination</strong> encourages careful, collision-averse navigation</p></li>
+<li><p><strong>Generous success thresholds</strong> make the task easier to learn initially</p></li>
+<li><p><strong>Appropriate episode lengths</strong> ensure the policy sees both short and long navigation scenarios</p></li>
+<li><p><strong>Clear success/failure distinction</strong> provides unambiguous learning signals</p></li>
+</ul>
+<p>The default configuration (success, collision, and timeout enabled with 300-step limit) works well for most navigation tasks. Adjust based on your specific requirements, scene complexity, and desired policy behaviors.</p>
 </section>
 </section>
 
@@ -562,7 +606,7 @@ Termination decisions also propagate into curriculum updates and training logs.<
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Reward</p>
+        <p class="prev-next-title">Designing the Reward Function</p>
       </div>
     </a>
     <a class="right-next"
@@ -570,7 +614,7 @@ Termination decisions also propagate into curriculum updates and training logs.<
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Curriculum Learning</p>
+        <p class="prev-next-title">Progressive Learning: Curriculum Strategies</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -591,8 +635,12 @@ Termination decisions also propagate into curriculum updates and training logs.<
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#termination-binding">Termination Binding</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#termination-term-descriptions">Termination Term Descriptions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#termination-strategy">Termination Strategy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-terminations">Configuring Terminations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-four-termination-modes">The Four Termination Modes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#termination-behavior">Termination Behavior</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tuning-termination-parameters">Tuning Termination Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#impact-on-learning">Impact on Learning</a></li>
 </ul>
   </nav></div>
 

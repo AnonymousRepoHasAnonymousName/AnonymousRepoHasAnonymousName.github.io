@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Scene Configuration &#8212; UrbanVerse Documentation</title>
+    <title>Working with Urban Scenes &#8212; UrbanVerse Documentation</title>
   
   
   
@@ -55,8 +55,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'source/robot_learning/reinforcement_learning/scene';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Action Space" href="action.html" />
-    <link rel="prev" title="Reinforcement Learning" href="index.html" />
+    <link rel="next" title="Defining Robot Actions" href="action.html" />
+    <link rel="prev" title="Reinforcement Learning in UrbanVerse" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="1.0.0" />
@@ -226,14 +226,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../simulation_paradigms.html">Simulation Paradigms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configurations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../robot_configuration.html">Robot Configuration</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Reinforcement Learning</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Scene Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="action.html">Action Space</a></li>
-<li class="toctree-l2"><a class="reference internal" href="observation.html">Observation Space</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reward.html">Reward</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reset.html">Termination Conditions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="curriculum.html">Curriculum Learning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="event.html">Events</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Reinforcement Learning in UrbanVerse</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Working with Urban Scenes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="action.html">Defining Robot Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="observation.html">What Your Policy Sees: Observations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reward.html">Designing the Reward Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reset.html">When Episodes End: Termination Conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="curriculum.html">Progressive Learning: Curriculum Strategies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="event.html">Environment Events and Initialization</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../imitation_learning/index.html">Imitation Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -473,7 +473,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Scene Configuration</h1>
+    <h1>Working with Urban Scenes</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -483,11 +483,11 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scene-binding">Scene Binding</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scenario-generation-pipelines">Scenario Generation Pipelines</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-yaml-config">Example YAML Config</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scene-customization">Scene Customization</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-arrangement">Spatial Arrangement</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-scene-sources">Understanding Scene Sources</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-scene-loading">Configuring Scene Loading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-configuration-parameters">Key Configuration Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scene-distribution-strategies">Scene Distribution Strategies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-example-multi-city-training-setup">Practical Example: Multi-City Training Setup</a></li>
 </ul>
             </nav>
         </div>
@@ -499,96 +499,120 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="scene-configuration">
-<h1>Scene Configuration<a class="headerlink" href="#scene-configuration" title="Permalink to this heading">#</a></h1>
-<p>UrbanVerse supports multiple pipelines for generating simulation scenes with varying complexity, spatial structure, and randomness.
-Each environment binds a scene configuration (<cite>SceneCfg</cite>) that determines what types of scenes are loaded, how they are arranged, and how they are reused across multiple environments.</p>
-<section id="scene-binding">
-<h2>Scene Binding<a class="headerlink" href="#scene-binding" title="Permalink to this heading">#</a></h2>
-<p>Scene configuration is specified in the environment config via:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@configclass</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">EnvCfg</span><span class="p">(</span><span class="n">ManagerBasedRLEnvCfg</span><span class="p">):</span>
+  <section id="working-with-urban-scenes">
+<h1>Working with Urban Scenes<a class="headerlink" href="#working-with-urban-scenes" title="Permalink to this heading">#</a></h1>
+<p>UrbanVerse transforms real-world city environments into interactive simulation scenes. Whether you’re using pre-built UrbanVerse-160 environments, CraftBench’s evaluation scenes, or custom scenes generated from your own videos, scene configuration determines which environments your robot will train in and how they’re organized across parallel simulation instances.</p>
+<section id="understanding-scene-sources">
+<h2>Understanding Scene Sources<a class="headerlink" href="#understanding-scene-sources" title="Permalink to this heading">#</a></h2>
+<p>UrbanVerse provides three primary sources of urban simulation scenes, each suited for different stages of the training pipeline:</p>
+<p><strong>UrbanVerse-160: Real-to-Sim Training Scenes</strong>
+A curated collection of 160 metric-scale urban environments reconstructed from city-tour videos spanning 7 continents, 24 countries, and 27 cities. Each scene includes multiple digital cousin variants—different asset instantiations of the same underlying city layout—providing rich visual diversity while maintaining consistent geometric structure.
+Perfect for: Large-scale training, validation, and generalization experiments.
+→ Learn more: <a class="reference internal" href="../../quickstart/urbanverse_scenes.html"><span class="doc">Use Built-in UrbanVerse Scenes</span></a></p>
+<p><strong>CraftBench: Artist-Crafted Test Scenes</strong>
+Ten high-fidelity urban environments meticulously designed by professional 3D artists. These scenes feature carefully crafted layouts, realistic asset placement, and challenging navigation scenarios.
+Perfect for: Final policy evaluation, benchmarking, and test-time assessment.
+→ Learn more: <a class="reference internal" href="../../quickstart/craftbench.html"><span class="doc">Use Built-in CraftBench Scenes</span></a></p>
+<p><strong>Custom Scenes via UrbanVerse-Gen</strong>
+Generate your own simulation environments directly from casually captured city-tour videos. The UrbanVerse-Gen pipeline extracts scene layouts, retrieves appropriate 3D assets, and instantiates fully interactive USD scenes.
+Perfect for: Domain-specific training, custom city environments, and research applications.
+→ Learn more: <a class="reference internal" href="../../quickstart/urbanverse_gen.html"><span class="doc">Real-to-Sim Scene Generation with UrbanVerse-Gen</span></a></p>
+</section>
+<section id="configuring-scene-loading">
+<h2>Configuring Scene Loading<a class="headerlink" href="#configuring-scene-loading" title="Permalink to this heading">#</a></h2>
+<p>Scene configuration is straightforward: provide a list of USD scene file paths and specify how they should be distributed across your parallel training environments.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">urbanverse.navigation.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">EnvCfg</span><span class="p">,</span> <span class="n">SceneCfg</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="c1"># Collect scenes from UrbanVerse-160</span>
+<span class="n">scene_root</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;URBANVERSE_SCENE_ROOT&quot;</span><span class="p">,</span> <span class="s2">&quot;/path/to/UrbanVerse-160&quot;</span><span class="p">)</span>
+
+<span class="n">scene_paths</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">scene_root</span><span class="si">}</span><span class="s2">/Tokyo_</span><span class="si">{</span><span class="n">i</span><span class="si">:</span><span class="s2">04d</span><span class="si">}</span><span class="s2">/scene.usd&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="p">]</span> <span class="o">+</span> <span class="p">[</span>
+    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">scene_root</span><span class="si">}</span><span class="s2">/Beijing_</span><span class="si">{</span><span class="n">i</span><span class="si">:</span><span class="s2">04d</span><span class="si">}</span><span class="s2">/scene.usd&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">EnvCfg</span><span class="p">(</span>
+    <span class="n">scenes</span><span class="o">=</span><span class="n">SceneCfg</span><span class="p">(</span>
+        <span class="n">scene_paths</span><span class="o">=</span><span class="n">scene_paths</span><span class="p">,</span>
+        <span class="n">async_sim</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>      <span class="c1"># Each env gets a different scene</span>
+        <span class="n">env_spacing</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span>     <span class="c1"># 3 meters between parallel environments</span>
+    <span class="p">),</span>
+    <span class="n">robot_type</span><span class="o">=</span><span class="s2">&quot;coco_wheeled&quot;</span><span class="p">,</span>
     <span class="o">...</span>
-    <span class="n">scene</span> <span class="o">=</span> <span class="n">SceneCfg</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>The scene class determines the number of environments, their spatial arrangement, and the scenario generation method used.</p>
-</section>
-<section id="scenario-generation-pipelines">
-<h2>Scenario Generation Pipelines<a class="headerlink" href="#scenario-generation-pipelines" title="Permalink to this heading">#</a></h2>
-<p>UrbanVerse includes two main pipelines for generating scenes:</p>
-<ol class="arabic simple">
-<li><p><strong>Random Object Placement</strong>
-Fast and lightweight. Places obstacles, buildings, and pedestrians randomly within a defined area.
-- Used via: <code class="docutils literal notranslate"><span class="pre">random_env.py</span></code>
-- Suitable for large-scale training and pretraining</p></li>
-<li><p><strong>Procedural Generation (PG)</strong>
-Structured scene generation based on layout rules and scenario graphs.
-- Used via: <code class="docutils literal notranslate"><span class="pre">pg_env.py</span></code>
-- Suitable for curriculum learning and benchmarking</p></li>
-</ol>
-<p>Each pipeline supports:</p>
-<ul class="simple">
-<li><p>Scene-level asset instantiation</p></li>
-<li><p>Environment duplication (<cite>–num_envs</cite>)</p></li>
-<li><p>Asynchronous or synchronous layout control</p></li>
-</ul>
-</section>
-<section id="example-yaml-config">
-<h2>Example YAML Config<a class="headerlink" href="#example-yaml-config" title="Permalink to this heading">#</a></h2>
-<p>In a YAML config, the scene section may look like:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">Env</span><span class="p">:</span>
-<span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">static</span>
-<span class="w"> </span><span class="nt">map_region</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span>
-<span class="w"> </span><span class="nt">num_objects</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">25</span>
-<span class="nt">Omniverse</span><span class="p">:</span>
-<span class="w"> </span><span class="nt">headless</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
-<span class="w"> </span><span class="nt">simulation_dt</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.005</span>
-<span class="w"> </span><span class="nt">rendering_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
-<span class="w"> </span><span class="nt">decimation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span>
-<span class="w"> </span><span class="nt">episode_length_s</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30.0</span>
-<span class="w"> </span><span class="nt">env_spacing</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">31.0</span>
-<span class="w"> </span><span class="nt">scenario_generation_method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">limited async procedural generation</span>
-</pre></div>
-</div>
-<p>This will spawn environments with randomized object placement and layout variation.</p>
-</section>
-<section id="scene-customization">
-<h2>Scene Customization<a class="headerlink" href="#scene-customization" title="Permalink to this heading">#</a></h2>
-<p>Scene behavior can be further customized via:</p>
-<ul class="simple">
-<li><p>Changing asset spawn positions or scale</p></li>
-<li><p>Overriding <cite>pg_config</cite> in the environment config</p></li>
-<li><p>Specifying deterministic vs stochastic layouts</p></li>
-</ul>
-<p>You can also inject dynamic agents (e.g., pedestrians, moving vehicles) through scenario setup like</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pg_config</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
-     <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;dynamic&#39;</span><span class="p">,</span> <span class="c1"># [clean, static, dynamic]</span>
-     <span class="n">with_terrain</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-     <span class="n">with_boundary</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-     <span class="n">map_region</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
-     <span class="n">buffer_width</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-     <span class="n">num_object</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
-     <span class="n">num_pedestrian</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span>
-     <span class="n">walkable_seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-     <span class="n">non_walkable_seed</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-     <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-     <span class="n">unique_env_num</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
-     <span class="n">ped_forward_inteval</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
-     <span class="n">moving_max_t</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span>
- <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">env</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">navigation</span><span class="o">.</span><span class="n">rl</span><span class="o">.</span><span class="n">create_env</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
-<section id="spatial-arrangement">
-<h2>Spatial Arrangement<a class="headerlink" href="#spatial-arrangement" title="Permalink to this heading">#</a></h2>
-<p>UrbanVerse supports both:</p>
+<section id="key-configuration-parameters">
+<h2>Key Configuration Parameters<a class="headerlink" href="#key-configuration-parameters" title="Permalink to this heading">#</a></h2>
+<p><strong>scene_paths</strong> (list of strings)
+A list of absolute paths to USD scene files. Each path points to a complete simulation environment that can be loaded independently. You can mix scenes from different sources—UrbanVerse-160, CraftBench, and custom scenes—in the same training run.</p>
+<p><strong>async_sim</strong> (bool)
+Controls how scenes are assigned across parallel environments:</p>
 <ul class="simple">
-<li><p><strong>Synchronous scenes</strong>: All environments share the same map and layout (ideal for evaluation)</p></li>
-<li><p><strong>Asynchronous scenes</strong>: Each environment is different (ideal for generalization training)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">True</span></code> (recommended): Each environment loads a different scene from your pool. This maximizes diversity and is ideal for training robust, generalizable policies. Different environments will see different city layouts, building arrangements, and obstacle configurations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">False</span></code>: All environments share the same underlying city layout, but each loads a different digital cousin variant. This keeps the geometric structure consistent while varying visual appearance (assets, textures, lighting). Useful for debugging and controlled experiments where you want to isolate the effects of visual diversity.</p></li>
 </ul>
-<p>Each environment is placed on a grid, spaced by <cite>env_spacing</cite>, and receives its own camera, sensor, and physics handle.</p>
-<p>More details on scene generation and configuration can be found in the file <code class="docutils literal notranslate"><span class="pre">urbansim/scene/urban_scene.py</span></code>.</p>
+<p><strong>env_spacing</strong> (float)
+The horizontal separation (in meters) between parallel environments in the simulator. Each environment is placed on a grid, and this parameter controls the spacing. Larger values provide more isolation but require more simulation space.</p>
+</section>
+<section id="scene-distribution-strategies">
+<h2>Scene Distribution Strategies<a class="headerlink" href="#scene-distribution-strategies" title="Permalink to this heading">#</a></h2>
+<p>The choice between synchronous and asynchronous simulation (see <a class="reference internal" href="../simulation_paradigms.html"><span class="doc">Simulation Paradigms</span></a> for a detailed comparison) significantly impacts training dynamics:</p>
+<p><strong>Asynchronous Mode</strong> (<code class="docutils literal notranslate"><span class="pre">async_sim=True</span></code>)
+Each of your 32 parallel environments might load: Tokyo_0001, Beijing_0003, CapeTown_0002, LosAngeles_0005, etc. This creates maximum diversity—your policy experiences different road networks, building layouts, and spatial structures simultaneously.
+→ Best for: Training generalizable policies that work across diverse urban environments.</p>
+<p><strong>Synchronous Mode</strong> (<code class="docutils literal notranslate"><span class="pre">async_sim=False</span></code>)
+All 32 environments load different cousins of the same layout (e.g., Tokyo_0001, Tokyo_0002, …, Tokyo_0032). The road geometry, building positions, and drivable paths are identical, but asset appearances, textures, and lighting vary.
+→ Best for: Debugging, controlled experiments, and understanding the impact of visual diversity.</p>
+</section>
+<section id="practical-example-multi-city-training-setup">
+<h2>Practical Example: Multi-City Training Setup<a class="headerlink" href="#practical-example-multi-city-training-setup" title="Permalink to this heading">#</a></h2>
+<p>Here’s a complete example that sets up training across multiple cities with proper scene organization:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">urbanverse.navigation.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">EnvCfg</span><span class="p">,</span> <span class="n">SceneCfg</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
+
+<span class="n">scene_root</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;URBANVERSE_SCENE_ROOT&quot;</span><span class="p">)</span>
+
+<span class="c1"># Define your city layouts</span>
+<span class="n">cities</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Tokyo&quot;</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>      <span class="c1"># 5 cousins</span>
+    <span class="s2">&quot;Beijing&quot;</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>    <span class="c1"># 5 cousins</span>
+    <span class="s2">&quot;CapeTown&quot;</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>   <span class="c1"># 3 cousins</span>
+    <span class="s2">&quot;LosAngeles&quot;</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="c1"># 3 cousins</span>
+<span class="p">}</span>
+
+<span class="c1"># Build scene path list</span>
+<span class="n">scene_paths</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">city</span><span class="p">,</span> <span class="n">cousin_range</span> <span class="ow">in</span> <span class="n">cities</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">cousin_id</span> <span class="ow">in</span> <span class="n">cousin_range</span><span class="p">:</span>
+        <span class="n">scene_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">scene_root</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">city</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">cousin_id</span><span class="si">:</span><span class="s2">04d</span><span class="si">}</span><span class="s2">/scene.usd&quot;</span>
+        <span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total scenes: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">scene_paths</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># 16 scenes</span>
+
+<span class="c1"># Configure environment</span>
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">EnvCfg</span><span class="p">(</span>
+    <span class="n">scenes</span><span class="o">=</span><span class="n">SceneCfg</span><span class="p">(</span>
+        <span class="n">scene_paths</span><span class="o">=</span><span class="n">scene_paths</span><span class="p">,</span>
+        <span class="n">async_sim</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>        <span class="c1"># Mix different cities across environments</span>
+        <span class="n">env_spacing</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="n">robot_type</span><span class="o">=</span><span class="s2">&quot;coco_wheeled&quot;</span><span class="p">,</span>
+    <span class="o">...</span>
+<span class="p">)</span>
+
+<span class="n">env</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">navigation</span><span class="o">.</span><span class="n">rl</span><span class="o">.</span><span class="n">create_env</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>During training, UrbanVerse automatically manages scene assignment, ensuring each environment receives a valid scene and that scenes are properly shuffled between episodes. The RL API handles all the complexity of scene loading, distribution, and rotation, letting you focus on policy design and training.</p>
 </section>
 </section>
 
@@ -609,7 +633,7 @@ Structured scene generation based on layout rules and scenario graphs.
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Reinforcement Learning</p>
+        <p class="prev-next-title">Reinforcement Learning in UrbanVerse</p>
       </div>
     </a>
     <a class="right-next"
@@ -617,7 +641,7 @@ Structured scene generation based on layout rules and scenario graphs.
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Action Space</p>
+        <p class="prev-next-title">Defining Robot Actions</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -638,11 +662,11 @@ Structured scene generation based on layout rules and scenario graphs.
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scene-binding">Scene Binding</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scenario-generation-pipelines">Scenario Generation Pipelines</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-yaml-config">Example YAML Config</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scene-customization">Scene Customization</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-arrangement">Spatial Arrangement</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-scene-sources">Understanding Scene Sources</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-scene-loading">Configuring Scene Loading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-configuration-parameters">Key Configuration Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scene-distribution-strategies">Scene Distribution Strategies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-example-multi-city-training-setup">Practical Example: Multi-City Training Setup</a></li>
 </ul>
   </nav></div>
 

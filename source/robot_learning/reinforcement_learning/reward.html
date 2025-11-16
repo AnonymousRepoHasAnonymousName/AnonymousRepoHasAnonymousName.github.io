@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Reward &#8212; UrbanVerse Documentation</title>
+    <title>Designing the Reward Function &#8212; UrbanVerse Documentation</title>
   
   
   
@@ -55,8 +55,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'source/robot_learning/reinforcement_learning/reward';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Termination Conditions" href="reset.html" />
-    <link rel="prev" title="Observation Space" href="observation.html" />
+    <link rel="next" title="When Episodes End: Termination Conditions" href="reset.html" />
+    <link rel="prev" title="What Your Policy Sees: Observations" href="observation.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="1.0.0" />
@@ -226,14 +226,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../simulation_paradigms.html">Simulation Paradigms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configurations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../robot_configuration.html">Robot Configuration</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Reinforcement Learning</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="scene.html">Scene Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="action.html">Action Space</a></li>
-<li class="toctree-l2"><a class="reference internal" href="observation.html">Observation Space</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Reward</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reset.html">Termination Conditions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="curriculum.html">Curriculum Learning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="event.html">Events</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Reinforcement Learning in UrbanVerse</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="scene.html">Working with Urban Scenes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="action.html">Defining Robot Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="observation.html">What Your Policy Sees: Observations</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Designing the Reward Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reset.html">When Episodes End: Termination Conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="curriculum.html">Progressive Learning: Curriculum Strategies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="event.html">Environment Events and Initialization</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../imitation_learning/index.html">Imitation Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -473,7 +473,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Reward</h1>
+    <h1>Designing the Reward Function</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -483,9 +483,12 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coco-reward-binding">COCO Reward Binding</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reward-term-descriptions">Reward Term Descriptions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-rewards">Customizing Rewards</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reward-function-philosophy">Reward Function Philosophy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-rewards">Configuring Rewards</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-reward-terms">Understanding Reward Terms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reward-computation">Reward Computation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tuning-reward-weights">Tuning Reward Weights</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices">Best Practices</a></li>
 </ul>
             </nav>
         </div>
@@ -497,89 +500,119 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="reward">
-<h1>Reward<a class="headerlink" href="#reward" title="Permalink to this heading">#</a></h1>
-<p>The reward function in UrbanVerse is modular and composed of multiple weighted terms.
-Each term corresponds to a specific behavior or outcome in the MDP (Markov Decision Process),
-and is defined using a <cite>RewTerm</cite> with an associated function, weight, and optional parameters.</p>
-<p>Taking <strong>COCO</strong> (a wheeled robot) as an example:</p>
-<section id="coco-reward-binding">
-<h2>COCO Reward Binding<a class="headerlink" href="#coco-reward-binding" title="Permalink to this heading">#</a></h2>
-<p>When <code class="docutils literal notranslate"><span class="pre">robot_name</span> <span class="pre">=</span> <span class="pre">&quot;coco&quot;</span></code>, the following class is loaded:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">urbansim.primitives.robot.coco</span><span class="w"> </span><span class="kn">import</span> <span class="n">COCORewardCfg</span>
-<span class="n">rewards</span> <span class="o">=</span> <span class="n">COCORewardCfg</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>The class <cite>COCORewardCfg</cite> defines the following reward terms:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@configclass</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">RewardsCfg</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Reward terms for the MDP.&quot;&quot;&quot;</span>
+  <section id="designing-the-reward-function">
+<h1>Designing the Reward Function<a class="headerlink" href="#designing-the-reward-function" title="Permalink to this heading">#</a></h1>
+<p>The reward function is the learning signal that guides your policy toward desired behaviors. UrbanVerse’s reward system is modular and composable, allowing you to balance multiple objectives: reaching goals efficiently, avoiding collisions, maintaining smooth trajectories, and following optimal paths.</p>
+<section id="reward-function-philosophy">
+<h2>Reward Function Philosophy<a class="headerlink" href="#reward-function-philosophy" title="Permalink to this heading">#</a></h2>
+<p>Effective navigation policies need to balance competing objectives. You want the robot to:
+- <strong>Reach its destination</strong> (task completion)
+- <strong>Avoid obstacles and collisions</strong> (safety)
+- <strong>Take efficient paths</strong> (navigation quality)
+- <strong>Move smoothly</strong> (motion efficiency)</p>
+<p>UrbanVerse’s reward function combines multiple weighted terms, each addressing one of these objectives. By adjusting weights, you can emphasize different aspects of navigation behavior.</p>
+</section>
+<section id="configuring-rewards">
+<h2>Configuring Rewards<a class="headerlink" href="#configuring-rewards" title="Permalink to this heading">#</a></h2>
+<p>Reward configuration lets you tune the relative importance of different behaviors:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">urbanverse.navigation.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">EnvCfg</span><span class="p">,</span> <span class="n">RewardCfg</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
 
-    <span class="n">arrived_reward</span> <span class="o">=</span> <span class="n">RewTerm</span><span class="p">(</span>
-        <span class="n">func</span><span class="o">=</span><span class="n">loc_mdp</span><span class="o">.</span><span class="n">is_terminated_term</span><span class="p">,</span>
-        <span class="n">weight</span><span class="o">=</span><span class="mf">2000.0</span><span class="p">,</span>
-        <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;term_keys&quot;</span><span class="p">:</span> <span class="s2">&quot;arrive&quot;</span><span class="p">}</span>
-    <span class="p">)</span>
-
-    <span class="n">collision_penalty</span> <span class="o">=</span> <span class="n">RewTerm</span><span class="p">(</span>
-        <span class="n">func</span><span class="o">=</span><span class="n">loc_mdp</span><span class="o">.</span><span class="n">is_terminated_term</span><span class="p">,</span>
-        <span class="n">weight</span><span class="o">=-</span><span class="mf">200.0</span><span class="p">,</span>
-        <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;term_keys&quot;</span><span class="p">:</span> <span class="s2">&quot;collision&quot;</span><span class="p">}</span>
-    <span class="p">)</span>
-
-    <span class="n">position_tracking</span> <span class="o">=</span> <span class="n">RewTerm</span><span class="p">(</span>
-        <span class="n">func</span><span class="o">=</span><span class="n">nav_mdp</span><span class="o">.</span><span class="n">position_command_error_tanh</span><span class="p">,</span>
-        <span class="n">weight</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>
-        <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;std&quot;</span><span class="p">:</span> <span class="mf">5.0</span><span class="p">,</span> <span class="s2">&quot;command_name&quot;</span><span class="p">:</span> <span class="s2">&quot;pose_command&quot;</span><span class="p">}</span>
-    <span class="p">)</span>
-
-    <span class="n">position_tracking_fine</span> <span class="o">=</span> <span class="n">RewTerm</span><span class="p">(</span>
-        <span class="n">func</span><span class="o">=</span><span class="n">nav_mdp</span><span class="o">.</span><span class="n">position_command_error_tanh</span><span class="p">,</span>
-        <span class="n">weight</span><span class="o">=</span><span class="mf">50.0</span><span class="p">,</span>
-        <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;std&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;command_name&quot;</span><span class="p">:</span> <span class="s2">&quot;pose_command&quot;</span><span class="p">}</span>
-    <span class="p">)</span>
-
-    <span class="n">moving_towards_goal</span> <span class="o">=</span> <span class="n">RewTerm</span><span class="p">(</span>
-        <span class="n">func</span><span class="o">=</span><span class="n">nav_mdp</span><span class="o">.</span><span class="n">moving_towards_goal_reward</span><span class="p">,</span>
-        <span class="n">weight</span><span class="o">=</span><span class="mf">20.0</span><span class="p">,</span>
-        <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;command_name&quot;</span><span class="p">:</span> <span class="s2">&quot;pose_command&quot;</span><span class="p">}</span>
-    <span class="p">)</span>
-
-    <span class="n">target_vel_rew</span> <span class="o">=</span> <span class="n">RewTerm</span><span class="p">(</span>
-        <span class="n">func</span><span class="o">=</span><span class="n">nav_mdp</span><span class="o">.</span><span class="n">target_vel_reward</span><span class="p">,</span>
-        <span class="n">weight</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>
-        <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;command_name&quot;</span><span class="p">:</span> <span class="s2">&quot;pose_command&quot;</span><span class="p">}</span>
-    <span class="p">)</span>
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">EnvCfg</span><span class="p">(</span>
+    <span class="n">robot_type</span><span class="o">=</span><span class="s2">&quot;coco_wheeled&quot;</span><span class="p">,</span>
+    <span class="n">rewards</span><span class="o">=</span><span class="n">RewardCfg</span><span class="p">(</span>
+        <span class="n">arrived_reward</span><span class="o">=</span><span class="mf">2000.0</span><span class="p">,</span>          <span class="c1"># Big reward for success</span>
+        <span class="n">collision_penalty</span><span class="o">=-</span><span class="mf">200.0</span><span class="p">,</span>       <span class="c1"># Penalty for unsafe behavior</span>
+        <span class="n">tracking_fine_std</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>          <span class="c1"># Precision near goal (meters)</span>
+        <span class="n">tracking_fine_weight</span><span class="o">=</span><span class="mf">50.0</span><span class="p">,</span>      <span class="c1"># How much precision matters</span>
+        <span class="n">tracking_coarse_std</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span>        <span class="c1"># General progress tolerance</span>
+        <span class="n">tracking_coarse_weight</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>    <span class="c1"># General progress reward</span>
+        <span class="n">velocity_weight</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>           <span class="c1"># Smooth motion reward</span>
+    <span class="p">),</span>
+    <span class="o">...</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </section>
-<section id="reward-term-descriptions">
-<h2>Reward Term Descriptions<a class="headerlink" href="#reward-term-descriptions" title="Permalink to this heading">#</a></h2>
+<section id="understanding-reward-terms">
+<h2>Understanding Reward Terms<a class="headerlink" href="#understanding-reward-terms" title="Permalink to this heading">#</a></h2>
+<p>The reward function consists of five key components:</p>
+<p><strong>1. Arrival Reward</strong> (<code class="docutils literal notranslate"><span class="pre">arrived_reward=2000.0</span></code>)
+A large positive reward granted when the robot successfully reaches its goal. This is the primary success signal, encouraging the policy to complete navigation tasks. The magnitude should be large enough to outweigh accumulated step penalties and guide learning toward task completion.</p>
+<p><strong>2. Collision Penalty</strong> (<code class="docutils literal notranslate"><span class="pre">collision_penalty=-200.0</span></code>)
+A negative reward triggered when the robot collides with obstacles, walls, or pedestrians. This safety signal discourages dangerous behaviors and encourages collision-free navigation. The penalty should be significant enough to make collisions clearly undesirable, but not so large that it prevents exploration.</p>
+<p><strong>3. Coarse Waypoint Tracking</strong> (<code class="docutils literal notranslate"><span class="pre">tracking_coarse_weight=10.0,</span> <span class="pre">std=5.0</span></code>)
+A smooth reward that encourages general progress toward the goal. Uses a tanh-based function that provides positive feedback when the robot is moving in the right direction, with a tolerance of 5 meters. This gives the policy guidance during long-range navigation, helping it stay on track even when far from the goal.</p>
+<p><strong>4. Fine Waypoint Tracking</strong> (<code class="docutils literal notranslate"><span class="pre">tracking_fine_weight=50.0,</span> <span class="pre">std=1.0</span></code>)
+A more precise reward that becomes important when the robot is close to its destination. With a 1-meter tolerance, this term encourages accurate final approach and precise goal reaching. The higher weight (50.0 vs 10.0) emphasizes precision in the final stages of navigation.</p>
+<p><strong>5. Velocity Alignment</strong> (<code class="docutils literal notranslate"><span class="pre">velocity_weight=10.0</span></code>)
+A dense reward that encourages the robot to match its commanded target velocity. This promotes smooth, efficient motion and helps the policy learn to maintain appropriate speeds for different navigation scenarios.</p>
+</section>
+<section id="reward-computation">
+<h2>Reward Computation<a class="headerlink" href="#reward-computation" title="Permalink to this heading">#</a></h2>
+<p>At each timestep, all active reward terms are evaluated and combined:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">total_reward</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="c1"># Sparse rewards (only when conditions are met)</span>
+    <span class="p">(</span><span class="mf">2000.0</span> <span class="k">if</span> <span class="n">goal_reached</span> <span class="k">else</span> <span class="mf">0.0</span><span class="p">)</span> <span class="o">+</span>
+    <span class="p">(</span><span class="o">-</span><span class="mf">200.0</span> <span class="k">if</span> <span class="n">collision_occurred</span> <span class="k">else</span> <span class="mf">0.0</span><span class="p">)</span> <span class="o">+</span>
+
+    <span class="c1"># Dense rewards (computed every step)</span>
+    <span class="mf">10.0</span> <span class="o">*</span> <span class="n">coarse_tracking_reward</span><span class="p">(</span><span class="n">distance_to_goal</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="mf">5.0</span><span class="p">)</span> <span class="o">+</span>
+    <span class="mf">50.0</span> <span class="o">*</span> <span class="n">fine_tracking_reward</span><span class="p">(</span><span class="n">distance_to_goal</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">+</span>
+    <span class="mf">10.0</span> <span class="o">*</span> <span class="n">velocity_alignment_reward</span><span class="p">(</span><span class="n">current_velocity</span><span class="p">,</span> <span class="n">target_velocity</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>The combination of sparse rewards (for major events) and dense rewards (for continuous guidance) provides both clear success/failure signals and smooth learning gradients throughout the episode.</p>
+</section>
+<section id="tuning-reward-weights">
+<h2>Tuning Reward Weights<a class="headerlink" href="#tuning-reward-weights" title="Permalink to this heading">#</a></h2>
+<p>Reward tuning is an iterative process. Here are some strategies:</p>
+<p><strong>Emphasize Safety</strong>
+Increase the collision penalty if your policy is too aggressive:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">RewardCfg</span><span class="p">(</span>
+    <span class="n">collision_penalty</span><span class="o">=-</span><span class="mf">500.0</span><span class="p">,</span>  <span class="c1"># Stronger safety signal</span>
+    <span class="o">...</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Prioritize Precision</strong>
+Increase fine tracking weight if the robot struggles with accurate goal reaching:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">RewardCfg</span><span class="p">(</span>
+    <span class="n">tracking_fine_weight</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span>  <span class="c1"># Emphasize precision</span>
+    <span class="n">tracking_fine_std</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>       <span class="c1"># Tighter tolerance</span>
+    <span class="o">...</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Encourage Exploration</strong>
+Reduce penalties and increase progress rewards if the policy is too conservative:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">RewardCfg</span><span class="p">(</span>
+    <span class="n">collision_penalty</span><span class="o">=-</span><span class="mf">100.0</span><span class="p">,</span>      <span class="c1"># Less discouraging</span>
+    <span class="n">tracking_coarse_weight</span><span class="o">=</span><span class="mf">20.0</span><span class="p">,</span>   <span class="c1"># More encouragement</span>
+    <span class="o">...</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Disable Specific Terms</strong>
+Set weights to zero to ablate reward components and understand their impact:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">RewardCfg</span><span class="p">(</span>
+    <span class="n">velocity_weight</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>  <span class="c1"># Disable velocity reward</span>
+    <span class="o">...</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p><strong>arrived_reward</strong>
-Provides a large positive reward when the robot successfully reaches the goal (termination condition).</p></li>
-<li><p><strong>collision_penalty</strong>
-Penalizes termination due to collision with objects or pedestrians.</p></li>
-<li><p><strong>position_tracking</strong>
-Penalizes positional error using a smooth tanh function with coarse tolerance (std=5.0).</p></li>
-<li><p><strong>position_tracking_fine</strong>
-Applies a finer penalty when closer to the target, encouraging precise final alignment.</p></li>
-<li><p><strong>moving_towards_goal</strong>
-Encourages movement in the direction of the goal based on heading alignment.</p></li>
-<li><p><strong>target_vel_rew</strong>
-Provides a dense reward for matching commanded target velocity.</p></li>
+<li><p><strong>Start with defaults</strong>: The default reward configuration works well for most navigation tasks</p></li>
+<li><p><strong>Monitor training metrics</strong>: Watch success rate, collision rate, and path efficiency to guide tuning</p></li>
+<li><p><strong>Make incremental changes</strong>: Adjust one weight at a time to understand its effect</p></li>
+<li><p><strong>Balance sparse and dense rewards</strong>: Ensure sparse rewards (arrival, collision) are large enough to matter, but dense rewards provide sufficient guidance</p></li>
+<li><p><strong>Consider task-specific needs</strong>: Urban navigation might need different weights than open-field navigation</p></li>
 </ul>
-<p>Each <cite>RewTerm</cite> is evaluated during environment stepping and combined (via weighted sum) to produce the total reward for each timestep.</p>
-</section>
-<section id="customizing-rewards">
-<h2>Customizing Rewards<a class="headerlink" href="#customizing-rewards" title="Permalink to this heading">#</a></h2>
-<p>To customize rewards:</p>
-<ol class="arabic simple">
-<li><p>Subclass <cite>RewardCfg</cite> or override terms in YAML.</p></li>
-<li><p>Adjust the weights or add new <cite>RewTerm</cite> entries.</p></li>
-<li><p>Define custom reward functions in <cite>nav_mdp</cite> or <cite>loc_mdp</cite>.</p></li>
-</ol>
-<p>You can toggle or ablate specific terms (e.g., disable <cite>collision_penalty</cite>) by setting their weight to 0 or removing them from the config.</p>
+<p>The reward function is one of the most impactful hyperparameters in RL training. A well-tuned reward function can dramatically improve learning speed and final policy performance.</p>
 </section>
 </section>
 
@@ -600,7 +633,7 @@ Provides a dense reward for matching commanded target velocity.</p></li>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Observation Space</p>
+        <p class="prev-next-title">What Your Policy Sees: Observations</p>
       </div>
     </a>
     <a class="right-next"
@@ -608,7 +641,7 @@ Provides a dense reward for matching commanded target velocity.</p></li>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Termination Conditions</p>
+        <p class="prev-next-title">When Episodes End: Termination Conditions</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -629,9 +662,12 @@ Provides a dense reward for matching commanded target velocity.</p></li>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coco-reward-binding">COCO Reward Binding</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reward-term-descriptions">Reward Term Descriptions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-rewards">Customizing Rewards</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reward-function-philosophy">Reward Function Philosophy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-rewards">Configuring Rewards</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-reward-terms">Understanding Reward Terms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reward-computation">Reward Computation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tuning-reward-weights">Tuning Reward Weights</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices">Best Practices</a></li>
 </ul>
   </nav></div>
 

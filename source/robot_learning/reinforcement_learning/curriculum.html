@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Curriculum Learning &#8212; UrbanVerse Documentation</title>
+    <title>Progressive Learning: Curriculum Strategies &#8212; UrbanVerse Documentation</title>
   
   
   
@@ -55,8 +55,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'source/robot_learning/reinforcement_learning/curriculum';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Events" href="event.html" />
-    <link rel="prev" title="Termination Conditions" href="reset.html" />
+    <link rel="next" title="Environment Events and Initialization" href="event.html" />
+    <link rel="prev" title="When Episodes End: Termination Conditions" href="reset.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="1.0.0" />
@@ -226,14 +226,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../simulation_paradigms.html">Simulation Paradigms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configurations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../robot_configuration.html">Robot Configuration</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Reinforcement Learning</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="scene.html">Scene Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="action.html">Action Space</a></li>
-<li class="toctree-l2"><a class="reference internal" href="observation.html">Observation Space</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reward.html">Reward</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reset.html">Termination Conditions</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Curriculum Learning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="event.html">Events</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Reinforcement Learning in UrbanVerse</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="scene.html">Working with Urban Scenes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="action.html">Defining Robot Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="observation.html">What Your Policy Sees: Observations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reward.html">Designing the Reward Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reset.html">When Episodes End: Termination Conditions</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Progressive Learning: Curriculum Strategies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="event.html">Environment Events and Initialization</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../imitation_learning/index.html">Imitation Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -473,7 +473,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Curriculum Learning</h1>
+    <h1>Progressive Learning: Curriculum Strategies</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -483,9 +483,13 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-increasing-goal-distance">Example: Increasing Goal Distance</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curriculum-binding">Curriculum Binding</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#design-notes">Design Notes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-curriculum-learning">Why Use Curriculum Learning?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curriculum-configuration">Curriculum Configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#built-in-curriculum-strategies">Built-in Curriculum Strategies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-curriculum-updates-work">How Curriculum Updates Work</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-goal-distance-progression">Example: Goal Distance Progression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-curriculum">Customizing Curriculum</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices">Best Practices</a></li>
 </ul>
             </nav>
         </div>
@@ -497,44 +501,102 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="curriculum-learning">
-<h1>Curriculum Learning<a class="headerlink" href="#curriculum-learning" title="Permalink to this heading">#</a></h1>
-<p>UrbanVerse supports curriculum learning by gradually adjusting task difficulty during training.
-Each curriculum behavior is defined as a <cite>CurrTerm</cite> function and bound via <cite>CurriculumCfg</cite>.</p>
-<p>A common use case is to expand the movement range or goal distance as training progresses.</p>
-<section id="example-increasing-goal-distance">
-<h2>Example: Increasing Goal Distance<a class="headerlink" href="#example-increasing-goal-distance" title="Permalink to this heading">#</a></h2>
-<p>The following curriculum function is defined for COCO:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">increase_moving_distance</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">env_ids</span><span class="p">,</span> <span class="n">command_name</span><span class="o">=</span><span class="s1">&#39;pose_command&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">):</span>
-    <span class="n">cur_iteration</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">common_step_counter</span> <span class="o">//</span> <span class="n">num_steps_per_iteration</span>
-    <span class="n">x_left</span> <span class="o">=</span> <span class="n">start_x</span> <span class="o">+</span> <span class="p">(</span><span class="n">end_x</span> <span class="o">-</span> <span class="n">start_x</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">cur_iteration</span> <span class="o">/</span> <span class="n">total_iterations</span><span class="p">)</span>
-    <span class="n">env</span><span class="o">.</span><span class="n">command_manager</span><span class="o">.</span><span class="n">get_term</span><span class="p">(</span><span class="n">command_name</span><span class="p">)</span><span class="o">.</span><span class="n">cfg</span><span class="o">.</span><span class="n">ranges</span><span class="o">.</span><span class="n">pos_x</span> <span class="o">=</span> <span class="p">(</span><span class="mf">10.</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">x_left</span><span class="p">,</span> <span class="n">end_x</span><span class="p">))</span>
-    <span class="n">env</span><span class="o">.</span><span class="n">command_manager</span><span class="o">.</span><span class="n">get_term</span><span class="p">(</span><span class="n">command_name</span><span class="p">)</span><span class="o">.</span><span class="n">cfg</span><span class="o">.</span><span class="n">ranges</span><span class="o">.</span><span class="n">pos_y</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">map_region</span><span class="p">)</span>
+  <section id="progressive-learning-curriculum-strategies">
+<h1>Progressive Learning: Curriculum Strategies<a class="headerlink" href="#progressive-learning-curriculum-strategies" title="Permalink to this heading">#</a></h1>
+<p>Curriculum learning gradually increases task difficulty as your policy improves, accelerating training and often leading to better final performance. UrbanVerse provides built-in curriculum mechanisms that automatically scale navigation challenges, helping your policy learn basic behaviors before tackling complex scenarios.</p>
+<section id="why-use-curriculum-learning">
+<h2>Why Use Curriculum Learning?<a class="headerlink" href="#why-use-curriculum-learning" title="Permalink to this heading">#</a></h2>
+<p>Training a navigation policy from scratch in complex urban environments can be challenging. Starting with nearby goals and simple scenarios, then progressively expanding to long-range navigation across diverse scenes, helps the policy:
+- <strong>Learn fundamental skills first</strong> (basic obstacle avoidance, goal following)
+- <strong>Build confidence</strong> before facing harder challenges
+- <strong>Converge faster</strong> by focusing on achievable tasks early in training
+- <strong>Achieve better final performance</strong> through structured skill development</p>
+</section>
+<section id="curriculum-configuration">
+<h2>Curriculum Configuration<a class="headerlink" href="#curriculum-configuration" title="Permalink to this heading">#</a></h2>
+<p>Enable curriculum learning with simple boolean flags:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">urbanverse.navigation.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">EnvCfg</span><span class="p">,</span> <span class="n">CurriculumCfg</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
+
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">EnvCfg</span><span class="p">(</span>
+    <span class="n">robot_type</span><span class="o">=</span><span class="s2">&quot;coco_wheeled&quot;</span><span class="p">,</span>
+    <span class="n">curriculum</span><span class="o">=</span><span class="n">CurriculumCfg</span><span class="p">(</span>
+        <span class="n">enable_goal_distance_curriculum</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># Expand goal distances over time</span>
+        <span class="n">enable_cousin_jitter</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>             <span class="c1"># Increase scene diversity gradually</span>
+    <span class="p">),</span>
+    <span class="o">...</span>
+<span class="p">)</span>
 </pre></div>
 </div>
-<p>This function progressively expands the allowed x-axis goal region as training proceeds.</p>
 </section>
-<section id="curriculum-binding">
-<h2>Curriculum Binding<a class="headerlink" href="#curriculum-binding" title="Permalink to this heading">#</a></h2>
-<p>It is registered via:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@configclass</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">CurriculumCfg</span><span class="p">:</span>
-    <span class="n">increased_moving_distance</span> <span class="o">=</span> <span class="n">CurrTerm</span><span class="p">(</span>
-        <span class="n">func</span><span class="o">=</span><span class="n">increase_moving_distance</span><span class="p">,</span>
-        <span class="n">params</span><span class="o">=</span><span class="p">{}</span>
-    <span class="p">)</span>
-</pre></div>
-</div>
-<p>This term will be called automatically during each environment step
-to update internal task parameters (e.g., goal position sampling bounds).</p>
+<section id="built-in-curriculum-strategies">
+<h2>Built-in Curriculum Strategies<a class="headerlink" href="#built-in-curriculum-strategies" title="Permalink to this heading">#</a></h2>
+<p>UrbanVerse offers two primary curriculum mechanisms:</p>
+<p><strong>Goal Distance Curriculum</strong>
+Starts training with nearby goals (e.g., 5-10 meters away) and gradually expands the maximum goal distance as training progresses. Early episodes focus on short-range navigation where the policy can easily see and reach the goal. As the policy improves, goals become progressively more distant, requiring longer-range planning and navigation skills.</p>
+<p>This curriculum helps the policy:
+- Master basic obstacle avoidance and goal-following on short paths
+- Develop path planning skills for medium-range navigation
+- Learn to navigate efficiently over long distances</p>
+<p><strong>Cousin Jitter Curriculum</strong>
+Gradually increases the diversity of scene appearances (digital cousins) used during training. Early training might focus on a smaller set of cousin variants, providing visual consistency that helps the policy learn geometric navigation. As training progresses, more diverse cousins are introduced, improving the policy’s robustness to visual variations.</p>
+<p>This curriculum helps the policy:
+- Learn navigation patterns that generalize across visual appearances
+- Develop robustness to different asset placements and textures
+- Adapt to varying lighting and scene conditions</p>
 </section>
-<section id="design-notes">
-<h2>Design Notes<a class="headerlink" href="#design-notes" title="Permalink to this heading">#</a></h2>
+<section id="how-curriculum-updates-work">
+<h2>How Curriculum Updates Work<a class="headerlink" href="#how-curriculum-updates-work" title="Permalink to this heading">#</a></h2>
+<p>Curriculum parameters are updated automatically during training:</p>
+<ol class="arabic simple">
+<li><p><strong>Periodic Evaluation</strong>: Every N training iterations, the curriculum manager evaluates the current training progress</p></li>
+<li><p><strong>Difficulty Adjustment</strong>: Based on performance metrics (e.g., success rate, average episode length), curriculum parameters are adjusted:
+- Goal distances expand if the policy is succeeding consistently
+- Scene diversity increases if the policy is performing well</p></li>
+<li><p><strong>Next Episode Application</strong>: Changes take effect at the next episode reset, ensuring smooth transitions</p></li>
+<li><p><strong>Automatic Scaling</strong>: The curriculum automatically scales difficulty to match the policy’s learning progress</p></li>
+</ol>
+</section>
+<section id="example-goal-distance-progression">
+<h2>Example: Goal Distance Progression<a class="headerlink" href="#example-goal-distance-progression" title="Permalink to this heading">#</a></h2>
+<p>Here’s how goal distance curriculum typically progresses:</p>
 <ul class="simple">
-<li><p>Curriculum functions operate <em>outside</em> the RL policy loop and are called by the environment manager.</p></li>
-<li><p>You can define any callable that modifies task-related config values (goal ranges, difficulty level, distractor count, etc.).</p></li>
-<li><p>These changes take effect in the next episode reset.</p></li>
+<li><p><strong>Iterations 0-10K</strong>: Goals within 5-15 meters (short-range navigation)</p></li>
+<li><p><strong>Iterations 10K-50K</strong>: Goals within 15-30 meters (medium-range navigation)</p></li>
+<li><p><strong>Iterations 50K+</strong>: Goals within 30-50+ meters (long-range navigation)</p></li>
 </ul>
+<p>The exact progression depends on your policy’s learning speed and the curriculum schedule configuration.</p>
+</section>
+<section id="customizing-curriculum">
+<h2>Customizing Curriculum<a class="headerlink" href="#customizing-curriculum" title="Permalink to this heading">#</a></h2>
+<p>While the built-in curricula work well for most cases, you can customize them:</p>
+<p><strong>Adjust Curriculum Schedule</strong>
+Modify how quickly difficulty increases (linear, exponential, or custom schedules)</p>
+<p><strong>Add Custom Curriculum Terms</strong>
+Implement your own curriculum strategies:
+- Gradually increase obstacle density
+- Progressively introduce more dynamic agents (pedestrians, vehicles)
+- Vary lighting conditions over time
+- Adjust terrain difficulty</p>
+<p><strong>Disable Curriculum</strong>
+For fixed-difficulty training, disable curriculum learning:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">CurriculumCfg</span><span class="p">(</span>
+    <span class="n">enable_goal_distance_curriculum</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># Fixed goal distances</span>
+    <span class="n">enable_cousin_jitter</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>             <span class="c1"># Fixed scene appearance</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Start with curriculum enabled</strong>: It typically accelerates training and improves results</p></li>
+<li><p><strong>Monitor curriculum progression</strong>: Ensure difficulty increases at an appropriate rate</p></li>
+<li><p><strong>Combine with other techniques</strong>: Curriculum works well with domain randomization and reward shaping</p></li>
+<li><p><strong>Adjust based on performance</strong>: If the policy struggles, slow down curriculum progression</p></li>
+<li><p><strong>Use for complex tasks</strong>: Curriculum is especially valuable for long-range navigation and diverse scene training</p></li>
+</ul>
+<p>Curriculum learning is optional but highly recommended, especially when training policies for challenging navigation tasks in diverse urban environments. It’s one of the most effective techniques for improving both training efficiency and final policy performance.</p>
 </section>
 </section>
 
@@ -555,7 +617,7 @@ to update internal task parameters (e.g., goal position sampling bounds).</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Termination Conditions</p>
+        <p class="prev-next-title">When Episodes End: Termination Conditions</p>
       </div>
     </a>
     <a class="right-next"
@@ -563,7 +625,7 @@ to update internal task parameters (e.g., goal position sampling bounds).</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Events</p>
+        <p class="prev-next-title">Environment Events and Initialization</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -584,9 +646,13 @@ to update internal task parameters (e.g., goal position sampling bounds).</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-increasing-goal-distance">Example: Increasing Goal Distance</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curriculum-binding">Curriculum Binding</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#design-notes">Design Notes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-curriculum-learning">Why Use Curriculum Learning?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curriculum-configuration">Curriculum Configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#built-in-curriculum-strategies">Built-in Curriculum Strategies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-curriculum-updates-work">How Curriculum Updates Work</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-goal-distance-progression">Example: Goal Distance Progression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-curriculum">Customizing Curriculum</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices">Best Practices</a></li>
 </ul>
   </nav></div>
 

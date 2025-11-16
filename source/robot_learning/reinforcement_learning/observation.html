@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Observation Space &#8212; UrbanVerse Documentation</title>
+    <title>What Your Policy Sees: Observations &#8212; UrbanVerse Documentation</title>
   
   
   
@@ -55,8 +55,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'source/robot_learning/reinforcement_learning/observation';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Reward" href="reward.html" />
-    <link rel="prev" title="Action Space" href="action.html" />
+    <link rel="next" title="Designing the Reward Function" href="reward.html" />
+    <link rel="prev" title="Defining Robot Actions" href="action.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="1.0.0" />
@@ -226,14 +226,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../simulation_paradigms.html">Simulation Paradigms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configurations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../robot_configuration.html">Robot Configuration</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Reinforcement Learning</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="scene.html">Scene Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="action.html">Action Space</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Observation Space</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reward.html">Reward</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reset.html">Termination Conditions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="curriculum.html">Curriculum Learning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="event.html">Events</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Reinforcement Learning in UrbanVerse</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="scene.html">Working with Urban Scenes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="action.html">Defining Robot Actions</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">What Your Policy Sees: Observations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reward.html">Designing the Reward Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reset.html">When Episodes End: Termination Conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="curriculum.html">Progressive Learning: Curriculum Strategies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="event.html">Environment Events and Initialization</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../imitation_learning/index.html">Imitation Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -473,7 +473,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Observation Space</h1>
+    <h1>What Your Policy Sees: Observations</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -483,10 +483,12 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sensor-based-observations">Sensor-based Observations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sensor-configuration">Sensor Configuration</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#observation-binding">Observation Binding</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extending-observation-space">Extending Observation Space</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#observation-components">Observation Components</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-observations">Configuring Observations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-observation-setup">Standard Observation Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-observation-structure">Example Observation Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-the-observation-space">Customizing the Observation Space</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#design-considerations">Design Considerations</a></li>
 </ul>
             </nav>
         </div>
@@ -498,106 +500,103 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="observation-space">
-<h1>Observation Space<a class="headerlink" href="#observation-space" title="Permalink to this heading">#</a></h1>
-<p>UrbanVerse supports configurable multimodal observation spaces tailored to different robot embodiments and tasks.
-Each environment binds an observation configuration class that defines the set of sensors, modalities, and preprocessing methods available to the policy.</p>
-<p>The observation space is defined in the scenecfg file, for example, <code class="docutils literal notranslate"><span class="pre">urbansim/primitives/navigation/random_env_cfg.py</span></code>.</p>
-<section id="sensor-based-observations">
-<h2>Sensor-based Observations<a class="headerlink" href="#sensor-based-observations" title="Permalink to this heading">#</a></h2>
-<p>UrbanVerse supports a modular sensor system, where observations from various physical or virtual sensors
-(e.g., cameras, raycasters, contact sensors) can be processed and passed to RL policies.
-These sensors are defined under the robot’s scene configuration and referenced by observation terms.</p>
-<p>Taking <strong>COCO</strong> as an example:</p>
+  <section id="what-your-policy-sees-observations">
+<h1>What Your Policy Sees: Observations<a class="headerlink" href="#what-your-policy-sees-observations" title="Permalink to this heading">#</a></h1>
+<p>The observation space defines the sensory information available to your navigation policy. UrbanVerse provides a flexible observation system that combines visual inputs from onboard cameras with spatial awareness through goal-relative position vectors, creating a rich representation of the robot’s state and environment.</p>
+<section id="observation-components">
+<h2>Observation Components<a class="headerlink" href="#observation-components" title="Permalink to this heading">#</a></h2>
+<p>For goal-directed navigation in urban environments, your policy typically needs two types of information:</p>
+<p><strong>Visual Perception</strong>
+Onboard cameras capture the robot’s view of the world, providing information about obstacles, road structure, pedestrians, and other scene elements. This visual input is essential for understanding the immediate surroundings and making navigation decisions.</p>
+<p><strong>Spatial Awareness</strong>
+A goal vector encodes the relative position from the robot to its target destination. This compact representation (just two numbers: <code class="docutils literal notranslate"><span class="pre">dx,</span> <span class="pre">dy</span></code>) tells the policy where the goal is relative to the robot’s current position, enabling efficient path planning.</p>
 </section>
-<section id="sensor-configuration">
-<h2>Sensor Configuration<a class="headerlink" href="#sensor-configuration" title="Permalink to this heading">#</a></h2>
-<p>The following sensors are typically spawned in the robot’s scene config (e.g., <cite>SceneCfg.sensors</cite>):</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Contact sensor for foot or chassis contact</span>
-<span class="n">contact_forces</span> <span class="o">=</span> <span class="n">ContactSensorCfg</span><span class="p">(</span>
-    <span class="n">prim_path</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{ENV_REGEX_NS}</span><span class="s2">/Robot/.*&quot;</span><span class="p">,</span>
-    <span class="n">history_length</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-    <span class="n">track_air_time</span><span class="o">=</span><span class="kc">True</span>
+<section id="configuring-observations">
+<h2>Configuring Observations<a class="headerlink" href="#configuring-observations" title="Permalink to this heading">#</a></h2>
+<p>Observation configuration is simple and intuitive:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">urbanverse.navigation.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">EnvCfg</span><span class="p">,</span> <span class="n">ObservationCfg</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
+
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">EnvCfg</span><span class="p">(</span>
+    <span class="n">robot_type</span><span class="o">=</span><span class="s2">&quot;coco_wheeled&quot;</span><span class="p">,</span>
+    <span class="n">observations</span><span class="o">=</span><span class="n">ObservationCfg</span><span class="p">(</span>
+        <span class="n">rgb_size</span><span class="o">=</span><span class="p">(</span><span class="mi">135</span><span class="p">,</span> <span class="mi">240</span><span class="p">),</span>        <span class="c1"># Camera image resolution</span>
+        <span class="n">use_depth</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>             <span class="c1"># RGB only (no depth channel)</span>
+        <span class="n">include_goal_vector</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>    <span class="c1"># Add (dx, dy) goal position</span>
+    <span class="p">),</span>
+    <span class="o">...</span>
 <span class="p">)</span>
 
-<span class="c1"># RGB + depth camera</span>
-<span class="n">camera</span> <span class="o">=</span> <span class="n">TiledCameraCfg</span><span class="p">(</span>
-    <span class="n">prim_path</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{ENV_REGEX_NS}</span><span class="s2">/Robot/base/front_cam&quot;</span><span class="p">,</span>
-    <span class="n">update_period</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
-    <span class="n">height</span><span class="o">=</span><span class="mi">135</span><span class="p">,</span>
-    <span class="n">width</span><span class="o">=</span><span class="mi">240</span><span class="p">,</span>
-    <span class="n">data_types</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;rgb&quot;</span><span class="p">,</span> <span class="s2">&quot;distance_to_camera&quot;</span><span class="p">],</span>
-    <span class="n">spawn</span><span class="o">=</span><span class="n">sim_utils</span><span class="o">.</span><span class="n">PinholeCameraCfg</span><span class="o">.</span><span class="n">from_intrinsic_matrix</span><span class="p">(</span>
-        <span class="n">intrinsic_matrix</span><span class="o">=</span><span class="p">[</span><span class="mf">531.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">960.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">531.</span><span class="p">,</span> <span class="mf">540.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span>
-        <span class="n">width</span><span class="o">=</span><span class="mi">1920</span><span class="p">,</span>
-        <span class="n">height</span><span class="o">=</span><span class="mi">1080</span><span class="p">,</span>
-    <span class="p">),</span>
-    <span class="n">offset</span><span class="o">=</span><span class="n">CameraCfg</span><span class="o">.</span><span class="n">OffsetCfg</span><span class="p">(</span>
-        <span class="n">pos</span><span class="o">=</span><span class="p">(</span><span class="mf">0.51</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.015</span><span class="p">),</span>
-        <span class="n">rot</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">),</span>
-        <span class="n">convention</span><span class="o">=</span><span class="s2">&quot;ros&quot;</span>
-    <span class="p">),</span>
-<span class="p">)</span>
-
-<span class="c1"># Height scanner using raycasting grid</span>
-<span class="n">height_scanner</span> <span class="o">=</span> <span class="n">RayCasterCfg</span><span class="p">(</span>
-    <span class="n">prim_path</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{ENV_REGEX_NS}</span><span class="s2">/Robot/base&quot;</span><span class="p">,</span>
-    <span class="n">offset</span><span class="o">=</span><span class="n">RayCasterCfg</span><span class="o">.</span><span class="n">OffsetCfg</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">)),</span>
-    <span class="n">attach_yaw_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">pattern_cfg</span><span class="o">=</span><span class="n">patterns</span><span class="o">.</span><span class="n">GridPatternCfg</span><span class="p">(</span><span class="n">resolution</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">[</span><span class="mf">1.6</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]),</span>
-    <span class="n">debug_vis</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">mesh_prim_paths</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;/World/ground&quot;</span><span class="p">]</span>
-<span class="p">)</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">navigation</span><span class="o">.</span><span class="n">rl</span><span class="o">.</span><span class="n">create_env</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
-<section id="observation-binding">
-<h2>Observation Binding<a class="headerlink" href="#observation-binding" title="Permalink to this heading">#</a></h2>
-<p>Once sensors are defined, their data is passed to the policy via an <cite>ObservationsCfg</cite> class:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@configclass</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">ObservationsCfg</span><span class="p">:</span>
-    <span class="nd">@configclass</span>
-    <span class="k">class</span><span class="w"> </span><span class="nc">PolicyCfg</span><span class="p">(</span><span class="n">ObsGroup</span><span class="p">):</span>
-        <span class="n">pose_command</span> <span class="o">=</span> <span class="n">ObsTerm</span><span class="p">(</span>
-            <span class="n">func</span><span class="o">=</span><span class="n">loc_mdp</span><span class="o">.</span><span class="n">advanced_generated_commands</span><span class="p">,</span>
-            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-                <span class="s2">&quot;command_name&quot;</span><span class="p">:</span> <span class="s2">&quot;pose_command&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;max_dim&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-                <span class="s2">&quot;normalize&quot;</span><span class="p">:</span> <span class="kc">True</span>
-            <span class="p">}</span>
-        <span class="p">)</span>
+<section id="standard-observation-setup">
+<h2>Standard Observation Setup<a class="headerlink" href="#standard-observation-setup" title="Permalink to this heading">#</a></h2>
+<p>The default observation configuration for navigation tasks includes:</p>
+<p><strong>RGB Camera Image</strong>
+A color image from the robot’s forward-facing camera, resized to the specified resolution. This provides visual information about the scene ahead, including obstacles, road markings, buildings, and dynamic agents.</p>
+<p><strong>Goal Vector</strong>
+A 2D vector <code class="docutils literal notranslate"><span class="pre">(dx,</span> <span class="pre">dy)</span></code> representing the relative position from the robot to the goal, normalized and appended to the observation tensor. This gives the policy direct spatial information about where it needs to go.</p>
+<p>Together, these components provide a compact yet informative representation: the camera image handles visual scene understanding, while the goal vector provides precise spatial guidance.</p>
+</section>
+<section id="example-observation-structure">
+<h2>Example Observation Structure<a class="headerlink" href="#example-observation-structure" title="Permalink to this heading">#</a></h2>
+<p>When you query the environment, observations are returned as a dictionary:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">obs</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
 
-    <span class="nd">@configclass</span>
-    <span class="k">class</span><span class="w"> </span><span class="nc">SensorCfg</span><span class="p">(</span><span class="n">ObsGroup</span><span class="p">):</span>
-        <span class="n">rgb</span> <span class="o">=</span> <span class="n">ObsTerm</span><span class="p">(</span>
-            <span class="n">func</span><span class="o">=</span><span class="n">nav_mdp</span><span class="o">.</span><span class="n">rgbd_processed</span><span class="p">,</span>
-            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;sensor_cfg&quot;</span><span class="p">:</span> <span class="n">SceneEntityCfg</span><span class="p">(</span><span class="s2">&quot;camera&quot;</span><span class="p">)}</span>
-        <span class="p">)</span>
+<span class="c1"># obs contains:</span>
+<span class="c1"># - &quot;rgb&quot;: tensor of shape [num_envs, 135, 240, 3] - camera images</span>
+<span class="c1"># - &quot;goal_vector&quot;: tensor of shape [num_envs, 2] - (dx, dy) to goal</span>
+<span class="c1"># - Additional robot state information (pose, velocity, etc.)</span>
 
-    <span class="n">policy</span><span class="p">:</span> <span class="n">PolicyCfg</span> <span class="o">=</span> <span class="n">PolicyCfg</span><span class="p">()</span>
-    <span class="n">sensor</span><span class="p">:</span> <span class="n">SensorCfg</span> <span class="o">=</span> <span class="n">SensorCfg</span><span class="p">()</span>
+<span class="c1"># Your policy processes these observations:</span>
+<span class="n">actions</span> <span class="o">=</span> <span class="n">policy</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Explanation:</p>
+<p>The observation processing pipeline automatically:
+- Captures camera images from the simulation
+- Computes goal-relative positions
+- Normalizes and preprocesses the data
+- Concatenates everything into a format your policy can consume</p>
+</section>
+<section id="customizing-the-observation-space">
+<h2>Customizing the Observation Space<a class="headerlink" href="#customizing-the-observation-space" title="Permalink to this heading">#</a></h2>
+<p>You can tailor the observation space to your specific needs:</p>
+<p><strong>Higher Resolution Images</strong>
+Increase camera resolution for more detailed visual information (at the cost of larger input tensors):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ObservationCfg</span><span class="p">(</span>
+    <span class="n">rgb_size</span><span class="o">=</span><span class="p">(</span><span class="mi">180</span><span class="p">,</span> <span class="mi">320</span><span class="p">),</span>  <span class="c1"># Higher resolution</span>
+    <span class="o">...</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Enable Depth Information</strong>
+Add a depth channel to provide 3D spatial awareness:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ObservationCfg</span><span class="p">(</span>
+    <span class="n">use_depth</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># Include depth channel</span>
+    <span class="o">...</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Additional Sensors</strong>
+For advanced applications, you can extend observations to include:
+- LiDAR point clouds for precise distance measurements
+- Contact sensors for collision detection
+- Height scanners for terrain awareness
+- Multiple camera views for panoramic perception</p>
+<p><strong>Custom Observation Processing</strong>
+Subclass <code class="docutils literal notranslate"><span class="pre">ObservationCfg</span></code> to implement custom preprocessing, feature extraction, or sensor fusion logic.</p>
+</section>
+<section id="design-considerations">
+<h2>Design Considerations<a class="headerlink" href="#design-considerations" title="Permalink to this heading">#</a></h2>
+<p>The observation space is a critical design choice that affects both learning efficiency and policy performance:</p>
 <ul class="simple">
-<li><p><cite>ObsGroup</cite>: A logical grouping of observations (e.g., policy inputs vs. auxiliary sensors).</p></li>
-<li><p><cite>ObsTerm</cite>: Binds a specific function that processes sensor data.</p></li>
-<li><p><cite>SceneEntityCfg(“camera”)</cite>: Indicates this term pulls data from the named sensor defined in the scene.</p></li>
+<li><p><strong>Compact representations</strong> (like the default RGB + goal vector) train faster and require less memory</p></li>
+<li><p><strong>Rich observations</strong> (multiple sensors, high resolution) provide more information but increase computational cost</p></li>
+<li><p><strong>Task-specific sensors</strong> can significantly improve performance for specialized navigation scenarios</p></li>
 </ul>
-<p>Processing Chain:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Scene Sensor → Simulator → ObsTerm.func (e.g., rgbd_processed) → Policy Input Tensor
-</pre></div>
-</div>
-<p>This design decouples <strong>sensor definition</strong> from <strong>observation usage</strong>, allowing different policies to reuse or remap sensor outputs flexibly.</p>
-</section>
-<section id="extending-observation-space">
-<h2>Extending Observation Space<a class="headerlink" href="#extending-observation-space" title="Permalink to this heading">#</a></h2>
-<p>To add new sensor-based observations:</p>
-<ol class="arabic simple">
-<li><p>Define the sensor in <cite>SceneCfg.sensors</cite> with a unique name.</p></li>
-<li><p>Use <cite>SceneEntityCfg(&lt;name&gt;)</cite> to reference it in your <cite>ObsTerm</cite>.</p></li>
-<li><p>Provide a custom processing function in your MDP module.</p></li>
-</ol>
+<p>The default configuration (RGB camera + goal vector) strikes an excellent balance for most navigation tasks, providing sufficient information for effective learning while remaining computationally efficient. Start with the defaults, then experiment with extensions based on your specific requirements.</p>
 </section>
 </section>
 
@@ -618,7 +617,7 @@ These sensors are defined under the robot’s scene configuration and referenced
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Action Space</p>
+        <p class="prev-next-title">Defining Robot Actions</p>
       </div>
     </a>
     <a class="right-next"
@@ -626,7 +625,7 @@ These sensors are defined under the robot’s scene configuration and referenced
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Reward</p>
+        <p class="prev-next-title">Designing the Reward Function</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -647,10 +646,12 @@ These sensors are defined under the robot’s scene configuration and referenced
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sensor-based-observations">Sensor-based Observations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sensor-configuration">Sensor Configuration</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#observation-binding">Observation Binding</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extending-observation-space">Extending Observation Space</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#observation-components">Observation Components</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-observations">Configuring Observations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-observation-setup">Standard Observation Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-observation-structure">Example Observation Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-the-observation-space">Customizing the Observation Space</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#design-considerations">Design Considerations</a></li>
 </ul>
   </nav></div>
 

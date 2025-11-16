@@ -1,133 +1,132 @@
-Action Space
-=================
+Defining Robot Actions
+=======================
 
-UrbanVerse supports multiple types of action spaces depending on the robot embodiment.  
-Each robot defines its own control interface by providing a corresponding action configuration class.  
-This configuration determines the **action dimension**, **control type**, and **scaling behavior** used during RL training.
+The action space defines how your RL policy controls the robot. UrbanVerse automatically adapts the action interface based on your chosen robot embodiment, from simple velocity commands for wheeled delivery robots to sophisticated joint-level controls for humanoid platforms.
 
-Taking **COCO** (a wheeled robot) as an example:
+How Actions Work
+-----------------
 
-The action space is defined in the ``urbansim/primitives/robot/coco.py``.
+At each simulation step, your policy outputs a vector of action values. UrbanVerse processes these values, applies appropriate scaling and limits, and converts them into physical robot commands. The exact mapping depends on your robot type, but the interface remains consistent: your policy outputs actions, and UrbanVerse handles the rest.
 
-COCO Action Binding
---------------------
-
-When `robot_name = "coco"`, the following modules are loaded:
+For wheeled robots like COCO, actions are straightforward velocity commands:
 
 .. code-block:: python
 
-   from urbansim.primitives.robot.coco import COCOVelocityActionsCfg
-   action_cfg = COCOVelocityActionsCfg
+   from urbanverse.navigation.config import EnvCfg, ActionCfg
+   import urbanverse as uv
 
-The class `COCOVelocityActionsCfg` defines a **continuous 2D velocity command** space, consisting of:
-
-- **linear_velocity** (forward/backward)
-- **angular_velocity** (rotation rate)
-
-It is used in the full environment config:
-
-.. code-block:: python
-
-   @configclass
-   class EnvCfg(ManagerBasedRLEnvCfg):
+   cfg = EnvCfg(
+       robot_type="coco_wheeled",
+       actions=ActionCfg(
+           action_dim=2,          # [linear_velocity, angular_velocity]
+           linear_limit=1.0,      # Max forward speed: 1.0 m/s
+           angular_limit=1.0,     # Max rotation rate: 1.0 rad/s
+       ),
        ...
-       actions = COCOVelocityActionsCfg()
+   )
 
-More specifically, the action space is defined as:
+   env = uv.navigation.rl.create_env(cfg)
+
+   # During training, your policy outputs actions like:
+   actions = policy(observations)  # Shape: [num_envs, 2]
+   # actions[:, 0] = linear velocity commands
+   # actions[:, 1] = angular velocity commands
+
+Robot-Specific Action Spaces
+-----------------------------
+
+UrbanVerse supports a wide variety of robot embodiments, each with its own natural action space. The action configuration is automatically selected based on your ``robot_type``, so you typically don't need to specify it manually.
+
+**Wheeled Robots**  
+Simple and intuitive: control forward speed and turning rate.
+
+- **COCO Wheeled** (``coco_wheeled``): 2D velocity commands ``[v_forward, ω_yaw]``
+- **NVIDIA Carter** (``nvidia_carter``): 3D velocity commands ``[vx, vy, ω_yaw]`` for omnidirectional movement
+- **TurtleBot3** (``turtlebot3``): Differential drive velocity commands
+
+**Legged Robots**  
+More complex control requiring joint-level or high-level locomotion commands.
+
+- **Unitree Go2** (``unitree_go2``): Joint velocity commands or high-level velocity for quadruped locomotion
+- **ANYmal** (``anymal``): Joint-based controls for robust quadruped navigation
+
+**Humanoid Robots**  
+Sophisticated bipedal locomotion with full-body control.
+
+- **Unitree G1** (``unitree_g1``): Joint-angle or torque-based controls for humanoid walking
+- **Booster T1** (``booster_t1``): Advanced joint-level controls for humanoid navigation
+
+For detailed specifications of each robot's action space, see :doc:`../robot_configuration`.
+
+Action Processing Pipeline
+---------------------------
+
+UrbanVerse handles action processing automatically:
+
+1. **Policy Output**: Your neural network outputs raw action values (typically in ``[-1, 1]`` range)
+
+2. **Scaling**: Actions are scaled by the configured limits (e.g., ``linear_limit``, ``angular_limit``)
+
+3. **Application**: Scaled actions are converted to robot-specific commands and applied to the simulation
+
+4. **Execution**: The physics engine executes the commands, updating robot state
+
+This pipeline ensures that actions are properly bounded, scaled, and applied regardless of your robot type.
+
+Example: Training with COCO Actions
+------------------------------------
+
+Here's a complete example showing how actions flow through the system:
 
 .. code-block:: python
 
-   class ClassicalCarAction(ActionTerm):
-      r"""Pre-trained policy action term.
+   import urbanverse as uv
+   from urbanverse.navigation.config import EnvCfg, SceneCfg, ActionCfg
 
-      This action term infers a pre-trained policy and applies the corresponding low-level actions to the robot.
-      The raw actions correspond to the commands for the pre-trained policy.
+   cfg = EnvCfg(
+       scenes=SceneCfg(scene_paths=my_scenes, async_sim=True),
+       robot_type="coco_wheeled",
+       actions=ActionCfg(
+           action_dim=2,
+           linear_limit=1.5,   # Allow faster forward movement
+           angular_limit=0.8,  # Slightly slower rotation
+       ),
+       ...
+   )
 
-      """
+   env = uv.navigation.rl.create_env(cfg)
 
-      cfg: ClassicalCarActionCfg
-      """The configuration of the action term."""
+   # Training loop (simplified)
+   obs = env.reset()
+   for step in range(num_steps):
+       # Policy outputs actions in [-1, 1] range
+       actions = policy(obs)  # Shape: [num_envs, 2]
+       
+       # UrbanVerse automatically:
+       # 1. Scales actions by limits: [linear_limit, angular_limit]
+       # 2. Converts to robot commands
+       # 3. Applies to simulation
+       obs, rewards, dones, info = env.step(actions)
 
-      def __init__(self, cfg: ClassicalCarActionCfg, env: ManagerBasedRLEnv) -> None:
-          # initialize the action term
-          super().__init__(cfg, env)
+Customizing Action Spaces
+--------------------------
 
-          self.robot: Articulation = env.scene[cfg.asset_name]
-          self._counter = 0
-          self.last_wheel_angle = torch.zeros(self.num_envs, 1, device=self.device)
+While UrbanVerse provides sensible defaults for each robot type, you can customize the action space:
 
-          self.axle_names = ["base_to_front_axle_joint"]
-          self.wheel_names = ["front_left_wheel_joint","front_right_wheel_joint", "rear_left_wheel_joint", "rear_right_wheel_joint"]
-          self.shock_names = [".*shock_joint"]
-          self._raw_actions = torch.zeros(self.num_envs, 2, device=self.device)
+**Adjust Action Limits**  
+Modify the maximum velocities or joint ranges:
 
-          # prepare low level actions
-          self.acceleration_action: JointVelocityAction = JointVelocityAction(JointVelocityActionCfg(asset_name="robot", joint_names=[".*_wheel_joint"], scale=10.0, use_default_offset=False), env)
-          self.steering_action: JointPositionAction = JointPositionAction(JointPositionActionCfg(asset_name="robot", joint_names=self.axle_names, scale=1., use_default_offset=True), env)
+.. code-block:: python
 
-      """
-      Properties.
-      """
+   ActionCfg(
+       linear_limit=2.0,   # Faster maximum speed
+       angular_limit=1.5,  # More aggressive turning
+   )
 
-      @property
-      def action_dim(self) -> int:
-          return 2
+**Change Action Dimensions**  
+For advanced use cases, you can extend the action space to include additional control dimensions (e.g., gripper commands, head movement).
 
-      @property
-      def raw_actions(self) -> torch.Tensor:
-          return self._raw_actions
+**Custom Action Processing**  
+Subclass the action configuration class to implement custom action transformations, constraints, or safety limits.
 
-      @property
-      def processed_actions(self) -> torch.Tensor:
-          return self.raw_actions
-      """
-      Operations.
-      """
-
-      def process_actions(self, actions: torch.Tensor):
-          self._raw_actions[:] = actions
-
-
-      def apply_actions(self):
-          if self._counter % ACTION_INTERVAL == 0:
-              max_wheel_v = 4.
-              wheel_base = 1.5
-              radius_rear = 0.3
-              max_ang = 40 * torch.pi / 180
-              velocity = self.raw_actions[..., :1].clamp(0.0, max_wheel_v) / radius_rear 
-              angular = self.raw_actions[..., 1:2].clamp(-max_ang, max_ang)
-              angular[angular.abs() < 0.05] = torch.zeros_like(angular[angular.abs() < 0.05])
-              R = wheel_base / torch.tan(angular)
-              left_wheel_angle = torch.arctan(wheel_base / (R - 0.5 * 1.8))
-              right_wheel_angle = torch.arctan(wheel_base / (R + 0.5 * 1.8))
-
-          
-              self.steering_action.process_actions(((right_wheel_angle + left_wheel_angle) / 2.))
-              self.acceleration_action.process_actions(torch.cat([velocity, velocity, velocity, velocity], dim=1))
-          
-          self.steering_action.apply_actions()
-          self.acceleration_action.apply_actions()
-          self._counter += 1
-
-If you want to build your own action term, you can subclass `ActionTerm` and implement the required methods.
-
-Action Application
-------------------
-
-In each simulation step, the RL policy outputs a 2D vector ``[v_lin, v_ang]``, which is interpreted as:
-
-- ``v_lin``: forward speed (e.g., mapped to ``base_command.v_target``)
-- ``v_ang``: yaw rate (e.g., mapped to ``base_command.w_target``)
-
-This command is then used to drive the robot within the simulation loop.
-
-Other Robot Types
-------------------
-
-Other robot embodiments use different action configs:
-
-- **Unitree Go2**: `GO2NavActionsCfg` → joint velocity commands or high-level velocity
-- **Unitree G1**: `G1NavActionsCfg` → biped locomotion controls
-
-These robots take pretrained neural networks as actions, which are applied to the robot's joints or high-level velocity commands.
-More details can be found in the respective robot configuration files under `urbansim/primitives/robot/` and we will provide pretrained model weights.
+The action space is one of the most fundamental aspects of your RL setup—it defines what your policy can do. Choose appropriate limits that match your robot's physical capabilities and your navigation task requirements.

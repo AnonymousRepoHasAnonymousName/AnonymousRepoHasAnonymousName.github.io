@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Action Space &#8212; UrbanVerse Documentation</title>
+    <title>Defining Robot Actions &#8212; UrbanVerse Documentation</title>
   
   
   
@@ -55,8 +55,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'source/robot_learning/reinforcement_learning/action';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Observation Space" href="observation.html" />
-    <link rel="prev" title="Scene Configuration" href="scene.html" />
+    <link rel="next" title="What Your Policy Sees: Observations" href="observation.html" />
+    <link rel="prev" title="Working with Urban Scenes" href="scene.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="1.0.0" />
@@ -226,14 +226,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../simulation_paradigms.html">Simulation Paradigms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configurations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../robot_configuration.html">Robot Configuration</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Reinforcement Learning</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="scene.html">Scene Configuration</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Action Space</a></li>
-<li class="toctree-l2"><a class="reference internal" href="observation.html">Observation Space</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reward.html">Reward</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reset.html">Termination Conditions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="curriculum.html">Curriculum Learning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="event.html">Events</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Reinforcement Learning in UrbanVerse</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="scene.html">Working with Urban Scenes</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Defining Robot Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="observation.html">What Your Policy Sees: Observations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reward.html">Designing the Reward Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reset.html">When Episodes End: Termination Conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="curriculum.html">Progressive Learning: Curriculum Strategies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="event.html">Environment Events and Initialization</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../imitation_learning/index.html">Imitation Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -473,7 +473,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Action Space</h1>
+    <h1>Defining Robot Actions</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -483,9 +483,11 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coco-action-binding">COCO Action Binding</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#action-application">Action Application</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-robot-types">Other Robot Types</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-actions-work">How Actions Work</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#robot-specific-action-spaces">Robot-Specific Action Spaces</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#action-processing-pipeline">Action Processing Pipeline</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-training-with-coco-actions">Example: Training with COCO Actions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-action-spaces">Customizing Action Spaces</a></li>
 </ul>
             </nav>
         </div>
@@ -497,126 +499,119 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="action-space">
-<h1>Action Space<a class="headerlink" href="#action-space" title="Permalink to this heading">#</a></h1>
-<p>UrbanVerse supports multiple types of action spaces depending on the robot embodiment.
-Each robot defines its own control interface by providing a corresponding action configuration class.
-This configuration determines the <strong>action dimension</strong>, <strong>control type</strong>, and <strong>scaling behavior</strong> used during RL training.</p>
-<p>Taking <strong>COCO</strong> (a wheeled robot) as an example:</p>
-<p>The action space is defined in the <code class="docutils literal notranslate"><span class="pre">urbansim/primitives/robot/coco.py</span></code>.</p>
-<section id="coco-action-binding">
-<h2>COCO Action Binding<a class="headerlink" href="#coco-action-binding" title="Permalink to this heading">#</a></h2>
-<p>When <cite>robot_name = “coco”</cite>, the following modules are loaded:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">urbansim.primitives.robot.coco</span><span class="w"> </span><span class="kn">import</span> <span class="n">COCOVelocityActionsCfg</span>
-<span class="n">action_cfg</span> <span class="o">=</span> <span class="n">COCOVelocityActionsCfg</span>
-</pre></div>
-</div>
-<p>The class <cite>COCOVelocityActionsCfg</cite> defines a <strong>continuous 2D velocity command</strong> space, consisting of:</p>
-<ul class="simple">
-<li><p><strong>linear_velocity</strong> (forward/backward)</p></li>
-<li><p><strong>angular_velocity</strong> (rotation rate)</p></li>
-</ul>
-<p>It is used in the full environment config:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@configclass</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">EnvCfg</span><span class="p">(</span><span class="n">ManagerBasedRLEnvCfg</span><span class="p">):</span>
+  <section id="defining-robot-actions">
+<h1>Defining Robot Actions<a class="headerlink" href="#defining-robot-actions" title="Permalink to this heading">#</a></h1>
+<p>The action space defines how your RL policy controls the robot. UrbanVerse automatically adapts the action interface based on your chosen robot embodiment, from simple velocity commands for wheeled delivery robots to sophisticated joint-level controls for humanoid platforms.</p>
+<section id="how-actions-work">
+<h2>How Actions Work<a class="headerlink" href="#how-actions-work" title="Permalink to this heading">#</a></h2>
+<p>At each simulation step, your policy outputs a vector of action values. UrbanVerse processes these values, applies appropriate scaling and limits, and converts them into physical robot commands. The exact mapping depends on your robot type, but the interface remains consistent: your policy outputs actions, and UrbanVerse handles the rest.</p>
+<p>For wheeled robots like COCO, actions are straightforward velocity commands:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">urbanverse.navigation.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">EnvCfg</span><span class="p">,</span> <span class="n">ActionCfg</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
+
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">EnvCfg</span><span class="p">(</span>
+    <span class="n">robot_type</span><span class="o">=</span><span class="s2">&quot;coco_wheeled&quot;</span><span class="p">,</span>
+    <span class="n">actions</span><span class="o">=</span><span class="n">ActionCfg</span><span class="p">(</span>
+        <span class="n">action_dim</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>          <span class="c1"># [linear_velocity, angular_velocity]</span>
+        <span class="n">linear_limit</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>      <span class="c1"># Max forward speed: 1.0 m/s</span>
+        <span class="n">angular_limit</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>     <span class="c1"># Max rotation rate: 1.0 rad/s</span>
+    <span class="p">),</span>
     <span class="o">...</span>
-    <span class="n">actions</span> <span class="o">=</span> <span class="n">COCOVelocityActionsCfg</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="n">env</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">navigation</span><span class="o">.</span><span class="n">rl</span><span class="o">.</span><span class="n">create_env</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
+
+<span class="c1"># During training, your policy outputs actions like:</span>
+<span class="n">actions</span> <span class="o">=</span> <span class="n">policy</span><span class="p">(</span><span class="n">observations</span><span class="p">)</span>  <span class="c1"># Shape: [num_envs, 2]</span>
+<span class="c1"># actions[:, 0] = linear velocity commands</span>
+<span class="c1"># actions[:, 1] = angular velocity commands</span>
 </pre></div>
 </div>
-<p>More specifically, the action space is defined as:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ClassicalCarAction</span><span class="p">(</span><span class="n">ActionTerm</span><span class="p">):</span>
-<span class="w">   </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Pre-trained policy action term.</span>
+</section>
+<section id="robot-specific-action-spaces">
+<h2>Robot-Specific Action Spaces<a class="headerlink" href="#robot-specific-action-spaces" title="Permalink to this heading">#</a></h2>
+<p>UrbanVerse supports a wide variety of robot embodiments, each with its own natural action space. The action configuration is automatically selected based on your <code class="docutils literal notranslate"><span class="pre">robot_type</span></code>, so you typically don’t need to specify it manually.</p>
+<p><strong>Wheeled Robots</strong>
+Simple and intuitive: control forward speed and turning rate.</p>
+<ul class="simple">
+<li><p><strong>COCO Wheeled</strong> (<code class="docutils literal notranslate"><span class="pre">coco_wheeled</span></code>): 2D velocity commands <code class="docutils literal notranslate"><span class="pre">[v_forward,</span> <span class="pre">ω_yaw]</span></code></p></li>
+<li><p><strong>NVIDIA Carter</strong> (<code class="docutils literal notranslate"><span class="pre">nvidia_carter</span></code>): 3D velocity commands <code class="docutils literal notranslate"><span class="pre">[vx,</span> <span class="pre">vy,</span> <span class="pre">ω_yaw]</span></code> for omnidirectional movement</p></li>
+<li><p><strong>TurtleBot3</strong> (<code class="docutils literal notranslate"><span class="pre">turtlebot3</span></code>): Differential drive velocity commands</p></li>
+</ul>
+<p><strong>Legged Robots</strong>
+More complex control requiring joint-level or high-level locomotion commands.</p>
+<ul class="simple">
+<li><p><strong>Unitree Go2</strong> (<code class="docutils literal notranslate"><span class="pre">unitree_go2</span></code>): Joint velocity commands or high-level velocity for quadruped locomotion</p></li>
+<li><p><strong>ANYmal</strong> (<code class="docutils literal notranslate"><span class="pre">anymal</span></code>): Joint-based controls for robust quadruped navigation</p></li>
+</ul>
+<p><strong>Humanoid Robots</strong>
+Sophisticated bipedal locomotion with full-body control.</p>
+<ul class="simple">
+<li><p><strong>Unitree G1</strong> (<code class="docutils literal notranslate"><span class="pre">unitree_g1</span></code>): Joint-angle or torque-based controls for humanoid walking</p></li>
+<li><p><strong>Booster T1</strong> (<code class="docutils literal notranslate"><span class="pre">booster_t1</span></code>): Advanced joint-level controls for humanoid navigation</p></li>
+</ul>
+<p>For detailed specifications of each robot’s action space, see <a class="reference internal" href="../robot_configuration.html"><span class="doc">Robot Configuration</span></a>.</p>
+</section>
+<section id="action-processing-pipeline">
+<h2>Action Processing Pipeline<a class="headerlink" href="#action-processing-pipeline" title="Permalink to this heading">#</a></h2>
+<p>UrbanVerse handles action processing automatically:</p>
+<ol class="arabic simple">
+<li><p><strong>Policy Output</strong>: Your neural network outputs raw action values (typically in <code class="docutils literal notranslate"><span class="pre">[-1,</span> <span class="pre">1]</span></code> range)</p></li>
+<li><p><strong>Scaling</strong>: Actions are scaled by the configured limits (e.g., <code class="docutils literal notranslate"><span class="pre">linear_limit</span></code>, <code class="docutils literal notranslate"><span class="pre">angular_limit</span></code>)</p></li>
+<li><p><strong>Application</strong>: Scaled actions are converted to robot-specific commands and applied to the simulation</p></li>
+<li><p><strong>Execution</strong>: The physics engine executes the commands, updating robot state</p></li>
+</ol>
+<p>This pipeline ensures that actions are properly bounded, scaled, and applied regardless of your robot type.</p>
+</section>
+<section id="example-training-with-coco-actions">
+<h2>Example: Training with COCO Actions<a class="headerlink" href="#example-training-with-coco-actions" title="Permalink to this heading">#</a></h2>
+<p>Here’s a complete example showing how actions flow through the system:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">urbanverse.navigation.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">EnvCfg</span><span class="p">,</span> <span class="n">SceneCfg</span><span class="p">,</span> <span class="n">ActionCfg</span>
 
-<span class="sd">   This action term infers a pre-trained policy and applies the corresponding low-level actions to the robot.</span>
-<span class="sd">   The raw actions correspond to the commands for the pre-trained policy.</span>
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">EnvCfg</span><span class="p">(</span>
+    <span class="n">scenes</span><span class="o">=</span><span class="n">SceneCfg</span><span class="p">(</span><span class="n">scene_paths</span><span class="o">=</span><span class="n">my_scenes</span><span class="p">,</span> <span class="n">async_sim</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+    <span class="n">robot_type</span><span class="o">=</span><span class="s2">&quot;coco_wheeled&quot;</span><span class="p">,</span>
+    <span class="n">actions</span><span class="o">=</span><span class="n">ActionCfg</span><span class="p">(</span>
+        <span class="n">action_dim</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">linear_limit</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>   <span class="c1"># Allow faster forward movement</span>
+        <span class="n">angular_limit</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>  <span class="c1"># Slightly slower rotation</span>
+    <span class="p">),</span>
+    <span class="o">...</span>
+<span class="p">)</span>
 
-<span class="sd">   &quot;&quot;&quot;</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">navigation</span><span class="o">.</span><span class="n">rl</span><span class="o">.</span><span class="n">create_env</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
 
-   <span class="n">cfg</span><span class="p">:</span> <span class="n">ClassicalCarActionCfg</span>
-<span class="w">   </span><span class="sd">&quot;&quot;&quot;The configuration of the action term.&quot;&quot;&quot;</span>
+<span class="c1"># Training loop (simplified)</span>
+<span class="n">obs</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_steps</span><span class="p">):</span>
+    <span class="c1"># Policy outputs actions in [-1, 1] range</span>
+    <span class="n">actions</span> <span class="o">=</span> <span class="n">policy</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span>  <span class="c1"># Shape: [num_envs, 2]</span>
 
-   <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cfg</span><span class="p">:</span> <span class="n">ClassicalCarActionCfg</span><span class="p">,</span> <span class="n">env</span><span class="p">:</span> <span class="n">ManagerBasedRLEnv</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-       <span class="c1"># initialize the action term</span>
-       <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="n">env</span><span class="p">)</span>
-
-       <span class="bp">self</span><span class="o">.</span><span class="n">robot</span><span class="p">:</span> <span class="n">Articulation</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">scene</span><span class="p">[</span><span class="n">cfg</span><span class="o">.</span><span class="n">asset_name</span><span class="p">]</span>
-       <span class="bp">self</span><span class="o">.</span><span class="n">_counter</span> <span class="o">=</span> <span class="mi">0</span>
-       <span class="bp">self</span><span class="o">.</span><span class="n">last_wheel_angle</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_envs</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
-
-       <span class="bp">self</span><span class="o">.</span><span class="n">axle_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;base_to_front_axle_joint&quot;</span><span class="p">]</span>
-       <span class="bp">self</span><span class="o">.</span><span class="n">wheel_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;front_left_wheel_joint&quot;</span><span class="p">,</span><span class="s2">&quot;front_right_wheel_joint&quot;</span><span class="p">,</span> <span class="s2">&quot;rear_left_wheel_joint&quot;</span><span class="p">,</span> <span class="s2">&quot;rear_right_wheel_joint&quot;</span><span class="p">]</span>
-       <span class="bp">self</span><span class="o">.</span><span class="n">shock_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;.*shock_joint&quot;</span><span class="p">]</span>
-       <span class="bp">self</span><span class="o">.</span><span class="n">_raw_actions</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_envs</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
-
-       <span class="c1"># prepare low level actions</span>
-       <span class="bp">self</span><span class="o">.</span><span class="n">acceleration_action</span><span class="p">:</span> <span class="n">JointVelocityAction</span> <span class="o">=</span> <span class="n">JointVelocityAction</span><span class="p">(</span><span class="n">JointVelocityActionCfg</span><span class="p">(</span><span class="n">asset_name</span><span class="o">=</span><span class="s2">&quot;robot&quot;</span><span class="p">,</span> <span class="n">joint_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;.*_wheel_joint&quot;</span><span class="p">],</span> <span class="n">scale</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">use_default_offset</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> <span class="n">env</span><span class="p">)</span>
-       <span class="bp">self</span><span class="o">.</span><span class="n">steering_action</span><span class="p">:</span> <span class="n">JointPositionAction</span> <span class="o">=</span> <span class="n">JointPositionAction</span><span class="p">(</span><span class="n">JointPositionActionCfg</span><span class="p">(</span><span class="n">asset_name</span><span class="o">=</span><span class="s2">&quot;robot&quot;</span><span class="p">,</span> <span class="n">joint_names</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">axle_names</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">use_default_offset</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">env</span><span class="p">)</span>
-
-<span class="w">   </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">   Properties.</span>
-<span class="sd">   &quot;&quot;&quot;</span>
-
-   <span class="nd">@property</span>
-   <span class="k">def</span><span class="w"> </span><span class="nf">action_dim</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-       <span class="k">return</span> <span class="mi">2</span>
-
-   <span class="nd">@property</span>
-   <span class="k">def</span><span class="w"> </span><span class="nf">raw_actions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
-       <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_raw_actions</span>
-
-   <span class="nd">@property</span>
-   <span class="k">def</span><span class="w"> </span><span class="nf">processed_actions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
-       <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_actions</span>
-<span class="w">   </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">   Operations.</span>
-<span class="sd">   &quot;&quot;&quot;</span>
-
-   <span class="k">def</span><span class="w"> </span><span class="nf">process_actions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actions</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
-       <span class="bp">self</span><span class="o">.</span><span class="n">_raw_actions</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">actions</span>
-
-
-   <span class="k">def</span><span class="w"> </span><span class="nf">apply_actions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-       <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_counter</span> <span class="o">%</span> <span class="n">ACTION_INTERVAL</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-           <span class="n">max_wheel_v</span> <span class="o">=</span> <span class="mf">4.</span>
-           <span class="n">wheel_base</span> <span class="o">=</span> <span class="mf">1.5</span>
-           <span class="n">radius_rear</span> <span class="o">=</span> <span class="mf">0.3</span>
-           <span class="n">max_ang</span> <span class="o">=</span> <span class="mi">40</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">180</span>
-           <span class="n">velocity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_actions</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="p">:</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">max_wheel_v</span><span class="p">)</span> <span class="o">/</span> <span class="n">radius_rear</span>
-           <span class="n">angular</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_actions</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="o">-</span><span class="n">max_ang</span><span class="p">,</span> <span class="n">max_ang</span><span class="p">)</span>
-           <span class="n">angular</span><span class="p">[</span><span class="n">angular</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">0.05</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">angular</span><span class="p">[</span><span class="n">angular</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">0.05</span><span class="p">])</span>
-           <span class="n">R</span> <span class="o">=</span> <span class="n">wheel_base</span> <span class="o">/</span> <span class="n">torch</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">angular</span><span class="p">)</span>
-           <span class="n">left_wheel_angle</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arctan</span><span class="p">(</span><span class="n">wheel_base</span> <span class="o">/</span> <span class="p">(</span><span class="n">R</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="mf">1.8</span><span class="p">))</span>
-           <span class="n">right_wheel_angle</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arctan</span><span class="p">(</span><span class="n">wheel_base</span> <span class="o">/</span> <span class="p">(</span><span class="n">R</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="mf">1.8</span><span class="p">))</span>
-
-
-           <span class="bp">self</span><span class="o">.</span><span class="n">steering_action</span><span class="o">.</span><span class="n">process_actions</span><span class="p">(((</span><span class="n">right_wheel_angle</span> <span class="o">+</span> <span class="n">left_wheel_angle</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">))</span>
-           <span class="bp">self</span><span class="o">.</span><span class="n">acceleration_action</span><span class="o">.</span><span class="n">process_actions</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">velocity</span><span class="p">,</span> <span class="n">velocity</span><span class="p">,</span> <span class="n">velocity</span><span class="p">,</span> <span class="n">velocity</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
-
-       <span class="bp">self</span><span class="o">.</span><span class="n">steering_action</span><span class="o">.</span><span class="n">apply_actions</span><span class="p">()</span>
-       <span class="bp">self</span><span class="o">.</span><span class="n">acceleration_action</span><span class="o">.</span><span class="n">apply_actions</span><span class="p">()</span>
-       <span class="bp">self</span><span class="o">.</span><span class="n">_counter</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="c1"># UrbanVerse automatically:</span>
+    <span class="c1"># 1. Scales actions by limits: [linear_limit, angular_limit]</span>
+    <span class="c1"># 2. Converts to robot commands</span>
+    <span class="c1"># 3. Applies to simulation</span>
+    <span class="n">obs</span><span class="p">,</span> <span class="n">rewards</span><span class="p">,</span> <span class="n">dones</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>If you want to build your own action term, you can subclass <cite>ActionTerm</cite> and implement the required methods.</p>
 </section>
-<section id="action-application">
-<h2>Action Application<a class="headerlink" href="#action-application" title="Permalink to this heading">#</a></h2>
-<p>In each simulation step, the RL policy outputs a 2D vector <code class="docutils literal notranslate"><span class="pre">[v_lin,</span> <span class="pre">v_ang]</span></code>, which is interpreted as:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">v_lin</span></code>: forward speed (e.g., mapped to <code class="docutils literal notranslate"><span class="pre">base_command.v_target</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">v_ang</span></code>: yaw rate (e.g., mapped to <code class="docutils literal notranslate"><span class="pre">base_command.w_target</span></code>)</p></li>
-</ul>
-<p>This command is then used to drive the robot within the simulation loop.</p>
-</section>
-<section id="other-robot-types">
-<h2>Other Robot Types<a class="headerlink" href="#other-robot-types" title="Permalink to this heading">#</a></h2>
-<p>Other robot embodiments use different action configs:</p>
-<ul class="simple">
-<li><p><strong>Unitree Go2</strong>: <cite>GO2NavActionsCfg</cite> → joint velocity commands or high-level velocity</p></li>
-<li><p><strong>Unitree G1</strong>: <cite>G1NavActionsCfg</cite> → biped locomotion controls</p></li>
-</ul>
-<p>These robots take pretrained neural networks as actions, which are applied to the robot’s joints or high-level velocity commands.
-More details can be found in the respective robot configuration files under <cite>urbansim/primitives/robot/</cite> and we will provide pretrained model weights.</p>
+<section id="customizing-action-spaces">
+<h2>Customizing Action Spaces<a class="headerlink" href="#customizing-action-spaces" title="Permalink to this heading">#</a></h2>
+<p>While UrbanVerse provides sensible defaults for each robot type, you can customize the action space:</p>
+<p><strong>Adjust Action Limits</strong>
+Modify the maximum velocities or joint ranges:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ActionCfg</span><span class="p">(</span>
+    <span class="n">linear_limit</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span>   <span class="c1"># Faster maximum speed</span>
+    <span class="n">angular_limit</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>  <span class="c1"># More aggressive turning</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Change Action Dimensions</strong>
+For advanced use cases, you can extend the action space to include additional control dimensions (e.g., gripper commands, head movement).</p>
+<p><strong>Custom Action Processing</strong>
+Subclass the action configuration class to implement custom action transformations, constraints, or safety limits.</p>
+<p>The action space is one of the most fundamental aspects of your RL setup—it defines what your policy can do. Choose appropriate limits that match your robot’s physical capabilities and your navigation task requirements.</p>
 </section>
 </section>
 
@@ -637,7 +632,7 @@ More details can be found in the respective robot configuration files under <cit
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Scene Configuration</p>
+        <p class="prev-next-title">Working with Urban Scenes</p>
       </div>
     </a>
     <a class="right-next"
@@ -645,7 +640,7 @@ More details can be found in the respective robot configuration files under <cit
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Observation Space</p>
+        <p class="prev-next-title">What Your Policy Sees: Observations</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -666,9 +661,11 @@ More details can be found in the respective robot configuration files under <cit
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coco-action-binding">COCO Action Binding</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#action-application">Action Application</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-robot-types">Other Robot Types</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-actions-work">How Actions Work</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#robot-specific-action-spaces">Robot-Specific Action Spaces</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#action-processing-pipeline">Action Processing Pipeline</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-training-with-coco-actions">Example: Training with COCO Actions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-action-spaces">Customizing Action Spaces</a></li>
 </ul>
   </nav></div>
 

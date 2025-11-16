@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Events &#8212; UrbanVerse Documentation</title>
+    <title>Environment Events and Initialization &#8212; UrbanVerse Documentation</title>
   
   
   
@@ -56,7 +56,7 @@
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="Imitation Learning" href="../imitation_learning/index.html" />
-    <link rel="prev" title="Curriculum Learning" href="curriculum.html" />
+    <link rel="prev" title="Progressive Learning: Curriculum Strategies" href="curriculum.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="1.0.0" />
@@ -226,14 +226,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../simulation_paradigms.html">Simulation Paradigms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configurations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../robot_configuration.html">Robot Configuration</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Reinforcement Learning</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="scene.html">Scene Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="action.html">Action Space</a></li>
-<li class="toctree-l2"><a class="reference internal" href="observation.html">Observation Space</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reward.html">Reward</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reset.html">Termination Conditions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="curriculum.html">Curriculum Learning</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Events</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Reinforcement Learning in UrbanVerse</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="scene.html">Working with Urban Scenes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="action.html">Defining Robot Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="observation.html">What Your Policy Sees: Observations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reward.html">Designing the Reward Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reset.html">When Episodes End: Termination Conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="curriculum.html">Progressive Learning: Curriculum Strategies</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Environment Events and Initialization</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../imitation_learning/index.html">Imitation Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -473,7 +473,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Events</h1>
+    <h1>Environment Events and Initialization</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -483,10 +483,12 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coco-event-binding">COCO Event Binding</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#event-term-parameters">Event Term Parameters</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#event-modes">Event Modes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-custom-events">Defining Custom Events</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automatic-robot-spawn-initialization">Automatic Robot Spawn Initialization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-it-works">How It Works</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benefits-of-automatic-initialization">Benefits of Automatic Initialization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-episode-reset-flow">Example: Episode Reset Flow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-custom-events">Advanced: Custom Events</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#design-philosophy">Design Philosophy</a></li>
 </ul>
             </nav>
         </div>
@@ -498,74 +500,95 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="events">
-<h1>Events<a class="headerlink" href="#events" title="Permalink to this heading">#</a></h1>
-<p>In UrbanVerse, <strong>events</strong> are simulation-time triggers that modify the environment state or robot behavior
-without terminating the episode. Events can occur on reset, periodically, or under specific conditions.
-They are defined using the <cite>EventTerm</cite> class and grouped under an <cite>EventCfg</cite>.</p>
-<p>Taking <strong>COCO</strong> (a wheeled robot) as an example:</p>
-<section id="coco-event-binding">
-<h2>COCO Event Binding<a class="headerlink" href="#coco-event-binding" title="Permalink to this heading">#</a></h2>
-<p>When <code class="docutils literal notranslate"><span class="pre">robot_name</span> <span class="pre">=</span> <span class="pre">&quot;coco&quot;</span></code>, the following event config is registered:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@configclass</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">EventCfg</span><span class="p">:</span>
-    <span class="n">reset_base</span> <span class="o">=</span> <span class="n">EventTerm</span><span class="p">(</span>
-        <span class="n">func</span><span class="o">=</span><span class="n">loc_mdp</span><span class="o">.</span><span class="n">reset_root_state_uniform</span><span class="p">,</span>
-        <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;reset&quot;</span><span class="p">,</span>
-        <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-            <span class="s2">&quot;pose_range&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">),</span>
-                <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">),</span>
-                <span class="s2">&quot;yaw&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
-            <span class="p">},</span>
-            <span class="s2">&quot;velocity_range&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
-                <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
-                <span class="s2">&quot;z&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
-                <span class="s2">&quot;roll&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
-                <span class="s2">&quot;pitch&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
-            <span class="p">},</span>
-        <span class="p">}</span>
-    <span class="p">)</span>
+  <section id="environment-events-and-initialization">
+<h1>Environment Events and Initialization<a class="headerlink" href="#environment-events-and-initialization" title="Permalink to this heading">#</a></h1>
+<p>Events are mechanisms for modifying the simulation state during training, enabling domain randomization, state initialization, and dynamic environment changes. The most important event in UrbanVerse is automatic robot spawn initialization, which ensures your robot starts each episode in a valid, safe position within the urban scene.</p>
+<section id="automatic-robot-spawn-initialization">
+<h2>Automatic Robot Spawn Initialization<a class="headerlink" href="#automatic-robot-spawn-initialization" title="Permalink to this heading">#</a></h2>
+<p>UrbanVerse automatically handles robot initialization at the start of each episode, eliminating the need to manually configure spawn points. The system intelligently samples valid starting positions from the scene’s navigable regions.</p>
+</section>
+<section id="how-it-works">
+<h2>How It Works<a class="headerlink" href="#how-it-works" title="Permalink to this heading">#</a></h2>
+<p>When an episode begins, UrbanVerse:</p>
+<ol class="arabic simple">
+<li><p><strong>Analyzes the scene</strong> to identify drivable regions (roads, sidewalks, and other traversable surfaces)</p></li>
+<li><p><strong>Samples a valid spawn point</strong> from these regions, ensuring:
+- The position is on a navigable surface (not inside buildings or obstacles)
+- There are no collisions at the spawn location
+- The position is reachable and suitable for navigation</p></li>
+<li><p><strong>Sets robot position and orientation</strong>:
+- Places the robot at the sampled spawn point
+- Orients the robot’s heading (yaw) to align with valid navigation directions
+- Sets the robot’s height appropriately for the surface type</p></li>
+<li><p><strong>Initializes robot state</strong>:
+- Zeroes linear and angular velocities (robot starts at rest)
+- Resets joint positions to default configurations
+- Prepares sensors and actuators for the new episode</p></li>
+</ol>
+<p>This automatic initialization works seamlessly across:
+- <strong>UrbanVerse-160 scenes</strong>: Diverse city layouts from around the world
+- <strong>CraftBench scenes</strong>: Artist-designed test environments
+- <strong>Custom scenes</strong>: User-generated environments from UrbanVerse-Gen</p>
+</section>
+<section id="benefits-of-automatic-initialization">
+<h2>Benefits of Automatic Initialization<a class="headerlink" href="#benefits-of-automatic-initialization" title="Permalink to this heading">#</a></h2>
+<p><strong>Consistency</strong>: Every episode starts from a valid position, eliminating initialization-related failures</p>
+<p><strong>Diversity</strong>: Spawn points are sampled randomly, providing varied starting conditions that improve policy robustness</p>
+<p><strong>Safety</strong>: No risk of spawning inside obstacles, buildings, or invalid regions</p>
+<p><strong>Simplicity</strong>: No manual configuration required—UrbanVerse handles everything automatically</p>
+<p><strong>Scene Adaptation</strong>: The system adapts to each scene’s unique layout, road network, and navigable regions</p>
+</section>
+<section id="example-episode-reset-flow">
+<h2>Example: Episode Reset Flow<a class="headerlink" href="#example-episode-reset-flow" title="Permalink to this heading">#</a></h2>
+<p>Here’s what happens automatically when you call <code class="docutils literal notranslate"><span class="pre">env.reset()</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">urbanverse.navigation.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">EnvCfg</span><span class="p">,</span> <span class="n">SceneCfg</span>
+
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">EnvCfg</span><span class="p">(</span>
+    <span class="n">scenes</span><span class="o">=</span><span class="n">SceneCfg</span><span class="p">(</span><span class="n">scene_paths</span><span class="o">=</span><span class="n">my_scenes</span><span class="p">,</span> <span class="n">async_sim</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+    <span class="n">robot_type</span><span class="o">=</span><span class="s2">&quot;coco_wheeled&quot;</span><span class="p">,</span>
+    <span class="o">...</span>
+<span class="p">)</span>
+
+<span class="n">env</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">navigation</span><span class="o">.</span><span class="n">rl</span><span class="o">.</span><span class="n">create_env</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
+
+<span class="c1"># Reset automatically:</span>
+<span class="c1"># 1. Samples valid spawn points for all environments</span>
+<span class="c1"># 2. Places robots on drivable surfaces</span>
+<span class="c1"># 3. Samples goal positions</span>
+<span class="c1"># 4. Initializes robot states</span>
+<span class="c1"># 5. Returns initial observations</span>
+<span class="n">obs</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+<span class="c1"># Your policy receives observations from valid starting positions</span>
+<span class="c1"># No manual spawn configuration needed!</span>
 </pre></div>
 </div>
-<p>This event is triggered in <cite>reset</cite> mode, meaning it will be applied at the beginning of each episode.</p>
 </section>
-<section id="event-term-parameters">
-<h2>Event Term Parameters<a class="headerlink" href="#event-term-parameters" title="Permalink to this heading">#</a></h2>
+<section id="advanced-custom-events">
+<h2>Advanced: Custom Events<a class="headerlink" href="#advanced-custom-events" title="Permalink to this heading">#</a></h2>
+<p>While automatic spawn initialization covers most use cases, UrbanVerse supports custom events for advanced scenarios:</p>
+<p><strong>Event Types</strong></p>
 <ul class="simple">
-<li><p><strong>pose_range</strong>
-Specifies the randomization range for the robot’s base position and yaw (heading).
-In this case, it’s a fixed spawn at <code class="docutils literal notranslate"><span class="pre">(x=0.3,</span> <span class="pre">y=0.3,</span> <span class="pre">yaw=0.0)</span></code>.</p></li>
-<li><p><strong>velocity_range</strong>
-Specifies the initial linear and angular velocity ranges.
-Setting all values to zero initializes the robot at rest.</p></li>
+<li><p><strong>Reset events</strong>: Applied at the start of each episode (e.g., custom state randomization)</p></li>
+<li><p><strong>Step events</strong>: Applied during environment stepping (e.g., dynamic agent spawning, environmental changes)</p></li>
+<li><p><strong>Manual events</strong>: Triggered programmatically (e.g., scripted scenario changes)</p></li>
 </ul>
+<p><strong>Use Cases for Custom Events</strong></p>
+<ul class="simple">
+<li><p><strong>Enhanced domain randomization</strong>: Randomize robot mass, friction, or sensor parameters</p></li>
+<li><p><strong>Dynamic scenarios</strong>: Spawn or modify pedestrians, vehicles, or obstacles during episodes</p></li>
+<li><p><strong>Environmental variations</strong>: Change lighting, weather, or scene properties over time</p></li>
+<li><p><strong>Specialized training</strong>: Create custom initialization patterns for specific learning objectives</p></li>
+</ul>
+<p><strong>Implementing Custom Events</strong></p>
+<p>Custom events require subclassing the event configuration and implementing event functions. This is typically only needed for advanced research scenarios or specialized domain adaptation tasks.</p>
+<p>For most users, the default automatic initialization provides everything needed for effective training. The system is designed to “just work” out of the box, handling all the complexity of valid spawn point selection and robot state initialization automatically.</p>
 </section>
-<section id="event-modes">
-<h2>Event Modes<a class="headerlink" href="#event-modes" title="Permalink to this heading">#</a></h2>
-<p>Each <cite>EventTerm</cite> has a <cite>mode</cite>, which determines when the event is triggered:</p>
-<ul class="simple">
-<li><p><cite>“reset”</cite>: Applied at the start of an episode</p></li>
-<li><p><cite>“step”</cite>: Applied during environment stepping (e.g., at intervals or conditions)</p></li>
-<li><p><cite>“manual”</cite>: Triggered via API calls or scripted logic</p></li>
-</ul>
-</section>
-<section id="defining-custom-events">
-<h2>Defining Custom Events<a class="headerlink" href="#defining-custom-events" title="Permalink to this heading">#</a></h2>
-<p>To define your own event:</p>
-<ol class="arabic simple">
-<li><p>Create a Python function with signature:
-<code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">my_event(env:</span> <span class="pre">ManagerBasedRLEnv,</span> <span class="pre">env_ids:</span> <span class="pre">Sequence[int],</span> <span class="pre">...)</span></code></p></li>
-<li><p>Wrap it in an <cite>EventTerm(func=…, mode=…, params=…)</cite></p></li>
-<li><p>Register it in your robot-specific <cite>EventCfg</cite> class.</p></li>
-</ol>
-<p>Use cases include:</p>
-<ul class="simple">
-<li><p>Randomizing initial state</p></li>
-<li><p>Injecting wind or external forces</p></li>
-<li><p>Resetting memory or trajectory buffers</p></li>
-</ul>
+<section id="design-philosophy">
+<h2>Design Philosophy<a class="headerlink" href="#design-philosophy" title="Permalink to this heading">#</a></h2>
+<p>UrbanVerse’s event system is built on the principle of <strong>sensible defaults with full customization</strong>. The automatic spawn initialization ensures that training starts smoothly without configuration overhead, while the event framework provides the flexibility to implement sophisticated training strategies when needed.</p>
+<p>This approach lets you focus on policy design and training hyperparameters rather than low-level simulation setup details.</p>
 </section>
 </section>
 
@@ -586,7 +609,7 @@ Setting all values to zero initializes the robot at rest.</p></li>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Curriculum Learning</p>
+        <p class="prev-next-title">Progressive Learning: Curriculum Strategies</p>
       </div>
     </a>
     <a class="right-next"
@@ -615,10 +638,12 @@ Setting all values to zero initializes the robot at rest.</p></li>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coco-event-binding">COCO Event Binding</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#event-term-parameters">Event Term Parameters</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#event-modes">Event Modes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-custom-events">Defining Custom Events</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automatic-robot-spawn-initialization">Automatic Robot Spawn Initialization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-it-works">How It Works</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benefits-of-automatic-initialization">Benefits of Automatic Initialization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-episode-reset-flow">Example: Episode Reset Flow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-custom-events">Advanced: Custom Events</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#design-philosophy">Design Philosophy</a></li>
 </ul>
   </nav></div>
 

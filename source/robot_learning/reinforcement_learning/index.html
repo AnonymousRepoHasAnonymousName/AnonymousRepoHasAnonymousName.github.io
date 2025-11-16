@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Reinforcement Learning &#8212; UrbanVerse Documentation</title>
+    <title>Reinforcement Learning in UrbanVerse &#8212; UrbanVerse Documentation</title>
   
   
   
@@ -55,7 +55,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'source/robot_learning/reinforcement_learning/index';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Scene Configuration" href="scene.html" />
+    <link rel="next" title="Working with Urban Scenes" href="scene.html" />
     <link rel="prev" title="Robot Configuration" href="../robot_configuration.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -226,14 +226,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../simulation_paradigms.html">Simulation Paradigms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configurations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../robot_configuration.html">Robot Configuration</a></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Reinforcement Learning</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="scene.html">Scene Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="action.html">Action Space</a></li>
-<li class="toctree-l2"><a class="reference internal" href="observation.html">Observation Space</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reward.html">Reward</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reset.html">Termination Conditions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="curriculum.html">Curriculum Learning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="event.html">Events</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Reinforcement Learning in UrbanVerse</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="scene.html">Working with Urban Scenes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="action.html">Defining Robot Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="observation.html">What Your Policy Sees: Observations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reward.html">Designing the Reward Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reset.html">When Episodes End: Termination Conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="curriculum.html">Progressive Learning: Curriculum Strategies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="event.html">Environment Events and Initialization</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../imitation_learning/index.html">Imitation Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -473,7 +473,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Reinforcement Learning</h1>
+    <h1>Reinforcement Learning in UrbanVerse</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -483,8 +483,8 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#component-overview">Component Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage-tip">Usage Tip</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-rl-environment-architecture">The RL Environment Architecture</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-your-first-rl-environment">Getting Started: Your First RL Environment</a></li>
 </ul>
             </nav>
         </div>
@@ -496,53 +496,80 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="reinforcement-learning">
-<h1>Reinforcement Learning<a class="headerlink" href="#reinforcement-learning" title="Permalink to this heading">#</a></h1>
-<p>UrbanVerse provides a modular and extensible framework for reinforcement learning (RL) in complex urban environments.
-It is built on top of Isaac Lab’s <cite>ManagerBasedRLEnv</cite> architecture and supports multi-environment parallel simulation, curriculum learning, and rich observations/actions.</p>
-<p>This section introduces the major configurable components of the RL environment pipeline.</p>
+  <section id="reinforcement-learning-in-urbanverse">
+<h1>Reinforcement Learning in UrbanVerse<a class="headerlink" href="#reinforcement-learning-in-urbanverse" title="Permalink to this heading">#</a></h1>
+<p>UrbanVerse offers a comprehensive reinforcement learning framework designed specifically for training navigation policies in photorealistic urban environments. Built on Isaac Lab’s robust simulation infrastructure, UrbanVerse enables efficient parallel training across diverse real-to-sim city scenes, supporting everything from simple point navigation to complex multi-agent interactions.</p>
+<p>This section walks through the essential building blocks for configuring and training RL agents in UrbanVerse’s rich urban simulation environments.</p>
 <div class="toctree-wrapper compound">
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">RL Environment Components</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="scene.html">Scene Configuration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="action.html">Action Space</a></li>
-<li class="toctree-l1"><a class="reference internal" href="observation.html">Observation Space</a></li>
-<li class="toctree-l1"><a class="reference internal" href="reward.html">Reward</a></li>
-<li class="toctree-l1"><a class="reference internal" href="reset.html">Termination Conditions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="curriculum.html">Curriculum Learning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="event.html">Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scene.html">Working with Urban Scenes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="action.html">Defining Robot Actions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="observation.html">What Your Policy Sees: Observations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reward.html">Designing the Reward Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reset.html">When Episodes End: Termination Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="curriculum.html">Progressive Learning: Curriculum Strategies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event.html">Environment Events and Initialization</a></li>
 </ul>
 </div>
-<section id="component-overview">
-<h2>Component Overview<a class="headerlink" href="#component-overview" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p><strong>Scene Binding</strong>
-RL environments are bound to a <code class="docutils literal notranslate"><span class="pre">SceneCfg</span></code> that defines the world layout, agent configuration, and asset loading.
-See: <a class="reference internal" href="scene.html"><span class="doc">Scene Configuration</span></a></p></li>
-<li><p><strong>Actions</strong>
-UrbanVerse supports multiple action interfaces, including velocity commands for wheeled and legged robots.
-See: <a class="reference internal" href="action.html"><span class="doc">Action Space</span></a></p></li>
-<li><p><strong>Observations</strong>
-Rich multimodal observations are available (e.g., RGB, depth, lidar, robot state).
-See: <a class="reference internal" href="observation.html"><span class="doc">Observation Space</span></a></p></li>
-<li><p><strong>Rewards</strong>
-Task-specific rewards are defined via modular reward terms for navigation, collision avoidance, etc.
-See: <a class="reference internal" href="reward.html"><span class="doc">Reward</span></a></p></li>
-<li><p><strong>Reset Conditions</strong>
-Environments reset based on terminal conditions like collisions, goal reached, or episode timeout.
-See: <a class="reference internal" href="reset.html"><span class="doc">Termination Conditions</span></a></p></li>
-<li><p><strong>Curriculum</strong>
-Training difficulty can be gradually increased using a curriculum manager.
-See: <a class="reference internal" href="curriculum.html"><span class="doc">Curriculum Learning</span></a></p></li>
-<li><p><strong>Events</strong>
-Optional simulation events (e.g., trigger zone entered, pedestrian spawn) that can influence rewards or resets.
-See: <a class="reference internal" href="event.html"><span class="doc">Events</span></a></p></li>
-</ul>
+<section id="the-rl-environment-architecture">
+<h2>The RL Environment Architecture<a class="headerlink" href="#the-rl-environment-architecture" title="Permalink to this heading">#</a></h2>
+<p>Training a navigation policy in UrbanVerse involves configuring seven key components that work together to define the learning task:</p>
+<p><strong>🌍 Scene Configuration</strong>
+Choose from UrbanVerse-160’s diverse city layouts, CraftBench’s artist-crafted test scenes, or your own custom environments generated with UrbanVerse-Gen. Configure how scenes are distributed across parallel training environments.
+→ <a class="reference internal" href="scene.html"><span class="doc">Working with Urban Scenes</span></a></p>
+<p><strong>🎮 Action Space</strong>
+Define how your robot moves. UrbanVerse automatically adapts the action interface based on your robot type—from simple velocity commands for wheeled robots to complex joint controls for humanoids.
+→ <a class="reference internal" href="action.html"><span class="doc">Defining Robot Actions</span></a></p>
+<p><strong>👁️ Observations</strong>
+Specify what your policy sees. Combine visual inputs from onboard cameras with goal-relative position vectors and proprioceptive state information.
+→ <a class="reference internal" href="observation.html"><span class="doc">What Your Policy Sees: Observations</span></a></p>
+<p><strong>🎯 Rewards</strong>
+Design the learning signal. Balance task completion rewards, safety penalties, and navigation quality metrics to guide your policy toward desired behaviors.
+→ <a class="reference internal" href="reward.html"><span class="doc">Designing the Reward Function</span></a></p>
+<p><strong>🏁 Episode Termination</strong>
+Control when episodes end. Define success conditions, failure modes, and time limits that shape the learning dynamics.
+→ <a class="reference internal" href="reset.html"><span class="doc">When Episodes End: Termination Conditions</span></a></p>
+<p><strong>📈 Curriculum Learning</strong>
+Gradually increase task difficulty. Start with nearby goals and simple scenes, then progressively expand to long-range navigation across diverse urban layouts.
+→ <a class="reference internal" href="curriculum.html"><span class="doc">Progressive Learning: Curriculum Strategies</span></a></p>
+<p><strong>⚡ Events</strong>
+Inject variability and randomization. Customize robot initialization, dynamic agent spawning, and environmental variations to improve policy robustness.
+→ <a class="reference internal" href="event.html"><span class="doc">Environment Events and Initialization</span></a></p>
 </section>
-<section id="usage-tip">
-<h2>Usage Tip<a class="headerlink" href="#usage-tip" title="Permalink to this heading">#</a></h2>
-<p>Each component can be configured independently via the central <code class="docutils literal notranslate"><span class="pre">EnvCfg</span></code> class.
-You can also subclass individual configs to customize robot interfaces, rewards, observations, or scene logic.</p>
+<section id="getting-started-your-first-rl-environment">
+<h2>Getting Started: Your First RL Environment<a class="headerlink" href="#getting-started-your-first-rl-environment" title="Permalink to this heading">#</a></h2>
+<p>Here’s a minimal example that creates a complete RL environment for training a COCO wheeled robot:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">urbanverse.navigation.config</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">EnvCfg</span><span class="p">,</span> <span class="n">SceneCfg</span><span class="p">,</span> <span class="n">ObservationCfg</span><span class="p">,</span> <span class="n">ActionCfg</span><span class="p">,</span>
+    <span class="n">RewardCfg</span><span class="p">,</span> <span class="n">TerminationCfg</span><span class="p">,</span> <span class="n">CurriculumCfg</span>
+<span class="p">)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uv</span>
+
+<span class="c1"># Define your training configuration</span>
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">EnvCfg</span><span class="p">(</span>
+    <span class="n">scenes</span><span class="o">=</span><span class="n">SceneCfg</span><span class="p">(</span>
+        <span class="n">scene_paths</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;/path/to/UrbanVerse-160/Tokyo_0001/scene.usd&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+        <span class="n">async_sim</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="n">robot_type</span><span class="o">=</span><span class="s2">&quot;coco_wheeled&quot;</span><span class="p">,</span>
+    <span class="n">observations</span><span class="o">=</span><span class="n">ObservationCfg</span><span class="p">(</span><span class="n">rgb_size</span><span class="o">=</span><span class="p">(</span><span class="mi">135</span><span class="p">,</span> <span class="mi">240</span><span class="p">),</span> <span class="n">include_goal_vector</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+    <span class="n">actions</span><span class="o">=</span><span class="n">ActionCfg</span><span class="p">(),</span>
+    <span class="n">rewards</span><span class="o">=</span><span class="n">RewardCfg</span><span class="p">(),</span>
+    <span class="n">terminations</span><span class="o">=</span><span class="n">TerminationCfg</span><span class="p">(</span><span class="n">max_episode_steps</span><span class="o">=</span><span class="mi">300</span><span class="p">),</span>
+    <span class="n">curriculum</span><span class="o">=</span><span class="n">CurriculumCfg</span><span class="p">(</span><span class="n">enable_goal_distance_curriculum</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="c1"># Create and train</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">navigation</span><span class="o">.</span><span class="n">rl</span><span class="o">.</span><span class="n">create_env</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
+<span class="n">uv</span><span class="o">.</span><span class="n">navigation</span><span class="o">.</span><span class="n">rl</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
+    <span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">,</span>
+    <span class="n">training_cfg</span><span class="o">=</span><span class="n">training_cfg</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;outputs/my_navigation_policy&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Each component can be customized independently, allowing you to experiment with different configurations, robot types, and training strategies. The following pages dive deep into each component, providing detailed explanations, examples, and best practices for training effective navigation policies in UrbanVerse.</p>
 </section>
 </section>
 
@@ -571,7 +598,7 @@ You can also subclass individual configs to customize robot interfaces, rewards,
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Scene Configuration</p>
+        <p class="prev-next-title">Working with Urban Scenes</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -592,8 +619,8 @@ You can also subclass individual configs to customize robot interfaces, rewards,
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#component-overview">Component Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage-tip">Usage Tip</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-rl-environment-architecture">The RL Environment Architecture</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-your-first-rl-environment">Getting Started: Your First RL Environment</a></li>
 </ul>
   </nav></div>
 
