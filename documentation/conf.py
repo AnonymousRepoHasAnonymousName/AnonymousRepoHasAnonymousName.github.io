@@ -1,25 +1,3 @@
-# Copyright (c) 2025-2030, UrbanSim Project Developers from Zhou Lab @ UCLA.
-# All rights reserved.
-# Author: Anonymous Authors of UrbanVerse
-# SPDX-License-Identifier: BSD-3-Clause
-# Acknowledgment:
-# The template is from IsaacLab: https://github.com/isaac-sim/IsaacLab
-# We thank the IsaacLab team for their contributions.
-
-# SPDX-License-Identifier: BSD-3-Clause
-
-# Configuration file for the Sphinx documentation builder.
-#
-# This file only contains a selection of the most common options. For a full
-# list see the documentation:
-# https://www.sphinx-doc.org/en/master/usage/configuration.html
-
-# -- Path setup --------------------------------------------------------------
-
-# If extensions (or modules to document with autodoc) are in another directory,
-# add these directories to sys.path here. If the directory is relative to the
-# documentation root, use os.path.abspath to make it absolute, like shown here.
-#
 import os
 import sys
 
@@ -33,7 +11,7 @@ sys.path.insert(0, os.path.abspath("../isaac_source/isaaclab_mimic"))
 sys.path.insert(0, os.path.abspath("../isaac_source/isaaclab_mimic/isaaclab_mimic"))
 sys.path.insert(0, os.path.abspath("../isaac_source/isaaclab_assets"))
 sys.path.insert(0, os.path.abspath("../isaac_source/isaaclab_assets/isaaclab_assets"))
-sys.path.insert(0, os.path.abspath("../urbansim"))
+sys.path.insert(0, os.path.abspath("../urbanverse"))
 sys.path.insert(0, os.path.abspath("../meta_source/metaurban/metaurban"))
 sys.path.insert(0, os.path.abspath("../meta_source/metadrive/metadrive"))
 
@@ -224,7 +202,7 @@ language = "en"
 
 import sphinx_book_theme
 
-html_title = "UrbanVerse Documentation"
+html_title = "UrbanVerse 1.0.0 Documentation (Fully Anonymous)"
 html_theme_path = [sphinx_book_theme.get_html_theme_path()]
 html_theme = "sphinx_book_theme"
 html_favicon = ""
@@ -240,28 +218,28 @@ html_css_files = ["custom.css"]
 
 html_theme_options = {
     "collapse_navigation": True,
-    "repository_url": "https://github.com/metadriverse/UrbanVerse",
+    "repository_url": "https://AnonymousURLForDoubleBlindReview",
     "use_repository_button": True,
     "use_issues_button": True,
     "use_edit_page_button": True,
     "show_toc_level": 1,
     "use_sidenotes": True,
     "logo": {
-        "text": "UrbanVerse Documentation",
+        "text": "UrbanVerse 1.0.0 Documentation (Fully Anonymous)",
     },
     "icon_links": [
-        {
-            "name": "GitHub",
-            "url": "https://github.com/metadriverse/UrbanVerse",
-            "icon": "fa-brands fa-square-github",
-            "type": "fontawesome",
-        },
-        {
-            "name": "Stars",
-            "url": "https://img.shields.io/github/stars/metadriverse/UrbanVerse?color=fedcba",
-            "icon": "https://img.shields.io/github/stars/metadriverse/UrbanVerse?color=fedcba",
-            "type": "url",
-        },
+        # {
+        #     "name": "GitHub",
+        #     "url": "https://AnonymousURLForDoubleBlindReview",
+        #     "icon": "fa-brands fa-square-github",
+        #     "type": "fontawesome",
+        # },
+        # {
+        #     "name": "Stars",
+        #     "url": "https://img.shields.io/github/stars/metadriverse/UrbanVerse?color=fedcba",
+        #     "icon": "https://img.shields.io/github/stars/metadriverse/UrbanVerse?color=fedcba",
+        #     "type": "url",
+        # },
         {
         "name": "",
         "url": "",
@@ -270,13 +248,13 @@ html_theme_options = {
         },
         {
             "name": "Isaac Lab",
-            "url": "https://github.com/isaac-sim/IsaacLab",
+            "url": "https://AnonymousURLForDoubleBlindReview",
             "icon": "https://img.shields.io/badge/IsaacLab-2.0.1-silver.svg",
             "type": "url",
         },
         {
             "name": "Isaac Sim",
-            "url": "https://developer.nvidia.com/isaac-sim",
+            "url": "https://AnonymousURLForDoubleBlindReview",
             "icon": "https://img.shields.io/badge/IsaacSim-4.5.0-silver.svg",
             "type": "url",
         },
