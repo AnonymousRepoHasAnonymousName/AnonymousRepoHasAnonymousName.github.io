@@ -1,3 +1,5 @@
+.. _urbanverse-robot-learning-rl-guide-curriculum:
+
 Progressive Learning: Curriculum Strategies
 ============================================
 

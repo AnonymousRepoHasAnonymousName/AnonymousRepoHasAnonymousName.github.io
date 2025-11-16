@@ -1,3 +1,5 @@
+.. _urbanverse-robot-learning-rl-guide-observation:
+
 What Your Policy Sees: Observations
 ====================================
 

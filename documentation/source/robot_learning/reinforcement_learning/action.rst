@@ -1,3 +1,5 @@
+.. _urbanverse-robot-learning-rl-guide-action:
+
 Defining Robot Actions
 =======================
 
