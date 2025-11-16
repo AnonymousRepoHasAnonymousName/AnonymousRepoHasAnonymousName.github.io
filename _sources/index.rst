@@ -92,7 +92,7 @@ Table of Contents
    :caption: Robot Learning with UrbanVerse
    :titlesonly:
    
-   source/robot_learning/simulation
+   source/robot_learning/simulation_paradigms
    source/robot_learning/environments
    source/robot_learning/configuration
    source/robot_learning/reinforcement_learning/index
