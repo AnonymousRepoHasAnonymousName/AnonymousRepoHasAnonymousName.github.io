@@ -123,16 +123,14 @@ Table of Contents
    :maxdepth: 1
    :caption: UrbanVerse Community
 
-   source/community/contributing
-   source/community/communication
    source/community/coding_standards
+   source/community/contributing
+   source/community/bug_reports
+   source/community/communication
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    :caption: References
 
-   source/refs/assets
-   source/refs/issues
-   source/refs/license
-   source/refs/3license
+   source/refs/index
 

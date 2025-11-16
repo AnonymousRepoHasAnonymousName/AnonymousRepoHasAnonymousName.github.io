@@ -55,8 +55,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'source/community/coding_standards';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Assets in UrbanVerse" href="../refs/assets.html" />
-    <link rel="prev" title="Communication Channels" href="communication.html" />
+    <link rel="next" title="Contributing to UrbanVerse" href="contributing.html" />
+    <link rel="prev" title="Configuration API" href="../api_reference/configuration.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="1.0.0" />
@@ -268,16 +268,18 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">UrbanVerse Community</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="communication.html">Communication Channels</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Coding Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing to UrbanVerse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bug_reports.html">Bug Reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="communication.html">Communication Channels</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../refs/assets.html">Assets in UrbanVerse</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../refs/issues.html">Known Issues and Limitations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../refs/license.html">License</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../refs/3license.html">Third-Party License Notice</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../refs/index.html">References</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../refs/license.html">License</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../refs/3license.html">Third-Party Licenses</a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -487,9 +489,10 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general">General</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Python</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c">C++</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#style-guide">Style Guide</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#type-hints">Type Hints</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#docstrings">Docstrings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing">Testing</a></li>
 </ul>
             </nav>
         </div>
@@ -502,19 +505,128 @@
                 <article class="bd-article">
                   
   <section id="coding-standards">
-<h1>Coding Standards<a class="headerlink" href="#coding-standards" title="Permalink to this heading">#</a></h1>
-<p>aaa</p>
-<section id="general">
-<h2>General<a class="headerlink" href="#general" title="Permalink to this heading">#</a></h2>
-<p>aaa</p>
+<span id="urbanverse-community-coding-standards"></span><h1>Coding Standards<a class="headerlink" href="#coding-standards" title="Permalink to this heading">#</a></h1>
+<p>UrbanVerse follows Python coding standards to ensure code quality, readability, and maintainability. This document outlines the key coding conventions used in the UrbanVerse codebase.</p>
+<section id="style-guide">
+<h2>Style Guide<a class="headerlink" href="#style-guide" title="Permalink to this heading">#</a></h2>
+<p>UrbanVerse follows <strong>PEP 8</strong> (Python Enhancement Proposal 8), the official Python style guide. Key conventions include:</p>
+<p><strong>Indentation and Spacing:</strong></p>
+<ul class="simple">
+<li><p>Use 4 spaces for indentation (no tabs)</p></li>
+<li><p>Maximum line length: 88 characters (Black formatter default)</p></li>
+<li><p>Use blank lines to separate functions and classes</p></li>
+<li><p>No trailing whitespace</p></li>
+</ul>
+<p><strong>Naming Conventions:</strong></p>
+<ul class="simple">
+<li><p><strong>Functions and variables</strong>: Use <code class="docutils literal notranslate"><span class="pre">snake_case</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">get_observation()</span></code>, <code class="docutils literal notranslate"><span class="pre">robot_type</span></code>)</p></li>
+<li><p><strong>Classes</strong>: Use <code class="docutils literal notranslate"><span class="pre">PascalCase</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">EnvCfg</span></code>, <code class="docutils literal notranslate"><span class="pre">SceneCfg</span></code>)</p></li>
+<li><p><strong>Constants</strong>: Use <code class="docutils literal notranslate"><span class="pre">UPPER_SNAKE_CASE</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">MAX_EPISODE_STEPS</span></code>)</p></li>
+<li><p><strong>Private attributes/methods</strong>: Prefix with single underscore <code class="docutils literal notranslate"><span class="pre">_</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">_internal_method()</span></code>)</p></li>
+</ul>
+<p><strong>Imports:</strong></p>
+<ul class="simple">
+<li><p>Group imports in the following order:</p>
+<ol class="arabic simple">
+<li><p>Standard library imports</p></li>
+<li><p>Third-party imports</p></li>
+<li><p>Local application imports</p></li>
+</ol>
+</li>
+<li><p>Use absolute imports when possible</p></li>
+<li><p>One import per line</p></li>
+</ul>
+<p><strong>Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Standard library</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="c1"># Third-party</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+
+<span class="c1"># Local imports</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">urbanverse.navigation.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">EnvCfg</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">urbanverse.navigation.rl</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_env</span>
+</pre></div>
+</div>
 </section>
-<section id="python">
-<h2>Python<a class="headerlink" href="#python" title="Permalink to this heading">#</a></h2>
-<p>aaa</p>
+<section id="type-hints">
+<h2>Type Hints<a class="headerlink" href="#type-hints" title="Permalink to this heading">#</a></h2>
+<p>Use type hints for function signatures and class attributes:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">collect_data</span><span class="p">(</span>
+    <span class="n">scene_paths</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">robot_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">max_episodes</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Collect expert demonstrations.&quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<p><strong>Common type hints:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list[str]</span></code> for lists of strings</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dict[str,</span> <span class="pre">int]</span></code> for dictionaries</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tuple[int,</span> <span class="pre">int]</span></code> for tuples</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Callable[[dict],</span> <span class="pre">np.ndarray]</span></code> for callable types</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">None</span></code> for optional return values: <code class="docutils literal notranslate"><span class="pre">str</span> <span class="pre">|</span> <span class="pre">None</span></code></p></li>
+</ul>
 </section>
-<section id="c">
-<h2>C++<a class="headerlink" href="#c" title="Permalink to this heading">#</a></h2>
-<p>aaa</p>
+<section id="docstrings">
+<h2>Docstrings<a class="headerlink" href="#docstrings" title="Permalink to this heading">#</a></h2>
+<p>Follow <strong>Google-style docstrings</strong> for documentation:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">train_policy</span><span class="p">(</span>
+    <span class="n">env</span><span class="p">:</span> <span class="n">ManagerBasedRLEnv</span><span class="p">,</span>
+    <span class="n">training_cfg</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Train a reinforcement learning policy.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        env: RL environment instance</span>
+<span class="sd">        training_cfg: Training configuration dictionary</span>
+<span class="sd">        output_dir: Directory where training outputs will be saved</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Path to the best model checkpoint</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If training configuration is invalid</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<p><strong>Docstring sections:</strong></p>
+<ul class="simple">
+<li><p><strong>Args</strong>: Parameter descriptions</p></li>
+<li><p><strong>Returns</strong>: Return value description</p></li>
+<li><p><strong>Raises</strong>: Exceptions that may be raised</p></li>
+<li><p><strong>Example</strong>: Usage examples (optional)</p></li>
+</ul>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Write unit tests for all new functions and classes</p></li>
+<li><p>Use <strong>pytest</strong> for testing framework</p></li>
+<li><p>Test files should be named <code class="docutils literal notranslate"><span class="pre">test_*.py</span></code></p></li>
+<li><p>Aim for high code coverage (&gt;80%)</p></li>
+</ul>
+<p><strong>Example test structure:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">urbanverse.navigation.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">EnvCfg</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_env_cfg_creation</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test environment configuration creation.&quot;&quot;&quot;</span>
+    <span class="n">cfg</span> <span class="o">=</span> <span class="n">EnvCfg</span><span class="p">(</span>
+        <span class="n">scenes</span><span class="o">=</span><span class="n">SceneCfg</span><span class="p">(</span><span class="n">scene_paths</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;/path/to/scene.usd&quot;</span><span class="p">]),</span>
+        <span class="n">robot_type</span><span class="o">=</span><span class="s2">&quot;coco_wheeled&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">assert</span> <span class="n">cfg</span><span class="o">.</span><span class="n">robot_type</span> <span class="o">==</span> <span class="s2">&quot;coco_wheeled&quot;</span>
+</pre></div>
+</div>
 </section>
 </section>
 
@@ -530,20 +642,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="communication.html"
+       href="../api_reference/configuration.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Communication Channels</p>
+        <p class="prev-next-title">Configuration API</p>
       </div>
     </a>
     <a class="right-next"
-       href="../refs/assets.html"
+       href="contributing.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Assets in UrbanVerse</p>
+        <p class="prev-next-title">Contributing to UrbanVerse</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -564,9 +676,10 @@
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general">General</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Python</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c">C++</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#style-guide">Style Guide</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#type-hints">Type Hints</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#docstrings">Docstrings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing">Testing</a></li>
 </ul>
   </nav></div>
 
@@ -581,7 +694,7 @@
   <div class="footer-item">
     
 <p class="component-author">
-By Honglin He
+By The Anonymous UrbanVerse Project Developers
 </p>
 
   </div>
@@ -591,7 +704,7 @@ By Honglin He
 
   <p class="copyright">
     
-      © Copyright 2025-2030, The UrbanVerse Project Developers. [UrbanVerse is built upon NVIDIA Isaac Sim&amp;Lab and extends its capabilities for urban robot learning tasks].
+      © Copyright 2025-2030, The Anonymous UrbanVerse Project Developers. [UrbanVerse is built upon NVIDIA Isaac Sim&amp;Lab and extends its capabilities for urban robot learning tasks].
       <br/>
     
   </p>

@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Assets in UrbanVerse &#8212; UrbanVerse Documentation</title>
+    <title>Bug Reports &#8212; UrbanVerse Documentation</title>
   
   
   
@@ -52,11 +52,11 @@
     <script src="../../_static/copybutton.js"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script src="../../_static/design-tabs.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'source/refs/assets';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'source/community/bug_reports';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Known Issues and Limitations" href="issues.html" />
-    <link rel="prev" title="Coding Standards" href="../community/coding_standards.html" />
+    <link rel="next" title="Communication Channels" href="communication.html" />
+    <link rel="prev" title="Contributing to UrbanVerse" href="contributing.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="1.0.0" />
@@ -267,17 +267,19 @@
 <li class="toctree-l1"><a class="reference internal" href="../api_reference/configuration.html">Configuration API</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">UrbanVerse Community</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../community/contributing.html">Contributing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../community/communication.html">Communication Channels</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../community/coding_standards.html">Coding Standards</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="coding_standards.html">Coding Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing to UrbanVerse</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Bug Reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="communication.html">Communication Channels</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Assets in UrbanVerse</a></li>
-<li class="toctree-l1"><a class="reference internal" href="issues.html">Known Issues and Limitations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3license.html">Third-Party License Notice</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../refs/index.html">References</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../refs/license.html">License</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../refs/3license.html">Third-Party Licenses</a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -354,7 +356,7 @@
       
       
       
-      <li><a href="https://github.com/metadriverse/urban-sim/edit/main/source/refs/assets.rst" target="_blank"
+      <li><a href="https://github.com/metadriverse/urban-sim/edit/main/source/community/bug_reports.rst" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -371,7 +373,7 @@
       
       
       
-      <li><a href="https://github.com/metadriverse/urban-sim/issues/new?title=Issue%20on%20page%20%2Fsource/refs/assets.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/metadriverse/urban-sim/issues/new?title=Issue%20on%20page%20%2Fsource/community/bug_reports.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -401,7 +403,7 @@
       
       
       
-      <li><a href="../../_sources/source/refs/assets.rst" target="_blank"
+      <li><a href="../../_sources/source/community/bug_reports.rst" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -477,7 +479,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Assets in UrbanVerse</h1>
+    <h1>Bug Reports</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -487,10 +489,13 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asset-structure">Asset Structure</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptions-and-sources">Descriptions and Sources</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asset-download">Asset Download</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asset-conversion">Asset Conversion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#before-reporting">Before Reporting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-bug-report">Creating a Bug Report</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bug-report-template">Bug Report Template</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-bug-report">Example Bug Report</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-to-report">Where to Report</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-requests">Feature Requests</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#response-time">Response Time</a></li>
 </ul>
             </nav>
         </div>
@@ -502,69 +507,183 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="assets-in-urbanverse">
-<h1>Assets in UrbanVerse<a class="headerlink" href="#assets-in-urbanverse" title="Permalink to this heading">#</a></h1>
-<p>UrbanVerse relies on a set of standardized assets to build scenes, configure robots, and define environment dynamics.
-These assets are typically downloaded from HuggingFace on first run or via our provided download scripts.</p>
-<section id="asset-structure">
-<h2>Asset Structure<a class="headerlink" href="#asset-structure" title="Permalink to this heading">#</a></h2>
-<p>The asset directory consists of the following subfolders:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>assets/
-├── adj_parameter_folder/
-├── asset_config.yaml
-├── ckpts/
-├── materials/
-├── objects/
-├── ped_actions/
-├── pedestrians/
-├── peds/
-├── robots/
-└── usds/
+  <section id="bug-reports">
+<span id="urbanverse-community-bug-reports"></span><h1>Bug Reports<a class="headerlink" href="#bug-reports" title="Permalink to this heading">#</a></h1>
+<p>Found a bug? We want to hear about it! This guide will help you report bugs effectively so we can fix them quickly.</p>
+<section id="before-reporting">
+<h2>Before Reporting<a class="headerlink" href="#before-reporting" title="Permalink to this heading">#</a></h2>
+<p>Before creating a bug report, please:</p>
+<ol class="arabic simple">
+<li><p><strong>Search existing issues</strong> to see if the bug has already been reported</p></li>
+<li><p><strong>Check the documentation</strong> to ensure you’re using the API correctly</p></li>
+<li><p><strong>Test with the latest version</strong> to confirm the bug still exists</p></li>
+<li><p><strong>Try to reproduce</strong> the issue consistently</p></li>
+</ol>
+</section>
+<section id="creating-a-bug-report">
+<h2>Creating a Bug Report<a class="headerlink" href="#creating-a-bug-report" title="Permalink to this heading">#</a></h2>
+<p>When creating a bug report, please include the following information:</p>
+<p><strong>1. Clear Title</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Summarize the issue in one line</p></li>
+<li><p>Example: “Memory leak when loading multiple scenes in parallel”</p></li>
+</ul>
+</div></blockquote>
+<p><strong>2. Description</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>What happened vs. what you expected</p></li>
+<li><p>Steps to reproduce the issue</p></li>
+<li><p>Minimal code example that demonstrates the bug</p></li>
+</ul>
+</div></blockquote>
+<p><strong>3. Environment Information</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>UrbanVerse version</p></li>
+<li><p>Python version</p></li>
+<li><p>Operating system</p></li>
+<li><p>Isaac Sim version (if applicable)</p></li>
+<li><p>GPU/CPU information</p></li>
+</ul>
+</div></blockquote>
+<p><strong>4. Error Messages</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Full error traceback (if applicable)</p></li>
+<li><p>Log output</p></li>
+<li><p>Screenshots (if visual issue)</p></li>
+</ul>
+</div></blockquote>
+<p><strong>5. Additional Context</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>When did the issue first occur?</p></li>
+<li><p>Does it happen consistently or intermittently?</p></li>
+<li><p>Any workarounds you’ve found?</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="bug-report-template">
+<h2>Bug Report Template<a class="headerlink" href="#bug-report-template" title="Permalink to this heading">#</a></h2>
+<p>Use this template when creating a bug report:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>**Description**
+[Clear description of the bug]
+
+**To Reproduce**
+Steps to reproduce the behavior:
+1. Run &#39;...&#39;
+2. Call &#39;...&#39;
+3. See error
+
+**Expected Behavior**
+[What you expected to happen]
+
+**Actual Behavior**
+[What actually happened]
+
+**Code Example**
+```python
+# Minimal code that reproduces the issue
+```
+
+**Environment**
+- UrbanVerse version: [e.g., 1.0.0]
+- Python version: [e.g., 3.10]
+- OS: [e.g., Ubuntu 22.04, macOS 13.0, Windows 11]
+- Isaac Sim version: [e.g., 4.5.0]
+- GPU: [e.g., NVIDIA RTX 3090]
+
+**Error Output**
+```
+[Full error traceback or log output]
+```
+
+**Additional Context**
+[Any other relevant information]
 </pre></div>
 </div>
 </section>
-<section id="descriptions-and-sources">
-<h2>Descriptions and Sources<a class="headerlink" href="#descriptions-and-sources" title="Permalink to this heading">#</a></h2>
+<section id="example-bug-report">
+<h2>Example Bug Report<a class="headerlink" href="#example-bug-report" title="Permalink to this heading">#</a></h2>
+<p><strong>Good bug report:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>**Description**
+Environment creation fails when using async_sim=False with more than 16 scenes.
+
+**To Reproduce**
+1. Create EnvCfg with 20 scene paths
+2. Set async_sim=False
+3. Call uv.navigation.rl.create_env(cfg)
+4. See IndexError
+
+**Expected Behavior**
+Environment should be created successfully, using different cousin variants.
+
+**Actual Behavior**
+IndexError: list index out of range at scene assignment.
+
+**Code Example**
+```python
+from urbanverse.navigation.config import EnvCfg, SceneCfg
+
+scene_paths = [f&quot;/path/to/scene_{i:04d}/scene.usd&quot; for i in range(20)]
+cfg = EnvCfg(
+    scenes=SceneCfg(scene_paths=scene_paths, async_sim=False),
+    robot_type=&quot;coco_wheeled&quot;,
+)
+env = uv.navigation.rl.create_env(cfg)  # Fails here
+```
+
+**Environment**
+- UrbanVerse version: 1.0.0
+- Python version: 3.10.8
+- OS: Ubuntu 22.04
+- Isaac Sim version: 4.5.0
+
+**Error Output**
+```
+IndexError: list index out of range
+  File &quot;urbanverse/navigation/rl/env.py&quot;, line 123, in _assign_scenes
+    scene = available_scenes[env_idx % len(available_scenes)]
+```
+</pre></div>
+</div>
+</section>
+<section id="where-to-report">
+<h2>Where to Report<a class="headerlink" href="#where-to-report" title="Permalink to this heading">#</a></h2>
+<p>Report bugs on GitHub Issues:</p>
 <ul class="simple">
-<li><p><strong>adj_parameter_folder/</strong>
-Stores parameters like scla, bounding box of objects.</p></li>
-<li><p><strong>asset_config.yaml</strong>
-Central configuration file listing available assets and their metadata.</p></li>
-<li><p><strong>ckpts/</strong>
-Contains pretrained model checkpoints used for robot navigation or locomotion.
-→ <em>From official training runs.</em></p></li>
-<li><p><strong>materials/</strong>
-Defines surface materials.
-→ <em>From Isaac Lab extensions.</em></p></li>
-<li><p><strong>objects/</strong>
-Static environment objects like walls, crates, traffic cones, and trees.</p></li>
-<li><p><strong>ped_actions/</strong>
-Low-level motions for pedestrians.</p></li>
-<li><p><strong>pedestrians/</strong>
-Meshes for pedestrians in .gltf format.
-→ <em>Sourced from Synbody.</em></p></li>
-<li><p><strong>peds/</strong>
-Meshes for pedestrians in .usd format.
-→ <em>Sourced from Synbody.</em></p></li>
-<li><p><strong>robots/</strong>
-URDF or USD descriptions of robots (e.g., COCO).</p></li>
-<li><p><strong>usds/</strong>
-All environment assets in <cite>.usd</cite>, <cite>.usda</cite>, or <cite>.usdc</cite> format.
-→ <em>Includes buildings, roads, maps, and backgrounds… Converted from glTF or Blender exports.</em></p></li>
+<li><p><strong>GitHub Issues</strong>: <cite>AnonymousForDoubleBlindReview</cite></p></li>
+</ul>
+<p>For security-related issues, please email the maintainers directly rather than creating a public issue.</p>
+</section>
+<section id="feature-requests">
+<h2>Feature Requests<a class="headerlink" href="#feature-requests" title="Permalink to this heading">#</a></h2>
+<p>Feature requests are also welcome! When requesting a feature:</p>
+<ul class="simple">
+<li><p><strong>Describe the use case</strong>: Why is this feature needed?</p></li>
+<li><p><strong>Propose a solution</strong>: How should it work?</p></li>
+<li><p><strong>Consider alternatives</strong>: Are there existing ways to achieve this?</p></li>
+<li><p><strong>Check existing requests</strong>: Has this been requested before?</p></li>
+</ul>
+<p>Feature requests should be clearly labeled and include:</p>
+<ul class="simple">
+<li><p>Use case description</p></li>
+<li><p>Proposed API or interface</p></li>
+<li><p>Example usage</p></li>
+<li><p>Potential implementation considerations</p></li>
 </ul>
 </section>
-<section id="asset-download">
-<h2>Asset Download<a class="headerlink" href="#asset-download" title="Permalink to this heading">#</a></h2>
-<p>You can use the following command to download all required assets:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>scripts/download_assets.py
-</pre></div>
-</div>
-<p>Assets will be downloaded and extracted to the appropriate directory (<cite>./assets/</cite> by default).</p>
-</section>
-<section id="asset-conversion">
-<h2>Asset Conversion<a class="headerlink" href="#asset-conversion" title="Permalink to this heading">#</a></h2>
-<p>On first run, glTF/GLB assets will be converted to USD via Isaac Sim tools.
-This step is required before simulation if only <cite>.gltf</cite> or <cite>.glb</cite> files are present.</p>
+<section id="response-time">
+<h2>Response Time<a class="headerlink" href="#response-time" title="Permalink to this heading">#</a></h2>
+<p>We aim to:</p>
+<ul class="simple">
+<li><p>Acknowledge new issues within 1-2 business days</p></li>
+<li><p>Triage and label issues within 1 week</p></li>
+<li><p>Provide updates on bug fixes and feature requests regularly</p></li>
+</ul>
+<p>Thank you for helping improve UrbanVerse by reporting bugs! 🐛</p>
 </section>
 </section>
 
@@ -580,20 +699,20 @@ This step is required before simulation if only <cite>.gltf</cite> or <cite>.glb
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../community/coding_standards.html"
+       href="contributing.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Coding Standards</p>
+        <p class="prev-next-title">Contributing to UrbanVerse</p>
       </div>
     </a>
     <a class="right-next"
-       href="issues.html"
+       href="communication.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Known Issues and Limitations</p>
+        <p class="prev-next-title">Communication Channels</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -614,10 +733,13 @@ This step is required before simulation if only <cite>.gltf</cite> or <cite>.glb
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asset-structure">Asset Structure</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptions-and-sources">Descriptions and Sources</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asset-download">Asset Download</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asset-conversion">Asset Conversion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#before-reporting">Before Reporting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-bug-report">Creating a Bug Report</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bug-report-template">Bug Report Template</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-bug-report">Example Bug Report</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-to-report">Where to Report</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-requests">Feature Requests</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#response-time">Response Time</a></li>
 </ul>
   </nav></div>
 
@@ -632,7 +754,7 @@ This step is required before simulation if only <cite>.gltf</cite> or <cite>.glb
   <div class="footer-item">
     
 <p class="component-author">
-By Honglin He
+By The Anonymous UrbanVerse Project Developers
 </p>
 
   </div>
@@ -642,7 +764,7 @@ By Honglin He
 
   <p class="copyright">
     
-      © Copyright 2025-2030, The UrbanVerse Project Developers. [UrbanVerse is built upon NVIDIA Isaac Sim&amp;Lab and extends its capabilities for urban robot learning tasks].
+      © Copyright 2025-2030, The Anonymous UrbanVerse Project Developers. [UrbanVerse is built upon NVIDIA Isaac Sim&amp;Lab and extends its capabilities for urban robot learning tasks].
       <br/>
     
   </p>
