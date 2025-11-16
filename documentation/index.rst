@@ -120,12 +120,10 @@ Table of Contents
    source/api_reference/configuration
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    :caption: UrbanVerse Community
 
-   source/community/contributing
-   source/community/communication
-   source/community/coding_standards
+   source/community/index
 
 .. toctree::
    :maxdepth: 1
