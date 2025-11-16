@@ -1,0 +1,991 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>UrbanVerse-100K API &#8212; UrbanVerse Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/sphinxcontrib/icon/node_modules/@fortawesome/fontawesome-free/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.4cbf315f70debaebd550c87a6162cf0f.min.css" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/sphinxcontrib/icon/node_modules/@fortawesome/fontawesome-free/js/all.min.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'source/api_reference/urbanverse_100k';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="UrbanVerse-Gen API" href="urbanverse_gen.html" />
+    <link rel="prev" title="Adding New Robots to UrbanVerse" href="../developer/adding_new_robots.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="1.0.0" />
+    <meta name="docbuild:last-update" content="Nov 16, 2025"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">UrbanVese Documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><ul class="navbar-icon-links"
+    aria-label="Quick Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/metadriverse/urban-sim" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://img.shields.io/github/stars/metadriverse/urban-sim?color=fedcba" title="Stars" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="https://img.shields.io/github/stars/metadriverse/urban-sim?color=fedcba" class="icon-link-image" alt="Stars"/></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/isaac-sim/IsaacLab" title="Isaac Lab" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="https://img.shields.io/badge/IsaacLab-2.0.1-silver.svg" class="icon-link-image" alt="Isaac Lab"/></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://developer.nvidia.com/isaac-sim" title="Isaac Sim" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="https://img.shields.io/badge/IsaacSim-4.5.0-silver.svg" class="icon-link-image" alt="Isaac Sim"/></a>
+        </li>
+</ul></div>
+        <div class="sidebar-primary-item">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Installation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../installation/binaries_installation.html">Installation via Pre-Built Binaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation/asset_caching.html">UrbanVerse-100K Asset Caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation/scene_caching.html">UrbanVerse Scene Caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation/verifying_installation.html">Installation Verification</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Quickstart Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart/intro_quickstart.html">Introduction to Quickstart Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart/urbanverse_100k.html">Use UrbanVerse-100K with APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart/urbanverse_gen.html">Real-to-Sim Scene Generation with UrbanVerse-Gen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart/urbanverse_scenes.html">Use Built-in UrbanVerse Scenes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart/craftbench.html">Use Built-in CraftBench Scenes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart/train_your_own_robots.html">Train Your Robots in UrbanVerse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart/test_your_robots.html">Test Your Robots on CraftBench</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Robot Learning with UrbanVerse</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../robot_learning/simulation_paradigms.html">Simulation Paradigms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../robot_learning/configuration.html">General Configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../robot_learning/robot_configuration.html">Robot Configurations</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../robot_learning/reinforcement_learning/index.html">Reinforcement Learning in UrbanVerse</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../robot_learning/reinforcement_learning/scene.html">Working with Urban Scenes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../robot_learning/reinforcement_learning/action.html">Defining Robot Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../robot_learning/reinforcement_learning/observation.html">What Your Policy Sees: Observations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../robot_learning/reinforcement_learning/reward.html">Designing the Reward Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../robot_learning/reinforcement_learning/reset.html">When Episodes End: Termination Conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../robot_learning/reinforcement_learning/curriculum.html">Progressive Learning: Curriculum Strategies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../robot_learning/reinforcement_learning/event.html">Environment Events and Initialization</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../robot_learning/imitation_learning/index.html">Imitation Learning in UrbanVerse</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../robot_learning/imitation_learning/introduction.html">Introduction to Imitation Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../robot_learning/imitation_learning/data_collection.html">Collecting Expert Demonstrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../robot_learning/imitation_learning/dataset_format.html">Demonstration Dataset Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../robot_learning/imitation_learning/training_config.html">BC Training Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../robot_learning/imitation_learning/api_reference.html">UrbanVerse IL APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../robot_learning/imitation_learning/end_to_end_example.html">End-to-End Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../robot_learning/imitation_learning/evaluation.html">Evaluating BC Policies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../robot_learning/imitation_learning/best_practices.html">Best Practices and Tips</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer (Advanced)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../developer/collecting_data.html">Collecting Data in UrbanVerse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer/teleop_interface.html">Teleoperation Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer/realworld_deployment.html">Real-world Deployment: Unitree Go2 Quadruped Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer/adding_new_assets.html">Adding New Assets to UrbanVerse-100K</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer/adding_new_robots.html">Adding New Robots to UrbanVerse</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">UrbanVerse-100K API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="urbanverse_gen.html">UrbanVerse-Gen API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="navigation_rl.html">Navigation Reinforcement Learning API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="navigation_il.html">Navigation Imitation Learning API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assets.html">Assets API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="teleoperation.html">Teleoperation API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration API</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">UrbanVerse Community</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../community/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../community/communication.html">Communication Channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../community/coding_standards.html">Coding Standards</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../refs/assets.html">Assets in UrbanVerse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../refs/issues.html">Known Issues and Limitations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../refs/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../refs/3license.html">Third-Party License Notice</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/metadriverse/urban-sim" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/metadriverse/urban-sim/edit/main/source/api_reference/urbanverse_100k.rst" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/metadriverse/urban-sim/issues/new?title=Issue%20on%20page%20%2Fsource/api_reference/urbanverse_100k.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/source/api_reference/urbanverse_100k.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>UrbanVerse-100K API</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import">Import</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-metadata">Dataset Metadata</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-dataset-metadata">Load Dataset Metadata</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#categories">Categories</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-categories">Load Categories</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-category-statistics">Load Category Statistics</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uids">UIDs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-object-uids">Load Object UIDs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-ground-material-ids">Load Ground Material IDs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-sky-map-ids">Load Sky Map IDs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#annotations">Annotations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-object-annotations">Load Object Annotations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asset-download">Asset Download</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-objects">Load Objects</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-ground-materials">Load Ground Materials</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-sky-maps">Load Sky Maps</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualization">Visualization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-distribution-html">Get Distribution HTML</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="urbanverse-100k-api">
+<span id="urbanverse-api-urbanverse-100k"></span><h1>UrbanVerse-100K API<a class="headerlink" href="#urbanverse-100k-api" title="Permalink to this heading">#</a></h1>
+<p>The UrbanVerse-100K API provides access to the large-scale dataset of 102,530 metric-scale urban 3D assets, ground materials, and HDRI sky maps.</p>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>urbanverse-100k
+</pre></div>
+</div>
+</section>
+<section id="import">
+<h2>Import<a class="headerlink" href="#import" title="Permalink to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urbanverse_100k</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uvk</span>
+</pre></div>
+</div>
+</section>
+<section id="dataset-metadata">
+<h2>Dataset Metadata<a class="headerlink" href="#dataset-metadata" title="Permalink to this heading">#</a></h2>
+<section id="load-dataset-metadata">
+<h3>Load Dataset Metadata<a class="headerlink" href="#load-dataset-metadata" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uvk</span><span class="o">.</span><span class="n">load_dataset_metadata</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">dict</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p>Load global dataset statistics, version information, and category hierarchy.</p>
+<p><strong>Returns:</strong></p>
+<ul class="simple">
+<li><p><strong>about</strong> (dict): Dataset metadata including version information</p></li>
+<li><p><strong>stats</strong> (dict): Global statistics including:
+- <code class="docutils literal notranslate"><span class="pre">number_of_assets</span></code>: Total number of 3D object assets
+- <code class="docutils literal notranslate"><span class="pre">number_of_classes_l1</span></code>: Number of top-level categories
+- <code class="docutils literal notranslate"><span class="pre">number_of_classes_l2</span></code>: Number of mid-level categories
+- <code class="docutils literal notranslate"><span class="pre">number_of_classes_l3</span></code>: Number of leaf-level categories</p></li>
+<li><p><strong>hierarchy</strong> (list[dict]): Category hierarchy with <code class="docutils literal notranslate"><span class="pre">l1</span></code>, <code class="docutils literal notranslate"><span class="pre">l2</span></code>, <code class="docutils literal notranslate"><span class="pre">l3</span></code> fields</p></li>
+</ul>
+<p><strong>Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">about</span><span class="p">,</span> <span class="n">stats</span><span class="p">,</span> <span class="n">hierarchy</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_dataset_metadata</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">about</span><span class="p">[</span><span class="s2">&quot;version&quot;</span><span class="p">])</span>          <span class="c1"># e.g., &quot;1.0&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stats</span><span class="p">[</span><span class="s2">&quot;number_of_assets&quot;</span><span class="p">])</span> <span class="c1"># e.g., 102,530</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stats</span><span class="p">[</span><span class="s2">&quot;number_of_classes_l1&quot;</span><span class="p">],</span> <span class="n">stats</span><span class="p">[</span><span class="s2">&quot;number_of_classes_l2&quot;</span><span class="p">],</span> <span class="n">stats</span><span class="p">[</span><span class="s2">&quot;number_of_classes_l3&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="categories">
+<h2>Categories<a class="headerlink" href="#categories" title="Permalink to this heading">#</a></h2>
+<section id="load-categories">
+<h3>Load Categories<a class="headerlink" href="#load-categories" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uvk</span><span class="o">.</span><span class="n">load_categories</span><span class="p">(</span>
+    <span class="n">level</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;leaf&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Load category names at the specified hierarchy level.</p>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><p><strong>level</strong> (str, optional): Hierarchy level. Options: <code class="docutils literal notranslate"><span class="pre">&quot;top&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;mid&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;leaf&quot;</span></code>. Default: <code class="docutils literal notranslate"><span class="pre">&quot;leaf&quot;</span></code></p></li>
+</ul>
+<p><strong>Returns:</strong></p>
+<ul class="simple">
+<li><p><strong>list[str]</strong>: List of category names</p></li>
+</ul>
+<p><strong>Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">leaf_categories</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_categories</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="s2">&quot;leaf&quot;</span><span class="p">)</span>
+<span class="n">mid_categories</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_categories</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="s2">&quot;mid&quot;</span><span class="p">)</span>
+<span class="n">top_categories</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_categories</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="s2">&quot;top&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="load-category-statistics">
+<h3>Load Category Statistics<a class="headerlink" href="#load-category-statistics" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uvk</span><span class="o">.</span><span class="n">load_category_stats</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Load statistics for each category in the hierarchy.</p>
+<p><strong>Returns:</strong></p>
+<ul class="simple">
+<li><p><strong>list[dict]</strong>: List of dictionaries, each containing:
+- <code class="docutils literal notranslate"><span class="pre">l1</span></code>: Top-level category
+- <code class="docutils literal notranslate"><span class="pre">l2</span></code>: Mid-level category
+- <code class="docutils literal notranslate"><span class="pre">l3</span></code>: Leaf-level category
+- <code class="docutils literal notranslate"><span class="pre">count</span></code>: Number of assets in this category</p></li>
+</ul>
+<p><strong>Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">stats</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_category_stats</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">stats</span><span class="p">[:</span><span class="mi">5</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;l1&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1"> &gt; </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;l2&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1"> &gt; </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;l3&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1"> : </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="uids">
+<h2>UIDs<a class="headerlink" href="#uids" title="Permalink to this heading">#</a></h2>
+<section id="load-object-uids">
+<h3>Load Object UIDs<a class="headerlink" href="#load-object-uids" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uvk</span><span class="o">.</span><span class="n">load_object_uids</span><span class="p">(</span>
+    <span class="n">top_category</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">mid_category</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">leaf_category</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Load unique identifiers (UIDs) for 3D object assets, optionally filtered by category.</p>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><p><strong>top_category</strong> (str, optional): Filter by top-level category (l1), e.g., <code class="docutils literal notranslate"><span class="pre">&quot;street</span> <span class="pre">user&quot;</span></code></p></li>
+<li><p><strong>mid_category</strong> (str, optional): Filter by mid-level category (l2), e.g., <code class="docutils literal notranslate"><span class="pre">&quot;robot&quot;</span></code></p></li>
+<li><p><strong>leaf_category</strong> (str, optional): Filter by leaf-level category (l3), e.g., <code class="docutils literal notranslate"><span class="pre">&quot;delivery</span> <span class="pre">robot&quot;</span></code></p></li>
+<li><p><strong>limit</strong> (int, optional): Maximum number of UIDs to return</p></li>
+</ul>
+<p><strong>Returns:</strong></p>
+<ul class="simple">
+<li><p><strong>list[str]</strong>: List of object UIDs</p></li>
+</ul>
+<p><strong>Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">all_uids</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_object_uids</span><span class="p">()</span>
+<span class="n">street_user_uids</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_object_uids</span><span class="p">(</span><span class="n">top_category</span><span class="o">=</span><span class="s2">&quot;street user&quot;</span><span class="p">)</span>
+<span class="n">delivery_robot_uids</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_object_uids</span><span class="p">(</span><span class="n">leaf_category</span><span class="o">=</span><span class="s2">&quot;delivery robot&quot;</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="load-ground-material-ids">
+<h3>Load Ground Material IDs<a class="headerlink" href="#load-ground-material-ids" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uvk</span><span class="o">.</span><span class="n">load_ground_ids</span><span class="p">(</span>
+    <span class="n">subset</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Load identifiers for ground materials.</p>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><p><strong>subset</strong> (str, optional): Filter by subset. Options: <code class="docutils literal notranslate"><span class="pre">&quot;road&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;sidewalk&quot;</span></code>, or <code class="docutils literal notranslate"><span class="pre">None</span></code> for all</p></li>
+</ul>
+<p><strong>Returns:</strong></p>
+<ul class="simple">
+<li><p><strong>list[str]</strong>: List of ground material IDs (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;Asphalt016&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;PavingStones040&quot;</span></code>)</p></li>
+</ul>
+<p><strong>Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">all_ground_ids</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_ground_ids</span><span class="p">()</span>
+<span class="n">road_ids</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_ground_ids</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="s2">&quot;road&quot;</span><span class="p">)</span>
+<span class="n">sidewalk_ids</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_ground_ids</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="s2">&quot;sidewalk&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="load-sky-map-ids">
+<h3>Load Sky Map IDs<a class="headerlink" href="#load-sky-map-ids" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uvk</span><span class="o">.</span><span class="n">load_sky_ids</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Load identifiers for HDRI sky maps.</p>
+<p><strong>Returns:</strong></p>
+<ul class="simple">
+<li><p><strong>list[str]</strong>: List of sky map IDs (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;urban_street_01&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;stuttgart_suburbs&quot;</span></code>)</p></li>
+</ul>
+<p><strong>Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sky_ids</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_sky_ids</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sky maps:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sky_ids</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="annotations">
+<h2>Annotations<a class="headerlink" href="#annotations" title="Permalink to this heading">#</a></h2>
+<section id="load-object-annotations">
+<h3>Load Object Annotations<a class="headerlink" href="#load-object-annotations" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uvk</span><span class="o">.</span><span class="n">load_object_annotations</span><span class="p">(</span>
+    <span class="n">uids</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Load annotations for 3D object assets. Each annotation contains 33+ semantic, physical, and affordance attributes.</p>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><p><strong>uids</strong> (list[str], optional): List of object UIDs to load. If <code class="docutils literal notranslate"><span class="pre">None</span></code>, loads all annotations (cached after first download)</p></li>
+</ul>
+<p><strong>Returns:</strong></p>
+<ul class="simple">
+<li><p><strong>dict[str, dict]</strong>: Dictionary mapping UID to annotation dictionary. Each annotation includes:
+- <code class="docutils literal notranslate"><span class="pre">uid</span></code>: Unique identifier
+- <code class="docutils literal notranslate"><span class="pre">CLASS_NAME</span></code>: Category name
+- <code class="docutils literal notranslate"><span class="pre">category</span></code>: Category string
+- <code class="docutils literal notranslate"><span class="pre">height</span></code>, <code class="docutils literal notranslate"><span class="pre">length</span></code>, <code class="docutils literal notranslate"><span class="pre">width</span></code>: Dimensions in meters
+- <code class="docutils literal notranslate"><span class="pre">mass</span></code>: Mass in kg
+- <code class="docutils literal notranslate"><span class="pre">materials</span></code>: List of material types
+- <code class="docutils literal notranslate"><span class="pre">affordances</span></code>: List of affordance labels
+- <code class="docutils literal notranslate"><span class="pre">traversability</span></code>: Traversability classification
+- <code class="docutils literal notranslate"><span class="pre">friction_coefficient</span></code>: Surface friction
+- And 20+ additional attributes (see <a class="reference internal" href="../quickstart/urbanverse_100k.html"><span class="doc">Use UrbanVerse-100K with APIs</span></a> for full list)</p></li>
+</ul>
+<p><strong>Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">car_uids</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_object_uids</span><span class="p">(</span><span class="n">leaf_category</span><span class="o">=</span><span class="s2">&quot;electric car&quot;</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">annotations</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_object_annotations</span><span class="p">(</span><span class="n">car_uids</span><span class="p">)</span>
+
+<span class="n">uid</span> <span class="o">=</span> <span class="n">car_uids</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">ann</span> <span class="o">=</span> <span class="n">annotations</span><span class="p">[</span><span class="n">uid</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Category:&quot;</span><span class="p">,</span> <span class="n">ann</span><span class="p">[</span><span class="s2">&quot;CLASS_NAME&quot;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mass:&quot;</span><span class="p">,</span> <span class="n">ann</span><span class="p">[</span><span class="s2">&quot;mass&quot;</span><span class="p">],</span> <span class="s2">&quot;kg&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Affordances:&quot;</span><span class="p">,</span> <span class="n">ann</span><span class="p">[</span><span class="s2">&quot;affordances&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="asset-download">
+<h2>Asset Download<a class="headerlink" href="#asset-download" title="Permalink to this heading">#</a></h2>
+<section id="load-objects">
+<h3>Load Objects<a class="headerlink" href="#load-objects" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uvk</span><span class="o">.</span><span class="n">load_objects</span><span class="p">(</span>
+    <span class="n">uids</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">download_processes</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">include_thumbnails</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">include_renders</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Download and cache 3D object assets from UrbanVerse-100K.</p>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><p><strong>uids</strong> (list[str]): List of object UIDs to download</p></li>
+<li><p><strong>download_processes</strong> (int, optional): Number of parallel download processes. Default: <code class="docutils literal notranslate"><span class="pre">1</span></code></p></li>
+<li><p><strong>include_thumbnails</strong> (bool, optional): Whether to download thumbnail images. Default: <code class="docutils literal notranslate"><span class="pre">True</span></code></p></li>
+<li><p><strong>include_renders</strong> (bool, optional): Whether to download multi-view renders. Default: <code class="docutils literal notranslate"><span class="pre">False</span></code></p></li>
+</ul>
+<p><strong>Returns:</strong></p>
+<ul class="simple">
+<li><p><strong>dict[str, dict]</strong>: Dictionary mapping UID to asset paths:
+- <code class="docutils literal notranslate"><span class="pre">glb</span></code>: Path to GLB mesh file
+- <code class="docutils literal notranslate"><span class="pre">thumbnail</span></code>: Path to thumbnail image (if requested)
+- <code class="docutils literal notranslate"><span class="pre">renders</span></code>: Dictionary of render paths keyed by angle (if requested)</p></li>
+</ul>
+<p><strong>Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uids</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_object_uids</span><span class="p">(</span><span class="n">leaf_category</span><span class="o">=</span><span class="s2">&quot;traffic light&quot;</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">object_paths</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_objects</span><span class="p">(</span>
+    <span class="n">uids</span><span class="o">=</span><span class="n">uids</span><span class="p">,</span>
+    <span class="n">download_processes</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">include_thumbnails</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">include_renders</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">uid</span> <span class="o">=</span> <span class="n">uids</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;GLB:&quot;</span><span class="p">,</span> <span class="n">object_paths</span><span class="p">[</span><span class="n">uid</span><span class="p">][</span><span class="s2">&quot;glb&quot;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Thumbnail:&quot;</span><span class="p">,</span> <span class="n">object_paths</span><span class="p">[</span><span class="n">uid</span><span class="p">][</span><span class="s2">&quot;thumbnail&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="load-ground-materials">
+<h3>Load Ground Materials<a class="headerlink" href="#load-ground-materials" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uvk</span><span class="o">.</span><span class="n">load_ground_materials</span><span class="p">(</span>
+    <span class="n">ids</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">download_processes</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">include_thumbnails</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Download and cache ground material assets.</p>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><p><strong>ids</strong> (list[str]): List of ground material IDs</p></li>
+<li><p><strong>download_processes</strong> (int, optional): Number of parallel download processes. Default: <code class="docutils literal notranslate"><span class="pre">1</span></code></p></li>
+<li><p><strong>include_thumbnails</strong> (bool, optional): Whether to download thumbnail images. Default: <code class="docutils literal notranslate"><span class="pre">True</span></code></p></li>
+</ul>
+<p><strong>Returns:</strong></p>
+<ul class="simple">
+<li><p><strong>dict[str, dict]</strong>: Dictionary mapping ID to asset paths:
+- <code class="docutils literal notranslate"><span class="pre">mdl</span></code>: Path to MDL material file
+- <code class="docutils literal notranslate"><span class="pre">thumbnail</span></code>: Path to thumbnail image (if requested)</p></li>
+</ul>
+<p><strong>Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">road_ids</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_ground_ids</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="s2">&quot;road&quot;</span><span class="p">)</span>
+<span class="n">material_paths</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_ground_materials</span><span class="p">(</span><span class="n">road_ids</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Materials downloaded:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">material_paths</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+<section id="load-sky-maps">
+<h3>Load Sky Maps<a class="headerlink" href="#load-sky-maps" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uvk</span><span class="o">.</span><span class="n">load_sky_maps</span><span class="p">(</span>
+    <span class="n">ids</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">download_processes</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">include_thumbnails</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Download and cache HDRI sky map assets.</p>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><p><strong>ids</strong> (list[str]): List of sky map IDs</p></li>
+<li><p><strong>download_processes</strong> (int, optional): Number of parallel download processes. Default: <code class="docutils literal notranslate"><span class="pre">1</span></code></p></li>
+<li><p><strong>include_thumbnails</strong> (bool, optional): Whether to download thumbnail images. Default: <code class="docutils literal notranslate"><span class="pre">True</span></code></p></li>
+</ul>
+<p><strong>Returns:</strong></p>
+<ul class="simple">
+<li><p><strong>dict[str, dict]</strong>: Dictionary mapping ID to asset paths:
+- <code class="docutils literal notranslate"><span class="pre">hdr</span></code>: Path to HDR sky map file
+- <code class="docutils literal notranslate"><span class="pre">thumbnail</span></code>: Path to thumbnail image (if requested)</p></li>
+</ul>
+<p><strong>Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sky_ids</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_sky_ids</span><span class="p">()[:</span><span class="mi">10</span><span class="p">]</span>
+<span class="n">sky_paths</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">load_sky_maps</span><span class="p">(</span><span class="n">sky_ids</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sky maps downloaded:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sky_paths</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="visualization">
+<h2>Visualization<a class="headerlink" href="#visualization" title="Permalink to this heading">#</a></h2>
+<section id="get-distribution-html">
+<h3>Get Distribution HTML<a class="headerlink" href="#get-distribution-html" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">uvk</span><span class="o">.</span><span class="n">get_distribution_html</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+</pre></div>
+</div>
+<p>Get the path to the interactive sunburst visualization HTML file.</p>
+<p><strong>Returns:</strong></p>
+<ul class="simple">
+<li><p><strong>str</strong>: Absolute path to the distribution HTML file</p></li>
+</ul>
+<p><strong>Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">IFrame</span>
+
+<span class="n">html_path</span> <span class="o">=</span> <span class="n">uvk</span><span class="o">.</span><span class="n">get_distribution_html</span><span class="p">()</span>
+<span class="n">IFrame</span><span class="p">(</span><span class="n">src</span><span class="o">=</span><span class="n">html_path</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">900</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../developer/adding_new_robots.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Adding New Robots to UrbanVerse</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="urbanverse_gen.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">UrbanVerse-Gen API</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import">Import</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-metadata">Dataset Metadata</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-dataset-metadata">Load Dataset Metadata</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#categories">Categories</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-categories">Load Categories</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-category-statistics">Load Category Statistics</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uids">UIDs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-object-uids">Load Object UIDs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-ground-material-ids">Load Ground Material IDs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-sky-map-ids">Load Sky Map IDs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#annotations">Annotations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-object-annotations">Load Object Annotations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asset-download">Asset Download</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-objects">Load Objects</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-ground-materials">Load Ground Materials</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-sky-maps">Load Sky Maps</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualization">Visualization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-distribution-html">Get Distribution HTML</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Honglin He
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025-2030, The UrbanVerse Project Developers. [UrbanVerse is built upon NVIDIA Isaac Sim&amp;Lab and extends its capabilities for urban robot learning tasks].
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on Nov 16, 2025.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

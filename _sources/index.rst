@@ -101,12 +101,23 @@ Table of Contents
    :maxdepth: 1
    :caption: Developer (Advanced)
 
-   source/developer/code-structure/index
    source/developer/collecting_data
    source/developer/teleop_interface
    source/developer/realworld_deployment
    source/developer/adding_new_assets
    source/developer/adding_new_robots
+
+.. toctree::
+   :maxdepth: 1
+   :caption: API Reference
+
+   source/api_reference/urbanverse_100k
+   source/api_reference/urbanverse_gen
+   source/api_reference/navigation_rl
+   source/api_reference/navigation_il
+   source/api_reference/assets
+   source/api_reference/teleoperation
+   source/api_reference/configuration
 
 .. toctree::
    :maxdepth: 1
