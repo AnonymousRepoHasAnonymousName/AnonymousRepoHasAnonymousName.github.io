@@ -99,14 +99,14 @@ Table of Contents
    
 .. toctree::
    :maxdepth: 1
-   :caption: Developer
+   :caption: Developer (Advanced)
 
    source/developer/code-structure/index
    source/developer/collecting_data
+   source/developer/teleop_interface
    source/developer/realworld_deployment
-   source/developer/adding_new_robots
    source/developer/adding_new_assets
-   source/developer/vr_interface
+   source/developer/adding_new_robots
 
 .. toctree::
    :maxdepth: 1
