@@ -1,74 +1,109 @@
-Events
-=================
+Environment Events and Initialization
+======================================
 
-In UrbanVerse, **events** are simulation-time triggers that modify the environment state or robot behavior  
-without terminating the episode. Events can occur on reset, periodically, or under specific conditions.  
-They are defined using the `EventTerm` class and grouped under an `EventCfg`.
+Events are mechanisms for modifying the simulation state during training, enabling domain randomization, state initialization, and dynamic environment changes. The most important event in UrbanVerse is automatic robot spawn initialization, which ensures your robot starts each episode in a valid, safe position within the urban scene.
 
-Taking **COCO** (a wheeled robot) as an example:
+Automatic Robot Spawn Initialization
+-------------------------------------
 
-COCO Event Binding
---------------------
+UrbanVerse automatically handles robot initialization at the start of each episode, eliminating the need to manually configure spawn points. The system intelligently samples valid starting positions from the scene's navigable regions.
 
-When ``robot_name = "coco"``, the following event config is registered:
+How It Works
+------------
+
+When an episode begins, UrbanVerse:
+
+1. **Analyzes the scene** to identify drivable regions (roads, sidewalks, and other traversable surfaces)
+
+2. **Samples a valid spawn point** from these regions, ensuring:
+   - The position is on a navigable surface (not inside buildings or obstacles)
+   - There are no collisions at the spawn location
+   - The position is reachable and suitable for navigation
+
+3. **Sets robot position and orientation**:
+   - Places the robot at the sampled spawn point
+   - Orients the robot's heading (yaw) to align with valid navigation directions
+   - Sets the robot's height appropriately for the surface type
+
+4. **Initializes robot state**:
+   - Zeroes linear and angular velocities (robot starts at rest)
+   - Resets joint positions to default configurations
+   - Prepares sensors and actuators for the new episode
+
+This automatic initialization works seamlessly across:
+- **UrbanVerse-160 scenes**: Diverse city layouts from around the world
+- **CraftBench scenes**: Artist-designed test environments
+- **Custom scenes**: User-generated environments from UrbanVerse-Gen
+
+Benefits of Automatic Initialization
+-------------------------------------
+
+**Consistency**: Every episode starts from a valid position, eliminating initialization-related failures
+
+**Diversity**: Spawn points are sampled randomly, providing varied starting conditions that improve policy robustness
+
+**Safety**: No risk of spawning inside obstacles, buildings, or invalid regions
+
+**Simplicity**: No manual configuration required—UrbanVerse handles everything automatically
+
+**Scene Adaptation**: The system adapts to each scene's unique layout, road network, and navigable regions
+
+Example: Episode Reset Flow
+----------------------------
+
+Here's what happens automatically when you call ``env.reset()``:
 
 .. code-block:: python
 
-   @configclass
-   class EventCfg:
-       reset_base = EventTerm(
-           func=loc_mdp.reset_root_state_uniform,
-           mode="reset",
-           params={
-               "pose_range": {
-                   "x": (0.3, 0.3),
-                   "y": (0.3, 0.3),
-                   "yaw": (0.0, 0.0)
-               },
-               "velocity_range": {
-                   "x": (0.0, 0.0),
-                   "y": (0.0, 0.0),
-                   "z": (0.0, 0.0),
-                   "roll": (0.0, 0.0),
-                   "pitch": (0.0, 0.0)
-               },
-           }
-       )
+   import urbanverse as uv
+   from urbanverse.navigation.config import EnvCfg, SceneCfg
 
-This event is triggered in `reset` mode, meaning it will be applied at the beginning of each episode.
+   cfg = EnvCfg(
+       scenes=SceneCfg(scene_paths=my_scenes, async_sim=True),
+       robot_type="coco_wheeled",
+       ...
+   )
 
-Event Term Parameters
+   env = uv.navigation.rl.create_env(cfg)
+
+   # Reset automatically:
+   # 1. Samples valid spawn points for all environments
+   # 2. Places robots on drivable surfaces
+   # 3. Samples goal positions
+   # 4. Initializes robot states
+   # 5. Returns initial observations
+   obs = env.reset()
+
+   # Your policy receives observations from valid starting positions
+   # No manual spawn configuration needed!
+
+Advanced: Custom Events
 -----------------------
 
-- **pose_range**  
-  Specifies the randomization range for the robot’s base position and yaw (heading).  
-  In this case, it's a fixed spawn at ``(x=0.3, y=0.3, yaw=0.0)``.
+While automatic spawn initialization covers most use cases, UrbanVerse supports custom events for advanced scenarios:
 
-- **velocity_range**  
-  Specifies the initial linear and angular velocity ranges.  
-  Setting all values to zero initializes the robot at rest.
+**Event Types**
 
-Event Modes
-------------
+- **Reset events**: Applied at the start of each episode (e.g., custom state randomization)
+- **Step events**: Applied during environment stepping (e.g., dynamic agent spawning, environmental changes)
+- **Manual events**: Triggered programmatically (e.g., scripted scenario changes)
 
-Each `EventTerm` has a `mode`, which determines when the event is triggered:
+**Use Cases for Custom Events**
 
-- `"reset"`: Applied at the start of an episode
-- `"step"`: Applied during environment stepping (e.g., at intervals or conditions)
-- `"manual"`: Triggered via API calls or scripted logic
+- **Enhanced domain randomization**: Randomize robot mass, friction, or sensor parameters
+- **Dynamic scenarios**: Spawn or modify pedestrians, vehicles, or obstacles during episodes
+- **Environmental variations**: Change lighting, weather, or scene properties over time
+- **Specialized training**: Create custom initialization patterns for specific learning objectives
 
-Defining Custom Events
-------------------------
+**Implementing Custom Events**
 
-To define your own event:
+Custom events require subclassing the event configuration and implementing event functions. This is typically only needed for advanced research scenarios or specialized domain adaptation tasks.
 
-1. Create a Python function with signature:  
-   ``def my_event(env: ManagerBasedRLEnv, env_ids: Sequence[int], ...)``  
-2. Wrap it in an `EventTerm(func=..., mode=..., params=...)`
-3. Register it in your robot-specific `EventCfg` class.
+For most users, the default automatic initialization provides everything needed for effective training. The system is designed to "just work" out of the box, handling all the complexity of valid spawn point selection and robot state initialization automatically.
 
-Use cases include:
+Design Philosophy
+------------------
 
-- Randomizing initial state
-- Injecting wind or external forces
-- Resetting memory or trajectory buffers
+UrbanVerse's event system is built on the principle of **sensible defaults with full customization**. The automatic spawn initialization ensures that training starts smoothly without configuration overhead, while the event framework provides the flexibility to implement sophisticated training strategies when needed.
+
+This approach lets you focus on policy design and training hyperparameters rather than low-level simulation setup details.

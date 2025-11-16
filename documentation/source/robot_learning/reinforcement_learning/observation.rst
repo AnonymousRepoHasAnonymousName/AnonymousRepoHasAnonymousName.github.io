@@ -1,112 +1,119 @@
-Observation Space
-=================
+What Your Policy Sees: Observations
+====================================
 
-UrbanVerse supports configurable multimodal observation spaces tailored to different robot embodiments and tasks.  
-Each environment binds an observation configuration class that defines the set of sensors, modalities, and preprocessing methods available to the policy.
+The observation space defines the sensory information available to your navigation policy. UrbanVerse provides a flexible observation system that combines visual inputs from onboard cameras with spatial awareness through goal-relative position vectors, creating a rich representation of the robot's state and environment.
 
-The observation space is defined in the scenecfg file, for example, ``urbansim/primitives/navigation/random_env_cfg.py``.
-
-Sensor-based Observations
-----------------------------
-
-UrbanVerse supports a modular sensor system, where observations from various physical or virtual sensors  
-(e.g., cameras, raycasters, contact sensors) can be processed and passed to RL policies.  
-These sensors are defined under the robot's scene configuration and referenced by observation terms.
-
-Taking **COCO** as an example:
-
-Sensor Configuration
+Observation Components
 ----------------------
 
-The following sensors are typically spawned in the robot’s scene config (e.g., `SceneCfg.sensors`):
+For goal-directed navigation in urban environments, your policy typically needs two types of information:
+
+**Visual Perception**  
+Onboard cameras capture the robot's view of the world, providing information about obstacles, road structure, pedestrians, and other scene elements. This visual input is essential for understanding the immediate surroundings and making navigation decisions.
+
+**Spatial Awareness**  
+A goal vector encodes the relative position from the robot to its target destination. This compact representation (just two numbers: ``dx, dy``) tells the policy where the goal is relative to the robot's current position, enabling efficient path planning.
+
+Configuring Observations
+-------------------------
+
+Observation configuration is simple and intuitive:
 
 .. code-block:: python
 
-   # Contact sensor for foot or chassis contact
-   contact_forces = ContactSensorCfg(
-       prim_path="{ENV_REGEX_NS}/Robot/.*",
-       history_length=3,
-       track_air_time=True
-   )
+   from urbanverse.navigation.config import EnvCfg, ObservationCfg
+   import urbanverse as uv
 
-   # RGB + depth camera
-   camera = TiledCameraCfg(
-       prim_path="{ENV_REGEX_NS}/Robot/base/front_cam",
-       update_period=0.1,
-       height=135,
-       width=240,
-       data_types=["rgb", "distance_to_camera"],
-       spawn=sim_utils.PinholeCameraCfg.from_intrinsic_matrix(
-           intrinsic_matrix=[531., 0., 960., 0., 531., 540., 0., 0., 1.],
-           width=1920,
-           height=1080,
+   cfg = EnvCfg(
+       robot_type="coco_wheeled",
+       observations=ObservationCfg(
+           rgb_size=(135, 240),        # Camera image resolution
+           use_depth=False,             # RGB only (no depth channel)
+           include_goal_vector=True,    # Add (dx, dy) goal position
        ),
-       offset=CameraCfg.OffsetCfg(
-           pos=(0.51, 0.0, 0.015),
-           rot=(0.5, -0.5, 0.5, -0.5),
-           convention="ros"
-       ),
+       ...
    )
 
-   # Height scanner using raycasting grid
-   height_scanner = RayCasterCfg(
-       prim_path="{ENV_REGEX_NS}/Robot/base",
-       offset=RayCasterCfg.OffsetCfg(pos=(0.0, 0.0, 20.0)),
-       attach_yaw_only=True,
-       pattern_cfg=patterns.GridPatternCfg(resolution=0.1, size=[1.6, 1.0]),
-       debug_vis=True,
-       mesh_prim_paths=["/World/ground"]
-   )
+   env = uv.navigation.rl.create_env(cfg)
 
-Observation Binding
---------------------
+Standard Observation Setup
+---------------------------
 
-Once sensors are defined, their data is passed to the policy via an `ObservationsCfg` class:
+The default observation configuration for navigation tasks includes:
+
+**RGB Camera Image**  
+A color image from the robot's forward-facing camera, resized to the specified resolution. This provides visual information about the scene ahead, including obstacles, road markings, buildings, and dynamic agents.
+
+**Goal Vector**  
+A 2D vector ``(dx, dy)`` representing the relative position from the robot to the goal, normalized and appended to the observation tensor. This gives the policy direct spatial information about where it needs to go.
+
+Together, these components provide a compact yet informative representation: the camera image handles visual scene understanding, while the goal vector provides precise spatial guidance.
+
+Example Observation Structure
+------------------------------
+
+When you query the environment, observations are returned as a dictionary:
 
 .. code-block:: python
 
-   @configclass
-   class ObservationsCfg:
-       @configclass
-       class PolicyCfg(ObsGroup):
-           pose_command = ObsTerm(
-               func=loc_mdp.advanced_generated_commands,
-               params={
-                   "command_name": "pose_command",
-                   "max_dim": 2,
-                   "normalize": True
-               }
-           )
+   obs = env.reset()
+   
+   # obs contains:
+   # - "rgb": tensor of shape [num_envs, 135, 240, 3] - camera images
+   # - "goal_vector": tensor of shape [num_envs, 2] - (dx, dy) to goal
+   # - Additional robot state information (pose, velocity, etc.)
 
-       @configclass
-       class SensorCfg(ObsGroup):
-           rgb = ObsTerm(
-               func=nav_mdp.rgbd_processed,
-               params={"sensor_cfg": SceneEntityCfg("camera")}
-           )
+   # Your policy processes these observations:
+   actions = policy(obs)
 
-       policy: PolicyCfg = PolicyCfg()
-       sensor: SensorCfg = SensorCfg()
+The observation processing pipeline automatically:
+- Captures camera images from the simulation
+- Computes goal-relative positions
+- Normalizes and preprocesses the data
+- Concatenates everything into a format your policy can consume
 
-Explanation:
+Customizing the Observation Space
+-----------------------------------
 
-- `ObsGroup`: A logical grouping of observations (e.g., policy inputs vs. auxiliary sensors).
-- `ObsTerm`: Binds a specific function that processes sensor data.
-- `SceneEntityCfg("camera")`: Indicates this term pulls data from the named sensor defined in the scene.
+You can tailor the observation space to your specific needs:
 
-Processing Chain:
+**Higher Resolution Images**  
+Increase camera resolution for more detailed visual information (at the cost of larger input tensors):
 
-.. code-block::
+.. code-block:: python
 
-   Scene Sensor → Simulator → ObsTerm.func (e.g., rgbd_processed) → Policy Input Tensor
+   ObservationCfg(
+       rgb_size=(180, 320),  # Higher resolution
+       ...
+   )
 
-This design decouples **sensor definition** from **observation usage**, allowing different policies to reuse or remap sensor outputs flexibly.
+**Enable Depth Information**  
+Add a depth channel to provide 3D spatial awareness:
 
-Extending Observation Space
-----------------------------
+.. code-block:: python
 
-To add new sensor-based observations:
+   ObservationCfg(
+       use_depth=True,  # Include depth channel
+       ...
+   )
 
-1. Define the sensor in `SceneCfg.sensors` with a unique name.
-2. Use `SceneEntityCfg(<name>)` to reference it in your `ObsTerm`.
-3. Provide a custom processing function in your MDP module.
+**Additional Sensors**  
+For advanced applications, you can extend observations to include:
+- LiDAR point clouds for precise distance measurements
+- Contact sensors for collision detection
+- Height scanners for terrain awareness
+- Multiple camera views for panoramic perception
+
+**Custom Observation Processing**  
+Subclass ``ObservationCfg`` to implement custom preprocessing, feature extraction, or sensor fusion logic.
+
+Design Considerations
+----------------------
+
+The observation space is a critical design choice that affects both learning efficiency and policy performance:
+
+- **Compact representations** (like the default RGB + goal vector) train faster and require less memory
+- **Rich observations** (multiple sensors, high resolution) provide more information but increase computational cost
+- **Task-specific sensors** can significantly improve performance for specialized navigation scenarios
+
+The default configuration (RGB camera + goal vector) strikes an excellent balance for most navigation tasks, providing sufficient information for effective learning while remaining computationally efficient. Start with the defaults, then experiment with extensions based on your specific requirements.
