@@ -224,9 +224,9 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Robot Learning with UrbanVerse</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../simulation_paradigms.html">Simulation Paradigms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configurations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../robot_configuration.html">Robot Configuration</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Reinforcement Learning in UrbanVerse</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../configuration.html">General Configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../robot_configuration.html">Robot Configurations</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Reinforcement Learning Guide</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="scene.html">Working with Urban Scenes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="action.html">Defining Robot Actions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="observation.html">What Your Policy Sees: Observations</a></li>
@@ -236,16 +236,7 @@
 <li class="toctree-l2"><a class="reference internal" href="event.html">Environment Events and Initialization</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../imitation_learning/index.html">Imitation Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../imitation_learning/scene.html">Scene Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../imitation_learning/action.html">Action Space</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../imitation_learning/observation.html">Observation Space</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../imitation_learning/reward.html">Reward</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../imitation_learning/reset.html">Termination Conditions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../imitation_learning/curriculum.html">Curriculum Learning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../imitation_learning/event.html">Events</a></li>
-</ul>
-</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../imitation_learning/index.html">Imitation Learning Guide</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer</span></p>
 <ul class="nav bd-sidenav">
@@ -501,7 +492,7 @@
                 <article class="bd-article">
                   
   <section id="designing-the-reward-function">
-<h1>Designing the Reward Function<a class="headerlink" href="#designing-the-reward-function" title="Permalink to this heading">#</a></h1>
+<span id="urbanverse-robot-learning-rl-guide-reward"></span><h1>Designing the Reward Function<a class="headerlink" href="#designing-the-reward-function" title="Permalink to this heading">#</a></h1>
 <p>The reward function is the learning signal that guides your policy toward desired behaviors. UrbanVerse’s reward system is modular and composable, allowing you to balance multiple objectives: reaching goals efficiently, avoiding collisions, maintaining smooth trajectories, and following optimal paths.</p>
 <section id="reward-function-philosophy">
 <h2>Reward Function Philosophy<a class="headerlink" href="#reward-function-philosophy" title="Permalink to this heading">#</a></h2>

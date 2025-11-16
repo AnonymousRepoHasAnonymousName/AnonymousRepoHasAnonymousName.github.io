@@ -1,6 +1,6 @@
 .. _urbanverse-robot-learning-robot-configuration:
 
-Robot Configuration
+Robot Configurations
 ====================
 
 UrbanVerse provides a unified interface for working with multiple robot embodiments.  

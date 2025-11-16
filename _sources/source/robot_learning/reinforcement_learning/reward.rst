@@ -1,3 +1,5 @@
+.. _urbanverse-robot-learning-rl-guide-reward:
+
 Designing the Reward Function
 ==============================
 

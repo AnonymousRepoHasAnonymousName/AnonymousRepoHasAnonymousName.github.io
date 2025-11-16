@@ -1,6 +1,6 @@
 .. _urbanverse-robot-learning-configuration:
 
-Configurations
+General Configurations
 ===========================
 
 UrbanVerse uses a structured configuration system to define training environments for

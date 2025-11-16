@@ -1,3 +1,5 @@
+.. _urbanverse-robot-learning-rl-guide-event:
+
 Environment Events and Initialization
 ======================================
 

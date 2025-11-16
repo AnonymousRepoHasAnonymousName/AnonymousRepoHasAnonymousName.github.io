@@ -1,4 +1,6 @@
-Reinforcement Learning in UrbanVerse
+.. _urbanverse-robot-learning-rl-guide-root:
+
+Reinforcement Learning Guide
 =====================================
 
 UrbanVerse offers a comprehensive reinforcement learning framework designed specifically for training navigation policies in photorealistic urban environments. Built on Isaac Lab's robust simulation infrastructure, UrbanVerse enables efficient parallel training across diverse real-to-sim city scenes, supporting everything from simple point navigation to complex multi-agent interactions.
