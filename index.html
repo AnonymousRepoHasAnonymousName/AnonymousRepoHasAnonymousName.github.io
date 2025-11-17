@@ -56,7 +56,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Installation via Pre-Built Binaries" href="source/installation/binaries_installation.html" />
+    <link rel="next" title="User Workflow Guide" href="source/user_side_pipeline/index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="1.0.0" />
@@ -182,7 +182,11 @@
 </form></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Installation</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">User Pipeline Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="source/user_side_pipeline/index.html">User Workflow Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Installation</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="source/installation/binaries_installation.html">Installation via Pre-Built Binaries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source/installation/asset_caching.html">UrbanVerse-100K Asset Caching</a></li>
@@ -201,7 +205,6 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Quickstart Guide</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="source/quickstart/intro_quickstart.html">Introduction to Quickstart Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source/quickstart/urbanverse_100k.html">Use UrbanVerse-100K with APIs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source/quickstart/urbanverse_gen.html">Real-to-Sim Scene Generation with UrbanVerse-Gen</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source/quickstart/urbanverse_scenes.html">Use Built-in UrbanVerse Scenes</a></li>
@@ -367,7 +370,12 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-components">Core Components</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#built-in-urban-simulation-environments">Built-in Urban Simulation Environments</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#open-source-release">Open-Source Release</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation-platform">Simulation Platform</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#user-side-pipeline-overview">User-Side Pipeline Overview</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-generate-your-own-simulation-scenes-using-urbanverse-gen-automatica-pipeline">(A) Generate Your Own Simulation Scenes using UrbanVerse-Gen Automatica Pipeline</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-use-built-in-simulation-urbanverse-repositories">(B) Use Built-in Simulation UrbanVerse Repositories</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-leverage-urbanverse-scenes-for-downstream-applications">(C) Leverage UrbanVerse Scenes for Downstream Applications</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#license">License</a></li>
@@ -471,10 +479,49 @@ It converts casually captured, uncalibrated city-tour videos into fully interact
 </table>
 </div>
 </section>
-<section id="simulation-platform">
-<h2>Simulation Platform<a class="headerlink" href="#simulation-platform" title="Permalink to this heading">#</a></h2>
-<p>Built on top of <em>NVIDIA Isaac Sim</em> and <em>NVIDIA Isaac Lab</em>, UrbanVerse provides high-fidelity photorealistic rendering and efficient, asynchronous simulation in large-scale, dynamic environments.
-It supports a wide range of learning paradigms, including reinforcement learning and imitation learning, and offers diverse environments, robots, and scenario-generation pipelines.</p>
+<section id="user-side-pipeline-overview">
+<h2>User-Side Pipeline Overview<a class="headerlink" href="#user-side-pipeline-overview" title="Permalink to this heading">#</a></h2>
+<p>The diagram below illustrates the <strong>complete user workflow</strong> in UrbanVerse, covering both
+custom scene generation and the use of built-in simulation scenes.</p>
+<a class="reference internal image-reference" href="_static/user_side_pipeline_v2.png"><img alt="User-side pipeline for UrbanVerse" class="align-center" src="_static/user_side_pipeline_v2.png" style="width: 100%;" /></a>
+<section id="a-generate-your-own-simulation-scenes-using-urbanverse-gen-automatica-pipeline">
+<h3>(A) Generate Your Own Simulation Scenes using UrbanVerse-Gen Automatica Pipeline<a class="headerlink" href="#a-generate-your-own-simulation-scenes-using-urbanverse-gen-automatica-pipeline" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Input Preparation:</strong></p></li>
+</ol>
+<ul class="simple">
+<li><p>Accepts YouTube clips or URL, phone-recorded city-walk videos, pre-existing datasets, or folders of RGB frames (see <a class="reference internal" href="source/quickstart/urbanverse_gen.html"><span class="doc">Real-to-Sim Scene Generation with UrbanVerse-Gen</span></a> for more details).</p></li>
+<li><p>All inputs are normalized into sequential images for scene distillation.</p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p><strong>Run UrbanVerse-Gen Pipeline:</strong></p></li>
+</ol>
+<ul class="simple">
+<li><p>Generate your own simulation scenes using UrbanVerse-Gen APIs automatically (see <a class="reference internal" href="source/quickstart/urbanverse_gen.html"><span class="doc">Real-to-Sim Scene Generation with UrbanVerse-Gen</span></a> for more details).</p></li>
+<li><p>Extracts camera intrinsics/poses, metric depth, 3D instance point clouds, instance masks, and 3D boxes, producing a unified distilled scene graph (objects, ground, sky).</p></li>
+<li><p>Materializes the scene graph by retrieving mutiple matched assets from UrbanVerse-100K (see <a class="reference internal" href="source/quickstart/urbanverse_100k.html"><span class="doc">Use UrbanVerse-100K with APIs</span></a> for more details), including 3D GLB objects PBR ground materials, and HDRI sky maps.</p></li>
+<li><p>Create and export fully interactivedigital-cousin simulation scenes in Isaac Sim with metric placement, physics, and lighting.</p></li>
+</ul>
+</section>
+<section id="b-use-built-in-simulation-urbanverse-repositories">
+<h3>(B) Use Built-in Simulation UrbanVerse Repositories<a class="headerlink" href="#b-use-built-in-simulation-urbanverse-repositories" title="Permalink to this heading">#</a></h3>
+<p>You can also directly use the built-in simulation UrbanVerse scene repositories we provided, including:</p>
+<ol class="arabic simple">
+<li><p><strong>UrbanVerse-160:</strong> A collection of 160 real-to-sim city scenes generated by UrbanVerse-Gen from city-tour YouTube videos acorss the world (See <a class="reference internal" href="source/quickstart/urbanverse_scenes.html"><span class="doc">Use Built-in UrbanVerse Scenes</span></a> for more details).</p></li>
+<li><p><strong>CraftBench:</strong> A suite of 10 artist-crafted simulation scenes, useful for benchmarking policy robustness and generalization. (see <a class="reference internal" href="source/quickstart/craftbench.html"><span class="doc">Use Built-in CraftBench Scenes</span></a> for more details).</p></li>
+</ol>
+</section>
+<section id="c-leverage-urbanverse-scenes-for-downstream-applications">
+<h3>(C) Leverage UrbanVerse Scenes for Downstream Applications<a class="headerlink" href="#c-leverage-urbanverse-scenes-for-downstream-applications" title="Permalink to this heading">#</a></h3>
+<p>Using either custom-generated scenes or built-in scene repositories, UrbanVerse supports:</p>
+<ul class="simple">
+<li><p><strong>Reinforcement Learning:</strong> Train navigation policies in UrbanVerse scenes using reinforcement learning (PPO) (see <a class="reference internal" href="source/robot_learning/reinforcement_learning/index.html"><span class="doc">Reinforcement Learning in UrbanVerse</span></a> for more details).</p></li>
+<li><p><strong>Expert Data Collection for Imitation Learning:</strong> Collect expert demonstrations from teleoperation (keyboard, joystick, gamepad, VR), and train behavior cloning policies (see <a class="reference internal" href="source/robot_learning/imitation_learning/index.html"><span class="doc">Imitation Learning in UrbanVerse</span></a> for more details).</p></li>
+<li><p><strong>Multimodal dataset collection:</strong> Collect offline multimodal dataset (RGB, depth, normals, segmentation, poses, etc) from UrbanVerse scenes for training and evaluation (see <a class="reference internal" href="source/developer/collecting_data.html"><span class="doc">Collecting Data in UrbanVerse</span></a> for more details).</p></li>
+<li><p><strong>Closed-loop evaluation:</strong> Evaluate the performance of the trained policies in UrbanVerse scenes (see <a class="reference internal" href="source/quickstart/test_your_robots.html"><span class="doc">Test Your Robots on CraftBench</span></a> for more details).</p></li>
+<li><p><strong>Zero-shot Sim2Real deployment:</strong> Deploy the trained policies on real robot platforms (see <a class="reference internal" href="source/developer/realworld_deployment.html"><span class="doc">Real-world Deployment: Unitree Go2 Quadruped Example</span></a> for more details).</p></li>
+</ul>
+</section>
 </section>
 </section>
 <section id="license">
@@ -483,6 +530,12 @@ It supports a wide range of learning paradigms, including reinforcement learning
 </section>
 <section id="table-of-contents">
 <h1>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this heading">#</a></h1>
+<div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User Pipeline Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="source/user_side_pipeline/index.html">User Workflow Guide</a></li>
+</ul>
+</div>
 <div class="toctree-wrapper compound">
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Installation</span></p>
 <ul>
@@ -507,7 +560,6 @@ It supports a wide range of learning paradigms, including reinforcement learning
 <div class="toctree-wrapper compound">
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Quickstart Guide</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="source/quickstart/intro_quickstart.html">Introduction to Quickstart Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source/quickstart/urbanverse_100k.html">Use UrbanVerse-100K with APIs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source/quickstart/urbanverse_gen.html">Real-to-Sim Scene Generation with UrbanVerse-Gen</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source/quickstart/urbanverse_scenes.html">Use Built-in UrbanVerse Scenes</a></li>
@@ -578,11 +630,11 @@ It supports a wide range of learning paradigms, including reinforcement learning
                   
 <div class="prev-next-area">
     <a class="right-next"
-       href="source/installation/binaries_installation.html"
+       href="source/user_side_pipeline/index.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Installation via Pre-Built Binaries</p>
+        <p class="prev-next-title">User Workflow Guide</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -608,7 +660,12 @@ It supports a wide range of learning paradigms, including reinforcement learning
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-components">Core Components</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#built-in-urban-simulation-environments">Built-in Urban Simulation Environments</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#open-source-release">Open-Source Release</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation-platform">Simulation Platform</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#user-side-pipeline-overview">User-Side Pipeline Overview</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-generate-your-own-simulation-scenes-using-urbanverse-gen-automatica-pipeline">(A) Generate Your Own Simulation Scenes using UrbanVerse-Gen Automatica Pipeline</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-use-built-in-simulation-urbanverse-repositories">(B) Use Built-in Simulation UrbanVerse Repositories</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-leverage-urbanverse-scenes-for-downstream-applications">(C) Leverage UrbanVerse Scenes for Downstream Applications</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#license">License</a></li>
