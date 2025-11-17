@@ -31,27 +31,34 @@ Configure a teleoperation session for manual robot control.
 **Parameters:**
 
 - **interface** (str): Teleoperation interface type. Options:
+
   - ``"keyboard"``: Keyboard controls
   - ``"joystick"``: Joystick interface
   - ``"vr"``: VR headset and controllers (Meta Oculus Quest 3)
 - **robot_type** (str): Robot embodiment identifier (e.g., ``"coco_wheeled"``, ``"unitree_go2"``)
 - **scene_path** (str): Path to USD scene file
 - **keybindings** (dict, optional): Custom keyboard keybindings. Default keybindings:
+
   - ``"forward"``: ``"w"`` or ``"up"``
   - ``"backward"``: ``"s"`` or ``"down"``
   - ``"left"``: ``"a"`` or ``"left"``
   - ``"right"``: ``"d"`` or ``"right"``
   - ``"stop"``: ``"space"``
   - ``"reset"``: ``"r"``
+
 - **velocity_scaling** (dict, optional): Velocity scaling parameters:
+
   - ``"linear_max"``: Maximum linear velocity (m/s)
   - ``"angular_max"``: Maximum angular velocity (rad/s)
   - ``"acceleration"``: Acceleration rate
+
 - **vr_settings** (dict, optional): VR-specific settings (for Quest 3). Required keys:
+
   - ``"headset_type"``: ``"oculus_quest_3"``
   - ``"openxr_runtime"``: ``"oculus"``
   - ``"controller_mapping"``: Dictionary mapping controller inputs to actions
   - ``"rendering"``: Dictionary with:
+
     - ``"output_plugin"``: ``"openxr"``
     - ``"resolution"``: ``[1920, 1832]`` (per-eye)
     - ``"refresh_rate"``: ``90``

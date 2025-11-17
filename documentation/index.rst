@@ -1,5 +1,5 @@
 Welcome to UrbanVerse!
-=====================
+======================
 
 .. raw:: html
 
@@ -105,7 +105,7 @@ User-Side Pipeline Overview
 The diagram below illustrates the **complete user workflow** in UrbanVerse, covering both
 custom scene generation and the use of built-in simulation scenes.
 
-.. image:: _static/user_side_pipeline_v2.png
+.. image:: assets/user_side_pipeline_v2.png
    :align: center
    :width: 100%
    :alt: User-side pipeline for UrbanVerse

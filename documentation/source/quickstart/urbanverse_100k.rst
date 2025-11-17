@@ -438,6 +438,7 @@ Below is a structured overview of all annotation fields found in UrbanVerse-100K
 - ``max_dimension``
 
 **6. Affordances & Interactions**
+
 - ``movable``
 - ``interactive_parts`` (doors, wheels, trunk, …)
 - ``affordances`` (drivable, openable, pressable, …)
@@ -446,18 +447,21 @@ Below is a structured overview of all annotation fields found in UrbanVerse-100K
 - ``support_surface``
 
 **7. Traversability**
+
 - ``traversability`` (e.g., ``obstacle``)
 - ``traversable_by`` (list of agent types)
 
 **8. Object Metadata**
+
 - ``uid``
 - ``filename``
 - ``foldername`` (if grouped)
 - ``quality`` (asset quality score)
 - ``asset_composition_type``
 
-**9. Additional Object-Specific Attributes**
-(e.g., for ``electric car'' category)
+**9. Additional Object-Specific Attributes**  
+*(e.g., for ``electric car'' category)*
+
 - ``attribute_car_manufacturer``
 - ``attribute_car_model``
 - ``attribute_charging_port_location``
@@ -465,15 +469,18 @@ Below is a structured overview of all annotation fields found in UrbanVerse-100K
 - ``attribute_badging_or_emblem``
 
 **10. Annotation Metadata**
+
 - ``annotation_info`` (LLM models used)
 
 **11. Licensing Information**
-- ``license_info``  
-  - ``license`` (e.g., ``by``)  
-  - ``creator_username``  
-  - ``creator_display_name``  
-  - ``creator_profile_url``  
-  - ``uri``  
+
+- ``license_info``:
+
+  - ``license`` (e.g., ``by``)
+  - ``creator_username``
+  - ``creator_display_name``
+  - ``creator_profile_url``
+  - ``uri``
 
 
 

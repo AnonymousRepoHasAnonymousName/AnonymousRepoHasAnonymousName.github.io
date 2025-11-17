@@ -15,7 +15,7 @@ Explore UrbanVerse-100K API
 With UrbanVerse-Gen, you can build custom environments directly from casually captured videos.
 
 Real-to-Sim Scene Generation with UrbanVerse-Gen
-----------------------------
+------------------------------------------------
 
 With UrbanVerse-Gen, you can build custom environments directly from casually captured videos.
 

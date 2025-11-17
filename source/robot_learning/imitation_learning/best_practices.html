@@ -33,7 +33,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/sphinxcontrib/icon/node_modules/@fortawesome/fontawesome-free/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="/Users/miu/GoldsGym/AnonymousRepoHasAnonymousName.github.io/documentation/venv/lib/python3.14/site-packages/sphinxcontrib/icon/node_modules/@fortawesome/fontawesome-free/css/all.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.4cbf315f70debaebd550c87a6162cf0f.min.css" />
@@ -47,7 +47,7 @@
     <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
     <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/sphinx_highlight.js"></script>
-    <script src="/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/sphinxcontrib/icon/node_modules/@fortawesome/fontawesome-free/js/all.min.js"></script>
+    <script src="/Users/miu/GoldsGym/AnonymousRepoHasAnonymousName.github.io/documentation/venv/lib/python3.14/site-packages/sphinxcontrib/icon/node_modules/@fortawesome/fontawesome-free/js/all.min.js"></script>
     <script src="../../../_static/clipboard.min.js"></script>
     <script src="../../../_static/copybutton.js"></script>
     <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
@@ -461,25 +461,28 @@ If your demonstrations are noisy, enable action smoothing:</p>
 </section>
 <section id="robot-specific-considerations">
 <h2>Robot-Specific Considerations<a class="headerlink" href="#robot-specific-considerations" title="Permalink to this heading">#</a></h2>
-<p><strong>COCO Wheeled Robot</strong>
-- <strong>Easiest to clone</strong>: Simple 2D action space, stable dynamics
-- <strong>Recommended for beginners</strong>: Start with COCO to learn the BC workflow
-- <strong>Typical performance</strong>: 60-80% SR on similar scenes</p>
-<p><strong>Unitree Go2 (Quadruped)</strong>
-- <strong>Moderate difficulty</strong>: More complex action space, but stable locomotion
-- <strong>Considerations</strong>: Joint velocity commands require more precise demonstrations
-- <strong>Typical performance</strong>: 50-70% SR on similar scenes</p>
-<p><strong>Unitree G1 / Booster T1 (Humanoid)</strong>
-- <strong>Most challenging</strong>: Complex high-dimensional action space, delicate balance
-- <strong>Recommendations</strong>:</p>
-<blockquote>
-<div><ul class="simple">
+<p><strong>COCO Wheeled Robot</strong></p>
+<ul class="simple">
+<li><p><strong>Easiest to clone</strong>: Simple 2D action space, stable dynamics</p></li>
+<li><p><strong>Recommended for beginners</strong>: Start with COCO to learn the BC workflow</p></li>
+<li><p><strong>Typical performance</strong>: 60-80% SR on similar scenes</p></li>
+</ul>
+<p><strong>Unitree Go2 (Quadruped)</strong></p>
+<ul class="simple">
+<li><p><strong>Moderate difficulty</strong>: More complex action space, but stable locomotion</p></li>
+<li><p><strong>Considerations</strong>: Joint velocity commands require more precise demonstrations</p></li>
+<li><p><strong>Typical performance</strong>: 50-70% SR on similar scenes</p></li>
+</ul>
+<p><strong>Unitree G1 / Booster T1 (Humanoid)</strong></p>
+<ul class="simple">
+<li><p><strong>Most challenging</strong>: Complex high-dimensional action space, delicate balance</p></li>
+<li><p><strong>Recommendations</strong>:</p>
+<ul>
 <li><p>Collect more demonstrations (100+ episodes)</p></li>
 <li><p>Use longer training (100+ epochs)</p></li>
 <li><p>Consider using Gaussian policy for uncertainty</p></li>
 </ul>
-</div></blockquote>
-<ul class="simple">
+</li>
 <li><p><strong>Typical performance</strong>: 30-50% SR on similar scenes</p></li>
 </ul>
 <p><strong>General Rule</strong>: Simpler robots (wheeled) are easier to clone than complex robots (humanoids). Start with simpler robots to build intuition, then progress to more complex platforms.</p>
@@ -506,10 +509,12 @@ One of the most effective strategies is to use BC for initialization, then fine-
 <span class="n">uv</span><span class="o">.</span><span class="n">navigation</span><span class="o">.</span><span class="n">rl</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">,</span> <span class="n">training_cfg</span><span class="o">=</span><span class="n">rl_cfg</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><strong>Benefits:</strong>
-- Faster RL convergence (starts from good policy)
-- Better final performance (combines expert knowledge with exploration)
-- More sample-efficient (less RL training needed)</p>
+<p><strong>Benefits:</strong></p>
+<ul class="simple">
+<li><p>Faster RL convergence (starts from good policy)</p></li>
+<li><p>Better final performance (combines expert knowledge with exploration)</p></li>
+<li><p>More sample-efficient (less RL training needed)</p></li>
+</ul>
 </section>
 <section id="debugging-tips">
 <h2>Debugging Tips<a class="headerlink" href="#debugging-tips" title="Permalink to this heading">#</a></h2>

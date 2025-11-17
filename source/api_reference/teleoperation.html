@@ -33,7 +33,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/sphinxcontrib/icon/node_modules/@fortawesome/fontawesome-free/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="/Users/miu/GoldsGym/AnonymousRepoHasAnonymousName.github.io/documentation/venv/lib/python3.14/site-packages/sphinxcontrib/icon/node_modules/@fortawesome/fontawesome-free/css/all.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.4cbf315f70debaebd550c87a6162cf0f.min.css" />
@@ -47,7 +47,7 @@
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/sphinx_highlight.js"></script>
-    <script src="/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/sphinxcontrib/icon/node_modules/@fortawesome/fontawesome-free/js/all.min.js"></script>
+    <script src="/Users/miu/GoldsGym/AnonymousRepoHasAnonymousName.github.io/documentation/venv/lib/python3.14/site-packages/sphinxcontrib/icon/node_modules/@fortawesome/fontawesome-free/js/all.min.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
@@ -401,36 +401,46 @@
 </div>
 <p>Configure a teleoperation session for manual robot control.</p>
 <p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><p><strong>interface</strong> (str): Teleoperation interface type. Options:</p>
 <ul>
-<li><p><strong>interface</strong> (str): Teleoperation interface type. Options:
-- <code class="docutils literal notranslate"><span class="pre">&quot;keyboard&quot;</span></code>: Keyboard controls
-- <code class="docutils literal notranslate"><span class="pre">&quot;joystick&quot;</span></code>: Joystick interface
-- <code class="docutils literal notranslate"><span class="pre">&quot;vr&quot;</span></code>: VR headset and controllers (Meta Oculus Quest 3)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;keyboard&quot;</span></code>: Keyboard controls</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;joystick&quot;</span></code>: Joystick interface</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;vr&quot;</span></code>: VR headset and controllers (Meta Oculus Quest 3)</p></li>
+</ul>
+</li>
 <li><p><strong>robot_type</strong> (str): Robot embodiment identifier (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;coco_wheeled&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;unitree_go2&quot;</span></code>)</p></li>
 <li><p><strong>scene_path</strong> (str): Path to USD scene file</p></li>
-<li><p><strong>keybindings</strong> (dict, optional): Custom keyboard keybindings. Default keybindings:
-- <code class="docutils literal notranslate"><span class="pre">&quot;forward&quot;</span></code>: <code class="docutils literal notranslate"><span class="pre">&quot;w&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;up&quot;</span></code>
-- <code class="docutils literal notranslate"><span class="pre">&quot;backward&quot;</span></code>: <code class="docutils literal notranslate"><span class="pre">&quot;s&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;down&quot;</span></code>
-- <code class="docutils literal notranslate"><span class="pre">&quot;left&quot;</span></code>: <code class="docutils literal notranslate"><span class="pre">&quot;a&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;left&quot;</span></code>
-- <code class="docutils literal notranslate"><span class="pre">&quot;right&quot;</span></code>: <code class="docutils literal notranslate"><span class="pre">&quot;d&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;right&quot;</span></code>
-- <code class="docutils literal notranslate"><span class="pre">&quot;stop&quot;</span></code>: <code class="docutils literal notranslate"><span class="pre">&quot;space&quot;</span></code>
-- <code class="docutils literal notranslate"><span class="pre">&quot;reset&quot;</span></code>: <code class="docutils literal notranslate"><span class="pre">&quot;r&quot;</span></code></p></li>
-<li><p><strong>velocity_scaling</strong> (dict, optional): Velocity scaling parameters:
-- <code class="docutils literal notranslate"><span class="pre">&quot;linear_max&quot;</span></code>: Maximum linear velocity (m/s)
-- <code class="docutils literal notranslate"><span class="pre">&quot;angular_max&quot;</span></code>: Maximum angular velocity (rad/s)
-- <code class="docutils literal notranslate"><span class="pre">&quot;acceleration&quot;</span></code>: Acceleration rate</p></li>
-<li><p><strong>vr_settings</strong> (dict, optional): VR-specific settings (for Quest 3). Required keys:
-- <code class="docutils literal notranslate"><span class="pre">&quot;headset_type&quot;</span></code>: <code class="docutils literal notranslate"><span class="pre">&quot;oculus_quest_3&quot;</span></code>
-- <code class="docutils literal notranslate"><span class="pre">&quot;openxr_runtime&quot;</span></code>: <code class="docutils literal notranslate"><span class="pre">&quot;oculus&quot;</span></code>
-- <code class="docutils literal notranslate"><span class="pre">&quot;controller_mapping&quot;</span></code>: Dictionary mapping controller inputs to actions
-- <code class="docutils literal notranslate"><span class="pre">&quot;rendering&quot;</span></code>: Dictionary with:</p>
-<blockquote>
-<div><ul class="simple">
+<li><p><strong>keybindings</strong> (dict, optional): Custom keyboard keybindings. Default keybindings:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;forward&quot;</span></code>: <code class="docutils literal notranslate"><span class="pre">&quot;w&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;up&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;backward&quot;</span></code>: <code class="docutils literal notranslate"><span class="pre">&quot;s&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;down&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;left&quot;</span></code>: <code class="docutils literal notranslate"><span class="pre">&quot;a&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;left&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;right&quot;</span></code>: <code class="docutils literal notranslate"><span class="pre">&quot;d&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;right&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;stop&quot;</span></code>: <code class="docutils literal notranslate"><span class="pre">&quot;space&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;reset&quot;</span></code>: <code class="docutils literal notranslate"><span class="pre">&quot;r&quot;</span></code></p></li>
+</ul>
+</li>
+<li><p><strong>velocity_scaling</strong> (dict, optional): Velocity scaling parameters:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;linear_max&quot;</span></code>: Maximum linear velocity (m/s)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;angular_max&quot;</span></code>: Maximum angular velocity (rad/s)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;acceleration&quot;</span></code>: Acceleration rate</p></li>
+</ul>
+</li>
+<li><p><strong>vr_settings</strong> (dict, optional): VR-specific settings (for Quest 3). Required keys:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;headset_type&quot;</span></code>: <code class="docutils literal notranslate"><span class="pre">&quot;oculus_quest_3&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;openxr_runtime&quot;</span></code>: <code class="docutils literal notranslate"><span class="pre">&quot;oculus&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;controller_mapping&quot;</span></code>: Dictionary mapping controller inputs to actions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;rendering&quot;</span></code>: Dictionary with:</p>
+<ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">&quot;output_plugin&quot;</span></code>: <code class="docutils literal notranslate"><span class="pre">&quot;openxr&quot;</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">&quot;resolution&quot;</span></code>: <code class="docutils literal notranslate"><span class="pre">[1920,</span> <span class="pre">1832]</span></code> (per-eye)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">&quot;refresh_rate&quot;</span></code>: <code class="docutils literal notranslate"><span class="pre">90</span></code></p></li>
 </ul>
-</div></blockquote>
+</li>
+</ul>
 </li>
 </ul>
 <p><strong>Returns:</strong></p>

@@ -83,11 +83,12 @@ Key Parameters
   A list of USD scenes. Each path may represent a different **layout** (city) and/or
   different **digital cousin variants** of the same layout.
 
-- **async_sim**  
-  - ``True``: each environment loads a different scene in parallel (recommended)  
-    – ideal for generalization  
-  - ``False``: all environments use the same layout but different cousin variants  
-    – ideal for debugging and controlled experiments
+- **async_sim**
+
+  - ``True``: each environment loads a different scene in parallel (recommended)
+    - ideal for generalization
+  - ``False``: all environments use the same layout but different cousin variants
+    - ideal for debugging and controlled experiments
 
 - **env_spacing**  
   The horizontal offset between parallel environments in the simulator.

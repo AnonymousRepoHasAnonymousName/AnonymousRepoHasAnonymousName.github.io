@@ -33,7 +33,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/sphinxcontrib/icon/node_modules/@fortawesome/fontawesome-free/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="/Users/miu/GoldsGym/AnonymousRepoHasAnonymousName.github.io/documentation/venv/lib/python3.14/site-packages/sphinxcontrib/icon/node_modules/@fortawesome/fontawesome-free/css/all.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.4cbf315f70debaebd550c87a6162cf0f.min.css" />
@@ -47,7 +47,7 @@
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/sphinx_highlight.js"></script>
-    <script src="/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/sphinxcontrib/icon/node_modules/@fortawesome/fontawesome-free/js/all.min.js"></script>
+    <script src="/Users/miu/GoldsGym/AnonymousRepoHasAnonymousName.github.io/documentation/venv/lib/python3.14/site-packages/sphinxcontrib/icon/node_modules/@fortawesome/fontawesome-free/js/all.min.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
@@ -341,7 +341,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -357,6 +359,26 @@
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#object-assets-walkthrough">Object Assets Walkthrough</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-per-object-annotation">Example of Per-object Annotation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-object-diversities">Examples of Object Diversities</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#urban-barriers">Urban Barriers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#urban-street-objects">Urban Street Objects</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#urban-vehicles">Urban Vehicles</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#urban-structures">Urban Structures</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#object-category-distribution">Object Category Distribution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-road-pbrs">Examples of Road PBRs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-sidewalk-pbrs">Examples of Sidewalk PBRs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-sky-hdris">Examples of Sky HDRIs</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -369,26 +391,14 @@
   <section id="urbanverse-100k-gallery">
 <span id="urbanverse-gallery-100k"></span><h1>UrbanVerse-100K Gallery<a class="headerlink" href="#urbanverse-100k-gallery" title="Permalink to this heading">#</a></h1>
 <p>This gallery showcases examples from the UrbanVerse-100K dataset. For detailed usage instructions, see <a class="reference internal" href="../quickstart/urbanverse_100k.html"><span class="doc">Use UrbanVerse-100K with APIs</span></a>.</p>
+<section id="object-assets-walkthrough">
+<h2>Object Assets Walkthrough<a class="headerlink" href="#object-assets-walkthrough" title="Permalink to this heading">#</a></h2>
 <!-- Miu: UrbanVerse-100K Dataset Walkthrough and Interactive Statistics -->
 
 <section class="section" id="dataset">
 
-  <div class="container">
-
-
-    <!-- First row: Video and Annotation Image -->
-
-    <div class="columns" style="margin-bottom: 2rem;">
-
-      <!-- Left side - Video -->
-
+ <div class="container">
       <div class="column is-half">
-
-        <div class="has-text-centered" style="margin-bottom: 1rem; text-align: center;" id="dataset-walkthrough">
-
-          <h3 class="title is-5" style="background-color: black; color: white; padding: 6px 12px; display: inline-block; margin: 0; font-weight: normal; font-size: 1rem;">Object Assets Walkthrough</h3>
-
-        </div>
 
         <div class="has-text-centered">
 
@@ -397,19 +407,15 @@
         </div>
 
       </div>
+ </div>
 
+</section></section>
+<section id="example-of-per-object-annotation">
+<h2>Example of Per-object Annotation<a class="headerlink" href="#example-of-per-object-annotation" title="Permalink to this heading">#</a></h2>
+<section class="section" id="dataset">
 
-
-      <!-- Right side - Annotation Image -->
-
+ <div class="container">
       <div class="column is-half">
-
-        <div class="has-text-centered" style="margin-bottom: 1rem; text-align: center;" id="annotation-example">
-
-          <h3 class="title is-5" style="background-color: black; color: white; padding: 6px 12px; display: inline-block; margin: 0; font-weight: normal; font-size: 1rem;">Example of Per-object Annotation</h3>
-
-        </div>
-
         <div class="has-text-centered">
 
           <img src="../../_static/anno_attributes_dark_v2.png" alt="Example of Per-object Annotation" style="border-radius: 10px; width: 100%; max-width: 100%; border: 1px solid #ddd;">
@@ -417,62 +423,58 @@
         </div>
 
       </div>
+ </div>
 
-    </div>
+</section></section>
+<section id="examples-of-object-diversities">
+<h2>Examples of Object Diversities<a class="headerlink" href="#examples-of-object-diversities" title="Permalink to this heading">#</a></h2>
+<p>Here, we provide diverse object examples for few categories in UrbanVerse-100K.</p>
+<section id="urban-barriers">
+<h3>Urban Barriers<a class="headerlink" href="#urban-barriers" title="Permalink to this heading">#</a></h3>
+<section class="section" id="dataset">
 
-    <!-- Third row: Material and Skymap thumbnails -->
+ <div class="container">
+   <img src="../../_static/obj_gallery_barriers.png" alt="Example of urban barriers" style="border-radius: 10px; width: 100%; max-width: 100%; border: 1px solid #ddd;">
+ </div>
 
-    <div class="columns is-centered" style="margin-top: 2rem;">
+</section></section>
+<section id="urban-street-objects">
+<h3>Urban Street Objects<a class="headerlink" href="#urban-street-objects" title="Permalink to this heading">#</a></h3>
+<section class="section" id="dataset">
 
-      <div class="column is-one-third has-text-centered">
+ <div class="container">
+   <img src="../../_static/obj_gallery_street_infra.png" alt="Example of street objects" style="border-radius: 10px; width: 100%; max-width: 100%; border: 1px solid #ddd;">
+ </div>
 
-        <div class="has-text-centered" style="margin-bottom: 0.75rem; text-align: center;" id="road-pbrs">
+</section></section>
+<section id="urban-vehicles">
+<h3>Urban Vehicles<a class="headerlink" href="#urban-vehicles" title="Permalink to this heading">#</a></h3>
+<section class="section" id="dataset">
 
-          <h3 class="title is-5" style="background-color: black; color: white; padding: 6px 12px; display: inline-block; margin: 0; font-weight: normal; font-size: 1rem;">Examples of Road PBRs</h3>
+ <div class="container">
+   <img src="../../_static/obj_gallery_vehicles.png" alt="Example of vehicles" style="border-radius: 10px; width: 100%; max-width: 100%; border: 1px solid #ddd;">
+ </div>
 
-        </div>
+</section></section>
+<section id="urban-structures">
+<h3>Urban Structures<a class="headerlink" href="#urban-structures" title="Permalink to this heading">#</a></h3>
+<section class="section" id="dataset">
 
-        <img src="../../_static/road_pbrs.png" alt="Road PBRs" style="border-radius: 10px; height: 560px; width: 100%; object-fit: contain; border: 1px solid #ddd;">
+ <div class="container">
+   <img src="../../_static/obj_gallery_buildings.png" alt="Example of structures" style="border-radius: 10px; width: 100%; max-width: 100%; border: 1px solid #ddd;">
+ </div>
 
-      </div>
+</section></section>
+</section>
+<section id="object-category-distribution">
+<h2>Object Category Distribution<a class="headerlink" href="#object-category-distribution" title="Permalink to this heading">#</a></h2>
+<section class="section" id="dataset">
 
-      <div class="column is-one-third has-text-centered">
-
-        <div class="has-text-centered" style="margin-bottom: 0.75rem; text-align: center;" id="sidewalk-pbrs">
-
-          <h3 class="title is-5" style="background-color: black; color: white; padding: 6px 12px; display: inline-block; margin: 0; font-weight: normal; font-size: 1rem;">Examples of Sidewalk PBRs</h3>
-
-        </div>
-
-        <img src="../../_static/sidewalk_pbrs.png" alt="Sidewalk PBRs" style="border-radius: 10px; height: 560px; width: 100%; object-fit: contain; border: 1px solid #ddd;">
-
-      </div>
-
-      <div class="column is-one-third has-text-centered">
-
-        <div class="has-text-centered" style="margin-bottom: 0.75rem; text-align: center;" id="sky-hdris">
-
-          <h3 class="title is-5" style="background-color: black; color: white; padding: 6px 12px; display: inline-block; margin: 0; font-weight: normal; font-size: 1rem;">Examples of Sky HDRIs</h3>
-
-        </div>
-
-        <img src="../../_static/sky_hdris.png" alt="Sky HDRIs" style="border-radius: 10px; height: 560px; width: 100%; object-fit: contain; border: 1px solid #ddd;">
-
-      </div>
-
-    </div>
-
-    <!-- Second row: Interactive Statistics -->
+ <div class="container">
 
     <div class="columns">
 
       <div class="column is-full">
-
-        <div class="has-text-centered" style="margin-bottom: 1rem; text-align: center;" id="interactive-stats">
-
-          <h3 class="title is-5" style="background-color: black; color: white; padding: 6px 12px; display: inline-block; margin: 0; font-weight: normal; font-size: 1rem;">Interactive Statistics of Object Category Distributions in UrbanVerse-100K</h3>
-
-        </div>
 
         <p class="has-text-centered" style="font-size: 0.9rem; margin-bottom: 1rem; color: #666;">
 
@@ -515,12 +517,37 @@
       </div>
 
     </div>
-
-
-
-  </div>
+ </div>
 
 </section></section>
+<section id="examples-of-road-pbrs">
+<h2>Examples of Road PBRs<a class="headerlink" href="#examples-of-road-pbrs" title="Permalink to this heading">#</a></h2>
+<section class="section" id="dataset">
+
+ <div class="container">
+     <img src="../../_static/road_pbrs.png" alt="Road PBRs" style="border-radius: 10px; height: 560px; width: 100%; object-fit: contain; border: 1px solid #ddd;">
+ </div>
+
+</section></section>
+<section id="examples-of-sidewalk-pbrs">
+<h2>Examples of Sidewalk PBRs<a class="headerlink" href="#examples-of-sidewalk-pbrs" title="Permalink to this heading">#</a></h2>
+<section class="section" id="dataset">
+
+ <div class="container">
+        <img src="../../_static/sidewalk_pbrs.png" alt="Sidewalk PBRs" style="border-radius: 10px; height: 560px; width: 100%; object-fit: contain; border: 1px solid #ddd;">
+ </div>
+
+</section></section>
+<section id="examples-of-sky-hdris">
+<h2>Examples of Sky HDRIs<a class="headerlink" href="#examples-of-sky-hdris" title="Permalink to this heading">#</a></h2>
+<section class="section" id="dataset">
+
+ <div class="container">
+        <img src="../../_static/sky_hdris.png" alt="Sky HDRIs" style="border-radius: 10px; height: 560px; width: 100%; object-fit: contain; border: 1px solid #ddd;">
+ </div>
+
+</section></section>
+</section>
 
 
                 </article>
@@ -557,6 +584,34 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#object-assets-walkthrough">Object Assets Walkthrough</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-per-object-annotation">Example of Per-object Annotation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-object-diversities">Examples of Object Diversities</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#urban-barriers">Urban Barriers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#urban-street-objects">Urban Street Objects</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#urban-vehicles">Urban Vehicles</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#urban-structures">Urban Structures</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#object-category-distribution">Object Category Distribution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-road-pbrs">Examples of Road PBRs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-sidewalk-pbrs">Examples of Sidewalk PBRs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-sky-hdris">Examples of Sky HDRIs</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

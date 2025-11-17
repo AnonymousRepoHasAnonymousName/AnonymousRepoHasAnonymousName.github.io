@@ -33,7 +33,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/sphinxcontrib/icon/node_modules/@fortawesome/fontawesome-free/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="/Users/miu/GoldsGym/AnonymousRepoHasAnonymousName.github.io/documentation/venv/lib/python3.14/site-packages/sphinxcontrib/icon/node_modules/@fortawesome/fontawesome-free/css/all.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.4cbf315f70debaebd550c87a6162cf0f.min.css" />
@@ -47,7 +47,7 @@
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/sphinx_highlight.js"></script>
-    <script src="/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/sphinxcontrib/icon/node_modules/@fortawesome/fontawesome-free/js/all.min.js"></script>
+    <script src="/Users/miu/GoldsGym/AnonymousRepoHasAnonymousName.github.io/documentation/venv/lib/python3.14/site-packages/sphinxcontrib/icon/node_modules/@fortawesome/fontawesome-free/js/all.min.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
@@ -785,42 +785,53 @@ To help users understand the full structure, we provide a real annotation exampl
 - <code class="docutils literal notranslate"><span class="pre">index_of_refraction</span></code>
 - <code class="docutils literal notranslate"><span class="pre">youngs_modulus</span></code>
 - <code class="docutils literal notranslate"><span class="pre">max_dimension</span></code></p>
-<p><strong>6. Affordances &amp; Interactions</strong>
-- <code class="docutils literal notranslate"><span class="pre">movable</span></code>
-- <code class="docutils literal notranslate"><span class="pre">interactive_parts</span></code> (doors, wheels, trunk, …)
-- <code class="docutils literal notranslate"><span class="pre">affordances</span></code> (drivable, openable, pressable, …)
-- <code class="docutils literal notranslate"><span class="pre">enterable</span></code>
-- <code class="docutils literal notranslate"><span class="pre">walkable</span></code>
-- <code class="docutils literal notranslate"><span class="pre">support_surface</span></code></p>
-<p><strong>7. Traversability</strong>
-- <code class="docutils literal notranslate"><span class="pre">traversability</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">obstacle</span></code>)
-- <code class="docutils literal notranslate"><span class="pre">traversable_by</span></code> (list of agent types)</p>
-<p><strong>8. Object Metadata</strong>
-- <code class="docutils literal notranslate"><span class="pre">uid</span></code>
-- <code class="docutils literal notranslate"><span class="pre">filename</span></code>
-- <code class="docutils literal notranslate"><span class="pre">foldername</span></code> (if grouped)
-- <code class="docutils literal notranslate"><span class="pre">quality</span></code> (asset quality score)
-- <code class="docutils literal notranslate"><span class="pre">asset_composition_type</span></code></p>
+<p><strong>6. Affordances &amp; Interactions</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">movable</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">interactive_parts</span></code> (doors, wheels, trunk, …)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">affordances</span></code> (drivable, openable, pressable, …)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enterable</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">walkable</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">support_surface</span></code></p></li>
+</ul>
+<p><strong>7. Traversability</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">traversability</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">obstacle</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">traversable_by</span></code> (list of agent types)</p></li>
+</ul>
+<p><strong>8. Object Metadata</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">uid</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">filename</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">foldername</span></code> (if grouped)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">quality</span></code> (asset quality score)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">asset_composition_type</span></code></p></li>
+</ul>
 <p><strong>9. Additional Object-Specific Attributes</strong>
-(e.g., for <code class="docutils literal notranslate"><span class="pre">electric</span> <span class="pre">car''</span> <span class="pre">category)</span>
-<span class="pre">-</span> <span class="pre">``attribute_car_manufacturer</span></code>
-- <code class="docutils literal notranslate"><span class="pre">attribute_car_model</span></code>
-- <code class="docutils literal notranslate"><span class="pre">attribute_charging_port_location</span></code>
-- <code class="docutils literal notranslate"><span class="pre">attribute_license_plate_design</span></code>
-- <code class="docutils literal notranslate"><span class="pre">attribute_badging_or_emblem</span></code></p>
-<p><strong>10. Annotation Metadata</strong>
-- <code class="docutils literal notranslate"><span class="pre">annotation_info</span></code> (LLM models used)</p>
-<p><strong>11. Licensing Information</strong>
-- <code class="docutils literal notranslate"><span class="pre">license_info</span></code></p>
-<blockquote>
-<div><ul class="simple">
+<em>(e.g., for ``electric car’’ category)</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">attribute_car_manufacturer</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">attribute_car_model</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">attribute_charging_port_location</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">attribute_license_plate_design</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">attribute_badging_or_emblem</span></code></p></li>
+</ul>
+<p><strong>10. Annotation Metadata</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">annotation_info</span></code> (LLM models used)</p></li>
+</ul>
+<p><strong>11. Licensing Information</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">license_info</span></code>:</p>
+<ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">license</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">by</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">creator_username</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">creator_display_name</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">creator_profile_url</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">uri</span></code></p></li>
 </ul>
-</div></blockquote>
+</li>
+</ul>
 </section>
 <section id="filtering-by-attributes">
 <h2>Filtering by Attributes<a class="headerlink" href="#filtering-by-attributes" title="Permalink to this heading">#</a></h2>

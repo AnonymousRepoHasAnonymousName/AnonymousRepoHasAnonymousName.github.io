@@ -97,22 +97,27 @@ This creates smoother policies but may reduce responsiveness.
 Robot-Specific Considerations
 ------------------------------
 
-**COCO Wheeled Robot**  
+**COCO Wheeled Robot**
+
 - **Easiest to clone**: Simple 2D action space, stable dynamics
 - **Recommended for beginners**: Start with COCO to learn the BC workflow
 - **Typical performance**: 60-80% SR on similar scenes
 
-**Unitree Go2 (Quadruped)**  
+**Unitree Go2 (Quadruped)**
+
 - **Moderate difficulty**: More complex action space, but stable locomotion
 - **Considerations**: Joint velocity commands require more precise demonstrations
 - **Typical performance**: 50-70% SR on similar scenes
 
-**Unitree G1 / Booster T1 (Humanoid)**  
+**Unitree G1 / Booster T1 (Humanoid)**
+
 - **Most challenging**: Complex high-dimensional action space, delicate balance
-- **Recommendations**: 
+- **Recommendations**:
+
   - Collect more demonstrations (100+ episodes)
   - Use longer training (100+ epochs)
   - Consider using Gaussian policy for uncertainty
+
 - **Typical performance**: 30-50% SR on similar scenes
 
 **General Rule**: Simpler robots (wheeled) are easier to clone than complex robots (humanoids). Start with simpler robots to build intuition, then progress to more complex platforms.
@@ -144,6 +149,7 @@ This hybrid approach combines the efficiency of imitation learning with the robu
    uv.navigation.rl.train(env=env, training_cfg=rl_cfg, ...)
 
 **Benefits:**
+
 - Faster RL convergence (starts from good policy)
 - Better final performance (combines expert knowledge with exploration)
 - More sample-efficient (less RL training needed)

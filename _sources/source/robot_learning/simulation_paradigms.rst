@@ -103,7 +103,7 @@ Result:
 
 
 👬👬 Asynchronous Simulation
---------------------------
+----------------------------
 
 In **asynchronous simulation**, each parallel environment loads a **different layout–cousin pair**.
 This is the *recommended* mode for policy generalization and large-scale PPO training.

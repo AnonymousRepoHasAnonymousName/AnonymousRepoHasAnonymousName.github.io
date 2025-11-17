@@ -5,28 +5,16 @@ UrbanVerse-100K Gallery
 
 This gallery showcases examples from the UrbanVerse-100K dataset. For detailed usage instructions, see :doc:`../quickstart/urbanverse_100k`.
 
+Object Assets Walkthrough
+--------------------------
 .. raw:: html
 
    <!-- Miu: UrbanVerse-100K Dataset Walkthrough and Interactive Statistics -->
 
    <section class="section" id="dataset">
 
-     <div class="container">
-
-
-       <!-- First row: Video and Annotation Image -->
-
-       <div class="columns" style="margin-bottom: 2rem;">
-
-         <!-- Left side - Video -->
-
+    <div class="container">
          <div class="column is-half">
-
-           <div class="has-text-centered" style="margin-bottom: 1rem; text-align: center;" id="dataset-walkthrough">
-
-             <h3 class="title is-5" style="background-color: black; color: white; padding: 6px 12px; display: inline-block; margin: 0; font-weight: normal; font-size: 1rem;">Object Assets Walkthrough</h3>
-
-           </div>
 
            <div class="has-text-centered">
 
@@ -35,19 +23,19 @@ This gallery showcases examples from the UrbanVerse-100K dataset. For detailed u
            </div>
 
          </div>
+    </div>
 
-         
+   </section>
 
-         <!-- Right side - Annotation Image -->
 
+Example of Per-object Annotation
+--------------------------------
+.. raw:: html
+
+   <section class="section" id="dataset">
+
+    <div class="container">
          <div class="column is-half">
-
-           <div class="has-text-centered" style="margin-bottom: 1rem; text-align: center;" id="annotation-example">
-
-             <h3 class="title is-5" style="background-color: black; color: white; padding: 6px 12px; display: inline-block; margin: 0; font-weight: normal; font-size: 1rem;">Example of Per-object Annotation</h3>
-
-           </div>
-
            <div class="has-text-centered">
 
              <img src="../../_static/anno_attributes_dark_v2.png" alt="Example of Per-object Annotation" style="border-radius: 10px; width: 100%; max-width: 100%; border: 1px solid #ddd;">
@@ -55,62 +43,80 @@ This gallery showcases examples from the UrbanVerse-100K dataset. For detailed u
            </div>
 
          </div>
+    </div>
 
-       </div>
+   </section>
 
-       <!-- Third row: Material and Skymap thumbnails -->
+Examples of Object Diversities
+------------------------------
+Here, we provide diverse object examples for few categories in UrbanVerse-100K.
 
-       <div class="columns is-centered" style="margin-top: 2rem;">
+Urban Barriers
+~~~~~~~~~~~~~~
 
-         <div class="column is-one-third has-text-centered">
+.. raw:: html
 
-           <div class="has-text-centered" style="margin-bottom: 0.75rem; text-align: center;" id="road-pbrs">
+   <section class="section" id="dataset">
 
-             <h3 class="title is-5" style="background-color: black; color: white; padding: 6px 12px; display: inline-block; margin: 0; font-weight: normal; font-size: 1rem;">Examples of Road PBRs</h3>
+    <div class="container">
+      <img src="../../_static/obj_gallery_barriers.png" alt="Example of urban barriers" style="border-radius: 10px; width: 100%; max-width: 100%; border: 1px solid #ddd;">
+    </div>
 
-           </div>
+   </section>
 
-           <img src="../../_static/road_pbrs.png" alt="Road PBRs" style="border-radius: 10px; height: 560px; width: 100%; object-fit: contain; border: 1px solid #ddd;">
 
-         </div>
+Urban Street Objects
+~~~~~~~~~~~~~~~~~~~~
 
-         <div class="column is-one-third has-text-centered">
+.. raw:: html
 
-           <div class="has-text-centered" style="margin-bottom: 0.75rem; text-align: center;" id="sidewalk-pbrs">
+   <section class="section" id="dataset">
 
-             <h3 class="title is-5" style="background-color: black; color: white; padding: 6px 12px; display: inline-block; margin: 0; font-weight: normal; font-size: 1rem;">Examples of Sidewalk PBRs</h3>
+    <div class="container">
+      <img src="../../_static/obj_gallery_street_infra.png" alt="Example of street objects" style="border-radius: 10px; width: 100%; max-width: 100%; border: 1px solid #ddd;">
+    </div>
 
-           </div>
+   </section>
 
-           <img src="../../_static/sidewalk_pbrs.png" alt="Sidewalk PBRs" style="border-radius: 10px; height: 560px; width: 100%; object-fit: contain; border: 1px solid #ddd;">
+Urban Vehicles
+~~~~~~~~~~~~~~
 
-         </div>
+.. raw:: html
 
-         <div class="column is-one-third has-text-centered">
+   <section class="section" id="dataset">
 
-           <div class="has-text-centered" style="margin-bottom: 0.75rem; text-align: center;" id="sky-hdris">
+    <div class="container">
+      <img src="../../_static/obj_gallery_vehicles.png" alt="Example of vehicles" style="border-radius: 10px; width: 100%; max-width: 100%; border: 1px solid #ddd;">
+    </div>
 
-             <h3 class="title is-5" style="background-color: black; color: white; padding: 6px 12px; display: inline-block; margin: 0; font-weight: normal; font-size: 1rem;">Examples of Sky HDRIs</h3>
+   </section>
 
-           </div>
+Urban Structures
+~~~~~~~~~~~~~~~~
 
-           <img src="../../_static/sky_hdris.png" alt="Sky HDRIs" style="border-radius: 10px; height: 560px; width: 100%; object-fit: contain; border: 1px solid #ddd;">
+.. raw:: html
 
-         </div>
+   <section class="section" id="dataset">
 
-       </div>
+    <div class="container">
+      <img src="../../_static/obj_gallery_buildings.png" alt="Example of structures" style="border-radius: 10px; width: 100%; max-width: 100%; border: 1px solid #ddd;">
+    </div>
 
-       <!-- Second row: Interactive Statistics -->
+   </section>
+
+
+Object Category Distribution
+----------------------------
+
+.. raw:: html
+
+   <section class="section" id="dataset">
+
+    <div class="container">
 
        <div class="columns">
 
          <div class="column is-full">
-
-           <div class="has-text-centered" style="margin-bottom: 1rem; text-align: center;" id="interactive-stats">
-
-             <h3 class="title is-5" style="background-color: black; color: white; padding: 6px 12px; display: inline-block; margin: 0; font-weight: normal; font-size: 1rem;">Interactive Statistics of Object Category Distributions in UrbanVerse-100K</h3>
-
-           </div>
 
            <p class="has-text-centered" style="font-size: 0.9rem; margin-bottom: 1rem; color: #666;">
 
@@ -153,9 +159,48 @@ This gallery showcases examples from the UrbanVerse-100K dataset. For detailed u
          </div>
 
        </div>
+    </div>
+
+   </section>
 
 
+Examples of Road PBRs
+---------------------
 
-     </div>
+.. raw:: html
+
+   <section class="section" id="dataset">
+
+    <div class="container">
+        <img src="../../_static/road_pbrs.png" alt="Road PBRs" style="border-radius: 10px; height: 560px; width: 100%; object-fit: contain; border: 1px solid #ddd;">
+    </div>
+
+   </section>
+
+
+Examples of Sidewalk PBRs
+-------------------------
+
+.. raw:: html
+
+   <section class="section" id="dataset">
+
+    <div class="container">
+           <img src="../../_static/sidewalk_pbrs.png" alt="Sidewalk PBRs" style="border-radius: 10px; height: 560px; width: 100%; object-fit: contain; border: 1px solid #ddd;">
+    </div>
+
+   </section>
+
+
+Examples of Sky HDRIs
+--------------------------
+
+.. raw:: html
+
+   <section class="section" id="dataset">
+
+    <div class="container">
+           <img src="../../_static/sky_hdris.png" alt="Sky HDRIs" style="border-radius: 10px; height: 560px; width: 100%; object-fit: contain; border: 1px solid #ddd;">
+    </div>
 
    </section>
