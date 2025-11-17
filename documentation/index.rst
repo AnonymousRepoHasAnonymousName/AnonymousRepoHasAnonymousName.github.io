@@ -98,14 +98,6 @@ Simulation Platform
 Built on top of *NVIDIA Isaac Sim* and *NVIDIA Isaac Lab*, UrbanVerse provides high-fidelity photorealistic rendering and efficient, asynchronous simulation in large-scale, dynamic environments.  
 It supports a wide range of learning paradigms, including reinforcement learning and imitation learning, and offers diverse environments, robots, and scenario-generation pipelines.
 
-Extensibility
--------------
-UrbanVerse is fully extensible. With UrbanVerse-Gen, you can build custom environments directly from casually captured videos. Using our automatic annotation tools, you can also annotate and integrate new assets, and add your own robots with ease.
-
-
-.. figure:: assets/teaser.gif
-   :width: 100%
-   :alt: Example robots
 
 
 License

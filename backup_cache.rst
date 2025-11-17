@@ -1,293 +1,200 @@
-import os
-import sys
+Welcome to UrbanVerse!
+=====================
 
-sys.path.insert(0, os.path.abspath("../isaac_source/isaaclab"))
-sys.path.insert(0, os.path.abspath("../isaac_source/isaaclab/isaaclab"))
-sys.path.insert(0, os.path.abspath("../isaac_source/isaaclab_tasks"))
-sys.path.insert(0, os.path.abspath("../isaac_source/isaaclab_tasks/isaaclab_tasks"))
-sys.path.insert(0, os.path.abspath("../isaac_source/isaaclab_rl"))
-sys.path.insert(0, os.path.abspath("../isaac_source/isaaclab_rl/isaaclab_rl"))
-sys.path.insert(0, os.path.abspath("../isaac_source/isaaclab_mimic"))
-sys.path.insert(0, os.path.abspath("../isaac_source/isaaclab_mimic/isaaclab_mimic"))
-sys.path.insert(0, os.path.abspath("../isaac_source/isaaclab_assets"))
-sys.path.insert(0, os.path.abspath("../isaac_source/isaaclab_assets/isaaclab_assets"))
-sys.path.insert(0, os.path.abspath("../urbanverse"))
-sys.path.insert(0, os.path.abspath("../meta_source/metaurban/metaurban"))
-sys.path.insert(0, os.path.abspath("../meta_source/metadrive/metadrive"))
+.. raw:: html
 
-# -- Project information -----------------------------------------------------
-
-project = "UrbanVerse"
-copyright = "2025-2030, The Anonymous UrbanVerse Project Developers"
-author = "The Anonymous UrbanVerse Project Developers"
-
-# Read version from the package
-with open(os.path.join(os.path.dirname(__file__), "..", "VERSION")) as f:
-    full_version = f.read().strip()
-    version = ".".join(full_version.split(".")[:3])
-
-# -- General configuration ---------------------------------------------------
-
-# Add any Sphinx extension module names here, as strings. They can be
-# extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
-# ones.
-extensions = [
-    "autodocsumm",
-    "myst_parser",
-    "sphinx.ext.napoleon",
-    "sphinxemoji.sphinxemoji",
-    "sphinx.ext.autodoc",
-    "sphinx.ext.autosummary",
-    "sphinx.ext.githubpages",
-    "sphinx.ext.intersphinx",
-    "sphinx.ext.mathjax",
-    "sphinx.ext.todo",
-    "sphinx.ext.viewcode",
-    "sphinxcontrib.bibtex",
-    "sphinxcontrib.icon",
-    "sphinx_copybutton",
-    "sphinx_design",
-    "sphinx_tabs.tabs",  # backwards compatibility for building docs on v1.0.0
-    "sphinx_multiversion",
-]
-
-# mathjax hacks
-mathjax3_config = {
-    "tex": {
-        "inlineMath": [["\\(", "\\)"]],
-        "displayMath": [["\\[", "\\]"]],
-    },
-}
-
-# panels hacks
-panels_add_bootstrap_css = False
-panels_add_fontawesome_css = True
-
-# supported file extensions for source files
-source_suffix = {
-    ".rst": "restructuredtext",
-    ".md": "markdown",
-}
-
-# make sure we don't have any unknown references
-# TODO: Enable this by default once we have fixed all the warnings
-# nitpicky = True
-
-# put type hints inside the signature instead of the description (easier to maintain)
-autodoc_typehints = "signature"
-# autodoc_typehints_format = "fully-qualified"
-# document class *and* __init__ methods
-autoclass_content = "class"  #
-# separate class docstring from __init__ docstring
-autodoc_class_signature = "separated"
-# sort members by source order
-autodoc_member_order = "bysource"
-# inherit docstrings from base classes
-autodoc_inherit_docstrings = True
-# BibTeX configuration
-bibtex_bibfiles = ["source/_static/refs.bib"]
-# generate autosummary even if no references
-autosummary_generate = True
-autosummary_generate_overwrite = False
-# default autodoc settings
-autodoc_default_options = {
-    "autosummary": True,
-}
-
-# generate links to the documentation of objects in external projects
-intersphinx_mapping = {
-    "python": ("https://docs.python.org/3", None),
-    "numpy": ("https://numpy.org/doc/stable/", None),
-    "torch": ("https://pytorch.org/docs/stable/", None),
-    "isaac": ("https://docs.omniverse.nvidia.com/py/isaacsim", None),
-    "gymnasium": ("https://gymnasium.farama.org/", None),
-    "warp": ("https://nvidia.github.io/warp/", None),
-    "isaaclab": ("https://isaac-sim.github.io/IsaacLab/main/index.html", None),
-    "metaurban": ("https://metadriverse.github.io/metaurban/", None),
-}
-
-# Add any paths that contain templates here, relative to this directory.
-templates_path = []
-
-# List of patterns, relative to source directory, that match files and
-# directories to ignore when looking for source files.
-# This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ["_build", "_redirect", "_templates", "Thumbs.db", ".DS_Store", "README.md", "licenses/*"]
-
-# Mock out modules that are not available on RTD
-autodoc_mock_imports = [
-    "torch",
-    "torchvision",
-    "numpy",
-    "matplotlib",
-    "scipy",
-    "carb",
-    "warp",
-    "pxr",
-    "isaacsim",
-    "omni",
-    "omni.kit",
-    "omni.log",
-    "omni.usd",
-    "omni.client",
-    "omni.physx",
-    "omni.physics",
-    "pxr.PhysxSchema",
-    "pxr.PhysicsSchemaTools",
-    "omni.replicator",
-    "omni.isaac.core",
-    "omni.isaac.kit",
-    "omni.isaac.cloner",
-    "omni.isaac.urdf",
-    "omni.isaac.version",
-    "omni.isaac.motion_generation",
-    "omni.isaac.ui",
-    "isaacsim",
-    "isaacsim.core.api",
-    "isaacsim.core.cloner",
-    "isaacsim.core.version",
-    "isaacsim.robot_motion.motion_generation",
-    "isaacsim.gui.components",
-    "isaacsim.asset.importer.urdf",
-    "isaacsim.asset.importer.mjcf",
-    "omni.syntheticdata",
-    "omni.timeline",
-    "omni.ui",
-    "gym",
-    "skrl",
-    "stable_baselines3",
-    "rsl_rl",
-    "rl_games",
-    "ray",
-    "h5py",
-    "hid",
-    "prettytable",
-    "tqdm",
-    "tensordict",
-    "trimesh",
-    "toml",
-    "pink",
-    "pinocchio",
-    "nvidia.srl",
-    "flatdict",
-]
-
-# List of zero or more Sphinx-specific warning categories to be squelched (i.e.,
-# suppressed, ignored).
-suppress_warnings = [
-    # Generally speaking, we do want Sphinx to inform
-    # us about cross-referencing failures. Remove this entirely after Sphinx
-    # resolves this open issue:
-    #   https://github.com/sphinx-doc/sphinx/issues/4961
-    # Squelch mostly ignorable warnings resembling:
-    #     WARNING: more than one target found for cross-reference 'TypeHint':
-    #     beartype.door._doorcls.TypeHint, beartype.door.TypeHint
-    #
-    # Sphinx currently emits *MANY* of these warnings against our
-    # documentation. All of these warnings appear to be ignorable. Although we
-    # could explicitly squelch *SOME* of these warnings by canonicalizing
-    # relative to absolute references in docstrings, Sphinx emits still others
-    # of these warnings when parsing PEP-compliant type hints via static
-    # analysis. Since those hints are actual hints that *CANNOT* by definition
-    # by canonicalized, our only recourse is to squelch warnings altogether.
-    "ref.python",
-]
-
-# -- Internationalization ----------------------------------------------------
-
-# specifying the natural language populates some key tags
-language = "en"
-
-# -- Options for HTML output -------------------------------------------------
-
-import sphinx_book_theme
-
-html_title = "UrbanVerse Documentation"
-html_theme_path = [sphinx_book_theme.get_html_theme_path()]
-html_theme = "sphinx_book_theme"
-html_favicon = ""
-html_show_copyright = True
-html_show_sphinx = False
-html_last_updated_fmt = ""  # to reveal the build date in the pages meta
-
-# Add any paths that contain custom static files (such as style sheets) here,
-# relative to this directory. They are copied after the builtin static files,
-# so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ["source/_static/css"]
-html_css_files = ["custom.css"]
-
-html_theme_options = {
-    "collapse_navigation": True,
-    "repository_url": "https://github.com/metadriverse/urban-sim",
-    "use_repository_button": True,
-    "use_issues_button": True,
-    "use_edit_page_button": True,
-    "show_toc_level": 1,
-    "use_sidenotes": True,
-    "logo": {
-        "text": "UrbanVese Documentation",
-    },
-    "icon_links": [
-        {
-            "name": "GitHub",
-            "url": "https://github.com/metadriverse/urban-sim",
-            "icon": "fa-brands fa-square-github",
-            "type": "fontawesome",
-        },
-        {
-            "name": "Stars",
-            "url": "https://img.shields.io/github/stars/metadriverse/urban-sim?color=fedcba",
-            "icon": "https://img.shields.io/github/stars/metadriverse/urban-sim?color=fedcba",
-            "type": "url",
-        },
-        {
-        "name": "",
-        "url": "",
-        "icon": "", 
-        "type": "separator"
-        },
-        {
-            "name": "Isaac Lab",
-            "url": "https://github.com/isaac-sim/IsaacLab",
-            "icon": "https://img.shields.io/badge/IsaacLab-2.0.1-silver.svg",
-            "type": "url",
-        },
-        {
-            "name": "Isaac Sim",
-            "url": "https://developer.nvidia.com/isaac-sim",
-            "icon": "https://img.shields.io/badge/IsaacSim-4.5.0-silver.svg",
-            "type": "url",
-        },
-        
-    ],
-    "icon_links_label": "Quick Links",
-}
-
-templates_path = [
-    "_templates",
-]
-
-# Whitelist pattern for remotes
-smv_remote_whitelist = r"^.*$"
-# Whitelist pattern for branches (set to None to ignore all branches)
-smv_branch_whitelist = os.getenv("SMV_BRANCH_WHITELIST", r"^(main|devel)$")
-# Whitelist pattern for tags (set to None to ignore all tags)
-smv_tag_whitelist = os.getenv("SMV_TAG_WHITELIST", r"^v[1-9]\d*\.\d+\.\d+$")
-html_sidebars = {
-    "**": ["navbar-logo.html", "versioning.html", "icon-links.html", "search-field.html", "sbt-sidebar-nav.html"]
-}
+   <div style="background-color: #d4edda; border-left: 4px solid #28a745; padding: 12px 16px; margin: 16px 0; border-radius: 4px;">
+       <strong>Note: This documentation is <span style="color: #007bff;">fully anonymized for double-blind review</span>.</strong>  All external links and identity-related content have been removed or replaced with anonymized placeholders.
+   </div>
 
 
-# -- Advanced configuration -------------------------------------------------
+.. raw:: html
+
+   <video width="100%" autoplay loop muted playsinline controls style="display: block; margin: 1em 0;">
+       <source src="../../_static/short_teaser_v9_muted.mp4" type="video/mp4">
+       Your browser does not support the video tag.
+   </video>
+   
+UrbanVerse
+==========
+
+**UrbanVerse** is a unified real-to-sim system built on the UrbanVerse platform with Nvidia IsaacLab as the simulation engine for robot learning in urban environments.  
+It converts casually captured, uncalibrated city-tour videos into fully interactive simulation scenes, enabling users to build realistic, layout-accurate environments and train their own robots at scale.
+
+Core Components
+---------------
+
+UrbanVerse is powered by two main modules:
+
+1. **UrbanVerse-100K** — a large-scale dataset of (a) Object Collection: 102,530 urban 3D assets across 667 categories, each annotated with 33 semantic, physical, and affordance attributes in true metric scale; (b) Ground Texture Collection: 288 4K photorealistic PBR materials (98 road, 190 sidewalk) for ground plane texturing; (c) Sky Collection: 306 4K HDRI sky maps for realistic global illumination and immersive 360° backgrounds.
+
+2. **UrbanVerse-Gen** — an automatic pipeline that extracts scene layouts from video and instantiates metric-scale simulations using retrieved assets.
+
+Built-in Urban Simulation Environments
+--------------------------------------
+
+We provide ready-to-use (pre-built) urban simulation environments for training and evaluation, each packaged as a standalone `.usd` file that can be directly loaded into the IsaacLab platform:
+
+1. **UrbanVerse-160** — a collection of 160 pre-built environments reconstructed from city-tour videos across 7 continents, 24 countries, and 27 cities, available for training and validation.
+
+2. **CraftBench** — a suite of 10 high-fidelity urban scenes created by professional 3D artists, reserved exclusively for test-time evaluation.
 
 
-def skip_member(app, what, name, obj, skip, options):
-    # List the names of the functions you want to skip here
-    exclusions = ["from_dict", "to_dict", "replace", "copy", "validate", "__post_init__"]
-    if name in exclusions:
-        return True
-    return None
+Open-Source Release
+-------------------
+
+We will fully open-source the following UrbanVerse resources for the community, and we stand by this commitment:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 33 15 15 17
+
+   * - **Content**
+     - **Platform**
+     - **Format**
+     - **Release Month**
+
+   * - UrbanVerse-100K Asset Database
+     - Hugging Face
+     - ``.glb`` ``.json`` ``.jpg`` ``.mdl`` ``.hdr``
+     - January 2026
+
+   * - 160 UrbanVerse Scenes
+     - Hugging Face
+     - ``.usd``
+     - January 2026
+
+   * - CraftBench Scenes
+     - Hugging Face
+     - ``.usd``
+     - January 2026
+
+   * - UrbanVerse-Gen Pipeline
+     - GitHub
+     - ``.py``
+     - February 2026
+
+   * - RL Training Scripts and Checkpoints
+     - GitHub
+     - ``.py`` ``.pt``
+     - February 2026
+
+   * - UrbanVerse-100K Annotation Tool
+     - GitHub
+     - ``.py``
+     - January 2026
+
+   * - Documentation & Tutorials
+     - GitHub
+     - ``.html``
+     - January 2026
 
 
-def setup(app):
-    app.connect("autodoc-skip-member", skip_member)
+
+
+Simulation Platform
+-------------------
+
+Built on top of *NVIDIA Isaac Sim* and *NVIDIA Isaac Lab*, UrbanVerse provides high-fidelity photorealistic rendering and efficient, asynchronous simulation in large-scale, dynamic environments.  
+It supports a wide range of learning paradigms, including reinforcement learning and imitation learning, and offers diverse environments, robots, and scenario-generation pipelines.
+
+Extensibility
+-------------
+UrbanVerse is fully extensible. With UrbanVerse-Gen, you can build custom environments directly from casually captured videos. Using our automatic annotation tools, you can also annotate and integrate new assets, and add your own robots with ease.
+
+
+.. figure:: assets/teaser.gif
+   :width: 100%
+   :alt: Example robots
+
+
+License
+=======
+This work, UrbanVerse, is released under the Creative Commons Attribution 4.0 International (CC BY 4.0) License, which permits sharing and adaptation with appropriate credit.
+
+
+Table of Contents
+=================
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Installation
+
+   source/installation/binaries_installation
+   source/installation/asset_caching
+   source/installation/scene_caching
+   source/installation/verifying_installation
+
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Gallery
+
+   source/gallery/urbanverse_100k
+   source/gallery/urbanverse_gen
+   source/gallery/urbanverse_160_scenes
+   source/gallery/craftbench
+   source/gallery/real_world_longhorizon
+   source/gallery/real_world_sidebyside
+   source/gallery/yt_video_collection
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Quickstart Guide
+
+   source/quickstart/intro_quickstart
+   source/quickstart/urbanverse_100k
+   source/quickstart/urbanverse_gen
+   source/quickstart/urbanverse_scenes
+   source/quickstart/craftbench
+   source/quickstart/train_your_own_robots
+   source/quickstart/test_your_robots
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Robot Learning with UrbanVerse
+   
+   source/robot_learning/simulation_paradigms
+   source/robot_learning/configuration
+   source/robot_learning/robot_configuration
+   source/robot_learning/reinforcement_learning/index
+   source/robot_learning/imitation_learning/index
+   
+.. toctree::
+   :maxdepth: 1
+   :caption: Developer Guide (Advanced)
+
+   source/developer/collecting_data
+   source/developer/teleop_interface
+   source/developer/realworld_deployment
+   source/developer/adding_new_assets
+   source/developer/adding_new_robots
+
+.. toctree::
+   :maxdepth: 1
+   :caption: API Reference
+
+   source/api_reference/urbanverse_100k
+   source/api_reference/urbanverse_gen
+   source/api_reference/navigation_rl
+   source/api_reference/navigation_il
+   source/api_reference/assets
+   source/api_reference/teleoperation
+   source/api_reference/configuration
+
+.. toctree::
+   :maxdepth: 1
+   :caption: UrbanVerse Community
+
+   source/community/coding_standards
+   source/community/contributing
+   source/community/bug_reports
+   source/community/communication
+
+.. toctree::
+   :maxdepth: 1
+   :caption: References
+
+   source/refs/license
+   source/refs/3license
+
