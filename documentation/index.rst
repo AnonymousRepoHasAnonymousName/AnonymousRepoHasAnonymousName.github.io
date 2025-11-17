@@ -7,7 +7,16 @@ Welcome to UrbanVerse!
        <strong>Note: This documentation is <span style="color: #007bff;">fully anonymized for double-blind review</span>.</strong>  All external links and identity-related content have been removed or replaced with anonymized placeholders.
    </div>
 
+.. raw:: html
 
+   <div style="background-color: #fff9db; border-left: 4px solid #f5c518; padding: 12px 16px; margin: 16px 0; border-radius: 4px;">
+      <strong>Note:</strong> To view video demos and real-world results, please visit our anonymous project page: 
+      <strong><a href="https://anonymoususeruseanonymousname.github.io/" target="_blank" style="color: #007bff;">
+      https://anonymoususeruseanonymousname.github.io/</a></strong>
+   </div>
+
+
+   
 .. raw:: html
 
    <video width="100%" autoplay loop muted playsinline controls style="display: block; margin: 1em 0;">
