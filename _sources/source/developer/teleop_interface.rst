@@ -1,15 +1,28 @@
 .. _urbanverse-developer-teleop-interface:
 
-Teleoperation Interfaces
+VR Teleoperation Interfaces
 =====================================
 
 UrbanVerse supports multiple teleoperation interfaces for manual robot control, including keyboard, joystick, and VR interfaces. This guide explains how to configure and use these interfaces in UrbanVerse scenes, following Isaac Sim's input handling patterns.
 
-.. figure:: ../../assets/vr_output.gif
-   :width: 100%
-   :alt: VR Teleoperation in UrbanVerse
+.. raw:: html
 
-   Demo: A human teleoperating a COCO wheeled robot in UrbanVerse scenes for imitation learning data collection using the Joystick + VR interface with Meta Oculus Quest 3.
+   <!-- Miu: UrbanVerse-100K Dataset Walkthrough and Interactive Statistics -->
+
+   <section class="section" id="dataset">
+    <div class="container">
+         <div class="column is-half">
+           <div class="has-text-centered">
+             <video autoplay loop muted playsinline controls controlslist="nodownload" preload="metadata" src="../../_static/short_vr_demo_og_hq2x.mp4" poster="../../_static/videos/loading-icon.gif" style="border-radius: 10px; width: 100%; max-width: 100%;"></video>
+              <p style="margin-top: 0.5rem;">
+                <strong>VR Teleoperation Demo:</strong> A human enters UrbanVerse scenes and interacts with objects immersively using a Joystick + VR interface (Meta Quest 3).
+              </p>
+           </div>
+
+         </div>
+    </div>
+   </section>
+
 
 Overview
 ---------

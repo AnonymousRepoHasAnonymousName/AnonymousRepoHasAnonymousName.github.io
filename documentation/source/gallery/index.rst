@@ -9,6 +9,9 @@ This section showcases visual demonstrations and examples of UrbanVerse's capabi
    :maxdepth: 1
    :caption: Gallery
 
+   scenes_with_dynamic_agents
+   mobile_manipulators
+   vr_interaction
    urbanverse_100k
    urbanverse_gen
    urbanverse_160_scenes

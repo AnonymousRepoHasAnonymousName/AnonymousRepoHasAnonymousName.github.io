@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Teleoperation Interfaces &#8212; UrbanVerse Documentation (Fully Anonymous)</title>
+    <title>VR Teleoperation Interfaces &#8212; UrbanVerse Documentation (Fully Anonymous)</title>
   
   
   
@@ -194,6 +194,9 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Gallery</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../gallery/scenes_with_dynamic_agents.html">Scenes with Dynamic Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gallery/mobile_manipulators.html">Mobile Manipulators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gallery/vr_interaction.html">Demo VR Interaction in UrbanVerse</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../gallery/urbanverse_100k.html">UrbanVerse-100K Gallery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../gallery/urbanverse_gen.html">UrbanVerse-Gen Gallery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../gallery/urbanverse_160_scenes.html">UrbanVerse-160 Scenes Gallery</a></li>
@@ -241,7 +244,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide (Advanced)</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="collecting_data.html">Collecting Data in UrbanVerse</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Teleoperation Interfaces</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">VR Teleoperation Interfaces</a></li>
 <li class="toctree-l1"><a class="reference internal" href="realworld_deployment.html">Real-world Deployment: Unitree Go2 Quadruped Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="adding_new_assets.html">Adding New Assets to UrbanVerse-100K</a></li>
 <li class="toctree-l1"><a class="reference internal" href="adding_new_robots.html">Adding New Robots to UrbanVerse</a></li>
@@ -354,7 +357,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Teleoperation Interfaces</h1>
+    <h1>VR Teleoperation Interfaces</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -389,16 +392,24 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="teleoperation-interfaces">
-<span id="urbanverse-developer-teleop-interface"></span><h1>Teleoperation Interfaces<a class="headerlink" href="#teleoperation-interfaces" title="Permalink to this heading">#</a></h1>
+  <section id="vr-teleoperation-interfaces">
+<span id="urbanverse-developer-teleop-interface"></span><h1>VR Teleoperation Interfaces<a class="headerlink" href="#vr-teleoperation-interfaces" title="Permalink to this heading">#</a></h1>
 <p>UrbanVerse supports multiple teleoperation interfaces for manual robot control, including keyboard, joystick, and VR interfaces. This guide explains how to configure and use these interfaces in UrbanVerse scenes, following Isaac Sim’s input handling patterns.</p>
-<figure class="align-default" id="id1">
-<a class="reference internal image-reference" href="../../_images/vr_output.gif"><img alt="VR Teleoperation in UrbanVerse" src="../../_images/vr_output.gif" style="width: 100%;" /></a>
-<figcaption>
-<p><span class="caption-text">Demo: A human teleoperating a COCO wheeled robot in UrbanVerse scenes for imitation learning data collection using the Joystick + VR interface with Meta Oculus Quest 3.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-<section id="overview">
+<!-- Miu: UrbanVerse-100K Dataset Walkthrough and Interactive Statistics -->
+
+<section class="section" id="dataset">
+ <div class="container">
+      <div class="column is-half">
+        <div class="has-text-centered">
+          <video autoplay loop muted playsinline controls controlslist="nodownload" preload="metadata" src="../../_static/short_vr_demo_og_hq2x.mp4" poster="../../_static/videos/loading-icon.gif" style="border-radius: 10px; width: 100%; max-width: 100%;"></video>
+           <p style="margin-top: 0.5rem;">
+             <strong>VR Teleoperation Demo:</strong> A human enters UrbanVerse scenes and interacts with objects immersively using a Joystick + VR interface (Meta Quest 3).
+           </p>
+        </div>
+
+      </div>
+ </div>
+</section><section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
 <p>Teleoperation interfaces enable manual control of robots in UrbanVerse scenes for:
 - <strong>Data Collection</strong>: Collecting expert demonstrations for imitation learning

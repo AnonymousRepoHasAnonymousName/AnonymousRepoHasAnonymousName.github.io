@@ -175,6 +175,9 @@ Table of Contents
    :maxdepth: 1
    :caption: Gallery
 
+   source/gallery/scenes_with_dynamic_agents
+   source/gallery/mobile_manipulators
+   source/gallery/vr_interaction
    source/gallery/urbanverse_100k
    source/gallery/urbanverse_gen
    source/gallery/urbanverse_160_scenes
